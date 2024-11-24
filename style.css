@@ -1,16 +1,16 @@
 /* General Page Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: #000000; /* Black background */
+    color: #ffffff; /* White text */
     line-height: 1.6;
 }
 
 h1 {
     text-align: center;
-    color: #4CAF50;
+    color: #ffffff; /* White text */
     margin-top: 20px;
     font-size: 2.5em;
 }
@@ -20,35 +20,28 @@ table {
     width: 90%;
     margin: 20px auto;
     border-collapse: collapse;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: white;
+    background-color: #333333; /* Dark gray table background */
+    color: #ffffff; /* White text */
     border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
 }
 
 table th, table td {
     padding: 12px 15px;
     text-align: left;
+    border-bottom: 1px solid #444444; /* Subtle border */
 }
 
 table th {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #555555; /* Medium gray header */
+    color: #ffffff; /* White text */
     text-transform: uppercase;
     font-weight: bold;
-    border-bottom: 2px solid #3E8E41;
-}
-
-table tr {
-    border-bottom: 1px solid #ddd;
 }
 
 table tr:hover {
-    background-color: #f1f1f1;
-}
-
-table td {
-    color: #555;
+    background-color: #444444; /* Slightly lighter gray for hover */
 }
 
 /* Search Filter Styling */
@@ -61,7 +54,15 @@ table td {
     width: 50%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid #444444;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #222222; /* Dark gray input */
+    color: #ffffff; /* White text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Focus style for input */
+#search:focus {
+    outline: none;
+    border-color: #ffffff;
 }
