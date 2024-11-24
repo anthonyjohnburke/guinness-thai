@@ -1,118 +1,102 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guinness Ranking in Thailand</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .filter {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Guinness Ranking in Thailand&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f4f4f9;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>table {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 80%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-collapse: collapse;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>table th, table td {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ddd;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>table th {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4CAF50;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.filter {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Guinness Ranking in Thailand&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="filter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" id="search" placeholder="Search by city or name..." onkeyup="filterTable()"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;table id="rankingTable"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;thead&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;th&gt;Establishment&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;th&gt;Location&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;th&gt;Price (THB)&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;th&gt;Happy Hour Price (THB)&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;th&gt;Notes&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/thead&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tbody&gt;&lt;/tbody&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/table&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTRkkm3qa0ZwLGUp_rEKepADE-w3At78wBzy9H2GJxYNQWUadXWrPMXiV4TT3neiXx5QZFXj--gZSBP/pub?output=csv";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>fetch(sheetURL)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.then(response =&gt; response.text())</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.then(data =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const rows = data.split("\n").slice(1); // Skip the header row</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const tableBody = document.querySelector("#rankingTable tbody");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>rows.forEach(row =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const columns = row.split(",");</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const tr = document.createElement("tr");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>columns.forEach(col =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const td = document.createElement("td");</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>td.textContent = col.trim().replace(/"/g, ""); // Clean up quotes</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>tr.appendChild(td);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>tableBody.appendChild(tr);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>})</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.catch(error =&gt; console.error("Error fetching data:", error));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function filterTable() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const input = document.getElementById("search").value.toUpperCase();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const table = document.getElementById("rankingTable");</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const rows = table.getElementsByTagName("tr");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 1; i &lt; rows.length; i++) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const cells = rows[i].getElementsByTagName("td");</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let matches = false;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>for (let j = 0; j &lt; cells.length; j++) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (cells[j] &amp;&amp; cells[j].textContent.toUpperCase().includes(input)) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>matches = true;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>break;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>rows[i].style.display = matches ? "" : "none";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <h1>Guinness Ranking in Thailand</h1>
+    <div class="filter">
+        <input type="text" id="search" placeholder="Search by city or name..." onkeyup="filterTable()">
+    </div>
+    <table id="rankingTable">
+        <thead>
+            <tr>
+                <th>Establishment</th>
+                <th>Location</th>
+                <th>Price (THB)</th>
+                <th>Happy Hour Price (THB)</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTRkkm3qa0ZwLGUp_rEKepADE-w3At78wBzy9H2GJxYNQWUadXWrPMXiV4TT3neiXx5QZFXj--gZSBP/pub?output=csv";
+
+        fetch(sheetURL)
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split("\n").slice(1); // Skip the header row
+                const tableBody = document.querySelector("#rankingTable tbody");
+
+                rows.forEach(row => {
+                    const columns = row.split(",");
+                    const tr = document.createElement("tr");
+
+                    columns.forEach(col => {
+                        const td = document.createElement("td");
+                        td.textContent = col.trim().replace(/"/g, ""); // Clean up quotes
+                        tr.appendChild(td);
+                    });
+
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error("Error fetching data:", error));
+
+        function filterTable() {
+            const input = document.getElementById("search").value.toUpperCase();
+            const table = document.getElementById("rankingTable");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                let matches = false;
+
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j] && cells[j].textContent.toUpperCase().includes(input)) {
+                        matches = true;
+                        break;
+                    }
+                }
+
+                rows[i].style.display = matches ? "" : "none";
+            }
+        }
+    </script>
 </body>
 </html>
