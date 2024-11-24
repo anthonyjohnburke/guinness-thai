@@ -46,12 +46,17 @@
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTRkkm3qa0ZwLGUp_rEKepADE-w3At78wBzy9H2GJxYNQWUadXWrPMXiV4TT3neiXx5QZFXj--gZSBP/pub?output=csv";
 
         // Initialize the map
-        const map = L.map('map').setView([13.7563, 100.5018], 12); // Centered on Bangkok
+        const map = L.map('map');
 
-        // Add a tile layer (map background)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        // Add a modern, Google Maps-like tile layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
         }).addTo(map);
+
+        // Group markers for dynamic zoom and centering
+        const markers = L.featureGroup();
 
         fetch(sheetURL)
             .then(response => response.text())
@@ -60,7 +65,7 @@
                 const parsedData = Papa.parse(data, { header: true });
                 const rows = parsedData.data;
 
-                // Populate the table and add map markers
+                // Populate the table and add markers
                 const tableBody = document.querySelector("#rankingTable tbody");
                 rows.forEach(row => {
                     const tr = document.createElement("tr");
@@ -75,17 +80,34 @@
                         row["Notes/Reviews"]
                     ].forEach(col => {
                         const td = document.createElement("td");
-                        td.textContent = col ? col.trim() : "N/A"; // Handle missing values
+                        td.textContent = col ? col.trim() : "N/A";
                         tr.appendChild(td);
                     });
                     tableBody.appendChild(tr);
 
                     // Add marker to map
                     if (row["Latitude"] && row["Longitude"]) {
-                        const marker = L.marker([parseFloat(row["Latitude"]), parseFloat(row["Longitude"])]).addTo(map);
-                        marker.bindPopup(`<b>${row["Establishment Name"]}</b><br>${row["Notes/Reviews"] || ""}`);
+                        const lat = parseFloat(row["Latitude"]);
+                        const lon = parseFloat(row["Longitude"]);
+
+                        if (!isNaN(lat) && !isNaN(lon)) {
+                            const marker = L.marker([lat, lon], {
+                                icon: L.icon({
+                                    iconUrl: 'https://cdn-icons-png.flaticon.com/512/149/149059.png', // Custom pin icon
+                                    iconSize: [32, 32],
+                                    iconAnchor: [16, 32],
+                                    popupAnchor: [0, -32]
+                                })
+                            }).addTo(markers);
+
+                            marker.bindPopup(`<b>${row["Establishment Name"]}</b><br>${row["Notes/Reviews"] || ""}`);
+                        }
                     }
                 });
+
+                // Add markers to map and adjust view
+                markers.addTo(map);
+                map.fitBounds(markers.getBounds());
             })
             .catch(error => console.error("Error fetching data:", error));
 
