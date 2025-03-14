@@ -64,8 +64,10 @@
             return;
         }
 
-        // Send data to Google Sheets
-        fetch("https://script.google.com/macros/s/AKfycbzlgxSKzCyOXFjs3tFKWDhIsfeGdVul1gRm61hMs9YSrlWOupFuMNSUKlCRLPc-jOm2/exec", {
+        // Use the correct Google Apps Script Web App URL
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwuluWf7BEqNrIDuBH6g1vQt7tjj7pFEFOWxIBaqQHEKx-E6GxASCZFKraEB_sZV-cV/exec";
+
+        fetch(scriptURL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ suggestion: userInput })
@@ -81,6 +83,7 @@
         });
     }
 </script>
+
 
 
 </body>
