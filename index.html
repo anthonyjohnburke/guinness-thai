@@ -56,20 +56,32 @@
     <input type="text" id="response" placeholder="Type your answer here...">
     <button onclick="submitAnswer()">Submit</button>
 
-    <script>
-        function submitAnswer() {
-            let userInput = document.getElementById("response").value;
-            if (userInput.trim() === "") {
-                alert("Please enter a suggestion!");
-                return;
-            }
-            
-            // For now, just display the response as an alert
-            alert("Thanks for your suggestion: " + userInput);
-            
-            // Later, you can save responses to Google Sheets or a database
+   <script>
+    function submitAnswer() {
+        let userInput = document.getElementById("response").value;
+        if (userInput.trim() === "") {
+            alert("Please enter a suggestion!");
+            return;
         }
-    </script>
+
+        // Send data to Google Sheets
+        fetch("https://script.google.com/macros/s/AKfycbzlgxSKzCyOXFjs3tFKWDhIsfeGdVul1gRm61hMs9YSrlWOupFuMNSUKlCRLPc-jOm2/exec", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ suggestion: userInput })
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert("Thanks for your suggestion!");
+            document.getElementById("response").value = ""; // Clear input field
+        })
+        .catch(error => {
+            alert("Error submitting your suggestion. Please try again.");
+            console.error(error);
+        });
+    }
+</script>
+
 
 </body>
 </html>
