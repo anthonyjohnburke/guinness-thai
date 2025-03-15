@@ -120,16 +120,23 @@
             return;
         }
 
-        // Google Apps Script Web App URL (Replace with your actual URL)
+        // Google Apps Script Web App URL
         const scriptURL = "https://script.google.com/macros/s/AKfycbw1yKmqH2in_JWBAFV8tZ3_n89l05UaTkuW1AsMz4ilYZrGDtgJpRZpjTR_ydyIp_-4/exec";
+
+        // Debugging: Log data before sending
+        console.log("Sending data:", { suggestion: userInput, rating: rating });
 
         fetch(scriptURL, {
             method: "POST",
-            mode: "no-cors",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ suggestion: userInput, rating: rating })
+            body: JSON.stringify({
+                suggestion: userInput,
+                rating: rating
+            })
         })
-        .then(response => {
+        .then(response => response.text()) // Convert response to text for debugging
+        .then(data => {
+            console.log("Response from server:", data); // Log server response
             alert("Thanks for your suggestion!");
             document.getElementById("response").value = ""; // Clear input field
         })
@@ -138,8 +145,7 @@
             console.error("Fetch error:", error);
         });
     }
-</script>
-
+    </script>
 
 </body>
 </html>
