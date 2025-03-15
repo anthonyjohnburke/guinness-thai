@@ -19,10 +19,21 @@
             text-align: center;
         }
 
+        /* The "Guinness Head" - White Top Section */
+        #top-section {
+            background-color: white;
+            width: 100%;
+            height: 12.5vh; /* 12.5% of the viewport height */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         /* Centering the Question */
         #question {
             font-size: 2em;
             margin-bottom: 20px;
+            margin-top: 15vh; /* Pushes it below the white section */
         }
 
         /* Input Styling */
@@ -54,6 +65,9 @@
     </style>
 </head>
 <body>
+
+    <!-- White Top Section (Empty) -->
+    <div id="top-section"></div>
 
     <!-- Centered Question -->
     <div id="question">Where can I find the best Guinness in Bangkok?</div>
