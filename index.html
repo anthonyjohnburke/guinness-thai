@@ -6,23 +6,46 @@
     <title>Best Guinness in Bangkok</title>
     <style>
         body {
-            background-color: black;
-            color: white;
+            margin: 0;
+            padding: 0;
             font-family: 'Open Sans', sans-serif;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        /* The "Guinness Head" - White Top Section */
+        #top-section {
+            background-color: white;
+            width: 100%;
+            height: 12.5vh; /* 12.5% of the viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* The "Guinness Stout" - Black Bottom Section */
+        #bottom-section {
+            background-color: black;
+            width: 100%;
+            height: 87.5vh; /* Remaining 87.5% of the page */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            color: white;
         }
 
-        h1 {
+        /* Adjust H1 for White Top Section */
+        #top-section h1 {
+            color: black;
             font-size: 2.5em;
-            margin-bottom: 20px;
+            text-align: center;
         }
 
+        /* Input Styling */
         input {
             padding: 10px;
             font-size: 1.2em;
@@ -33,6 +56,7 @@
             text-align: center;
         }
 
+        /* Button Styling */
         button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -47,45 +71,74 @@
         button:hover {
             background-color: gray;
         }
+
+        /* Rating Dropdown */
+        label {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        select {
+            font-size: 1.2em;
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Where can I find the best Guinness in Bangkok?</h1>
-    
-    <input type="text" id="response" placeholder="Type your answer here...">
-    <button onclick="submitAnswer()">Submit</button>
+    <!-- White Top Section -->
+    <div id="top-section">
+        <h1>Where can I find the best Guinness in Bangkok?</h1>
+    </div>
 
-  <script>
-    function submitAnswer() {
-        let userInput = document.getElementById("response").value;
-        if (userInput.trim() === "") {
-            alert("Please enter a suggestion!");
-            return;
+    <!-- Black Bottom Section -->
+    <div id="bottom-section">
+        <input type="text" id="response" placeholder="Type your answer here...">
+
+        <!-- Rating Dropdown -->
+        <label for="rating">How would you rate it? (1-5)</label>
+        <select id="rating">
+            <option value="1">1 ⭐</option>
+            <option value="2">2 ⭐⭐</option>
+            <option value="3">3 ⭐⭐⭐</option>
+            <option value="4">4 ⭐⭐⭐⭐</option>
+            <option value="5" selected>5 ⭐⭐⭐⭐⭐</option>
+        </select>
+
+        <button onclick="submitAnswer()">Submit</button>
+    </div>
+
+    <script>
+        function submitAnswer() {
+            let userInput = document.getElementById("response").value;
+            let rating = document.getElementById("rating").value;
+
+            if (userInput.trim() === "") {
+                alert("Please enter a suggestion!");
+                return;
+            }
+
+            // Google Apps Script Web App URL
+            const scriptURL = "https://script.google.com/macros/s/AKfycbw1yKmqH2in_JWBAFV8tZ3_n89l05UaTkuW1AsMz4ilYZrGDtgJpRZpjTR_ydyIp_-4/exec";
+
+            fetch(scriptURL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ suggestion: userInput, rating: rating })
+            })
+            .then(response => {
+                alert("Thanks for your suggestion!");
+                document.getElementById("response").value = ""; // Clear input field
+            })
+            .catch(error => {
+                alert("Error submitting your suggestion. Please try again.");
+                console.error("Fetch error:", error);
+            });
         }
-
-        // Replace with your actual Google Apps Script Web App URL
-        const scriptURL = "https://script.google.com/macros/s/AKfycbw1yKmqH2in_JWBAFV8tZ3_n89l05UaTkuW1AsMz4ilYZrGDtgJpRZpjTR_ydyIp_-4/exec";
-
-        fetch(scriptURL, {
-            method: "POST",
-            mode: "no-cors",  // Important: Prevents CORS errors
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ suggestion: userInput })
-        })
-        .then(response => {
-            alert("Thanks for your suggestion!");
-            document.getElementById("response").value = ""; // Clear input field
-        })
-        .catch(error => {
-            alert("Error submitting your suggestion. Please try again.");
-            console.error("Fetch error:", error);
-        });
-    }
-</script>
-
-
-
+    </script>
 
 </body>
 </html>
