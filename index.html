@@ -86,7 +86,7 @@
             return;
         }
 
-        // Use your newly deployed Google Apps Script URL
+        // Use your correct Google Apps Script Web App URL
         const scriptURL = "https://script.google.com/macros/s/AKfycbxoMqjEMCPg10o0175iqS4k4kAuC4tS1vQIBLXWLRq3TPpznRDPRO23L9m_w6FFgZtx/exec";
 
         console.log("Sending data:", { suggestion: userInput });
@@ -98,12 +98,12 @@
         })
         .then(response => response.text()) // Convert response to text
         .then(data => {
-            console.log("Response from server:", data); // Debugging
+            console.log("Response from server:", data);
             if (data.includes("Success")) {
                 alert("Thanks for your suggestion!");
                 document.getElementById("response").value = ""; // Clear input field
             } else {
-                alert("Error: " + data); // Show error message from the server
+                alert("Error: " + data);
             }
         })
         .catch(error => {
@@ -112,6 +112,7 @@
         });
     }
 </script>
+
 
 
 
