@@ -56,7 +56,7 @@
     <input type="text" id="response" placeholder="Type your answer here...">
     <button onclick="submitAnswer()">Submit</button>
 
-   <script>
+  <script>
     function submitAnswer() {
         let userInput = document.getElementById("response").value;
         if (userInput.trim() === "") {
@@ -64,25 +64,26 @@
             return;
         }
 
-        // Use the correct Google Apps Script Web App URL
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwuluWf7BEqNrIDuBH6g1vQt7tjj7pFEFOWxIBaqQHEKx-E6GxASCZFKraEB_sZV-cV/exec";
+        // Replace with your actual Google Apps Script Web App URL
+        const scriptURL = "https://script.google.com/macros/s/AKfycbw1yKmqH2in_JWBAFV8tZ3_n89l05UaTkuW1AsMz4ilYZrGDtgJpRZpjTR_ydyIp_-4/exec";
 
         fetch(scriptURL, {
             method: "POST",
+            mode: "no-cors",  // Important: Prevents CORS errors
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ suggestion: userInput })
         })
-        .then(response => response.text())
-        .then(data => {
+        .then(response => {
             alert("Thanks for your suggestion!");
             document.getElementById("response").value = ""; // Clear input field
         })
         .catch(error => {
             alert("Error submitting your suggestion. Please try again.");
-            console.error(error);
+            console.error("Fetch error:", error);
         });
     }
 </script>
+
 
 
 
