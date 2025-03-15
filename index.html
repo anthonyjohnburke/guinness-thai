@@ -111,34 +111,35 @@
     </div>
 
     <script>
-        function submitAnswer() {
-            let userInput = document.getElementById("response").value;
-            let rating = document.getElementById("rating").value;
+    function submitAnswer() {
+        let userInput = document.getElementById("response").value;
+        let rating = document.getElementById("rating").value;
 
-            if (userInput.trim() === "") {
-                alert("Please enter a suggestion!");
-                return;
-            }
-
-            // Google Apps Script Web App URL
-            const scriptURL = "https://script.google.com/macros/s/AKfycbw1yKmqH2in_JWBAFV8tZ3_n89l05UaTkuW1AsMz4ilYZrGDtgJpRZpjTR_ydyIp_-4/exec";
-
-            fetch(scriptURL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ suggestion: userInput, rating: rating })
-            })
-            .then(response => {
-                alert("Thanks for your suggestion!");
-                document.getElementById("response").value = ""; // Clear input field
-            })
-            .catch(error => {
-                alert("Error submitting your suggestion. Please try again.");
-                console.error("Fetch error:", error);
-            });
+        if (userInput.trim() === "") {
+            alert("Please enter a suggestion!");
+            return;
         }
-    </script>
+
+        // Google Apps Script Web App URL (Replace with your actual URL)
+        const scriptURL = "https://script.google.com/macros/s/AKfycbw1yKmqH2in_JWBAFV8tZ3_n89l05UaTkuW1AsMz4ilYZrGDtgJpRZpjTR_ydyIp_-4/exec";
+
+        fetch(scriptURL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ suggestion: userInput, rating: rating })
+        })
+        .then(response => {
+            alert("Thanks for your suggestion!");
+            document.getElementById("response").value = ""; // Clear input field
+        })
+        .catch(error => {
+            alert("Error submitting your suggestion. Please try again.");
+            console.error("Fetch error:", error);
+        });
+    }
+</script>
+
 
 </body>
 </html>
