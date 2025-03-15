@@ -96,7 +96,7 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ suggestion: userInput })
         })
-        .then(response => response.json()) // Parse response as JSON
+        .then(response => response.json()) // Convert response to JSON
         .then(data => {
             console.log("Response from server:", data);
             if (data.status === "Success") {
@@ -112,6 +112,7 @@
         });
     }
 </script>
+
 
 
 
