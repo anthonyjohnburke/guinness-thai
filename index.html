@@ -77,26 +77,34 @@
     <input type="text" id="response" placeholder="Type your answer here...">
     <button onclick="submitAnswer()">Submit</button>
 
-   <script>
+  <script>
     function submitAnswer() {
         let userInput = document.getElementById("response").value;
+
         if (userInput.trim() === "") {
             alert("Please enter a suggestion!");
             return;
         }
 
-        // Replace with your actual Google Apps Script Web App URL
-        const scriptURL = "https://script.google.com/macros/s/AKfycbyK2m8Ty_fuHsEajykVdJoXqE0xTRFRwzIfZZX878KSDewS07YRFqO-g6vgaFqS8YYs/exec";
+        // Use your newly deployed Google Apps Script URL
+        const scriptURL = "https://script.google.com/macros/s/AKfycbxoMqjEMCPg10o0175iqS4k4kAuC4tS1vQIBLXWLRq3TPpznRDPRO23L9m_w6FFgZtx/exec";
+
+        console.log("Sending data:", { suggestion: userInput });
 
         fetch(scriptURL, {
             method: "POST",
-            mode: "no-cors",  // Important: Prevents CORS errors
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ suggestion: userInput })
         })
-        .then(response => {
-            alert("Thanks for your suggestion!");
-            document.getElementById("response").value = ""; // Clear input field
+        .then(response => response.text()) // Convert response to text
+        .then(data => {
+            console.log("Response from server:", data); // Debugging
+            if (data.includes("Success")) {
+                alert("Thanks for your suggestion!");
+                document.getElementById("response").value = ""; // Clear input field
+            } else {
+                alert("Error: " + data); // Show error message from the server
+            }
         })
         .catch(error => {
             alert("Error submitting your suggestion. Please try again.");
@@ -104,6 +112,7 @@
         });
     }
 </script>
+
 
 
 </body>
