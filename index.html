@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Guinness in Bangkok</title>
+    <title>Best Irish Guinness in Bangkok Thailand </title>
     <style>
         body {
             margin: 0;
@@ -74,7 +74,7 @@
     <div id="question">Where can I find the best Guinness in Bangkok?</div>
 
     <!-- Submit Form -->
-    <input type="text" id="response" placeholder="Type your answer here...">
+    <input type="text" id="response" placeholder="Type your answer here, be honest lad!...">
     <button onclick="submitAnswer()">Submit</button>
 
 <script>
@@ -95,7 +95,7 @@
             body: JSON.stringify({ suggestion: userInput })
         })
         .then(response => {
-            alert("Thanks for your suggestion!");
+            alert("Go raibh maith agat!-thanks for your suggestion");
             document.getElementById("response").value = ""; // Clear input field
         })
         .catch(error => {
