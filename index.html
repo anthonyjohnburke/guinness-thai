@@ -81,7 +81,7 @@
       pointer-events: none;
     }
 
-    /* Keyframes */
+    /* Animations */
     @keyframes typing {
       from { width: 0 }
       to { width: 100% }
@@ -101,7 +101,7 @@
     /* Animated Question */
     #question {
       font-size: 3.2em;
-      font-weight: bold;
+      font-weight: 800;
       margin-bottom: 20px;
       margin-top: 18vh;
       max-width: 80%;
@@ -113,6 +113,8 @@
       border-right: 3px solid white;
       width: 0;
       animation: typing 1.8s steps(35, end) forwards, blink 0.8s step-end infinite;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* Fading Intro */
@@ -124,7 +126,7 @@
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.1);
       opacity: 0;
-      animation: fadeIn 1.5s ease-in 2s forwards;
+      animation: fadeIn 1.5s ease-in 0s forwards;
     }
 
     /* Form Input */
