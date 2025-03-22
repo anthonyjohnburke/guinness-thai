@@ -72,9 +72,9 @@
     /* Handwritten Note */
     #note {
       font-family: 'Shadows Into Light', cursive;
-      font-size: 1.2em;
+      font-size: 1.1em;
       position: absolute;
-      top: 14vh;
+      top: 14.5vh;
       color: #ffffffa0;
       width: 100%;
       text-align: center;
@@ -101,7 +101,7 @@
     /* Animated Question */
     #question {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 4em;
+      font-size: 3.4em;
       font-weight: normal;
       margin-bottom: 20px;
       margin-top: 18vh;
@@ -120,8 +120,8 @@
 
     /* Fading Intro */
     #intro {
-      font-size: 1em;
-      max-width: 700px;
+      font-size: 1.1em;
+      max-width: 600px;
       margin: 10px auto 30px;
       padding: 0 20px;
       line-height: 1.5;
@@ -133,7 +133,7 @@
     /* Form Input */
     input {
       padding: 10px;
-      font-size: 1em;
+      font-size: 1.1em;
       width: 80%;
       max-width: 450px;
       border: none;
@@ -143,26 +143,46 @@
 
     /* Submit Button */
     button {
-    margin-top: 40px;
-    padding: 12px 22px;
-    font-size: 1em;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 5px;
-    background-color: #C8F2C2;
-    color: black;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-    button:hover {
-    background-color: #B8E8B1;
-  }
+      margin-top: 40px;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 5px;
+      background-color: #C8F2C2;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
 
-    /* 📱 Disable animations on mobile */
+    button:hover {
+      background-color: #B8E8B1;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* 📱 Mobile Layout Fixes */
     @media screen and (max-width: 768px) {
+      body {
+        padding: 20px;
+        height: auto;
+      }
+
+      #top-section {
+        height: 10vh;
+      }
+
+      #note {
+        font-size: 0.95em;
+        top: 11vh;
+      }
+
       #question {
+        font-size: 2.2em;
+        margin-top: 14vh;
         width: 100% !important;
         border-right: none !important;
         animation: none !important;
@@ -171,9 +191,22 @@
       }
 
       #intro {
+        font-size: 1em;
+        margin-top: 10px;
         opacity: 1 !important;
         color: rgba(255, 255, 255, 0.9) !important;
         animation: none !important;
+      }
+
+      input {
+        width: 100%;
+        font-size: 1em;
+      }
+
+      button {
+        width: 100%;
+        font-size: 1em;
+        margin-top: 25px;
       }
     }
   </style>
@@ -216,4 +249,14 @@
         body: JSON.stringify({ suggestion: userInput })
       })
       .then(response => {
-        aler
+        alert("Go raibh maith agat! – thanks for your suggestion");
+        document.getElementById("response").value = "";
+      })
+      .catch(error => {
+        alert("Error submitting your suggestion. Please try again.");
+        console.error("Fetch error:", error);
+      });
+    }
+  </script>
+</body>
+</html>
