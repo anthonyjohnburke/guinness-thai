@@ -81,7 +81,7 @@
       pointer-events: none;
     }
 
-    /* Typing animation */
+    /* Keyframes */
     @keyframes typing {
       from { width: 0 }
       to { width: 100% }
@@ -91,7 +91,14 @@
       50% { border-color: transparent }
     }
 
-    /* Main Question */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    /* Animated Question */
     #question {
       font-size: 3.2em;
       font-weight: bold;
@@ -105,10 +112,10 @@
       white-space: nowrap;
       border-right: 3px solid white;
       width: 0;
-      animation: typing 3s steps(40, end) forwards, blink 0.8s step-end infinite;
+      animation: typing 1.8s steps(35, end) forwards, blink 0.8s step-end infinite;
     }
 
-    /* Fade-in Body Text */
+    /* Fading Intro */
     #intro {
       font-size: 1.1em;
       max-width: 600px;
@@ -117,14 +124,7 @@
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.1);
       opacity: 0;
-      animation: fadeIn 2s ease-in 3s forwards;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        color: rgba(255, 255, 255, 0.9);
-      }
+      animation: fadeIn 1.5s ease-in 2s forwards;
     }
 
     /* Form Input */
@@ -154,6 +154,23 @@
 
     button:hover {
       background-color: rgba(218, 253, 186, 0.5);
+    }
+
+    /* 📱 Disable animations on mobile */
+    @media screen and (max-width: 768px) {
+      #question {
+        width: 100% !important;
+        border-right: none !important;
+        animation: none !important;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #intro {
+        opacity: 1 !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        animation: none !important;
+      }
     }
   </style>
 </head>
