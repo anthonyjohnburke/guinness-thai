@@ -6,7 +6,7 @@
   <title>Where to Find the Best Guinness in Bangkok 🍺 | Vote for Your Favorite Pint!</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Discover the best Guinness in Bangkok! Help us find the finest pint in town by sharing your top spots." />
@@ -100,8 +100,9 @@
 
     /* Animated Question */
     #question {
-      font-size: 3.2em;
-      font-weight: 800;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.4em;
+      font-weight: normal;
       margin-bottom: 20px;
       margin-top: 18vh;
       max-width: 80%;
@@ -214,14 +215,4 @@
         body: JSON.stringify({ suggestion: userInput })
       })
       .then(response => {
-        alert("Go raibh maith agat! – thanks for your suggestion");
-        document.getElementById("response").value = "";
-      })
-      .catch(error => {
-        alert("Error submitting your suggestion. Please try again.");
-        console.error("Fetch error:", error);
-      });
-    }
-  </script>
-</body>
-</html>
+        aler
