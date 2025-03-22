@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Where to Find the Best Guinness in Bangkok 🍺 | Vote for Your Favorite Pint!</title>
 
-  <!-- Google Font: Handwriting Style -->
-  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Discover the best Guinness in Bangkok! Help us find the finest pint in town by sharing your top spots." />
@@ -14,7 +14,7 @@
   <meta name="author" content="The Black Stuff Thailand" />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph for Social Sharing -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Best Guinness in Bangkok" />
   <meta property="og:description" content="Where can you find the best pint of Guinness in Bangkok? Share your favorite spots!" />
   <meta property="og:image" content="https://i.imgur.com/jX1EnbJ.png" />
@@ -44,7 +44,6 @@
     }
   </script>
 
-  <!-- Styling -->
   <style>
     body {
       margin: 0;
@@ -60,7 +59,7 @@
       text-align: center;
     }
 
-    /* White Guinness Head */
+    /* Guinness Foam */
     #top-section {
       background-color: white;
       width: 100%;
@@ -72,17 +71,27 @@
 
     /* Handwritten Note */
     #note {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 1.1em;
-    position: absolute;
-    top: 14.5vh; /* was 12vh */
-    color: #ffffffa0;
-    width: 100%;
-    text-align: center;
-    pointer-events: none;
-  }
+      font-family: 'Shadows Into Light', cursive;
+      font-size: 1.1em;
+      position: absolute;
+      top: 14.5vh;
+      color: #ffffffa0;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
 
-    /* Question */
+    /* Typing animation */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    /* Main Question */
     #question {
       font-size: 3.2em;
       font-weight: bold;
@@ -92,6 +101,30 @@
       padding: 0 10%;
       text-align: center;
       word-wrap: break-word;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid white;
+      width: 0;
+      animation: typing 3s steps(40, end) forwards, blink 0.8s step-end infinite;
+    }
+
+    /* Fade-in Body Text */
+    #intro {
+      font-size: 1.1em;
+      max-width: 600px;
+      margin: 10px auto 30px;
+      padding: 0 20px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      animation: fadeIn 2s ease-in 3s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        color: rgba(255, 255, 255, 0.9);
+      }
     }
 
     /* Form Input */
@@ -122,18 +155,6 @@
     button:hover {
       background-color: rgba(218, 253, 186, 0.5);
     }
-
-    /* Optional: SEO Body Text */
-    #intro {
-    font-size: 1.1em;
-    max-width: 600px;
-    margin: 10px auto 30px;
-    padding: 0 20px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.9); /* Light grey with 90% opacity */
-  }
-
-    
   </style>
 </head>
 
@@ -142,22 +163,21 @@
   <!-- White Top Section (Foam) -->
   <div id="top-section"></div>
 
-  <!-- Handwritten Pint Note -->
+  <!-- Pint Head Note -->
   <div id="note">"The perfect Guinness head is approx 12% of the pint height."</div>
 
-  <!-- Question -->
+  <!-- Animated Question -->
   <h1 id="question">Who’s pouring the finest pint of Guinness in Bangkok?</h1>
 
-  <!-- Optional SEO Copy -->
+  <!-- Fading Intro -->
   <p id="intro">
     Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
   </p>
 
-  <!-- Input + Button -->
+  <!-- Submission -->
   <input type="text" id="response" placeholder="Go on lad, tell me which bar has the best pint..">
   <button onclick="submitAnswer()">Right so, let’s hear it</button>
 
-  <!-- Script -->
   <script>
     function submitAnswer() {
       let userInput = document.getElementById("response").value;
@@ -174,16 +194,15 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ suggestion: userInput })
       })
-        .then(response => {
-          alert("Go raibh maith agat! – thanks for your suggestion");
-          document.getElementById("response").value = "";
-        })
-        .catch(error => {
-          alert("Error submitting your suggestion. Please try again.");
-          console.error("Fetch error:", error);
-        });
+      .then(response => {
+        alert("Go raibh maith agat! – thanks for your suggestion");
+        document.getElementById("response").value = "";
+      })
+      .catch(error => {
+        alert("Error submitting your suggestion. Please try again.");
+        console.error("Fetch error:", error);
+      });
     }
   </script>
-
 </body>
 </html>
