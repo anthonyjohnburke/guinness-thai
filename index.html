@@ -1,160 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Where to Find the Best Guinness in Bangkok 🍺 | Vote for Your Favorite Pint!</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where to Find the Best Guinness in Bangkok 🍺 | Vote for Your Favorite Pint!</title>
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Discover the best Guinness in Bangkok! Help us find the finest pint in town by sharing your top spots.">
-    <meta name="keywords" content="Best Guinness Bangkok Thailand, Irish Pubs Bangkok, Where to drink Guinness in Bangkok, Best Pints Bangkok">
-    <meta name="author" content="The Black Stuff Thailand">
-    <meta name="robots" content="index, follow">
+  <!-- Google Font: Handwriting Style -->
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet" />
 
-    <!-- SEO & Social Media Sharing -->
-    <meta property="og:image" content="https://i.imgur.com/jX1EnbJ.png">
-    <meta name="twitter:image" content="https://i.imgur.com/jX1EnbJ.png">
-    <meta property="og:image:alt" content="A perfect pint of Guinness in Bangkok">
-    <meta name="twitter:image:alt" content="A perfect pint of Guinness in Bangkok">
-    
-    <!-- Open Graph for Social Sharing -->
-    <meta property="og:title" content="Best Guinness in Bangkok">
-    <meta property="og:description" content="Where can you find the best pint of Guinness in Bangkok? Share your favorite spots!">
-    <meta property="og:url" content="https://www.guinnessthailand.com/">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Best Guinness in Bangkok">
-    <meta name="twitter:description" content="Help us find the best pint of Guinness in Bangkok! Share your go-to spots.">
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Open Sans', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center; /* Centers everything vertically */
-            height: 100vh;
-            background-color: black;
-            color: white;
-            text-align: center;
-        }
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Discover the best Guinness in Bangkok! Help us find the finest pint in town by sharing your top spots." />
+  <meta name="keywords" content="Best Guinness Bangkok Thailand, Irish Pubs Bangkok, Where to drink Guinness in Bangkok, Best Pints Bangkok" />
+  <meta name="author" content="The Black Stuff Thailand" />
+  <meta name="robots" content="index, follow" />
 
-        /* The "Guinness Head" - White Top Section */
-        #top-section {
-            background-color: white;
-            width: 100%;
-            height: 12.5vh; /* 12.5% of the viewport height */
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+  <!-- Open Graph for Social Sharing -->
+  <meta property="og:title" content="Best Guinness in Bangkok" />
+  <meta property="og:description" content="Where can you find the best pint of Guinness in Bangkok? Share your favorite spots!" />
+  <meta property="og:image" content="https://i.imgur.com/jX1EnbJ.png" />
+  <meta property="og:image:alt" content="A perfect pint of Guinness in Bangkok" />
+  <meta property="og:url" content="https://www.guinnessthailand.com/" />
+  <meta property="og:type" content="website" />
 
-        /* Centering the Question */
-        #question {
-            font-size: 3.2em; /* Increased by 20% */
-            font-weight: bold;
-            margin-bottom: 20px;
-            margin-top: 15vh; /* Pushes it below the white section */
-            max-width: 80%;  /* Limits the width to 80% of the screen */
-            padding: 0 10%;   /* Adds spacing on both sides */
-            text-align: center; /* Ensures text stays centered */
-            word-wrap: break-word; /* Ensures long words don’t overflow */
-        }
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Best Guinness in Bangkok" />
+  <meta name="twitter:description" content="Help us find the best pint of Guinness in Bangkok! Share your go-to spots." />
+  <meta name="twitter:image" content="https://i.imgur.com/jX1EnbJ.png" />
+  <meta name="twitter:image:alt" content="A perfect pint of Guinness in Bangkok" />
 
-        /* Input Styling */
-        input {
-            padding: 10px;
-            font-size: 1.1em;
-            width: 80%;
-            max-width: 450px;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-        }
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Best Guinness in Bangkok",
+      "url": "https://www.guinnessthailand.com",
+      "description": "Discover and vote on the best pint of Guinness in Bangkok.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Black Stuff Thailand"
+      }
+    }
+  </script>
 
-        /* Button Styling */
-        button {
-            margin-top: 30px;
-            padding: 10px 20px;
-            font-size: 1.1em;
-            font-weight: bold;  /* This makes the text bold */
-            border: none;
-            border-radius: 5px;
-            background-color: white;
-            color: black;
-            cursor: pointer;
-        }
+  <!-- Styling -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: black;
+      color: white;
+      text-align: center;
+    }
 
-        button:hover {
-            background-color: rgba(218, 253, 186);
-        }
-    </style>
+    /* White Guinness Head */
+    #top-section {
+      background-color: white;
+      width: 100%;
+      height: 12.5vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Best Guinness in Bangkok",
-  "url": "https://www.guinnessthailand.com",
-  "description": "Discover and vote on the best pint of Guinness in Bangkok.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "The Black Stuff Thailand"
-  }
-}
-</script>
+    /* Handwritten Note */
+    #note {
+      font-family: 'Shadows Into Light', cursive;
+      font-size: 1.1em;
+      position: absolute;
+      top: 12vh;
+      color: #ffffffa0;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
 
+    /* Question */
+    #question {
+      font-size: 3.2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      margin-top: 18vh;
+      max-width: 80%;
+      padding: 0 10%;
+      text-align: center;
+      word-wrap: break-word;
+    }
 
-    
+    /* Form Input */
+    input {
+      padding: 10px;
+      font-size: 1.1em;
+      width: 80%;
+      max-width: 450px;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    /* Submit Button */
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      background-color: white;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: rgba(218, 253, 186, 0.5);
+    }
+
+    /* Optional: SEO Body Text */
+    #intro {
+      font-size: 1.1em;
+      max-width: 600px;
+      margin: 10px auto 30px;
+      padding: 0 20px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- White Top Section (Empty) -->
-    <div id="top-section"></div>
+  <!-- White Top Section (Foam) -->
+  <div id="top-section"></div>
 
-    <!-- Centered Question -->
-    <h1 id="question">Who’s pouring the finest pint of Guinness in Bangkok?</h1>
+  <!-- Handwritten Pint Note -->
+  <div id="note">"The perfect Guinness head is approx 12% of the pint height."</div>
 
+  <!-- Question -->
+  <h1 id="question">Who’s pouring the finest pint of Guinness in Bangkok?</h1>
 
-    <!-- Submit Form -->
-    <input type="text" id="response" placeholder="Go on lad, tell me which bar has the best pint..">
-    <button onclick="submitAnswer()">Right so, let’s hear it</button>
+  <!-- Optional SEO Copy -->
+  <p id="intro">
+    Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
+  </p>
 
-<script>
+  <!-- Input + Button -->
+  <input type="text" id="response" placeholder="Go on lad, tell me which bar has the best pint..">
+  <button onclick="submitAnswer()">Right so, let’s hear it</button>
+
+  <!-- Script -->
+  <script>
     function submitAnswer() {
-        let userInput = document.getElementById("response").value;
-        if (userInput.trim() === "") {
-            alert("Please enter a suggestion!");
-            return;
-        }
+      let userInput = document.getElementById("response").value;
+      if (userInput.trim() === "") {
+        alert("Please enter a suggestion!");
+        return;
+      }
 
-        // Correct Google Apps Script Web App URL
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
 
-        fetch(scriptURL, {
-            method: "POST",
-            mode: "no-cors",  // Important: Prevents CORS errors
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ suggestion: userInput })
-        })
+      fetch(scriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ suggestion: userInput })
+      })
         .then(response => {
-            alert("Go raibh maith agat!-thanks for your suggestion");
-            document.getElementById("response").value = ""; // Clear input field
+          alert("Go raibh maith agat! – thanks for your suggestion");
+          document.getElementById("response").value = "";
         })
         .catch(error => {
-            alert("Error submitting your suggestion. Please try again.");
-            console.error("Fetch error:", error);
+          alert("Error submitting your suggestion. Please try again.");
+          console.error("Fetch error:", error);
         });
     }
-</script>
-
-
-
-
+  </script>
 
 </body>
 </html>
