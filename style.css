@@ -259,9 +259,44 @@ button:active {
         font-size: 1em;
     }
 
+
+/* Inline form inside column */
+.inline-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Smaller, cleaner input */
+.inline-form input {
+    width: 100%;
+    font-size: 0.95em;
+    padding: 10px;
+}
+
+/* Softer button */
+.inline-form button {
+    font-size: 0.9em;
+    padding: 10px;
+    background-color: #C8F2C2;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    font-weight: normal; /* 👈 no longer shouty */
+    text-transform: none; /* 👈 remove ALL CAPS */
+}
+
+.inline-form button:hover {
+    background-color: #B8E8B1;
+}
+
+
+    
     button {
         width: 100%;
         font-size: 1em;
         margin-top: 25px;
     }
 }
+
