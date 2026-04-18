@@ -194,7 +194,7 @@ button:hover {
 
 .popup-title {
     font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
+    font-weight: black;
     font-size: 1.4em;   /* 👈 bigger */
     margin-bottom: 10px;
     letter-spacing: 0.2px; /* subtle polish */
@@ -221,7 +221,7 @@ button:hover {
 }
 
 .popup-link {
-    font-size: 0.8em;
+    font-size: 1em;
     text-decoration: none;
     color: #2a7a2a;
 }
