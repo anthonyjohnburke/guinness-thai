@@ -97,13 +97,87 @@ const map = new mapboxgl.Map({
 
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-// Test marker (we'll replace later)
-new mapboxgl.Marker({ color: '#C8F2C2' })
-  .setLngLat([100.5625, 13.7367])
-  .setPopup(
-    new mapboxgl.Popup().setHTML("<strong>Test Pint</strong><br>The Black Swan")
-  )
-  .addTo(map);
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
+  center: [100.5018, 13.7563],
+  zoom: 11.2
+});
+
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+map.scrollZoom.disable();
+
+const pubs = [
+  {
+    name: "The Black Swan",
+    area: "Sukhumvit",
+    price: "350 THB",
+    rating: "4.6",
+    lng: 100.5625,
+    lat: 13.7367
+  },
+  {
+    name: "The Royal Oak",
+    area: "Phrom Phong",
+    price: "320 THB",
+    rating: "4.4",
+    lng: 100.5700,
+    lat: 13.7305
+  },
+  {
+    name: "O'Shea's",
+    area: "Silom",
+    price: "330 THB",
+    rating: "4.3",
+    lng: 100.5315,
+    lat: 13.7280
+  }
+];
+
+pubs.forEach(pub => {
+  const popupHTML = `
+    <div style="font-family: Open Sans, sans-serif; color: #111; min-width: 180px;">
+      <strong>${pub.name}</strong><br>
+      ${pub.area}<br>
+      Price: ${pub.price}<br>
+      Taste rating: ${pub.rating}
+    </div>
+  `;
+
+  new mapboxgl.Marker({ color: '#C8F2C2' })
+    .setLngLat([pub.lng, pub.lat])
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
+    .addTo(map);
+});
+
+// Submission form
+function submitAnswer() {
+  let userInput = document.getElementById("response").value;
+
+  if (userInput.trim() === "") {
+    alert("Please enter a suggestion!");
+    return;
+  }
+
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
+
+  fetch(scriptURL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ suggestion: userInput })
+  })
+  .then(() => {
+    alert("Go raibh maith agat! – thanks for your suggestion");
+    document.getElementById("response").value = "";
+  })
+  .catch(() => {
+    alert("Error submitting your suggestion.");
+  });
+}
 </script>
 
 <!-- Form Script -->
