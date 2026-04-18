@@ -187,7 +187,7 @@ button:active {
 }
 
 .inline-form button {
-    width: auto;
+    width: 50%;
     margin-top: 0;
     font-size: 0.8em;
     padding: 10px;
