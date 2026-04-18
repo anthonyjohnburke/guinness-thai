@@ -1,1 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where to Find the Best Guinness in Bangkok 🍺 | Vote for Your Favorite Pint!</title>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Discover the best Guinness in Bangkok! Help us find the finest pint in town by sharing your top spots." />
+  <meta name="keywords" content="Best Guinness Bangkok Thailand, Irish Pubs Bangkok, Where to drink Guinness in Bangkok, Best Pints Bangkok" />
+  <meta name="author" content="The Black Stuff Thailand" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Best Guinness in Bangkok" />
+  <meta property="og:description" content="Where can you find the best pint of Guinness in Bangkok? Share your favorite spots!" />
+  <meta property="og:image" content="https://i.imgur.com/jX1EnbJ.png" />
+  <meta property="og:image:alt" content="A perfect pint of Guinness in Bangkok" />
+  <meta property="og:url" content="https://www.guinnessthailand.com/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Best Guinness in Bangkok" />
+  <meta name="twitter:description" content="Help us find the best pint of Guinness in Bangkok! Share your go-to spots." />
+  <meta name="twitter:image" content="https://i.imgur.com/jX1EnbJ.png" />
+  <meta name="twitter:image:alt" content="A perfect pint of Guinness in Bangkok" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Best Guinness in Bangkok",
+      "url": "https://www.guinnessthailand.com",
+      "description": "Discover and vote on the best pint of Guinness in Bangkok.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Black Stuff Thailand"
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: black;
+      color: white;
+      text-align: center;
+    }
+
+    /* Guinness Foam */
+    #top-section {
+      background-color: white;
+      width: 100%;
+      height: 12.5vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Handwritten Note */
+    #note {
+      font-family: 'Shadows Into Light', cursive;
+      font-size: 1.1em;
+      position: absolute;
+      top: 14.5vh;
+      color: #ffffffa0;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    /* Animations */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    /* Animated Question */
+    #question {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4.4em;
+      font-weight: normal;
+      margin-bottom: 20px;
+      margin-top: 18vh;
+      max-width: 80%;
+      padding: 0 10%;
+      text-align: center;
+      word-wrap: break-word;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid white;
+      width: 0;
+      animation: typing 1.8s steps(35, end) forwards, blink 0.8s step-end infinite;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Fading Intro */
+    #intro {
+      font-size: 1.1em;
+      max-width: 600px;
+      margin: 10px auto 30px;
+      padding: 0 20px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      animation: fadeIn 1.5s ease-in 0s forwards;
+    }
+
+    /* Form Input */
+    input {
+      padding: 10px;
+      font-size: 1.1em;
+      width: 80%;
+      max-width: 450px;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    /* Submit Button */
+    button {
+      margin-top: 40px;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 5px;
+      background-color: #C8F2C2;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #B8E8B1;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* 📱 Mobile Layout Fixes */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 20px;
+        height: auto;
+      }
+
+      #top-section {
+        height: 10vh;
+      }
+
+      #note {
+        font-size: 0.95em;
+        top: 11vh;
+      }
+
+      #question {
+        font-size: 2.6em;
+        margin-top: 15vh;
+        width: 100% !important;
+        border-right: none !important;
+        animation: none !important;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #intro {
+        font-size: 1em;
+        margin-top: 12px;
+        opacity: 1 !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        animation: none !important;
+      }
+
+      input {
+        width: 100%;
+        font-size: 1em;
+      }
+
+      button {
+        width: 100%;
+        font-size: 1em;
+        margin-top: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- White Top Section (Foam) -->
+  <div id="top-section"></div>
+
+  <!-- Pint Head Note -->
+  <div id="note">"The perfect Guinness head is approx 12% of the pint height."</div>
+
+  <!-- Animated Question -->
+  <h1 id="question">Who’s pouring the finest pint of Guinness in Bangkok?</h1>
+
+  <!-- Fading Intro -->
+  <p id="intro">
+    Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
+  </p>
+
+  <!-- Submission -->
+  <input type="text" id="response" placeholder="Go on lad, tell me which bar has the best pint..">
+  <button onclick="submitAnswer()">Right so, let’s hear it</button>
+
+  <script>
+    function submitAnswer() {
+      let userInput = document.getElementById("response").value;
+      if (userInput.trim() === "") {
+        alert("Please enter a suggestion!");
+        return;
+      }
+
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
+
+      fetch(scriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ suggestion: userInput })
+      })
+      .then(response => {
+        alert("Go raibh maith agat! – thanks for your suggestion");
+        document.getElementById("response").value = "";
+      })
+      .catch(error => {
+        alert("Error submitting your suggestion. Please try again.");
+        console.error("Fetch error:", error);
+      });
+    }
+  </script>
+</body>
+</html>
