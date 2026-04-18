@@ -30,183 +30,137 @@
 </head>
 
 <body>
+  <div class="page-wrap">
 
-<div class="page-wrap">
+    <div id="top-section"></div>
 
-  <!-- White Foam -->
-  <div id="top-section"></div>
-
-   <!-- Pint Note -->
-  <div id="note">
-    "The perfect Guinness head is approx 12% of the pint height."
-  </div>
-  
-  
-  <!-- Map (FULL WIDTH HERO) -->
-  <section id="map-section">
-    <div id="map"></div>
-  </section>
-
-
-  <!-- Question -->
-  <h1 id="question">
-    Who’s pouring the finest pint of Guinness in Bangkok?
-  </h1>
-
-  <!-- 3 Column Intro -->
- <div id="intro">
-
-  <div class="intro-col">
-    <p>
-      Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get the perfect pint without overpaying.
-    </p>
-  </div>
-
-  <div class="intro-col">
-    <p>
-      More features coming soon — ratings, price comparisons, and a live leaderboard of Bangkok’s top pints. Stay tuned.
-    </p>
-  </div>
-
-  <div class="intro-col">
-    <p>
-      Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
-    </p>
-
-    <!-- FORM MOVED HERE -->
-    <div class="inline-form">
-      <input type="text" id="response" placeholder="Tell me which bar has the best pint..." />
-      <button onclick="submitAnswer()">Submit</button>
+    <div id="note">
+      "The perfect Guinness head is approx 12% of the pint height."
     </div>
+
+    <section id="map-section">
+      <div id="map"></div>
+    </section>
+
+    <h1 id="question">
+      Who’s pouring the finest pint of Guinness in Bangkok?
+    </h1>
+
+    <div id="intro">
+      <div class="intro-col">
+        <p>
+          Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get the perfect pint without overpaying.
+        </p>
+      </div>
+
+      <div class="intro-col">
+        <p>
+          More features coming soon — ratings, price comparisons, and a live leaderboard of Bangkok’s top pints. Stay tuned.
+        </p>
+      </div>
+
+      <div class="intro-col">
+        <p>
+          Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
+        </p>
+
+        <div class="inline-form">
+          <input type="text" id="response" placeholder="Tell me which bar has the best pint..." />
+          <button onclick="submitAnswer()">Submit</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-</div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
+      center: [100.5018, 13.7563],
+      zoom: 11.2
+    });
 
-<!-- Map Script -->
-<script>
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    map.scrollZoom.disable();
 
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
-  center: [100.5018, 13.7563],
-  zoom: 11.2,
-  scrollZoom: false
-});
+    const pubs = [
+      {
+        name: "The Black Swan",
+        area: "Sukhumvit",
+        price: "350 THB",
+        rating: "4.6",
+        link: "#",
+        lng: 100.5625,
+        lat: 13.7367
+      },
+      {
+        name: "The Royal Oak",
+        area: "Phrom Phong",
+        price: "320 THB",
+        rating: "4.4",
+        link: "#",
+        lng: 100.5700,
+        lat: 13.7305
+      },
+      {
+        name: "O'Shea's",
+        area: "Silom",
+        price: "330 THB",
+        rating: "4.3",
+        link: "#",
+        lng: 100.5315,
+        lat: 13.7280
+      }
+    ];
 
-map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    pubs.forEach(pub => {
+      const popupHTML = `
+        <div class="popup-card">
+          <div class="popup-title">${pub.name}</div>
+          <div class="popup-area">${pub.area}</div>
 
-<script>
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+          <div class="popup-details">
+            <div>🍺 ${pub.price}</div>
+            <div>⭐ ${pub.rating}</div>
+          </div>
 
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
-  center: [100.5018, 13.7563],
-  zoom: 11.2
-});
+          ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
+        </div>
+      `;
 
-map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-map.scrollZoom.disable();
+      new mapboxgl.Marker({ color: '#C8F2C2' })
+        .setLngLat([pub.lng, pub.lat])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
+        .addTo(map);
+    });
 
-const pubs = [
-  {
-    name: "The Black Swan",
-    area: "Sukhumvit",
-    price: "350 THB",
-    rating: "4.6",
-    lng: 100.5625,
-    lat: 13.7367
-  },
-  {
-    name: "The Royal Oak",
-    area: "Phrom Phong",
-    price: "320 THB",
-    rating: "4.4",
-    lng: 100.5700,
-    lat: 13.7305
-  },
-  {
-    name: "O'Shea's",
-    area: "Silom",
-    price: "330 THB",
-    rating: "4.3",
-    lng: 100.5315,
-    lat: 13.7280
-  }
-];
+    function submitAnswer() {
+      const userInput = document.getElementById("response").value;
 
-pubs.forEach(pub => {
-  const popupHTML = `
-    <div style="font-family: Open Sans, sans-serif; color: #111; min-width: 180px;">
-      <strong>${pub.name}</strong><br>
-      ${pub.area}<br>
-      Price: ${pub.price}<br>
-      Taste rating: ${pub.rating}
-    </div>
-  `;
+      if (userInput.trim() === "") {
+        alert("Please enter a suggestion!");
+        return;
+      }
 
-  new mapboxgl.Marker({ color: '#C8F2C2' })
-    .setLngLat([pub.lng, pub.lat])
-    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
-    .addTo(map);
-});
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
 
-// Submission form
-function submitAnswer() {
-  let userInput = document.getElementById("response").value;
-
-  if (userInput.trim() === "") {
-    alert("Please enter a suggestion!");
-    return;
-  }
-
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
-
-  fetch(scriptURL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ suggestion: userInput })
-  })
-  .then(() => {
-    alert("Go raibh maith agat! – thanks for your suggestion");
-    document.getElementById("response").value = "";
-  })
-  .catch(() => {
-    alert("Error submitting your suggestion.");
-  });
-}
-</script>
-
-<!-- Form Script -->
-<script>
-function submitAnswer() {
-  let userInput = document.getElementById("response").value;
-
-  if (userInput.trim() === "") {
-    alert("Please enter a suggestion!");
-    return;
-  }
-
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
-
-  fetch(scriptURL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ suggestion: userInput })
-  })
-  .then(() => {
-    alert("Go raibh maith agat! – thanks for your suggestion");
-    document.getElementById("response").value = "";
-  })
-  .catch(() => {
-    alert("Error submitting your suggestion.");
-  });
-}
-</script>
-
+      fetch(scriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ suggestion: userInput })
+      })
+      .then(() => {
+        alert("Go raibh maith agat! – thanks for your suggestion");
+        document.getElementById("response").value = "";
+      })
+      .catch(() => {
+        alert("Error submitting your suggestion.");
+      });
+    }
+  </script>
 </body>
 </html>
