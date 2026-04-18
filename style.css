@@ -151,9 +151,9 @@ input {
 button {
     margin-top: 40px;
     padding: 10px 20px;
-    font-size: 1.1em;
-    font-weight: bold;
-    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: normal;
+    text-transform: lowercase;
     border: none;
     border-radius: 5px;
     background-color: #C8F2C2;
