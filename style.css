@@ -277,7 +277,7 @@ button:active {
 
 /* Softer button */
 .inline-form button {
-    font-size: 0.9em;
+    font-size: 0.8em;
     padding: 10px;
     background-color: #C8F2C2;
     color: black;
