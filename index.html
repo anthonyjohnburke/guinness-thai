@@ -8,6 +8,10 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
 
+  <!-- Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
+
   <!-- SEO Meta Tags -->
   <meta name="description" content="Discover the best Guinness in Bangkok! Help us find the finest pint in town by sharing your top spots." />
   <meta name="keywords" content="Best Guinness Bangkok Thailand, Irish Pubs Bangkok, Where to drink Guinness in Bangkok, Best Pints Bangkok" />
@@ -49,14 +53,17 @@
       margin: 0;
       padding: 0;
       font-family: 'Open Sans', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       background-color: black;
       color: white;
       text-align: center;
+    }
+
+    .page-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-bottom: 60px;
     }
 
     /* Guinness Foam */
@@ -64,20 +71,16 @@
       background-color: white;
       width: 100%;
       height: 12.5vh;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
 
-    /* Handwritten Note */
+    /* Pint Head Note */
     #note {
       font-family: 'Shadows Into Light', cursive;
       font-size: 1.1em;
-      position: absolute;
-      top: 14.5vh;
       color: #ffffffa0;
       width: 100%;
       text-align: center;
+      margin-top: 12px;
       pointer-events: none;
     }
 
@@ -103,8 +106,7 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 4.4em;
       font-weight: normal;
-      margin-bottom: 20px;
-      margin-top: 18vh;
+      margin: 32px 0 20px;
       max-width: 80%;
       padding: 0 10%;
       text-align: center;
@@ -121,7 +123,7 @@
     /* Fading Intro */
     #intro {
       font-size: 1.1em;
-      max-width: 600px;
+      max-width: 700px;
       margin: 10px auto 30px;
       padding: 0 20px;
       line-height: 1.5;
@@ -130,7 +132,38 @@
       animation: fadeIn 1.5s ease-in 0s forwards;
     }
 
-    /* Form Input */
+    /* Map Section */
+    #map-section {
+      width: 92%;
+      max-width: 1200px;
+      margin: 10px auto 40px;
+    }
+
+    #map-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2em;
+      letter-spacing: 0.02em;
+      margin: 0 0 16px;
+    }
+
+    #map {
+      width: 100%;
+      height: 560px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Submission */
+    #form-section {
+      width: 92%;
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     input {
       padding: 10px;
       font-size: 1.1em;
@@ -141,7 +174,6 @@
       text-align: center;
     }
 
-    /* Submit Button */
     button {
       margin-top: 40px;
       padding: 10px 20px;
@@ -164,25 +196,26 @@
       transform: scale(0.98);
     }
 
-    /* 📱 Mobile Layout Fixes */
+    /* Mobile */
     @media screen and (max-width: 768px) {
-      body {
-        padding: 20px;
-        height: auto;
+      .page-wrap {
+        padding: 0 20px 40px;
       }
 
       #top-section {
         height: 10vh;
+        width: calc(100% + 40px);
+        margin: 0 -20px;
       }
 
       #note {
         font-size: 0.95em;
-        top: 11vh;
+        margin-top: 10px;
       }
 
       #question {
         font-size: 2.6em;
-        margin-top: 15vh;
+        margin-top: 24px;
         width: 100% !important;
         border-right: none !important;
         animation: none !important;
@@ -196,6 +229,19 @@
         opacity: 1 !important;
         color: rgba(255, 255, 255, 0.9) !important;
         animation: none !important;
+      }
+
+      #map-section {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      #map-heading {
+        font-size: 1.8em;
+      }
+
+      #map {
+        height: 420px;
       }
 
       input {
@@ -213,26 +259,58 @@
 </head>
 
 <body>
+  <div class="page-wrap">
+    <!-- White Top Section (Foam) -->
+    <div id="top-section"></div>
 
-  <!-- White Top Section (Foam) -->
-  <div id="top-section"></div>
+    <!-- Pint Head Note -->
+    <div id="note">"The perfect Guinness head is approx 12% of the pint height."</div>
 
-  <!-- Pint Head Note -->
-  <div id="note">"The perfect Guinness head is approx 12% of the pint height."</div>
+    <!-- Animated Question -->
+    <h1 id="question">Who’s pouring the finest pint of Guinness in Bangkok?</h1>
 
-  <!-- Animated Question -->
-  <h1 id="question">Who’s pouring the finest pint of Guinness in Bangkok?</h1>
+    <!-- Fading Intro -->
+    <p id="intro">
+      Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
+    </p>
 
-  <!-- Fading Intro -->
-  <p id="intro">
-    Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
-  </p>
+    <!-- Map Section -->
+    <section id="map-section">
+      <h2 id="map-heading">Bangkok Pint Map</h2>
+      <div id="map"></div>
+    </section>
 
-  <!-- Submission -->
-  <input type="text" id="response" placeholder="Go on lad, tell me which bar has the best pint..">
-  <button onclick="submitAnswer()">Right so, let’s hear it</button>
+    <!-- Submission -->
+    <section id="form-section">
+      <input type="text" id="response" placeholder="Go on lad, tell me which bar has the best pint..">
+      <button onclick="submitAnswer()">Right so, let’s hear it</button>
+    </section>
+  </div>
 
   <script>
+    // Mapbox
+    mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
+      center: [100.5018, 13.7563],
+      zoom: 11.2
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    // Test marker
+    new mapboxgl.Marker({ color: '#C8F2C2' })
+      .setLngLat([100.5625, 13.7367])
+      .setPopup(
+        new mapboxgl.Popup({ offset: 25 }).setHTML(
+          '<strong>Test Pint</strong><br>The Black Swan'
+        )
+      )
+      .addTo(map);
+
+    // Submission form
     function submitAnswer() {
       let userInput = document.getElementById("response").value;
       if (userInput.trim() === "") {
