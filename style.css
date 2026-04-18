@@ -135,7 +135,7 @@ body {
     align-items: center;
 }
 
-/* Form inputs */
+/* Default form inputs */
 input {
     padding: 10px;
     font-size: 1.1em;
@@ -147,7 +147,7 @@ input {
     margin-top: 10px;
 }
 
-/* Submit Button */
+/* Default buttons */
 button {
     margin-top: 40px;
     padding: 10px 20px;
@@ -168,6 +168,39 @@ button:hover {
 
 button:active {
     transform: scale(0.98);
+}
+
+/* Inline form inside last column */
+.inline-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inline-form input {
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.95em;
+    padding: 10px;
+    margin-top: 0;
+}
+
+.inline-form button {
+    width: auto;
+    margin-top: 0;
+    font-size: 0.8em;
+    padding: 10px;
+    background-color: #C8F2C2;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    font-weight: normal;
+    text-transform: none;
+}
+
+.inline-form button:hover {
+    background-color: #B8E8B1;
 }
 
 /* Mapbox control styling */
@@ -259,44 +292,23 @@ button:active {
         font-size: 1em;
     }
 
-
-/* Inline form inside column */
-.inline-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Smaller, cleaner input */
-.inline-form input {
-    width: 100%;
-    font-size: 0.95em;
-    padding: 10px;
-}
-
-/* Softer button */
-.inline-form button {
-    font-size: 0.8em;
-    padding: 10px;
-    background-color: #C8F2C2;
-    color: black;
-    border: none;
-    border-radius: 4px;
-    font-weight: normal; /* 👈 no longer shouty */
-    text-transform: none; /* 👈 remove ALL CAPS */
-}
-
-.inline-form button:hover {
-    background-color: #B8E8B1;
-}
-
-
-    
     button {
         width: 100%;
         font-size: 1em;
         margin-top: 25px;
     }
-}
 
+    .inline-form {
+        margin-top: 20px;
+    }
+
+    .inline-form input {
+        width: 100%;
+        font-size: 0.95em;
+    }
+
+    .inline-form button {
+        width: 100%;
+        font-size: 0.9em;
+    }
+}
