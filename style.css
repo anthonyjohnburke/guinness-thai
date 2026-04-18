@@ -219,6 +219,74 @@ button:active {
     color: white;
 }
 
+
+
+/* =========================
+   MAP POPUP STYLING
+========================= */
+
+/* Remove default popup styling */
+.mapboxgl-popup-content {
+    background: transparent;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+/* Main popup card */
+.popup-card {
+    background: white;
+    color: #111;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-family: 'Open Sans', sans-serif;
+    min-width: 180px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Pub name */
+.popup-title {
+    font-weight: bold;
+    font-size: 1.05em;
+    margin-bottom: 2px;
+}
+
+/* Area */
+.popup-area {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Price + rating row */
+.popup-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+/* Link */
+.popup-link {
+    font-size: 0.85em;
+    text-decoration: none;
+    color: #2a7a2a;
+    font-weight: 500;
+}
+
+.popup-link:hover {
+    text-decoration: underline;
+}
+
+/* Fix popup arrow color */
+.mapboxgl-popup-tip {
+    border-top-color: white !important;
+}
+
+
+
+
+
 /* Mobile Layout */
 @media screen and (max-width: 768px) {
     .page-wrap {
