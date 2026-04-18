@@ -204,18 +204,25 @@ button:active {
         animation: none !important;
     }
 
-    #map-section {
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-        margin-right: calc(-50vw + 50%);
-        margin-top: 10px;
-    }
+    /* Full-width map section */
+#map-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: 10px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-    #map {
-        height: 55vh;
-        min-height: 350px;
-        max-height: 700px;
-    }
+/* Full-width map */
+#map {
+  width: 100%;
+  height: 70vh;
+  max-height: 1000px;
+  min-height: 500px;
+  border-radius: 0;
+  box-shadow: none;
+}
 
     input {
         width: 100%;
