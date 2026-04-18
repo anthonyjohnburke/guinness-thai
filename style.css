@@ -193,9 +193,11 @@ button:hover {
 }
 
 .popup-title {
+    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    font-size: 1.15em;
+    font-size: 1.3em;   /* 👈 bigger */
     margin-bottom: 10px;
+    letter-spacing: 0.2px; /* subtle polish */
 }
 
 .popup-details {
