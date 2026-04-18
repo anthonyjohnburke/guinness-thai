@@ -118,19 +118,18 @@
 
     pubs.forEach(pub => {
       const popupHTML = `
-        <div class="popup-card">
-          <div class="popup-title">${pub.name}</div>
-          <div class="popup-area">${pub.area}</div>
+  <div class="popup-card">
+    <div class="popup-title">${pub.name}</div>
 
-          <div class="popup-details">
-            <div>🍺 ${pub.price}</div>
-            <div>⭐ ${pub.rating}</div>
-          </div>
+    <div class="popup-details">
+      <div class="popup-price">${pub.price}</div>
+      <div class="popup-rating">${pub.rating} / 5</div>
+    </div>
 
-          ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
-        </div>
-      `;
-
+    ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
+  </div>
+`;
+      
       new mapboxgl.Marker({ color: '#C8F2C2' })
         .setLngLat([pub.lng, pub.lat])
         .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
