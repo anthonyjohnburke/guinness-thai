@@ -194,8 +194,8 @@ button:hover {
 
 .popup-title {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.3em;   /* 👈 bigger */
+    font-weight: bold;
+    font-size: 1.4em;   /* 👈 bigger */
     margin-bottom: 10px;
     letter-spacing: 0.2px; /* subtle polish */
 }
@@ -208,12 +208,15 @@ button:hover {
 }
 
 .popup-price {
-    font-weight: 600;
-    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-size: 1.2em;
 }
 
 .popup-rating {
-    font-size: 0.85em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-size: 1.2em;
     color: #666;
 }
 
