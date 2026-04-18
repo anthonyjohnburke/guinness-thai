@@ -127,8 +127,8 @@ body {
 
 /* Submission section */
 #form-section {
-    width: 92%;
-    max-width: 700px;
+    width: 75%;
+    max-width: 600px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -139,7 +139,7 @@ body {
 input {
     padding: 10px;
     font-size: 1.1em;
-    width: 80%;
+    width: 75%;
     max-width: 450px;
     border: none;
     border-radius: 5px;
