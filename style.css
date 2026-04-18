@@ -215,6 +215,7 @@ button:active {
         animation: none !important;
     }
 
+    
     #map-section {
         width: 100vw;
         margin-left: calc(-50vw + 50%);
