@@ -112,11 +112,13 @@
   </div>
 `;
       
-      new mapboxgl.Marker({ color: '#C8F2C2' })
-        .setLngLat([pub.lng, pub.lat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
-        .addTo(map);
-    });
+     const el = document.createElement('div');
+el.className = 'pint-marker';
+
+new mapboxgl.Marker(el)
+  .setLngLat([pub.lng, pub.lat])
+  .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
+  .addTo(map);
 
     function submitAnswer() {
       const userInput = document.getElementById("response").value;
