@@ -357,6 +357,10 @@ body {
     border-top-color: #f4f4f4 !important;
 }
 
+.mapboxgl-ctrl-icon {
+    filter: invert(1) brightness(2);
+}
+
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
