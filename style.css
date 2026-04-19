@@ -109,18 +109,27 @@ body {
     min-height: 500px;
 }
 
-/* Inputs */
-input {
-    padding: 10px;
-    font-size: 1em;
-    width: 80%;
-    max-width: 450px;
+/* Form */
+.inline-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.inline-form input {
+    width: 100%;
+    max-width: 340px;
+    font-size: 0.9em;
+    padding: 10px 12px;
     border: none;
     border-radius: 5px;
     text-align: center;
+    background: #f5f5f5;
+    color: #333;
 }
 
-/* Buttons */
 .inline-form button {
     width: auto;
     max-width: 200px;
@@ -141,19 +150,15 @@ input {
     background-color: #c19b2e;
 }
 
-button:hover {
-    background-color: #B8E8B1;
+/* Mapbox controls */
+.mapboxgl-ctrl-group {
+    background: rgba(15, 15, 15, 0.88) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px !important;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
 }
-
-.inline-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;   /* 👈 left align */
-    gap: 10px;
-}
-
-
 
 .mapboxgl-ctrl-group button {
     margin: 0 !important;
@@ -174,7 +179,11 @@ button:hover {
     background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
+.mapboxgl-ctrl-icon {
+    opacity: 0.95;
+}
 
+/* Popup close button */
 .mapboxgl-popup-close-button {
     margin: 0 !important;
     padding: 0 !important;
@@ -195,65 +204,6 @@ button:hover {
     background: transparent !important;
     color: #000 !important;
 }
-
-
-/* Input */
-.inline-form input {
-    width: 100%;
-    max-width: 340px;          /* 👈 narrower */
-    font-size: 0.9em;          /* 👈 smaller text */
-    padding: 10px 12px;
-    background: #f5f5f5;
-    color: #333;
-}
-
-/* Button */
-.inline-form button {
-    width: auto;               /* 👈 no full width */
-    max-width: 200px;
-    padding: 10px 16px;
-    font-size: 0.85em;
-    font-weight: 600;
-
-    background-color: #d4af37; /* 👈 gold (Guinness vibe) */
-    color: black;
-
-    border-radius: 6px;
-    margin-top: 4px;
-}
-
-/* Hover */
-.inline-form button:hover {
-    background-color: #c19b2e;
-}
-
-/* Mapbox controls */
-.mapboxgl-ctrl-group {
-    background: rgba(15, 15, 15, 0.88) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 10px !important;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
-}
-
-.mapboxgl-ctrl-group button {
-    width: 38px;
-    height: 38px;
-    background-color: transparent !important;
-}
-
-.mapboxgl-ctrl-group button:hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-.mapboxgl-ctrl-icon {
-    opacity: 0.95;
-}
-
-/* =========================
-   CLEAN POPUP DESIGN
-========================= */
 
 /* Popup container */
 .mapboxgl-popup-content {
@@ -277,17 +227,15 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px; /* even spacing */
+    gap: 14px;
 }
 
-/* Top category */
 .popup-meta {
     font-size: 0.95em;
     color: #8a8a8a;
     margin: 0;
 }
 
-/* Pub name */
 .popup-title {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
@@ -297,7 +245,6 @@ button:hover {
     margin: 0;
 }
 
-/* Row for new + rating */
 .popup-row {
     display: flex;
     justify-content: center;
@@ -308,7 +255,6 @@ button:hover {
     min-height: 24px;
 }
 
-/* New tag */
 .tag-new {
     background: #f6dcdc;
     color: #d53030;
@@ -318,14 +264,12 @@ button:hover {
     font-weight: 600;
 }
 
-/* Rating */
 .rating {
     font-size: 1em;
     font-weight: 600;
     color: #333;
 }
 
-/* Normal price */
 .popup-price {
     font-size: 1.25em;
     font-weight: 700;
@@ -333,7 +277,6 @@ button:hover {
     margin: 0;
 }
 
-/* Happy hour price */
 .popup-happy {
     font-size: 1.05em;
     font-weight: 500;
@@ -341,7 +284,6 @@ button:hover {
     margin: 0;
 }
 
-/* Link */
 .popup-link {
     display: inline-block;
     font-size: 0.95em;
@@ -355,14 +297,11 @@ button:hover {
     text-decoration: underline;
 }
 
-/* Popup arrow */
 .mapboxgl-popup-tip {
     border-top-color: #f4f4f4 !important;
 }
-/* =========================
-   CLEAN PINT MARKER (NO GLOW)
-========================= */
 
+/* Pint marker */
 .pint-marker {
     width: 26px;
     height: 36px;
@@ -398,8 +337,6 @@ button:hover {
     transform-origin: bottom center;
     transition: transform 0.2s ease;
 }
-
-
 
 /* Mobile */
 @media screen and (max-width: 768px) {
@@ -443,8 +380,13 @@ button:hover {
         min-height: 350px;
     }
 
-    input,
-    button {
+    .inline-form input,
+    .inline-form button {
         width: 100%;
+        max-width: 100%;
+    }
+
+    .inline-form {
+        align-items: stretch;
     }
 }
