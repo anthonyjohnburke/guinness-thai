@@ -34,40 +34,40 @@
     Who’s pouring the finest pint of Guinness in Bangkok?
   </h1>
 
- <div id="intro">
-  <div class="intro-col">
-    <h2 class="intro-heading">Price leaderboard</h2>
-    <p class="intro-small">
-      A quick look at how Guinness prices compare across Bangkok, from highest to lowest.
-    </p>
-    <div id="price-chart"></div>
-  </div>
+  <div id="intro">
+    <div class="intro-col">
+      <h2 class="intro-heading">Price leaderboard</h2>
+      <p class="intro-small">
+        A quick look at how Guinness prices compare across Bangkok, from highest to lowest.
+      </p>
+      <div id="price-chart"></div>
+    </div>
 
-  <div class="intro-col">
-    <h2 class="intro-heading">What we’re doing</h2>
-    <p>
-      Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get a proper pint without overpaying.
-    </p>
-    <p>
-      This is an independent, community-led guide built around price, quality, and local feedback. Over time, we’ll add more pubs, improve the rankings, and make it easier to spot the best-value pint in town.
-    </p>
-    <p>
-      More features coming soon — ratings, price comparisons, happy hour highlights, and a live leaderboard of Bangkok’s top pints.
-    </p>
-  </div>
+    <div class="intro-col">
+      <h2 class="intro-heading">What we’re doing</h2>
+      <p>
+        Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get a proper pint without overpaying.
+      </p>
+      <p>
+        This is an independent, community-led guide built around price, quality, and local feedback. Over time, we’ll add more pubs, improve the rankings, and make it easier to spot the best-value pint in town.
+      </p>
+      <p>
+        More features coming soon — ratings, price comparisons, happy hour highlights, and a live leaderboard of Bangkok’s top pints.
+      </p>
+    </div>
 
-  <div class="intro-col">
-    <h2 class="intro-heading">Suggest a pub</h2>
-    <p>
-      Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
-    </p>
+    <div class="intro-col">
+      <h2 class="intro-heading">Suggest a pub</h2>
+      <p>
+        Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
+      </p>
 
-    <div class="inline-form">
-      <input type="text" id="response" placeholder="Tell me which bar has the best pint..." />
-      <button onclick="submitAnswer()">Submit</button>
+      <div class="inline-form">
+        <input type="text" id="response" placeholder="Tell me which bar has the best pint..." />
+        <button onclick="submitAnswer()">Submit</button>
+      </div>
     </div>
   </div>
-</div>
 
 </div>
 
@@ -93,7 +93,6 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
 
     const chart = document.getElementById("price-chart");
 
-    // FILTER + SORT (HIGHEST → LOWEST)
     const pricedPubs = pubs
       .filter(p => p.price && !isNaN(parseFloat(p.price)))
       .map(p => ({
@@ -104,7 +103,6 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
 
     const maxPrice = Math.max(...pricedPubs.map(p => p.price));
 
-    // BUILD BAR CHART
     pricedPubs.forEach(pub => {
       const bar = document.createElement("div");
       bar.className = "bar-row";
@@ -122,7 +120,6 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       chart.appendChild(bar);
     });
 
-    // MAP MARKERS
     pubs.forEach(pub => {
       if (!pub.lat || !pub.lon) return;
 
@@ -147,7 +144,7 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
           ` : ""}
 
           ${pub.price ? `<div class="popup-price">Guinness: ฿${pub.price}</div>` : ""}
-          ${pub.happy_hour_price && pub.happy_hour_price !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
+          ${pub.happy_hour_price && pub.happy_hour_price.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
           ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
         </div>
       `;
@@ -182,7 +179,7 @@ function submitAnswer() {
     return;
   }
 
-  fetch("YOUR_SCRIPT_URL", {
+  fetch("YOUR_REAL_SCRIPT_URL_HERE", {
     method: "POST",
     mode: "no-cors",
     headers: { "Content-Type": "application/json" },
