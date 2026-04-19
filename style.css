@@ -171,7 +171,7 @@ button:hover {
 }
 
 /* =========================
-   NEW CLEAN POPUP DESIGN
+   CLEAN POPUP DESIGN
 ========================= */
 
 .mapboxgl-popup-content {
@@ -194,10 +194,11 @@ button:hover {
 
 .popup-title {
     font-family: 'Open Sans', sans-serif;
-    font-weight: black;
-    font-size: 1.4em;   /* 👈 bigger */
+    font-weight: 700;
+    font-size: 1.4em;
+    color: #111;
     margin-bottom: 10px;
-    letter-spacing: 0.2px; /* subtle polish */
+    letter-spacing: 0.2px;
 }
 
 .popup-details {
@@ -205,18 +206,20 @@ button:hover {
     flex-direction: column;
     gap: 4px;
     margin-bottom: 10px;
+    align-items: center;
 }
 
 .popup-price {
     font-family: 'Open Sans', sans-serif;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 1.2em;
+    color: #111;
 }
 
 .popup-rating {
     font-family: 'Open Sans', sans-serif;
-    font-weight: normal;
-    font-size: 1.2em;
+    font-weight: 400;
+    font-size: 1.1em;
     color: #666;
 }
 
@@ -234,25 +237,59 @@ button:hover {
     border-top-color: white !important;
 }
 
+/* =========================
+   GUINNESS PINT MARKER
+========================= */
+
+.pint-marker {
+    width: 16px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(200, 242, 194, 0.6);
+}
+
+.pint-marker::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70%;
+    background: #111;
+    border-radius: 3px 3px 4px 4px;
+}
+
+.pint-marker::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 35%;
+    background: #f4f4f4;
+    border-radius: 4px 4px 2px 2px;
+}
+
+.pint-marker:hover {
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
 /* Mobile */
 @media screen and (max-width: 768px) {
     #question {
-    font-size: 2.4em;
-    margin-top: 20px;
-
-    width: 100% !important;
-    max-width: 100%;
-
-    white-space: normal !important;   /* 👈 critical fix */
-    overflow: visible !important;
-
-    border-right: none !important;
-    animation: none !important;
-}
+        font-size: 2.4em;
+        margin-top: 20px;
+        width: 100% !important;
+        max-width: 100%;
+        white-space: normal !important;
+        overflow: visible !important;
+        border-right: none !important;
+        animation: none !important;
+    }
 
     #intro {
         flex-direction: column;
-        gap: 10px;              /* 👈 smaller gap */
+        gap: 10px;
         margin-top: 10px;
         padding: 0 10px;
         opacity: 1 !important;
@@ -269,9 +306,9 @@ button:hover {
     }
 
     .intro-col:not(:last-child) {
-        border: none;           /* 👈 remove divider */
+        border: none;
         padding: 0;
-        margin-bottom: 12px;    /* 👈 clean spacing */
+        margin-bottom: 12px;
     }
 
     #map {
@@ -279,51 +316,8 @@ button:hover {
         min-height: 350px;
     }
 
-/* =========================
-   GUINNESS PINT MARKER
-========================= */
-
-.pint-marker {
-    width: 16px;
-    height: 24px;
-    position: relative;
-    cursor: pointer;
-}
-
-/* Pint body (black) */
-.pint-marker::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 70%;
-    background: #111;
-    border-radius: 3px 3px 4px 4px;
-}
-
-/* Pint head (foam) */
-.pint-marker::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 35%;
-    background: #f4f4f4;
-    border-radius: 4px 4px 2px 2px;
-}
-
-/* Subtle glow */
-.pint-marker {
-    box-shadow: 0 0 6px rgba(200, 242, 194, 0.6);
-}
-
-
-.pint-marker:hover {
-    transform: scale(1.2);
-    transition: 0.2s;
-}
-    
-    input, button {
+    input,
+    button {
         width: 100%;
     }
 }
