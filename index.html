@@ -50,8 +50,9 @@
       </p>
 
       <div class="inline-form">
-        <input type="text" id="response" placeholder="Tell me which bar has the best pint..." />
-        <button onclick="submitAnswer()">Submit</button>
+        <input type="text" id="response" placeholder="Tell me which bar has the best pint..." maxlength="150" autocomplete="off" />
+        <input type="text" id="website" name="website" class="hp-field" tabindex="-1" autocomplete="off" />
+        <button id="submit-btn" onclick="submitAnswer()">Submit</button>
       </div>
     </div>
   </div>
@@ -74,6 +75,18 @@
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+
+function escapeHTML(str) {
+  return String(str).replace(/[&<>"']/g, function (m) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[m];
+  });
+}
 
 const map = new mapboxgl.Map({
   container: 'map',
@@ -127,7 +140,7 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
         const widthPercent = ((maxPrice - pub.price) / (maxPrice - minPrice || 1)) * 100;
 
         barRow.innerHTML = `
-          <div class="bar-label">${pub.name}</div>
+          <div class="bar-label">${escapeHTML(pub.name)}</div>
           <div class="bar-wrap">
             <div class="bar" style="width: 0%" data-width="${widthPercent}%"></div>
           </div>
@@ -137,7 +150,6 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
         chart.appendChild(barRow);
 
         const barEl = barRow.querySelector(".bar");
-
         setTimeout(() => {
           barEl.style.width = barEl.dataset.width;
         }, 150 + index * 80);
@@ -156,20 +168,27 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       const lngLat = [lon, lat];
       bounds.extend(lngLat);
 
+      const pubType = escapeHTML(pub.type || "");
+      const pubName = escapeHTML(pub.name || "");
+      const pubPrice = escapeHTML(pub.price || "");
+      const pubHappy = escapeHTML(pub.happy_hour_price || "");
+      const pubLink = pub.link ? String(pub.link) : "";
+      const isNew = pub.isNew && pub.isNew.toLowerCase() === "yes";
+
       const popupHTML = `
         <div class="popup-card modern">
-          ${pub.type ? `<div class="popup-meta">${pub.type}</div>` : ""}
-          <div class="popup-title">${pub.name || ""}</div>
+          ${pubType ? `<div class="popup-meta">${pubType}</div>` : ""}
+          <div class="popup-title">${pubName}</div>
 
-          ${pub.isNew && pub.isNew.toLowerCase() === "yes" ? `
+          ${isNew ? `
             <div class="popup-row">
               <span class="tag-new">New</span>
             </div>
           ` : ""}
 
-          ${pub.price ? `<div class="popup-price">Guinness: ฿${pub.price}</div>` : ""}
-          ${pub.happy_hour_price && pub.happy_hour_price.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
-          ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
+          ${pubPrice ? `<div class="popup-price">Guinness: ฿${pubPrice}</div>` : ""}
+          ${pubHappy && pubHappy.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pubHappy}</div>` : ""}
+          ${pubLink ? `<a href="${pubLink}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
         </div>
       `;
 
@@ -200,25 +219,46 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
   .catch(err => console.error("Sheet load error:", err));
 
 function submitAnswer() {
-  const userInput = document.getElementById("response").value;
+  const inputEl = document.getElementById("response");
+  const honeypotEl = document.getElementById("website");
+  const button = document.getElementById("submit-btn");
+  const userInput = inputEl.value.trim();
 
-  if (userInput.trim() === "") {
+  if (honeypotEl.value !== "") return;
+
+  if (userInput === "") {
     alert("Please enter a suggestion!");
     return;
   }
+
+  if (userInput.length > 150) {
+    alert("Please keep it under 150 characters.");
+    return;
+  }
+
+  if (button.disabled) return;
+  button.disabled = true;
 
   fetch("https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec", {
     method: "POST",
     mode: "no-cors",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ suggestion: userInput })
+    body: JSON.stringify({
+      suggestion: userInput,
+      website: honeypotEl.value
+    })
   })
   .then(() => {
     alert("Go raibh maith agat!");
-    document.getElementById("response").value = "";
+    inputEl.value = "";
   })
   .catch(() => {
     alert("Error submitting your suggestion.");
+  })
+  .finally(() => {
+    setTimeout(() => {
+      button.disabled = false;
+    }, 1500);
   });
 }
 </script>
