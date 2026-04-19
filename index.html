@@ -96,7 +96,6 @@ const map = new mapboxgl.Map({
   projection: 'mercator'
 });
 
-map.setProjection('mercator');
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 map.scrollZoom.disable();
 
@@ -158,64 +157,146 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       });
     }
 
-    pubs.forEach(pub => {
-      if (!pub.lat || !pub.lon) return;
+    const geojson = {
+      type: "FeatureCollection",
+      features: pubs
+        .filter(pub => pub.lat && pub.lon)
+        .map(pub => {
+          const lat = parseFloat(pub.lat);
+          const lon = parseFloat(pub.lon);
 
-      const lat = parseFloat(pub.lat);
-      const lon = parseFloat(pub.lon);
+          if (Number.isNaN(lat) || Number.isNaN(lon)) return null;
 
-      if (Number.isNaN(lat) || Number.isNaN(lon)) return;
+          validCount += 1;
+          bounds.extend([lon, lat]);
 
-      validCount += 1;
-      const lngLat = [lon, lat];
-      bounds.extend(lngLat);
+          return {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [lon, lat]
+            },
+            properties: {
+              name: pub.name || "",
+              type: pub.type || "",
+              price: pub.price || "",
+              happy: pub.happy_hour_price || "",
+              link: pub.link || "",
+              isNew: pub.isNew || ""
+            }
+          };
+        })
+        .filter(Boolean)
+    };
 
-      const pubType = escapeHTML(pub.type || "");
-      const pubName = escapeHTML(pub.name || "");
-      const pubPrice = escapeHTML(pub.price || "");
-      const pubHappy = escapeHTML(pub.happy_hour_price || "");
-      const pubLink = pub.link ? String(pub.link) : "";
-      const isNew = pub.isNew && pub.isNew.toLowerCase() === "yes";
+    const addPubLayer = () => {
+      if (map.getSource('pubs')) {
+        return;
+      }
 
-      const popupHTML = `
-        <div class="popup-card modern">
-          ${pubType ? `<div class="popup-meta">${pubType}</div>` : ""}
-          <div class="popup-title">${pubName}</div>
-
-          ${isNew ? `
-            <div class="popup-row">
-              <span class="tag-new">New</span>
-            </div>
-          ` : ""}
-
-          ${pubPrice ? `<div class="popup-price">Guinness: ฿${pubPrice}</div>` : ""}
-          ${pubHappy && pubHappy.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pubHappy}</div>` : ""}
-          ${pubLink ? `<a href="${pubLink}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
-        </div>
-      `;
-
-      const el = document.createElement('div');
-      el.className = 'pint-marker';
-
-      new mapboxgl.Marker({
-        element: el,
-        anchor: 'bottom'
-      })
-        .setLngLat(lngLat)
-        .setPopup(new mapboxgl.Popup({ offset: 0 }).setHTML(popupHTML))
-        .addTo(map);
-    });
-
-    if (validCount === 1) {
-      const firstPub = pubs.find(pub => pub.lat && pub.lon);
-      map.setCenter([parseFloat(firstPub.lon), parseFloat(firstPub.lat)]);
-      map.setZoom(14);
-    } else if (validCount > 1) {
-      map.fitBounds(bounds, {
-        padding: 80,
-        maxZoom: 15,
-        duration: 1000
+      map.addSource('pubs', {
+        type: 'geojson',
+        data: geojson
       });
+
+      map.addLayer({
+        id: 'pubs-layer',
+        type: 'symbol',
+        source: 'pubs',
+        layout: {
+          'icon-image': 'pint-icon',
+          'icon-size': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            9, 0.42,
+            12, 0.52,
+            15, 0.62
+          ],
+          'icon-anchor': 'bottom',
+          'icon-allow-overlap': true
+        }
+      });
+
+      map.on('click', 'pubs-layer', (e) => {
+        const feature = e.features[0];
+        const props = feature.properties;
+
+        const pubType = escapeHTML(props.type || "");
+        const pubName = escapeHTML(props.name || "");
+        const pubPrice = escapeHTML(props.price || "");
+        const pubHappy = escapeHTML(props.happy || "");
+        const pubLink = props.link ? String(props.link) : "";
+        const isNew = props.isNew && props.isNew.toLowerCase() === "yes";
+
+        const popupHTML = `
+          <div class="popup-card modern">
+            ${pubType ? `<div class="popup-meta">${pubType}</div>` : ""}
+            <div class="popup-title">${pubName}</div>
+
+            ${isNew ? `
+              <div class="popup-row">
+                <span class="tag-new">New</span>
+              </div>
+            ` : ""}
+
+            ${pubPrice ? `<div class="popup-price">Guinness: ฿${pubPrice}</div>` : ""}
+            ${pubHappy && pubHappy.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pubHappy}</div>` : ""}
+            ${pubLink ? `<a href="${pubLink}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
+          </div>
+        `;
+
+        new mapboxgl.Popup({ offset: 10 })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(popupHTML)
+          .addTo(map);
+      });
+
+      map.on('mouseenter', 'pubs-layer', () => {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      map.on('mouseleave', 'pubs-layer', () => {
+        map.getCanvas().style.cursor = '';
+      });
+
+      if (validCount === 1) {
+        const firstFeature = geojson.features[0];
+        map.setCenter(firstFeature.geometry.coordinates);
+        map.setZoom(14);
+      } else if (validCount > 1) {
+        map.fitBounds(bounds, {
+          padding: 80,
+          maxZoom: 15,
+          duration: 1000
+        });
+      }
+    };
+
+    const loadPintIcon = () => {
+      if (map.hasImage('pint-icon')) {
+        addPubLayer();
+        return;
+      }
+
+      map.loadImage('/pint.png', (error, image) => {
+        if (error) {
+          console.error('Error loading pint icon:', error);
+          return;
+        }
+
+        if (!map.hasImage('pint-icon')) {
+          map.addImage('pint-icon', image);
+        }
+
+        addPubLayer();
+      });
+    };
+
+    if (map.isStyleLoaded()) {
+      loadPintIcon();
+    } else {
+      map.once('load', loadPintIcon);
     }
   })
   .catch(err => console.error("Sheet load error:", err));
