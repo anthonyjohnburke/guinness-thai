@@ -93,34 +93,33 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       bounds.extend(lngLat);
 
       const popupHTML = `
-  <div class="popup-card modern">
-    ${pub.type ? `<div class="popup-meta">${pub.type}</div>` : ""}
-    <div class="popup-title">${pub.name || ""}</div>
+        <div class="popup-card modern">
+          ${pub.type ? `<div class="popup-meta">${pub.type}</div>` : ""}
+          <div class="popup-title">${pub.name || ""}</div>
 
-    ${(pub.isNew && pub.isNew.toLowerCase() === "yes") || (pub.rating && pub.rating.toLowerCase() !== "xx") ? `
-      <div class="popup-row">
-        ${pub.isNew && pub.isNew.toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
-        ${pub.rating && pub.rating.toLowerCase() !== "xx" ? `<span class="rating">${pub.rating} ★</span>` : ""}
-      </div>
-    ` : ""}
+          ${(pub.isNew && pub.isNew.toLowerCase() === "yes") || (pub.rating && pub.rating.toLowerCase() !== "xx") ? `
+            <div class="popup-row">
+              ${pub.isNew && pub.isNew.toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
+              ${pub.rating && pub.rating.toLowerCase() !== "xx" ? `<span class="rating">${pub.rating} ★</span>` : ""}
+            </div>
+          ` : ""}
 
-    ${pub.price ? `<div class="popup-price">Guinness: ฿${pub.price}</div>` : ""}
-    ${pub.happy_hour_price && pub.happy_hour_price.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
-    ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
-  </div>
-`;
+          ${pub.price ? `<div class="popup-price">Guinness: ฿${pub.price}</div>` : ""}
+          ${pub.happy_hour_price && pub.happy_hour_price.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
+          ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
+        </div>
       `;
 
       const el = document.createElement('div');
-el.className = 'pint-marker';
+      el.className = 'pint-marker';
 
-new mapboxgl.Marker({
-  element: el,
-  anchor: 'center'
-})
-  .setLngLat(lngLat)
-  .setPopup(new mapboxgl.Popup({ offset: 32 }).setHTML(popupHTML))
-  .addTo(map);
+      new mapboxgl.Marker({
+        element: el,
+        anchor: 'center'
+      })
+        .setLngLat(lngLat)
+        .setPopup(new mapboxgl.Popup({ offset: 32 }).setHTML(popupHTML))
+        .addTo(map);
     });
 
     if (validCount === 1) {
