@@ -205,6 +205,7 @@ button:hover {
    CLEAN POPUP DESIGN
 ========================= */
 
+/* Popup container */
 .mapboxgl-popup-content {
     background: transparent;
     padding: 0;
@@ -212,75 +213,102 @@ button:hover {
     box-shadow: none;
 }
 
-/* MODERN POPUP */
+/* Modern popup card */
 .popup-card.modern {
     background: #f4f4f4;
     color: #111;
-    padding: 16px 18px;
-    border-radius: 14px;
+    padding: 22px 22px;
+    border-radius: 18px;
     font-family: 'Open Sans', sans-serif;
-    width: 220px;
+    width: 260px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px; /* even spacing */
 }
 
-/* Top meta */
+/* Top category */
 .popup-meta {
-    font-size: 1em;
-    color: #888;
-    margin-bottom: 6px;
+    font-size: 0.95em;
+    color: #8a8a8a;
+    margin: 0;
 }
 
-/* Title */
+/* Pub name */
 .popup-title {
-    font-size: 1.2em;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    margin-bottom: 10px;
+    font-size: 1.35em;
+    color: #111;
+    line-height: 1.25;
+    margin: 0;
 }
 
-/* Row for tags + rating */
+/* Row for new + rating */
 .popup-row {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0;
+    min-height: 24px;
 }
 
-/* NEW tag */
+/* New tag */
 .tag-new {
-    background: #ffdede;
-    color: #d10000;
-    font-size: 0.75em;
-    padding: 4px 8px;
-    border-radius: 6px;
+    background: #f6dcdc;
+    color: #d53030;
+    font-size: 0.9em;
+    padding: 6px 12px;
+    border-radius: 8px;
     font-weight: 600;
-    align-items: center;
 }
 
 /* Rating */
 .rating {
+    font-size: 1em;
     font-weight: 600;
     color: #333;
 }
 
-/* Price */
+/* Normal price */
 .popup-price {
-    font-size: 1.1em;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+}
+
+/* Happy hour price */
+.popup-happy {
+    font-size: 1.05em;
+    font-weight: 500;
+    color: #444;
+    margin: 0;
 }
 
 /* Link */
 .popup-link {
-    font-size: 0.9em;
+    display: inline-block;
+    font-size: 0.95em;
     text-decoration: none;
     color: #2a7de1;
     font-weight: 600;
+    margin: 0;
 }
 
+.popup-link:hover {
+    text-decoration: underline;
+}
 
+/* Popup arrow */
 .mapboxgl-popup-tip {
-    border-top-color: white !important;
+    border-top-color: #f4f4f4 !important;
 }
-
 /* =========================
    CLEAN PINT MARKER (NO GLOW)
 ========================= */
