@@ -17,14 +17,14 @@ body {
     padding-bottom: 60px;
 }
 
-/* The "Guinness Head" */
+/* Guinness head */
 #top-section {
     background-color: white;
     width: 100%;
     height: 12.5vh;
 }
 
-/* Handwritten note */
+/* Note */
 #note {
     font-family: 'Shadows Into Light', cursive;
     font-size: 1.1em;
@@ -33,7 +33,6 @@ body {
     text-align: center;
     margin-top: 12px;
     margin-bottom: 30px;
-    pointer-events: none;
 }
 
 /* Animations */
@@ -53,7 +52,7 @@ body {
     }
 }
 
-/* Main question */
+/* Main title */
 #question {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 4.4em;
@@ -67,7 +66,7 @@ body {
     animation: typing 1.8s steps(35, end) forwards, blink 0.8s step-end infinite;
 }
 
-/* Intro columns */
+/* Intro */
 #intro {
     display: flex;
     justify-content: center;
@@ -92,7 +91,7 @@ body {
     padding-right: 20px;
 }
 
-/* Full-width map */
+/* Map */
 #map-section {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
@@ -105,7 +104,6 @@ body {
 #map {
     width: 100%;
     height: 70vh;
-    max-height: 1000px;
     min-height: 500px;
 }
 
@@ -143,11 +141,49 @@ body {
     margin-top: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    text-transform: none;
 }
 
 .inline-form button:hover {
     background-color: #c19b2e;
+}
+
+/* PRICE CHART */
+#price-chart {
+    max-width: 800px;
+    width: 90%;
+    margin: 40px auto;
+    text-align: left;
+}
+
+.bar-row {
+    display: grid;
+    grid-template-columns: 1fr 3fr auto;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.bar-label {
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.8);
+}
+
+.bar-wrap {
+    background: rgba(255,255,255,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    height: 10px;
+}
+
+.bar {
+    height: 100%;
+    background: #d4af37;
+    border-radius: 6px;
+}
+
+.bar-price {
+    font-size: 0.9em;
+    font-weight: 600;
 }
 
 /* Mapbox controls */
@@ -156,141 +192,61 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 10px !important;
     overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
 }
 
 .mapboxgl-ctrl-group button {
     margin: 0 !important;
     padding: 0 !important;
     border: 0 !important;
-    border-radius: 0 !important;
-    min-width: 38px;
-    min-height: 38px;
     width: 38px;
     height: 38px;
     background: transparent !important;
-    color: inherit !important;
-    box-shadow: none !important;
-    text-transform: none !important;
 }
 
 .mapboxgl-ctrl-group button:hover {
     background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-.mapboxgl-ctrl-icon {
-    opacity: 0.95;
-}
-
-/* Popup close button */
-.mapboxgl-popup-close-button {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 28px !important;
-    height: 28px !important;
-    line-height: 28px !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: #111 !important;
-    font-size: 24px !important;
-    font-weight: 700;
-    top: 12px !important;
-    right: 12px !important;
-}
-
-.mapboxgl-popup-close-button:hover {
-    background: transparent !important;
-    color: #000 !important;
-}
-
-/* Popup container */
+/* Popup */
 .mapboxgl-popup-content {
     background: transparent;
     padding: 0;
-    border-radius: 10px;
     box-shadow: none;
 }
 
-/* Modern popup card */
 .popup-card.modern {
     background: #f4f4f4;
     color: #111;
-    padding: 22px 22px;
+    padding: 22px;
     border-radius: 18px;
-    font-family: 'Open Sans', sans-serif;
     width: 260px;
     text-align: center;
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 14px;
 }
 
-.popup-meta {
-    font-size: 0.95em;
-    color: #8a8a8a;
-    margin: 0;
-}
-
 .popup-title {
-    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     font-size: 1.35em;
-    color: #111;
-    line-height: 1.25;
-    margin: 0;
-}
-
-.popup-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 0;
-    min-height: 24px;
-}
-
-.tag-new {
-    background: #f6dcdc;
-    color: #d53030;
-    font-size: 0.9em;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.rating {
-    font-size: 1em;
-    font-weight: 600;
-    color: #333;
 }
 
 .popup-price {
     font-size: 1.25em;
     font-weight: 700;
-    color: #111;
-    margin: 0;
 }
 
 .popup-happy {
     font-size: 1.05em;
-    font-weight: 500;
     color: #444;
-    margin: 0;
 }
 
 .popup-link {
-    display: inline-block;
-    font-size: 0.95em;
     text-decoration: none;
     color: #2a7de1;
     font-weight: 600;
-    margin: 0;
 }
 
 .popup-link:hover {
@@ -301,20 +257,18 @@ body {
     border-top-color: #f4f4f4 !important;
 }
 
-/* Pint marker */
+/* Marker */
 .pint-marker {
     width: 26px;
     height: 36px;
     position: relative;
     cursor: pointer;
-    display: block;
 }
 
 .pint-marker::before {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
     height: 72%;
     background: #000;
@@ -325,7 +279,6 @@ body {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 35%;
     background: #fff;
@@ -333,60 +286,42 @@ body {
 }
 
 .pint-marker:hover {
-    transform: scale(1.15);
+    transform: scale(1.12);
     transform-origin: bottom center;
-    transition: transform 0.2s ease;
 }
 
 /* Mobile */
 @media screen and (max-width: 768px) {
     #question {
         font-size: 2.4em;
-        margin-top: 15px;
-        width: 100% !important;
-        max-width: 100%;
-        white-space: normal !important;
-        overflow: visible !important;
-        border-right: none !important;
-        animation: none !important;
+        border: none;
+        animation: none;
+        width: 100%;
+        white-space: normal;
     }
 
     #intro {
         flex-direction: column;
-        gap: 5px;
-        margin-top: 5px;
+        gap: 10px;
         padding: 0 10px;
-        opacity: 1 !important;
-        animation: none !important;
+        opacity: 1;
     }
 
     .intro-col {
-        max-width: 100%;
         text-align: center;
-        font-size: 0.95em;
-        line-height: 1.5;
-        padding: 0;
-        margin: 0;
-    }
-
-    .intro-col:not(:last-child) {
-        border: none;
-        padding: 0;
-        margin-bottom: 5px;
     }
 
     #map {
         height: 55vh;
-        min-height: 350px;
+    }
+
+    .inline-form {
+        align-items: stretch;
     }
 
     .inline-form input,
     .inline-form button {
         width: 100%;
         max-width: 100%;
-    }
-
-    .inline-form {
-        align-items: stretch;
     }
 }
