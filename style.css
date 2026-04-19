@@ -273,13 +273,10 @@ button:hover {
 ========================= */
 
 .pint-marker {
-    width: 26px;      /* 👈 bigger */
+    width: 26px;
     height: 36px;
     position: relative;
     cursor: pointer;
-
-    /* Proper positioning on map point */
-    transform: translate(-50%, -100%);
 }
 
 /* Pint body */
@@ -287,6 +284,7 @@ button:hover {
     content: "";
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
     height: 72%;
     background: #000;
@@ -298,15 +296,15 @@ button:hover {
     content: "";
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
     height: 35%;
     background: #fff;
     border-radius: 7px 7px 4px 4px;
 }
 
-/* Subtle hover only */
 .pint-marker:hover {
-    transform: translate(-50%, -100%) scale(1.15);
+    transform: scale(1.15);
     transition: 0.2s ease;
 }
 
