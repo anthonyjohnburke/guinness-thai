@@ -247,6 +247,8 @@ button:hover {
     position: relative;
     cursor: pointer;
     transform: translateY(-50%);
+    border: 2px solid #C8F2C2;
+    border-radius: 6px;
 
     /* Glow */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
@@ -279,6 +281,8 @@ button:hover {
     transform: translateY(-50%) scale(1.25);
     box-shadow: 0 0 14px rgba(200, 242, 194, 1);
 }
+
+
 
 /* Mobile */
 @media screen and (max-width: 768px) {
