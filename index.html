@@ -101,32 +101,33 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       }))
       .sort((a, b) => a.price - b.price);
 
-    if (pricedPubs.length > 0) {
-      const minPrice = Math.min(...pricedPubs.map(p => p.price));
-const widthPercent = ((maxPrice - pub.price) / (maxPrice - minPrice || 1)) * 100;
+   if (pricedPubs.length > 0) {
+  const maxPrice = Math.max(...pricedPubs.map(p => p.price));
+  const minPrice = Math.min(...pricedPubs.map(p => p.price));
 
-      pricedPubs.forEach((pub, index) => {
-        const barRow = document.createElement("div");
-        barRow.className = "bar-row";
+  pricedPubs.forEach((pub, index) => {
+    const barRow = document.createElement("div");
+    barRow.className = "bar-row";
 
-        const widthPercent = (pub.price / maxPrice) * 100;
+    // ✅ inverted width (cheapest = longest)
+    const widthPercent = ((maxPrice - pub.price) / (maxPrice - minPrice || 1)) * 100;
 
-        barRow.innerHTML = `
-          <div class="bar-label">${pub.name}</div>
-          <div class="bar-wrap">
-            <div class="bar" style="width: 0%" data-width="${widthPercent}%"></div>
-          </div>
-          <div class="bar-price">฿${pub.price}</div>
-        `;
+    barRow.innerHTML = `
+      <div class="bar-label">${pub.name}</div>
+      <div class="bar-wrap">
+        <div class="bar" style="width: 0%" data-width="${widthPercent}%"></div>
+      </div>
+      <div class="bar-price">฿${pub.price}</div>
+    `;
 
-        chart.appendChild(barRow);
+    chart.appendChild(barRow);
 
-        const barEl = barRow.querySelector(".bar");
+    const barEl = barRow.querySelector(".bar");
 
-        setTimeout(() => {
-          barEl.style.width = barEl.dataset.width;
-        }, 150 + index * 80);
-      });
+    setTimeout(() => {
+      barEl.style.width = barEl.dataset.width;
+    }, 150 + index * 80);
+  });
     }
 
     pubs.forEach(pub => {
