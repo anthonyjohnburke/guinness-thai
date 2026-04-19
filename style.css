@@ -326,4 +326,32 @@ body {
         width: 100%;
         max-width: 100%;
     }
+
+#footer {
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 60px;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-inner {
+    max-width: 800px;
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+
+.footer-inner p {
+    margin: 8px 0;
+}
+
+.footer-signoff {
+    margin-top: 12px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+}
+
 }
