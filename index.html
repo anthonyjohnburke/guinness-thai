@@ -87,38 +87,38 @@
     map.scrollZoom.disable();
 
     const pubs = [
-  {
-  name: "The Black Swan",
-  price: "330 THB",
-  rating: "4.6",
-  link: "#",
-  lng: 100.55993535767047,
-  lat: 13.739508656978682
-}
-
-];
+      {
+        name: "The Black Swan",
+        price: "330 THB",
+        rating: "4.6",
+        link: "#",
+        lng: 100.55993535767047,
+        lat: 13.739508656978682
+      }
+    ];
 
     pubs.forEach(pub => {
       const popupHTML = `
-  <div class="popup-card">
-    <div class="popup-title">${pub.name}</div>
+        <div class="popup-card">
+          <div class="popup-title">${pub.name}</div>
 
-    <div class="popup-details">
-      <div class="popup-price">${pub.price}</div>
-      <div class="popup-rating">${pub.rating} / 5</div>
-    </div>
+          <div class="popup-details">
+            <div class="popup-price">${pub.price}</div>
+            <div class="popup-rating">${pub.rating} / 5</div>
+          </div>
 
-    ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
-  </div>
-`;
-      
-     const el = document.createElement('div');
-el.className = 'pint-marker';
+          ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
+        </div>
+      `;
 
-new mapboxgl.Marker(el)
-  .setLngLat([pub.lng, pub.lat])
-  .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
-  .addTo(map);
+      const el = document.createElement('div');
+      el.className = 'pint-marker';
+
+      new mapboxgl.Marker(el)
+        .setLngLat([pub.lng, pub.lat])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
+        .addTo(map);
+    });
 
     function submitAnswer() {
       const userInput = document.getElementById("response").value;
