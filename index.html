@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Best Guinness in Bangkok</title>
 
@@ -82,14 +82,19 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 map.scrollZoom.disable();
 
 
-// ✅ GOOGLE SHEETS DATA
+// ✅ LOAD DATA FROM GOOGLE SHEETS
 fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
   .then(res => res.json())
   .then(pubs => {
 
+    const bounds = new mapboxgl.LngLatBounds();
+
     pubs.forEach(pub => {
 
       if (!pub.lat || !pub.lon) return;
+
+      const lngLat = [parseFloat(pub.lon), parseFloat(pub.lat)];
+      bounds.extend(lngLat);
 
       const popupHTML = `
         <div class="popup-card">
@@ -108,11 +113,23 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       el.className = 'pint-marker';
 
       new mapboxgl.Marker(el)
-        .setLngLat([parseFloat(pub.lon), parseFloat(pub.lat)])
+        .setLngLat(lngLat)
         .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
         .addTo(map);
 
     });
+
+    // ✅ AUTO ZOOM TO FIT ALL PUBS
+    if (pubs.length === 1) {
+      map.setCenter([parseFloat(pubs[0].lon), parseFloat(pubs[0].lat)]);
+      map.setZoom(14);
+    } else if (pubs.length > 1) {
+      map.fitBounds(bounds, {
+        padding: 80,
+        maxZoom: 15,
+        duration: 1000
+      });
+    }
 
   })
   .catch(err => console.error("Sheet load error:", err));
