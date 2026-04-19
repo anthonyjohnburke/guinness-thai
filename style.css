@@ -328,6 +328,8 @@ body {
     }
 
 #footer {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.75em;
     width: 100%;
     border-top: 1px solid rgba(255,255,255,0.08);
     margin-top: 60px;
