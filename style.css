@@ -224,7 +224,7 @@ button:hover {
 
 /* Top meta */
 .popup-meta {
-    font-size: 0.75em;
+    font-size: 1em;
     color: #888;
     margin-bottom: 6px;
 }
@@ -252,6 +252,7 @@ button:hover {
     padding: 4px 8px;
     border-radius: 6px;
     font-weight: 600;
+    align-items: center;
 }
 
 /* Rating */
