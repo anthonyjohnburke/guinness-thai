@@ -212,57 +212,69 @@ button:hover {
     box-shadow: none;
 }
 
-.popup-card {
-    background: white;
+/* MODERN POPUP */
+.popup-card.modern {
+    background: #f4f4f4;
     color: #111;
     padding: 16px 18px;
-    border-radius: 12px;
+    border-radius: 14px;
     font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    min-width: 180px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    width: 220px;
 }
 
+/* Top meta */
+.popup-meta {
+    font-size: 0.75em;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+/* Title */
 .popup-title {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.4em;
-    color: #111;
-    margin-bottom: 10px;
-    letter-spacing: 0.2px;
-}
-
-.popup-details {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 10px;
-    align-items: center;
-}
-
-.popup-price {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
     font-size: 1.2em;
-    color: #111;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
-.popup-rating {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+/* Row for tags + rating */
+.popup-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+/* NEW tag */
+.tag-new {
+    background: #ffdede;
+    color: #d10000;
+    font-size: 0.75em;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* Rating */
+.rating {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Price */
+.popup-price {
     font-size: 1.1em;
-    color: #666;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
+/* Link */
 .popup-link {
-    font-size: 1em;
+    font-size: 0.9em;
     text-decoration: none;
-    color: #2a7a2a;
+    color: #2a7de1;
+    font-weight: 600;
 }
 
-.popup-link:hover {
-    text-decoration: underline;
-}
 
 .mapboxgl-popup-tip {
     border-top-color: white !important;
