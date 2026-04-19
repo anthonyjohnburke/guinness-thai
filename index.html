@@ -111,12 +111,11 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       `;
 
       const el = document.createElement('div');
-      el.className = 'pint-marker';
+el.className = 'pint-marker';
 
-      new mapboxgl.Marker({
+new mapboxgl.Marker({
   element: el,
-  anchor: 'bottom',
-  offset: [0, -10]   // 👈 THIS IS THE KEY
+  anchor: 'center'
 })
   .setLngLat(lngLat)
   .setPopup(new mapboxgl.Popup({ offset: 32 }).setHTML(popupHTML))
