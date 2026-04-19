@@ -242,8 +242,8 @@ button:hover {
 ========================= */
 
 .pint-marker {
-    width: 22px;   /* 👈 bigger */
-    height: 32px;
+    width: 32px;   /* 👈 bigger */
+    height: 42px;
     position: relative;
     cursor: pointer;
 
