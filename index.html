@@ -37,9 +37,9 @@
   <div id="intro">
     <div class="intro-col intro-col-wide">
       <h2 class="intro-heading">Bangkok Guinness Price Watch</h2>
-<p class="intro-small">
-  Track Guinness prices across Bangkok and spot the bars serving the best-value pint.
-</p>
+      <p class="intro-small">
+        Track Guinness prices across Bangkok and spot the bars serving the best-value pint.
+      </p>
       <div id="price-chart"></div>
     </div>
 
@@ -101,33 +101,47 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       }))
       .sort((a, b) => a.price - b.price);
 
-   if (pricedPubs.length > 0) {
-  const maxPrice = Math.max(...pricedPubs.map(p => p.price));
-  const minPrice = Math.min(...pricedPubs.map(p => p.price));
+    if (pricedPubs.length > 0) {
+      const maxPrice = Math.max(...pricedPubs.map(p => p.price));
+      const minPrice = Math.min(...pricedPubs.map(p => p.price));
+      const priceGap = maxPrice - minPrice;
 
-  pricedPubs.forEach((pub, index) => {
-    const barRow = document.createElement("div");
-    barRow.className = "bar-row";
+      const summary = document.createElement("div");
+      summary.className = "chart-summary";
+      summary.innerHTML = `
+        <span>Price range: ฿${minPrice}–฿${maxPrice}</span>
+        <span class="chart-dot">·</span>
+        <span>Gap: ฿${priceGap}</span>
+      `;
+      chart.appendChild(summary);
 
-    // ✅ inverted width (cheapest = longest)
-    const widthPercent = ((maxPrice - pub.price) / (maxPrice - minPrice || 1)) * 100;
+      const key = document.createElement("div");
+      key.className = "chart-key";
+      key.textContent = "Longer bar = better value";
+      chart.appendChild(key);
 
-    barRow.innerHTML = `
-      <div class="bar-label">${pub.name}</div>
-      <div class="bar-wrap">
-        <div class="bar" style="width: 0%" data-width="${widthPercent}%"></div>
-      </div>
-      <div class="bar-price">฿${pub.price}</div>
-    `;
+      pricedPubs.forEach((pub, index) => {
+        const barRow = document.createElement("div");
+        barRow.className = "bar-row";
 
-    chart.appendChild(barRow);
+        const widthPercent = ((maxPrice - pub.price) / (maxPrice - minPrice || 1)) * 100;
 
-    const barEl = barRow.querySelector(".bar");
+        barRow.innerHTML = `
+          <div class="bar-label">${pub.name}</div>
+          <div class="bar-wrap">
+            <div class="bar" style="width: 0%" data-width="${widthPercent}%"></div>
+          </div>
+          <div class="bar-price">฿${pub.price}</div>
+        `;
 
-    setTimeout(() => {
-      barEl.style.width = barEl.dataset.width;
-    }, 150 + index * 80);
-  });
+        chart.appendChild(barRow);
+
+        const barEl = barRow.querySelector(".bar");
+
+        setTimeout(() => {
+          barEl.style.width = barEl.dataset.width;
+        }, 150 + index * 80);
+      });
     }
 
     pubs.forEach(pub => {
