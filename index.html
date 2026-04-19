@@ -35,25 +35,12 @@
   </h1>
 
   <div id="intro">
-    <div class="intro-col">
+    <div class="intro-col intro-col-wide">
       <h2 class="intro-heading">Price leaderboard</h2>
       <p class="intro-small">
-        A quick look at how Guinness prices compare across Bangkok, from highest to lowest.
+        A quick look at how Guinness prices compare across Bangkok, from highest to lowest. We’re building an independent, community-led guide to help track the best and best-value pints in town.
       </p>
       <div id="price-chart"></div>
-    </div>
-
-    <div class="intro-col">
-      <h2 class="intro-heading">What we’re doing</h2>
-      <p>
-        Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get a proper pint without overpaying.
-      </p>
-      <p>
-        This is an independent, community-led guide built around price, quality, and local feedback. Over time, we’ll add more pubs, improve the rankings, and make it easier to spot the best-value pint in town.
-      </p>
-      <p>
-        More features coming soon — ratings, price comparisons, happy hour highlights, and a live leaderboard of Bangkok’s top pints.
-      </p>
     </div>
 
     <div class="intro-col">
@@ -68,6 +55,20 @@
       </div>
     </div>
   </div>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <p>
+        Prices are based on publicly available information and community submissions, and may change over time. This is an independent, community-led project and is not affiliated with any venues listed.
+      </p>
+      <p>
+        Spotted something wrong or have a better pint? Let us know.
+      </p>
+      <p class="footer-signoff">
+        Built in Bangkok in 2026.
+      </p>
+    </div>
+  </footer>
 
 </div>
 
@@ -87,7 +88,6 @@ map.scrollZoom.disable();
 fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
   .then(res => res.json())
   .then(pubs => {
-
     const bounds = new mapboxgl.LngLatBounds();
     let validCount = 0;
 
@@ -101,24 +101,32 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       }))
       .sort((a, b) => b.price - a.price);
 
-    const maxPrice = Math.max(...pricedPubs.map(p => p.price));
+    if (pricedPubs.length > 0) {
+      const maxPrice = Math.max(...pricedPubs.map(p => p.price));
 
-    pricedPubs.forEach(pub => {
-      const bar = document.createElement("div");
-      bar.className = "bar-row";
+      pricedPubs.forEach((pub, index) => {
+        const barRow = document.createElement("div");
+        barRow.className = "bar-row";
 
-      const widthPercent = (pub.price / maxPrice) * 100;
+        const widthPercent = (pub.price / maxPrice) * 100;
 
-      bar.innerHTML = `
-        <div class="bar-label">${pub.name}</div>
-        <div class="bar-wrap">
-          <div class="bar" style="width: ${widthPercent}%"></div>
-        </div>
-        <div class="bar-price">฿${pub.price}</div>
-      `;
+        barRow.innerHTML = `
+          <div class="bar-label">${pub.name}</div>
+          <div class="bar-wrap">
+            <div class="bar" style="width: 0%" data-width="${widthPercent}%"></div>
+          </div>
+          <div class="bar-price">฿${pub.price}</div>
+        `;
 
-      chart.appendChild(bar);
-    });
+        chart.appendChild(barRow);
+
+        const barEl = barRow.querySelector(".bar");
+
+        setTimeout(() => {
+          barEl.style.width = barEl.dataset.width;
+        }, 150 + index * 80);
+      });
+    }
 
     pubs.forEach(pub => {
       if (!pub.lat || !pub.lon) return;
@@ -145,7 +153,7 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
 
           ${pub.price ? `<div class="popup-price">Guinness: ฿${pub.price}</div>` : ""}
           ${pub.happy_hour_price && pub.happy_hour_price.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
-          ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
+          ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
         </div>
       `;
 
@@ -161,13 +169,17 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
         .addTo(map);
     });
 
-    if (validCount > 1) {
+    if (validCount === 1) {
+      const firstPub = pubs.find(pub => pub.lat && pub.lon);
+      map.setCenter([parseFloat(firstPub.lon), parseFloat(firstPub.lat)]);
+      map.setZoom(14);
+    } else if (validCount > 1) {
       map.fitBounds(bounds, {
         padding: 80,
-        maxZoom: 15
+        maxZoom: 15,
+        duration: 1000
       });
     }
-
   })
   .catch(err => console.error("Sheet load error:", err));
 
@@ -195,21 +207,5 @@ function submitAnswer() {
 }
 </script>
 
-  <footer id="footer">
-  <div class="footer-inner">
-    <p>
-      Prices are based on publicly available information and community submissions, and may change over time.
-      This is an independent, community-led project and is not affiliated with any venues listed.
-    </p>
-    <p>
-      Spotted something wrong or have a better pint? Let us know.
-    </p>
-    <p class="footer-signoff">
-      Built in Bangkok in 2026.
-    </p>
-  </div>
-</footer>
-
-  
 </body>
 </html>
