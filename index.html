@@ -97,18 +97,25 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       bounds.extend(lngLat);
 
       const popupHTML = `
-        <div class="popup-card">
-          <div class="popup-title">${pub.name}</div>
+  <div class="popup-card modern">
 
-          <div class="popup-details">
-            <div class="popup-price">${pub.price} THB</div>
-            <div class="popup-rating">${pub.rating ? pub.rating + " / 5" : ""}</div>
-          </div>
+    <div class="popup-meta">Pub / Bar</div>
 
-          ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
-        </div>
-      `;
+    <div class="popup-title">${pub.name}</div>
 
+    <div class="popup-row">
+      ${pub.isNew === "yes" ? `<span class="tag-new">New</span>` : ""}
+      ${pub.rating ? `<span class="rating">${pub.rating} ★</span>` : ""}
+    </div>
+
+    <div class="popup-price">
+      From ฿${pub.price}
+    </div>
+
+    ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
+
+  </div>
+`;
       const el = document.createElement('div');
       el.className = 'pint-marker';
 
