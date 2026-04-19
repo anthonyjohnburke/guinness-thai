@@ -35,6 +35,8 @@
   </h1>
 
   <div id="intro">
+
+    <!-- LEFT (WIDE) -->
     <div class="intro-col intro-col-wide">
       <h2 class="intro-heading">Bangkok Guinness Price Watch</h2>
       <p class="intro-small">
@@ -43,6 +45,7 @@
       <div id="price-chart"></div>
     </div>
 
+    <!-- RIGHT -->
     <div class="intro-col">
       <h2 class="intro-heading">Suggest a pub</h2>
       <p>
@@ -51,12 +54,14 @@
 
       <div class="inline-form">
         <input type="text" id="response" placeholder="Tell me which bar has the best pint..." maxlength="150" autocomplete="off" />
-        <input type="text" id="website" name="website" class="hp-field" tabindex="-1" autocomplete="off" />
+        <input type="text" id="website" class="hp-field" tabindex="-1" autocomplete="off" />
         <button id="submit-btn" onclick="submitAnswer()">Submit</button>
       </div>
     </div>
+
   </div>
 
+  <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-inner">
       <p>
@@ -74,8 +79,9 @@
 </div>
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+mapboxgl.accessToken = 'YOUR_TOKEN_HERE';
 
+/* ---------- UTIL ---------- */
 function escapeHTML(str) {
   return String(str).replace(/[&<>"']/g, function (m) {
     return {
@@ -88,6 +94,7 @@ function escapeHTML(str) {
   });
 }
 
+/* ---------- MAP ---------- */
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
@@ -99,249 +106,191 @@ const map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 map.scrollZoom.disable();
 
+/* ---------- DATA ---------- */
 fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
-  .then(res => res.json())
-  .then(pubs => {
-    const bounds = new mapboxgl.LngLatBounds();
-    let validCount = 0;
+.then(res => res.json())
+.then(pubs => {
 
-    const chart = document.getElementById("price-chart");
+  const bounds = new mapboxgl.LngLatBounds();
+  let validCount = 0;
 
-    const pricedPubs = pubs
-      .filter(p => p.price && !isNaN(parseFloat(p.price)))
-      .map(p => ({
-        name: p.name,
-        price: parseFloat(p.price)
-      }))
-      .sort((a, b) => a.price - b.price);
+  /* ---------- CHART ---------- */
+  const chart = document.getElementById("price-chart");
 
-    if (pricedPubs.length > 0) {
-      const maxPrice = Math.max(...pricedPubs.map(p => p.price));
-      const minPrice = Math.min(...pricedPubs.map(p => p.price));
-      const priceGap = maxPrice - minPrice;
+  const pricedPubs = pubs
+    .filter(p => p.price && !isNaN(parseFloat(p.price)))
+    .map(p => ({
+      name: p.name,
+      price: parseFloat(p.price)
+    }))
+    .sort((a, b) => a.price - b.price);
 
-      const summary = document.createElement("div");
-      summary.className = "chart-summary";
-      summary.innerHTML = `
-        <span>Price range: ฿${minPrice}–฿${maxPrice}</span>
+  if (pricedPubs.length > 0) {
+
+    const max = Math.max(...pricedPubs.map(p => p.price));
+    const min = Math.min(...pricedPubs.map(p => p.price));
+    const gap = max - min;
+
+    chart.innerHTML += `
+      <div class="chart-summary">
+        <span>Price range: ฿${min}–฿${max}</span>
         <span class="chart-dot">·</span>
-        <span>Gap: ฿${priceGap}</span>
+        <span>Gap: ฿${gap}</span>
+      </div>
+      <div class="chart-key">Longer bar = better value</div>
+    `;
+
+    pricedPubs.forEach((pub, i) => {
+
+      const width = ((max - pub.price) / (max - min || 1)) * 100;
+
+      const row = document.createElement("div");
+      row.className = "bar-row";
+
+      row.innerHTML = `
+        <div class="bar-label">${escapeHTML(pub.name)}</div>
+        <div class="bar-wrap">
+          <div class="bar" style="width:0%" data-width="${width}%"></div>
+        </div>
+        <div class="bar-price">฿${pub.price}</div>
       `;
-      chart.appendChild(summary);
 
-      const key = document.createElement("div");
-      key.className = "chart-key";
-      key.textContent = "Longer bar = better value";
-      chart.appendChild(key);
+      chart.appendChild(row);
 
-      pricedPubs.forEach((pub, index) => {
-        const barRow = document.createElement("div");
-        barRow.className = "bar-row";
+      const bar = row.querySelector(".bar");
+      setTimeout(() => {
+        bar.style.width = bar.dataset.width;
+      }, 150 + i * 80);
+    });
+  }
 
-        const widthPercent = ((maxPrice - pub.price) / (maxPrice - minPrice || 1)) * 100;
+  /* ---------- GEOJSON ---------- */
+  const geojson = {
+    type: "FeatureCollection",
+    features: pubs
+      .filter(p => p.lat && p.lon)
+      .map(p => {
 
-        barRow.innerHTML = `
-          <div class="bar-label">${escapeHTML(pub.name)}</div>
-          <div class="bar-wrap">
-            <div class="bar" style="width: 0%" data-width="${widthPercent}%"></div>
-          </div>
-          <div class="bar-price">฿${pub.price}</div>
-        `;
+        const lat = parseFloat(p.lat);
+        const lon = parseFloat(p.lon);
 
-        chart.appendChild(barRow);
+        if (Number.isNaN(lat) || Number.isNaN(lon)) return null;
 
-        const barEl = barRow.querySelector(".bar");
-        setTimeout(() => {
-          barEl.style.width = barEl.dataset.width;
-        }, 150 + index * 80);
-      });
+        validCount++;
+        bounds.extend([lon, lat]);
+
+        return {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [lon, lat]
+          },
+          properties: p
+        };
+      })
+      .filter(Boolean)
+  };
+
+  /* ---------- ADD LAYER ---------- */
+  const addPubLayer = () => {
+
+    map.addSource('pubs', {
+      type: 'geojson',
+      data: geojson
+    });
+
+    map.addLayer({
+      id: 'pubs-layer',
+      type: 'symbol',
+      source: 'pubs',
+      layout: {
+        'icon-image': 'pint-icon',
+        'icon-size': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          9, 0.4,
+          12, 0.55,
+          15, 0.7
+        ],
+        'icon-anchor': 'bottom',
+        'icon-allow-overlap': true
+      }
+    });
+
+    /* POPUPS */
+    map.on('click', 'pubs-layer', (e) => {
+
+      const p = e.features[0].properties;
+
+      const html = `
+        <div class="popup-card modern">
+          ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
+          <div class="popup-title">${escapeHTML(p.name)}</div>
+          ${p.isNew === "yes" ? `<span class="tag-new">New</span>` : ""}
+          ${p.price ? `<div class="popup-price">Guinness: ฿${p.price}</div>` : ""}
+          ${p.happy_hour_price ? `<div class="popup-happy">Happy hour: ฿${p.happy_hour_price}</div>` : ""}
+          ${p.link ? `<a href="${p.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
+        </div>
+      `;
+
+      new mapboxgl.Popup({ offset: 10 })
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setHTML(html)
+        .addTo(map);
+    });
+
+    map.on('mouseenter', 'pubs-layer', () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', 'pubs-layer', () => map.getCanvas().style.cursor = '');
+
+    if (validCount > 1) {
+      map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
     }
+  };
 
-    const geojson = {
-      type: "FeatureCollection",
-      features: pubs
-        .filter(pub => pub.lat && pub.lon)
-        .map(pub => {
-          const lat = parseFloat(pub.lat);
-          const lon = parseFloat(pub.lon);
+  /* ---------- LOAD ICON (FIXED) ---------- */
+  const loadIcon = () => {
 
-          if (Number.isNaN(lat) || Number.isNaN(lon)) return null;
-
-          validCount += 1;
-          bounds.extend([lon, lat]);
-
-          return {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [lon, lat]
-            },
-            properties: {
-              name: pub.name || "",
-              type: pub.type || "",
-              price: pub.price || "",
-              happy: pub.happy_hour_price || "",
-              link: pub.link || "",
-              isNew: pub.isNew || ""
-            }
-          };
-        })
-        .filter(Boolean)
-    };
-
-    const addPubLayer = () => {
-      if (map.getSource('pubs')) {
+    map.loadImage('pint-glass.png', (error, image) => {
+      if (error || !image) {
+        console.error("Icon failed", error);
         return;
       }
 
-      map.addSource('pubs', {
-        type: 'geojson',
-        data: geojson
-      });
+      map.addImage('pint-icon', image);
+      addPubLayer();
+    });
+  };
 
-      map.addLayer({
-        id: 'pubs-layer',
-        type: 'symbol',
-        source: 'pubs',
-        layout: {
-          'icon-image': 'pint-icon',
-          'icon-size': [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            9, 0.42,
-            12, 0.52,
-            15, 0.62
-          ],
-          'icon-anchor': 'bottom',
-          'icon-allow-overlap': true
-        }
-      });
+  map.on('load', loadIcon);
 
-      map.on('click', 'pubs-layer', (e) => {
-        const feature = e.features[0];
-        const props = feature.properties;
+});
 
-        const pubType = escapeHTML(props.type || "");
-        const pubName = escapeHTML(props.name || "");
-        const pubPrice = escapeHTML(props.price || "");
-        const pubHappy = escapeHTML(props.happy || "");
-        const pubLink = props.link ? String(props.link) : "";
-        const isNew = props.isNew && props.isNew.toLowerCase() === "yes";
-
-        const popupHTML = `
-          <div class="popup-card modern">
-            ${pubType ? `<div class="popup-meta">${pubType}</div>` : ""}
-            <div class="popup-title">${pubName}</div>
-
-            ${isNew ? `
-              <div class="popup-row">
-                <span class="tag-new">New</span>
-              </div>
-            ` : ""}
-
-            ${pubPrice ? `<div class="popup-price">Guinness: ฿${pubPrice}</div>` : ""}
-            ${pubHappy && pubHappy.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pubHappy}</div>` : ""}
-            ${pubLink ? `<a href="${pubLink}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
-          </div>
-        `;
-
-        new mapboxgl.Popup({ offset: 10 })
-          .setLngLat(feature.geometry.coordinates)
-          .setHTML(popupHTML)
-          .addTo(map);
-      });
-
-      map.on('mouseenter', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-
-      map.on('mouseleave', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = '';
-      });
-
-      if (validCount === 1) {
-        const firstFeature = geojson.features[0];
-        map.setCenter(firstFeature.geometry.coordinates);
-        map.setZoom(14);
-      } else if (validCount > 1) {
-        map.fitBounds(bounds, {
-          padding: 80,
-          maxZoom: 15,
-          duration: 1000
-        });
-      }
-    };
-
-    const loadPintIcon = () => {
-      if (map.hasImage('pint-icon')) {
-        addPubLayer();
-        return;
-      }
-
-      map.loadImage('pint-glass.svg', (error, image) => {
-        if (error) {
-          console.error('Error loading pint icon:', error);
-          return;
-        }
-
-        if (!map.hasImage('pint-icon')) {
-          map.addImage('pint-icon', image);
-        }
-
-        addPubLayer();
-      });
-    };
-
-    if (map.isStyleLoaded()) {
-      loadPintIcon();
-    } else {
-      map.once('load', loadPintIcon);
-    }
-  })
-  .catch(err => console.error("Sheet load error:", err));
-
+/* ---------- FORM ---------- */
 function submitAnswer() {
-  const inputEl = document.getElementById("response");
-  const honeypotEl = document.getElementById("website");
-  const button = document.getElementById("submit-btn");
-  const userInput = inputEl.value.trim();
 
-  if (honeypotEl.value !== "") return;
+  const input = document.getElementById("response");
+  const hp = document.getElementById("website");
+  const btn = document.getElementById("submit-btn");
 
-  if (userInput === "") {
-    alert("Please enter a suggestion!");
-    return;
-  }
+  if (hp.value !== "") return;
 
-  if (userInput.length > 150) {
-    alert("Please keep it under 150 characters.");
-    return;
-  }
+  const val = input.value.trim();
+  if (!val) return alert("Please enter a suggestion!");
 
-  if (button.disabled) return;
-  button.disabled = true;
+  btn.disabled = true;
 
-  fetch("https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec", {
+  fetch("YOUR_SCRIPT_URL", {
     method: "POST",
     mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      suggestion: userInput,
-      website: honeypotEl.value
-    })
+    body: JSON.stringify({ suggestion: val })
   })
   .then(() => {
     alert("Go raibh maith agat!");
-    inputEl.value = "";
-  })
-  .catch(() => {
-    alert("Error submitting your suggestion.");
+    input.value = "";
   })
   .finally(() => {
-    setTimeout(() => {
-      button.disabled = false;
-    }, 1500);
+    setTimeout(() => btn.disabled = false, 1500);
   });
 }
 </script>
