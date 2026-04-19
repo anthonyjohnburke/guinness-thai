@@ -3,108 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Where to Find the Best Guinness in Bangkok 🍺 | Vote for Your Favorite Pint!</title>
 
-  <!-- Google Fonts -->
+  <title>Best Guinness in Bangkok</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
 
   <!-- Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
 
-  <!-- External CSS -->
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- SEO -->
-  <meta name="description" content="Discover the best Guinness in Bangkok! Help us find the finest pint in town by sharing your top spots." />
-  <meta name="keywords" content="Best Guinness Bangkok Thailand, Irish Pubs Bangkok, Guinness Bangkok, Best Pints Bangkok" />
-  <meta name="author" content="The Black Stuff Thailand" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Best Guinness in Bangkok" />
-  <meta property="og:description" content="Where can you find the best pint of Guinness in Bangkok?" />
-  <meta property="og:image" content="https://i.imgur.com/jX1EnbJ.png" />
-  <meta property="og:url" content="https://www.guinnessthailand.com/" />
-  <meta property="og:type" content="website" />
 </head>
 
 <body>
-  <div class="page-wrap">
 
-    <div id="top-section"></div>
+<div class="page-wrap">
 
-    <div id="note">
-      "The perfect Guinness head is approx 12% of the pint height."
+  <div id="top-section"></div>
+
+  <div id="note">
+    "The perfect Guinness head is approx 12% of the pint height."
+  </div>
+
+  <!-- MAP -->
+  <section id="map-section">
+    <div id="map"></div>
+  </section>
+
+  <!-- TITLE -->
+  <h1 id="question">
+    Who’s pouring the finest pint of Guinness in Bangkok?
+  </h1>
+
+  <!-- INTRO -->
+  <div id="intro">
+
+    <div class="intro-col">
+      <p>
+        Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get the perfect pint without overpaying.
+      </p>
     </div>
 
-    <section id="map-section">
-      <div id="map"></div>
-    </section>
+    <div class="intro-col">
+      <p>
+        More features coming soon — ratings, price comparisons, and a live leaderboard of Bangkok’s top pints. Stay tuned.
+      </p>
+    </div>
 
-    <h1 id="question">
-      Who’s pouring the finest pint of Guinness in Bangkok?
-    </h1>
+    <div class="intro-col">
+      <p>
+        Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
+      </p>
 
-    <div id="intro">
-      <div class="intro-col">
-        <p>
-          Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get the perfect pint without overpaying.
-        </p>
-      </div>
-
-      <div class="intro-col">
-        <p>
-          More features coming soon — ratings, price comparisons, and a live leaderboard of Bangkok’s top pints. Stay tuned.
-        </p>
-      </div>
-
-      <div class="intro-col">
-        <p>
-          Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest, creamiest Guinness in town. Help us crown the best!
-        </p>
-
-        <div class="inline-form">
-          <input type="text" id="response" placeholder="Tell me which bar has the best pint..." />
-          <button onclick="submitAnswer()">Submit</button>
-        </div>
+      <div class="inline-form">
+        <input type="text" id="response" placeholder="Tell me which bar has the best pint..." />
+        <button onclick="submitAnswer()">Submit</button>
       </div>
     </div>
 
   </div>
 
-  <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+</div>
 
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
-      center: [100.5018, 13.7563],
-      zoom: 11.2
-    });
+<script>
 
-    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    map.scrollZoom.disable();
+mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
-    const pubs = [
-      {
-        name: "The Black Swan",
-        price: "330 THB",
-        rating: "4.6",
-        link: "#",
-        lng: 100.55993535767047,
-        lat: 13.739508656978682
-      }
-    ];
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
+  center: [100.5018, 13.7563],
+  zoom: 11.2
+});
+
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+map.scrollZoom.disable();
+
+
+// ✅ GOOGLE SHEETS DATA
+fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
+  .then(res => res.json())
+  .then(pubs => {
 
     pubs.forEach(pub => {
+
+      if (!pub.lat || !pub.lon) return;
+
       const popupHTML = `
         <div class="popup-card">
           <div class="popup-title">${pub.name}</div>
 
           <div class="popup-details">
-            <div class="popup-price">${pub.price}</div>
-            <div class="popup-rating">${pub.rating} / 5</div>
+            <div class="popup-price">${pub.price} THB</div>
+            <div class="popup-rating">${pub.rating ? pub.rating + " / 5" : ""}</div>
           </div>
 
           ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
@@ -115,35 +108,43 @@
       el.className = 'pint-marker';
 
       new mapboxgl.Marker(el)
-        .setLngLat([pub.lng, pub.lat])
+        .setLngLat([parseFloat(pub.lon), parseFloat(pub.lat)])
         .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
         .addTo(map);
+
     });
 
-    function submitAnswer() {
-      const userInput = document.getElementById("response").value;
+  })
+  .catch(err => console.error("Sheet load error:", err));
 
-      if (userInput.trim() === "") {
-        alert("Please enter a suggestion!");
-        return;
-      }
 
-      const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
+// ✅ FORM SUBMISSION
+function submitAnswer() {
+  const userInput = document.getElementById("response").value;
 
-      fetch(scriptURL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ suggestion: userInput })
-      })
-      .then(() => {
-        alert("Go raibh maith agat! – thanks for your suggestion");
-        document.getElementById("response").value = "";
-      })
-      .catch(() => {
-        alert("Error submitting your suggestion.");
-      });
-    }
-  </script>
+  if (userInput.trim() === "") {
+    alert("Please enter a suggestion!");
+    return;
+  }
+
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
+
+  fetch(scriptURL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ suggestion: userInput })
+  })
+  .then(() => {
+    alert("Go raibh maith agat!");
+    document.getElementById("response").value = "";
+  })
+  .catch(() => {
+    alert("Error submitting your suggestion.");
+  });
+}
+
+</script>
+
 </body>
 </html>
