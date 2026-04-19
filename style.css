@@ -237,11 +237,18 @@ button:hover {
 /* Mobile */
 @media screen and (max-width: 768px) {
     #question {
-        font-size: 2.6em;
-        border-right: none;
-        animation: none;
-        white-space: normal;
-    }
+    font-size: 2.4em;
+    margin-top: 20px;
+
+    width: 100% !important;
+    max-width: 100%;
+
+    white-space: normal !important;   /* 👈 critical fix */
+    overflow: visible !important;
+
+    border-right: none !important;
+    animation: none !important;
+}
 
     #intro {
         flex-direction: column;
