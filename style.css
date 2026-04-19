@@ -157,22 +157,23 @@ body {
 
 .bar-row {
     display: grid;
-    grid-template-columns: 1fr 3fr auto;
+    grid-template-columns: 1.4fr 2fr auto;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
+    gap: 8px;
+    margin-bottom: 6px; /* tighter */
 }
 
 .bar-label {
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.8);
+    font-size: 0.78em;            /* smaller */
+    color: rgba(255,255,255,0.75);
+    line-height: 1.2;
 }
 
 .bar-wrap {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.06);
     border-radius: 6px;
     overflow: hidden;
-    height: 10px;
+    height: 8px;                 /* thinner bar */
 }
 
 .bar {
@@ -182,10 +183,11 @@ body {
 }
 
 .bar-price {
-    font-size: 0.9em;
-    font-weight: 600;
+    font-size: 0.78em;           /* match label */
+    font-weight: 500;            /* lighter */
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
 }
-
 /* Mapbox controls */
 .mapboxgl-ctrl-group {
     background: rgba(15, 15, 15, 0.88) !important;
