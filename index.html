@@ -114,12 +114,13 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       el.className = 'pint-marker';
 
       new mapboxgl.Marker({
-        element: el,
-        anchor: 'center'
-      })
-        .setLngLat(lngLat)
-        .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHTML))
-        .addTo(map);
+  element: el,
+  anchor: 'bottom',
+  offset: [0, -10]   // 👈 THIS IS THE KEY
+})
+  .setLngLat(lngLat)
+  .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHTML))
+  .addTo(map);
     });
 
     if (validCount === 1) {
