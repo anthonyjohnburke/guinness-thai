@@ -318,6 +318,7 @@ button:hover {
     height: 36px;
     position: relative;
     cursor: pointer;
+    display: block;
 }
 
 .pint-marker::before {
@@ -344,7 +345,8 @@ button:hover {
 
 .pint-marker:hover {
     transform: scale(1.15);
-    transition: 0.2s ease;
+    transform-origin: bottom center;
+    transition: transform 0.2s ease;
 }
 
 
