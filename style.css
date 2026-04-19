@@ -1,4 +1,4 @@
-/* General Page Styles */
+/* General Page */
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
@@ -8,16 +8,14 @@ body {
     text-align: center;
 }
 
-/* Main page wrapper */
 .page-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    padding-bottom: 60px;
 }
 
-/* Guinness head */
+/* Top bar */
 #top-section {
     background-color: white;
     width: 100%;
@@ -29,358 +27,199 @@ body {
     font-family: 'Shadows Into Light', cursive;
     font-size: 1.1em;
     color: #ffffffa0;
-    width: 100%;
-    text-align: center;
-    margin-top: 12px;
-    margin-bottom: 30px;
-    pointer-events: none;
+    margin: 12px 0 30px;
 }
 
-/* Animations */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        color: rgba(255, 255, 255, 0.9);
-    }
-}
-
-/* Main title */
+/* Title */
 #question {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 4.4em;
-    margin: 32px 0 20px;
-    max-width: 80%;
-    padding: 0 10%;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid white;
-    width: 0;
-    animation: typing 1.8s steps(35, end) forwards, blink 0.8s step-end infinite;
+    font-size: 4.2em;
+    margin: 30px 0 10px;
+    letter-spacing: 1px;
 }
 
 /* Map */
 #map-section {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    margin-top: 10px;
     margin-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 #map {
     width: 100%;
     height: 70vh;
-    min-height: 500px;
 }
 
-/* Intro layout */
+/* Layout */
 #intro {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 40px;
     max-width: 1200px;
     width: 100%;
-    margin: 20px auto 30px;
     padding: 0 20px;
-    opacity: 0;
-    animation: fadeIn 1.5s ease-in forwards;
-    box-sizing: border-box;
+    margin-top: 20px;
 }
 
 .intro-col {
     text-align: left;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    min-width: 0;
 }
 
 .intro-col-wide {
+    border-right: 1px solid rgba(255,255,255,0.08);
     padding-right: 40px;
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Headings */
 .intro-heading {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2em;
-    margin: 0 0 10px;
-    color: white;
-    letter-spacing: 0.4px;
+    margin-bottom: 10px;
 }
 
 .intro-small {
-    font-size: 0.98em;
-    color: rgba(255, 255, 255, 0.72);
-    margin: 0 0 24px;
-    max-width: 760px;
+    font-size: 0.95em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
 }
 
-/* Form */
-.inline-form {
-    margin-top: 20px;
+/* ===== CHART SUMMARY ===== */
+
+.chart-summary {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     gap: 10px;
+    align-items: center;
+    font-size: 0.82em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
 }
 
-.inline-form input {
-    width: 100%;
-    max-width: 420px;
-    font-size: 0.95em;
-    padding: 12px 14px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    background: #f5f5f5;
-    color: #333;
-    box-sizing: border-box;
+.chart-dot {
+    color: rgba(255,255,255,0.3);
 }
 
-.inline-form button {
-    width: auto;
-    max-width: 200px;
-    padding: 11px 18px;
-    font-size: 0.95em;
-    font-weight: 700;
-    background-color: #d4af37;
-    color: black;
-    border: none;
-    border-radius: 6px;
-    margin-top: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+.chart-key {
+    font-size: 0.72em;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
-.inline-form button:hover {
-    background-color: #c19b2e;
-}
+/* ===== BAR CHART ===== */
 
-/* Price chart */
 #price-chart {
     width: 100%;
-    margin: 0;
-    text-align: left;
 }
 
 .bar-row {
     display: grid;
-    grid-template-columns: 1.25fr 3fr auto;
-    align-items: center;
+    grid-template-columns: 1.3fr 3fr auto;
     gap: 10px;
+    align-items: center;
     margin-bottom: 8px;
 }
 
 .bar-label {
     font-size: 0.82em;
-    color: rgba(255,255,255,0.78);
-    line-height: 1.2;
+    color: rgba(255,255,255,0.8);
 }
 
 .bar-wrap {
-    background: rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.06);
     border-radius: 5px;
+    height: 8px;
     overflow: hidden;
-    height: 9px;
 }
 
 .bar {
     height: 100%;
     background: #d4af37;
-    border-radius: 5px;
     width: 0;
+    border-radius: 5px;
     transition: width 0.9s ease;
 }
 
 .bar-price {
     font-size: 0.82em;
-    font-weight: 500;
-    color: rgba(255,255,255,0.78);
-    white-space: nowrap;
+    color: rgba(255,255,255,0.8);
 }
 
-/* Footer */
+/* ===== FORM ===== */
+
+.inline-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inline-form input {
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background: #f2f2f2;
+}
+
+.inline-form button {
+    background: #d4af37;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.inline-form button:hover {
+    background: #c49c2f;
+}
+
+/* ===== FOOTER ===== */
+
 #footer {
     width: 100%;
-    border-top: 1px solid rgba(255,255,255,0.05);
     margin-top: 50px;
-    padding: 24px 20px 8px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .footer-inner {
-    max-width: 1000px;
-    text-align: center;
+    font-size: 0.7em;
     color: rgba(255,255,255,0.45);
-    font-size: 0.72em;
-    line-height: 1.55;
-}
-
-.footer-inner p {
-    margin: 6px 0;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.5;
 }
 
 .footer-signoff {
-    margin-top: 10px;
-    color: rgba(255,255,255,0.58);
-    font-weight: 500;
+    margin-top: 8px;
+    color: rgba(255,255,255,0.6);
 }
 
-/* Mapbox controls */
+/* ===== MAPBOX ===== */
+
 .mapboxgl-ctrl-group {
-    background: rgba(15, 15, 15, 0.88) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 10px !important;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
+    background: rgba(20,20,20,0.9) !important;
+    border-radius: 8px;
 }
 
 .mapboxgl-ctrl-group button {
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    min-width: 38px;
-    min-height: 38px;
-    width: 38px;
-    height: 38px;
     background: transparent !important;
-    color: inherit !important;
-    box-shadow: none !important;
-    text-transform: none !important;
-}
-
-.mapboxgl-ctrl-group button:hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-.mapboxgl-ctrl-icon {
-    opacity: 0.95;
-}
-
-/* Popup close button */
-.mapboxgl-popup-close-button {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 28px !important;
-    height: 28px !important;
-    line-height: 28px !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: #111 !important;
-    font-size: 24px !important;
-    font-weight: 700;
-    top: 12px !important;
-    right: 12px !important;
-}
-
-.mapboxgl-popup-close-button:hover {
-    background: transparent !important;
-    color: #000 !important;
+    color: white !important;
 }
 
 /* Popup */
 .mapboxgl-popup-content {
     background: transparent;
     padding: 0;
-    border-radius: 10px;
-    box-shadow: none;
 }
 
 .popup-card.modern {
     background: #f4f4f4;
-    color: #111;
-    padding: 22px 22px;
-    border-radius: 18px;
-    font-family: 'Open Sans', sans-serif;
-    width: 260px;
+    color: black;
+    padding: 20px;
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-}
-
-.popup-meta {
-    font-size: 0.95em;
-    color: #8a8a8a;
-    margin: 0;
-}
-
-.popup-title {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.35em;
-    color: #111;
-    line-height: 1.25;
-    margin: 0;
-}
-
-.popup-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 0;
-    min-height: 24px;
-}
-
-.tag-new {
-    background: #f6dcdc;
-    color: #d53030;
-    font-size: 0.9em;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.rating {
-    font-size: 1em;
-    font-weight: 600;
-    color: #333;
-}
-
-.popup-price {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: #111;
-    margin: 0;
-}
-
-.popup-happy {
-    font-size: 1.05em;
-    font-weight: 500;
-    color: #444;
-    margin: 0;
-}
-
-.popup-link {
-    display: inline-block;
-    font-size: 0.95em;
-    text-decoration: none;
-    color: #2a7de1;
-    font-weight: 600;
-    margin: 0;
-}
-
-.popup-link:hover {
-    text-decoration: underline;
 }
 
 .mapboxgl-popup-tip {
@@ -389,103 +228,44 @@ body {
 
 /* Marker */
 .pint-marker {
-    width: 26px;
-    height: 36px;
+    width: 24px;
+    height: 34px;
     position: relative;
-    cursor: pointer;
-    display: block;
 }
 
 .pint-marker::before {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
-    height: 72%;
-    background: #000;
-    border-radius: 5px 5px 7px 7px;
+    height: 70%;
+    background: black;
+    border-radius: 5px;
 }
 
 .pint-marker::after {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 35%;
-    background: #fff;
-    border-radius: 7px 7px 4px 4px;
+    height: 30%;
+    background: white;
+    border-radius: 5px;
 }
 
-.pint-marker:hover {
-    transform: scale(1.12);
-    transform-origin: bottom center;
-    transition: transform 0.2s ease;
-}
+/* ===== MOBILE ===== */
 
-/* Mobile */
-@media screen and (max-width: 900px) {
-    #question {
-        font-size: 2.6em;
-        margin-top: 15px;
-        width: 100% !important;
-        max-width: 100%;
-        white-space: normal !important;
-        overflow: visible !important;
-        border-right: none !important;
-        animation: none !important;
-    }
-
+@media (max-width: 900px) {
     #intro {
         grid-template-columns: 1fr;
-        gap: 24px;
-        margin-top: 5px;
-        padding: 0 14px;
-        opacity: 1 !important;
-        animation: none !important;
     }
 
     .intro-col-wide {
-        padding-right: 0;
         border-right: none;
+        padding-right: 0;
     }
 
-    .intro-col {
-        max-width: 100%;
-        text-align: center;
-    }
-
-    .intro-small {
-        max-width: 100%;
-    }
-
-    #map {
-        height: 55vh;
-        min-height: 350px;
-    }
-
-    .inline-form {
-        align-items: stretch;
-    }
-
-    .inline-form input,
-    .inline-form button {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .bar-row {
-        grid-template-columns: 1.2fr 2fr auto;
-        gap: 8px;
-    }
-
-    #footer {
-        padding-left: 14px;
-        padding-right: 14px;
-    }
-
-    .footer-inner {
-        font-size: 0.7em;
+    #question {
+        font-size: 2.5em;
     }
 }
