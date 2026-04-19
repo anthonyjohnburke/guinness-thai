@@ -114,12 +114,12 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
 
 new mapboxgl.Marker({
   element: el,
-  anchor: 'bottom'
+  anchor: 'center'
 })
   .setLngLat(lngLat)
-  .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
+  .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHTML))
   .addTo(map);
-
+      
     });
 
     // ✅ AUTO ZOOM TO FIT ALL PUBS
