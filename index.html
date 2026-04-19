@@ -37,21 +37,19 @@
   <div id="intro">
     <div class="intro-col">
       <p>
-        Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get the perfect pint without overpaying.
-      </p>
-    </div>
-
-    <div class="intro-col">
-      <div id="price-chart"></div>
-      
-      <p>
-        More features coming soon — ratings, price comparisons, and a live leaderboard of Bangkok’s top pints. Stay tuned.
+        Our goal is simple: find the best and cheapest Guinness in Bangkok.
       </p>
     </div>
 
     <div class="intro-col">
       <p>
-        Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
+        More features coming soon — ratings, price comparisons, and a live leaderboard.
+      </p>
+    </div>
+
+    <div class="intro-col">
+      <p>
+        Share your go-to spot for the smoothest Guinness in town.
       </p>
 
       <div class="inline-form">
@@ -61,10 +59,13 @@
     </div>
   </div>
 
+  <!-- 🍺 PRICE CHART -->
+  <div id="price-chart"></div>
+
 </div>
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+mapboxgl.accessToken = 'YOUR_TOKEN_HERE';
 
 const map = new mapboxgl.Map({
   container: 'map',
@@ -79,9 +80,42 @@ map.scrollZoom.disable();
 fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
   .then(res => res.json())
   .then(pubs => {
+
     const bounds = new mapboxgl.LngLatBounds();
     let validCount = 0;
 
+    const chart = document.getElementById("price-chart");
+
+    // FILTER + SORT (HIGHEST → LOWEST)
+    const pricedPubs = pubs
+      .filter(p => p.price && !isNaN(parseFloat(p.price)))
+      .map(p => ({
+        name: p.name,
+        price: parseFloat(p.price)
+      }))
+      .sort((a, b) => b.price - a.price);
+
+    const maxPrice = Math.max(...pricedPubs.map(p => p.price));
+
+    // BUILD BAR CHART
+    pricedPubs.forEach(pub => {
+      const bar = document.createElement("div");
+      bar.className = "bar-row";
+
+      const widthPercent = (pub.price / maxPrice) * 100;
+
+      bar.innerHTML = `
+        <div class="bar-label">${pub.name}</div>
+        <div class="bar-wrap">
+          <div class="bar" style="width: ${widthPercent}%"></div>
+        </div>
+        <div class="bar-price">฿${pub.price}</div>
+      `;
+
+      chart.appendChild(bar);
+    });
+
+    // MAP MARKERS
     pubs.forEach(pub => {
       if (!pub.lat || !pub.lon) return;
 
@@ -99,16 +133,15 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
           ${pub.type ? `<div class="popup-meta">${pub.type}</div>` : ""}
           <div class="popup-title">${pub.name || ""}</div>
 
-          ${(pub.isNew && pub.isNew.toLowerCase() === "yes") || (pub.rating && pub.rating.toLowerCase() !== "xx") ? `
+          ${pub.isNew && pub.isNew.toLowerCase() === "yes" ? `
             <div class="popup-row">
-              ${pub.isNew && pub.isNew.toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
-              ${pub.rating && pub.rating.toLowerCase() !== "xx" ? `<span class="rating">${pub.rating} ★</span>` : ""}
+              <span class="tag-new">New</span>
             </div>
           ` : ""}
 
           ${pub.price ? `<div class="popup-price">Guinness: ฿${pub.price}</div>` : ""}
-          ${pub.happy_hour_price && pub.happy_hour_price.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
-          ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
+          ${pub.happy_hour_price && pub.happy_hour_price !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
+          ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
         </div>
       `;
 
@@ -116,25 +149,21 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       el.className = 'pint-marker';
 
       new mapboxgl.Marker({
-  element: el,
-  anchor: 'bottom'
-})
-  .setLngLat(lngLat)
-  .setPopup(new mapboxgl.Popup({ offset: 2 }).setHTML(popupHTML))
-  .addTo(map);
+        element: el,
+        anchor: 'bottom'
+      })
+        .setLngLat(lngLat)
+        .setPopup(new mapboxgl.Popup({ offset: 0 }).setHTML(popupHTML))
+        .addTo(map);
     });
 
-    if (validCount === 1) {
-      const firstPub = pubs.find(pub => pub.lat && pub.lon);
-      map.setCenter([parseFloat(firstPub.lon), parseFloat(firstPub.lat)]);
-      map.setZoom(14);
-    } else if (validCount > 1) {
+    if (validCount > 1) {
       map.fitBounds(bounds, {
         padding: 80,
-        maxZoom: 15,
-        duration: 1000
+        maxZoom: 15
       });
     }
+
   })
   .catch(err => console.error("Sheet load error:", err));
 
@@ -146,9 +175,7 @@ function submitAnswer() {
     return;
   }
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
-
-  fetch(scriptURL, {
+  fetch("YOUR_SCRIPT_URL", {
     method: "POST",
     mode: "no-cors",
     headers: { "Content-Type": "application/json" },
