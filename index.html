@@ -18,7 +18,6 @@
 </head>
 
 <body>
-
 <div class="page-wrap">
 
   <div id="top-section"></div>
@@ -27,19 +26,15 @@
     "The perfect Guinness head is approx 12% of the pint height."
   </div>
 
-  <!-- MAP -->
   <section id="map-section">
     <div id="map"></div>
   </section>
 
-  <!-- TITLE -->
   <h1 id="question">
     Who’s pouring the finest pint of Guinness in Bangkok?
   </h1>
 
-  <!-- INTRO -->
   <div id="intro">
-
     <div class="intro-col">
       <p>
         Our goal is simple: find the best and cheapest Guinness in Bangkok. From hidden gems to well-known pubs, we’re tracking where you’ll get the perfect pint without overpaying.
@@ -62,13 +57,11 @@
         <button onclick="submitAnswer()">Submit</button>
       </div>
     </div>
-
   </div>
 
 </div>
 
 <script>
-
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
 const map = new mapboxgl.Map({
@@ -81,71 +74,68 @@ const map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 map.scrollZoom.disable();
 
-
-// ✅ LOAD DATA FROM GOOGLE SHEETS
 fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
   .then(res => res.json())
   .then(pubs => {
-
     const bounds = new mapboxgl.LngLatBounds();
+    let validCount = 0;
 
     pubs.forEach(pub => {
-
       if (!pub.lat || !pub.lon) return;
 
-      const lngLat = [parseFloat(pub.lon), parseFloat(pub.lat)];
+      const lat = parseFloat(pub.lat);
+      const lon = parseFloat(pub.lon);
+
+      if (Number.isNaN(lat) || Number.isNaN(lon)) return;
+
+      validCount += 1;
+      const lngLat = [lon, lat];
       bounds.extend(lngLat);
 
       const popupHTML = `
-  <div class="popup-card modern">
+        <div class="popup-card modern">
+          ${pub.type ? `<div class="popup-meta">${pub.type}</div>` : ""}
 
-    <div class="popup-meta">Pub / Bar</div>
+          <div class="popup-title">${pub.name || ""}</div>
 
-    <div class="popup-title">${pub.name}</div>
+          <div class="popup-row">
+            ${pub.isNew && pub.isNew.toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
+            ${pub.rating && pub.rating.toLowerCase() !== "xx" ? `<span class="rating">${pub.rating} ★</span>` : ""}
+          </div>
 
-    <div class="popup-row">
-      ${pub.isNew === "yes" ? `<span class="tag-new">New</span>` : ""}
-      ${pub.rating ? `<span class="rating">${pub.rating} ★</span>` : ""}
-    </div>
+          ${pub.price ? `<div class="popup-price">Guinness: ฿${pub.price}</div>` : ""}
+          ${pub.happy_hour_price && pub.happy_hour_price.toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${pub.happy_hour_price}</div>` : ""}
 
-    <div class="popup-price">
-      From ฿${pub.price}
-    </div>
+          ${pub.link ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
+        </div>
+      `;
 
-    ${pub.link ? `<a href="${pub.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
-
-  </div>
-`;
       const el = document.createElement('div');
       el.className = 'pint-marker';
 
-new mapboxgl.Marker({
-  element: el,
-  anchor: 'center'
-})
-  .setLngLat(lngLat)
-  .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHTML))
-  .addTo(map);
-      
+      new mapboxgl.Marker({
+        element: el,
+        anchor: 'center'
+      })
+        .setLngLat(lngLat)
+        .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHTML))
+        .addTo(map);
     });
 
-    // ✅ AUTO ZOOM TO FIT ALL PUBS
-    if (pubs.length === 1) {
-      map.setCenter([parseFloat(pubs[0].lon), parseFloat(pubs[0].lat)]);
+    if (validCount === 1) {
+      const firstPub = pubs.find(pub => pub.lat && pub.lon);
+      map.setCenter([parseFloat(firstPub.lon), parseFloat(firstPub.lat)]);
       map.setZoom(14);
-    } else if (pubs.length > 1) {
+    } else if (validCount > 1) {
       map.fitBounds(bounds, {
         padding: 80,
         maxZoom: 15,
         duration: 1000
       });
     }
-
   })
   .catch(err => console.error("Sheet load error:", err));
 
-
-// ✅ FORM SUBMISSION
 function submitAnswer() {
   const userInput = document.getElementById("response").value;
 
@@ -170,7 +160,6 @@ function submitAnswer() {
     alert("Error submitting your suggestion.");
   });
 }
-
 </script>
 
 </body>
