@@ -250,10 +250,6 @@ button:hover {
     border: 2px solid #C8F2C2;
     border-radius: 6px;
 
-    /* Glow */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
-}
-
 /* Pint body */
 .pint-marker::before {
     content: "";
