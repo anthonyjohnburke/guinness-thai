@@ -279,7 +279,6 @@ button:hover {
     cursor: pointer;
 }
 
-/* Pint body */
 .pint-marker::before {
     content: "";
     position: absolute;
@@ -291,7 +290,6 @@ button:hover {
     border-radius: 5px 5px 7px 7px;
 }
 
-/* Foam head */
 .pint-marker::after {
     content: "";
     position: absolute;
