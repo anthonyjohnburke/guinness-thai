@@ -178,10 +178,10 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
     const gap = max - min;
 
     // TOP STATS
-    document.getElementById("stat-pubs").textContent = pricedPubs.length;
-    document.getElementById("stat-cheapest").textContent = `฿${min}`;
-    document.getElementById("stat-expensive").textContent = `฿${max}`;
-    document.getElementById("stat-gap").textContent = `฿${gap}`;
+animateCount("stat-pubs", pricedPubs.length, "", 1000);
+animateCount("stat-cheapest", min, "฿", 1200);
+animateCount("stat-expensive", max, "฿", 1400);
+animateCount("stat-gap", gap, "฿", 1600);
 
     chart.innerHTML += `
       <div class="chart-summary">
