@@ -45,8 +45,22 @@ body {
 #question {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 4.2em;
-    margin: 40px 0 10px; /* improved spacing */
+    margin: 40px 0 10px;
     letter-spacing: 1px;
+
+    /* ADDED animation */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeSlideIn 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+
+/* Title animation (added) */
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Map */
@@ -54,7 +68,7 @@ body {
     width: calc(100vw - 40px);
     max-width: 1600px;
     margin: 0 auto 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.03); /* softened */
+    border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 
 #map {
@@ -97,7 +111,7 @@ body {
 .intro-small {
     font-size: 0.95em;
     color: rgba(255,255,255,0.7);
-    margin: 0 0 14px; /* tightened */
+    margin: 0 0 14px;
     max-width: 760px;
 }
 
