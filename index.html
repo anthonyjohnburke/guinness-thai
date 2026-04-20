@@ -119,6 +119,30 @@ function escapeHTML(str) {
   }[m]));
 }
 
+  function animateCount(id, endValue, prefix = "", duration = 1200) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const startValue = 0;
+  const startTime = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(startValue + (endValue - startValue) * eased);
+
+    el.textContent = `${prefix}${current}`;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = `${prefix}${endValue}`;
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
 /* MAP */
 const map = new mapboxgl.Map({
   container: 'map',
