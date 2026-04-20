@@ -95,6 +95,7 @@ body {
     padding: 0 20px;
     margin-top: 20px;
     box-sizing: border-box;
+    align-items: start;
 }
 
 .intro-col {
@@ -249,7 +250,8 @@ body {
 /* Footer */
 #footer {
     width: 100%;
-    margin-top: 50px;
+    max-width: 900px;
+    margin: 60px auto 0;
     padding: 20px;
     border-top: 1px solid rgba(255,255,255,0.05);
     box-sizing: border-box;
@@ -369,7 +371,7 @@ body {
 /* Stats */
 #top-stats {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
@@ -429,6 +431,11 @@ body {
         transform: none;
         animation: none;
     }
+
+    #footer {
+        max-width: 100%;
+        margin-top: 45px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -452,5 +459,9 @@ body {
 
     #question {
         font-size: 2.4em;
+    }
+
+    .last-updated {
+        font-size: 0.64em;
     }
 }
