@@ -374,6 +374,55 @@ body {
     filter: invert(1) brightness(2);
 }
 
+
+#top-stats {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 18px auto 34px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.stat-card {
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    padding: 20px 18px;
+    text-align: center;
+}
+
+.stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3em;
+    line-height: 1;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    font-size: 0.82em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+@media (max-width: 900px) {
+    #top-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 16px auto 26px;
+    }
+
+    .stat-number {
+        font-size: 2.4em;
+    }
+}
+
+
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
