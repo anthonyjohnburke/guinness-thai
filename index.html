@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Best Guinness in Bangkok</title>
+  <meta name="description" content="Track Guinness prices across Bangkok and find the bars pouring the best-value pint." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://api.mapbox.com https://www.googletagmanager.com https://static.cloudflareinsights.com;
+    style-src 'self' 'unsafe-inline' https://api.mapbox.com https://fonts.googleapis.com;
+    img-src 'self' data: blob: https://api.mapbox.com;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://api.mapbox.com https://events.mapbox.com https://opensheet.elk.sh https://script.google.com https://script.googleusercontent.com https://www.google-analytics.com https://region1.google-analytics.com;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://script.google.com;
+  ">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
@@ -15,6 +28,25 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Optional: Google Analytics 4 -->
+  <!-- Replace G-XXXXXXXXXX with your real GA4 measurement ID -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
+
+  <!-- Optional: Cloudflare Web Analytics -->
+  <!-- Replace with your real token if using Cloudflare -->
+  <!--
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN"}'></script>
+  -->
 </head>
 
 <body>
@@ -74,7 +106,13 @@
       </p>
 
       <div class="inline-form">
-        <input type="text" id="response" placeholder="Tell me which bar has the best pint..." maxlength="150" autocomplete="off" />
+        <input
+          type="text"
+          id="response"
+          placeholder="Tell me which bar has the best pint..."
+          maxlength="150"
+          autocomplete="off"
+        />
         <input type="text" id="website" class="hp-field" tabindex="-1" autocomplete="off" />
         <button id="submit-btn" onclick="submitAnswer()">Submit</button>
       </div>
@@ -98,7 +136,16 @@
 </div>
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+/*
+  Important:
+  - Restrict your Mapbox token by domain in Mapbox account settings.
+  - For stronger CSP later, move this script into app.js and remove 'unsafe-inline'.
+*/
+mapboxgl.accessToken = 'YOUR_MAPBOX_PUBLIC_TOKEN';
+
+const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
+const SUBMIT_COOLDOWN_MS = 30000;
 
 function escapeHTML(str) {
   return String(str).replace(/[&<>"']/g, function (m) {
@@ -110,6 +157,32 @@ function escapeHTML(str) {
       "'": "&#39;"
     }[m];
   });
+}
+
+function sanitizeURL(url) {
+  if (!url) return "";
+  try {
+    const parsed = new URL(url, window.location.origin);
+    if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+      return parsed.href;
+    }
+    return "";
+  } catch {
+    return "";
+  }
+}
+
+function trackEvent(name, params = {}) {
+  try {
+    if (typeof gtag === "function") {
+      gtag("event", name, params);
+    }
+    if (window.plausible) {
+      window.plausible(name, { props: params });
+    }
+  } catch (err) {
+    console.warn("Analytics tracking skipped:", err);
+  }
 }
 
 function animateCount(id, endValue, prefix = "", duration = 1200) {
@@ -147,8 +220,11 @@ const map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 map.scrollZoom.disable();
 
-fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
-  .then(res => res.json())
+fetch(SHEET_URL)
+  .then(res => {
+    if (!res.ok) throw new Error("Failed to load pub data");
+    return res.json();
+  })
   .then(pubs => {
     const bounds = new mapboxgl.LngLatBounds();
     let validCount = 0;
@@ -184,7 +260,12 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
       `;
 
       pricedPubs.forEach((pub, i) => {
-        const width = ((max - pub.price) / (max - min || 1)) * 100;
+        let width;
+        if (max === min) {
+          width = 100;
+        } else {
+          width = ((max - pub.price) / (max - min)) * 100;
+        }
 
         const row = document.createElement("div");
         row.className = "bar-row";
@@ -245,30 +326,25 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
         source: 'pubs',
         layout: {
           'icon-image': 'pint-icon',
-          'icon-size': [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            9, 0.4,
-            12, 0.55,
-            15, 0.7
-          ],
+          'icon-size': 0.5,
           'icon-anchor': 'bottom',
+          'icon-offset': [0, 6],
           'icon-allow-overlap': true
         }
       });
 
       map.on('click', 'pubs-layer', (e) => {
         const p = e.features[0].properties;
+        const safeLink = sanitizeURL(p.link);
 
         const html = `
           <div class="popup-card modern">
             ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
-            <div class="popup-title">${escapeHTML(p.name)}</div>
+            <div class="popup-title">${escapeHTML(p.name || "")}</div>
             ${p.isNew && String(p.isNew).toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
-            ${p.price ? `<div class="popup-price">Guinness: ฿${p.price}</div>` : ""}
-            ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${p.happy_hour_price}</div>` : ""}
-            ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer" class="popup-link">View pub →</a>` : ""}
+            ${p.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
+            ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>` : ""}
+            ${safeLink ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>` : ""}
           </div>
         `;
 
@@ -276,6 +352,10 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
           .setLngLat(e.features[0].geometry.coordinates)
           .setHTML(html)
           .addTo(map);
+
+        trackEvent("popup_open", {
+          pub_name: p.name || "unknown"
+        });
       });
 
       map.on('mouseenter', 'pubs-layer', () => {
@@ -316,7 +396,33 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
     } else {
       map.once('load', loadIcon);
     }
+  })
+  .catch(err => {
+    console.error(err);
+    const chart = document.getElementById("price-chart");
+    if (chart) {
+      chart.innerHTML = `<div class="chart-error">Could not load pub data right now.</div>`;
+    }
   });
+
+document.addEventListener("click", (e) => {
+  const link = e.target.closest("[data-pub-link]");
+  if (!link) return;
+
+  trackEvent("pub_link_click", {
+    pub_name: link.getAttribute("data-pub-link") || "unknown"
+  });
+});
+
+function canSubmitAgain() {
+  const lastSubmit = localStorage.getItem("last_pub_submit");
+  if (!lastSubmit) return true;
+  return (Date.now() - Number(lastSubmit)) > SUBMIT_COOLDOWN_MS;
+}
+
+function markSubmitTime() {
+  localStorage.setItem("last_pub_submit", String(Date.now()));
+}
 
 function submitAnswer() {
   const input = document.getElementById("response");
@@ -326,21 +432,44 @@ function submitAnswer() {
   if (hp.value !== "") return;
 
   const val = input.value.trim();
+
   if (!val) {
     alert("Please enter a suggestion!");
+    trackEvent("pub_submit_invalid", { reason: "empty" });
+    return;
+  }
+
+  if (val.length < 3) {
+    alert("Please enter a slightly longer suggestion.");
+    trackEvent("pub_submit_invalid", { reason: "too_short" });
+    return;
+  }
+
+  if (!canSubmitAgain()) {
+    alert("Please wait a little before submitting again.");
+    trackEvent("pub_submit_invalid", { reason: "cooldown" });
     return;
   }
 
   btn.disabled = true;
 
-  fetch("https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec", {
+  fetch(FORM_ENDPOINT, {
     method: "POST",
     mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
     body: JSON.stringify({ suggestion: val })
   })
   .then(() => {
     alert("Go raibh maith agat!");
     input.value = "";
+    markSubmitTime();
+    trackEvent("pub_submit", { form_name: "suggest_pub" });
+  })
+  .catch(() => {
+    alert("Something went wrong. Please try again.");
+    trackEvent("pub_submit_error", { form_name: "suggest_pub" });
   })
   .finally(() => {
     setTimeout(() => {
