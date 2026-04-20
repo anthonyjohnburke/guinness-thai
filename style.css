@@ -53,19 +53,20 @@ body {
     text-align: center;
     white-space: normal;
     display: block;
-    border-right: 3px solid white;
-
-    clip-path: inset(0 100% 0 0);
-    animation: revealText 2.1s steps(40, end) forwards, blink 0.8s step-end infinite;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: titleReveal 1s ease forwards;
 }
 
-@keyframes revealText {
-    from { clip-path: inset(0 100% 0 0); }
-    to { clip-path: inset(0 0 0 0); }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Map */
@@ -413,9 +414,13 @@ body {
 
     #question {
         font-size: 3em;
+        line-height: 0.95;
         max-width: 100%;
-        border-right: none !important;
-        animation: revealText 2s steps(30, end) forwards;
+        padding: 0 16px;
+        white-space: normal;
+        opacity: 1;
+        transform: none;
+        animation: none;
     }
 }
 
@@ -436,5 +441,9 @@ body {
 
     .popup-card.modern {
         width: 220px;
+    }
+
+    #question {
+        font-size: 2.4em;
     }
 }
