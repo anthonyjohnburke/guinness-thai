@@ -16,21 +16,20 @@ body {
 }
 
 /* Top bar */
-
 #top-section {
     background-color: white;
     width: 100%;
-    height: 14vh;              /* slightly taller */
+    height: 14vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 10px;         /* adds breathing room from top */
+    padding-top: 10px;
     box-sizing: border-box;
 }
 
 #logo {
-    height: 80%;               /* bigger */
-    max-height: 95px;          /* cap so it doesn’t get huge */
+    height: 80%;
+    max-height: 95px;
     object-fit: contain;
 }
 
@@ -46,7 +45,7 @@ body {
 #question {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 4.2em;
-    margin: 30px 0 10px;
+    margin: 40px 0 10px; /* improved spacing */
     letter-spacing: 1px;
 }
 
@@ -55,7 +54,7 @@ body {
     width: calc(100vw - 40px);
     max-width: 1600px;
     margin: 0 auto 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.03); /* softened */
 }
 
 #map {
@@ -98,7 +97,7 @@ body {
 .intro-small {
     font-size: 0.95em;
     color: rgba(255,255,255,0.7);
-    margin: 0 0 20px;
+    margin: 0 0 14px; /* tightened */
     max-width: 760px;
 }
 
@@ -249,7 +248,6 @@ body {
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
-    color: inherit !important;
     box-shadow: none !important;
 }
 
@@ -259,28 +257,7 @@ body {
 
 .mapboxgl-ctrl-icon {
     opacity: 0.95;
-}
-
-/* Popup close button */
-.mapboxgl-popup-close-button {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 28px !important;
-    height: 28px !important;
-    line-height: 28px !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: #111 !important;
-    font-size: 24px !important;
-    font-weight: 700;
-    top: 12px !important;
-    right: 12px !important;
-}
-
-.mapboxgl-popup-close-button:hover {
-    background: transparent !important;
-    color: #000 !important;
+    filter: invert(1) brightness(2);
 }
 
 /* Popup */
@@ -303,31 +280,16 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 14px;
-    box-sizing: border-box;
 }
 
 .popup-meta {
     font-size: 0.95em;
     color: #8a8a8a;
-    margin: 0;
 }
 
 .popup-title {
     font-weight: 700;
     font-size: 1.35em;
-    color: #111;
-    line-height: 1.25;
-    margin: 0;
-}
-
-.popup-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 0;
-    min-height: 24px;
 }
 
 .tag-new {
@@ -336,30 +298,23 @@ body {
     font-size: 0.9em;
     padding: 6px 12px;
     border-radius: 8px;
-    font-weight: 600;
 }
 
 .popup-price {
     font-size: 1.25em;
     font-weight: 700;
-    color: #111;
-    margin: 0;
 }
 
 .popup-happy {
     font-size: 1.05em;
-    font-weight: 500;
     color: #444;
-    margin: 0;
 }
 
 .popup-link {
-    display: inline-block;
     font-size: 0.95em;
-    text-decoration: none;
     color: #2a7de1;
     font-weight: 600;
-    margin: 0;
+    text-decoration: none;
 }
 
 .popup-link:hover {
@@ -370,11 +325,7 @@ body {
     border-top-color: #f4f4f4 !important;
 }
 
-.mapboxgl-ctrl-icon {
-    filter: invert(1) brightness(2);
-}
-
-
+/* Stats */
 #top-stats {
     width: 100%;
     max-width: 1200px;
@@ -390,38 +341,27 @@ body {
     border: 1px solid rgba(255,255,255,0.08);
     background: rgba(255,255,255,0.02);
     border-radius: 10px;
-    padding: 20px 18px;
+    padding: 22px 18px;
     text-align: center;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.15);
 }
 
 .stat-number {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3em;
-    line-height: 1;
-    color: white;
     letter-spacing: 1px;
-    margin-bottom: 6px;
 }
 
 .stat-label {
     font-size: 0.82em;
     color: rgba(255,255,255,0.6);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
 }
-
-@media (max-width: 900px) {
-    #top-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin: 16px auto 26px;
-    }
-
-    .stat-number {
-        font-size: 2.4em;
-    }
-}
-
 
 /* Mobile */
 @media (max-width: 900px) {
@@ -429,27 +369,17 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .intro-col-wide {
-        border-right: none;
-        padding-right: 0;
+    #top-stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     #question {
         font-size: 2.5em;
     }
+}
 
-    .inline-form {
-        align-items: stretch;
-    }
-
-    .inline-form input,
-    .inline-form button {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .bar-row {
-        grid-template-columns: 1.2fr 2fr auto;
-        gap: 8px;
+@media (max-width: 600px) {
+    #map {
+        height: 55vh;
     }
 }
