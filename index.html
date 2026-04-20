@@ -208,27 +208,29 @@ fetch(SHEET_URL)
     let validCount = 0;
 
     const chart = document.getElementById("price-chart");
-    const updatedEl = document.getElementById("last-updated");
-    chart.innerHTML = "";
+   const updatedEl = document.getElementById("last-updated");
 
-    const possibleDates = pubs
-      .map(p => p.last_updated || p.updated || p.date || p.timestamp)
-      .filter(Boolean)
-      .map(d => new Date(d))
-      .filter(d => !isNaN(d));
+const dates = pubs
+  .map(p => p.last_updated)
+  .filter(Boolean)
+  .map(d => new Date(d))
+  .filter(d => !isNaN(d));
 
-    if (updatedEl) {
-      if (possibleDates.length > 0) {
-        const latest = new Date(Math.max(...possibleDates));
-        updatedEl.textContent = `Prices last updated: ${latest.toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric'
-        })}`;
-      } else {
-        updatedEl.textContent = "Prices last updated: Recently";
-      }
-    }
+if (updatedEl) {
+  if (dates.length > 0) {
+    const latest = new Date(Math.max(...dates));
+
+    updatedEl.textContent =
+      "Prices last updated: " +
+      latest.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+  } else {
+    updatedEl.textContent = "Prices last updated: Recently";
+  }
+}
 
     const pricedPubs = pubs
       .filter(p => p.price && !isNaN(parseFloat(p.price)))
