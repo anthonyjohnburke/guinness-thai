@@ -44,22 +44,24 @@ body {
 /* Title */
 #question {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 4.2em;
-    margin: 40px 0 10px;
+    font-size: 5.2em;
+    line-height: 0.95;
+    margin: 40px 0 18px;
     letter-spacing: 1px;
-    max-width: 900px;
+    max-width: 1450px;
     padding: 0 20px;
-    overflow: hidden;
-    white-space: nowrap;
+    text-align: center;
+    white-space: normal;
+    display: block;
     border-right: 3px solid white;
-    width: 0;
-    display: inline-block;
-    animation: typing 2.2s steps(40, end) forwards, blink 0.8s step-end infinite;
+
+    clip-path: inset(0 100% 0 0);
+    animation: revealText 2.1s steps(40, end) forwards, blink 0.8s step-end infinite;
 }
 
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+@keyframes revealText {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
 }
 
 @keyframes blink {
