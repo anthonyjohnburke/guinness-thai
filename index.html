@@ -264,7 +264,11 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
     });
   };
 
-  map.on('load', loadIcon);
+  if (map.isStyleLoaded()) {
+  loadIcon();
+} else {
+  map.once('load', loadIcon);
+}
 
 });
 
