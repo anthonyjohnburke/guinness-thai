@@ -155,6 +155,12 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
     const min = Math.min(...pricedPubs.map(p => p.price));
     const gap = max - min;
 
+    // Top stats
+document.getElementById("stat-pubs").textContent = pricedPubs.length;
+document.getElementById("stat-cheapest").textContent = `฿${min}`;
+document.getElementById("stat-expensive").textContent = `฿${max}`;
+document.getElementById("stat-gap").textContent = `฿${gap}`;
+
     chart.innerHTML += `
       <div class="chart-summary">
         <span>Price range: ฿${min}–฿${max}</span>
