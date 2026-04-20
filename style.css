@@ -41,26 +41,30 @@ body {
     margin: 12px 0 30px;
 }
 
-/* Title */
+/* Title (TYPEWRITER VERSION RESTORED) */
 #question {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 4.2em;
     margin: 40px 0 10px;
     letter-spacing: 1px;
 
-    /* ADDED animation */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeSlideIn 0.8s ease forwards;
-    animation-delay: 0.2s;
+    max-width: 80%;
+    padding: 0 10%;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid white;
+    width: 0;
+    animation: typing 1.8s steps(35, end) forwards, blink 0.8s step-end infinite;
 }
 
-/* Title animation (added) */
-@keyframes fadeSlideIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Typewriter animation */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
 }
 
 /* Map */
@@ -389,6 +393,12 @@ body {
 
     #question {
         font-size: 2.5em;
+        width: 100% !important;
+        max-width: 100%;
+        white-space: normal !important;
+        overflow: visible !important;
+        border-right: none !important;
+        animation: none !important;
     }
 }
 
