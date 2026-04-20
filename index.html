@@ -7,7 +7,6 @@
   <title>Best Guinness in Bangkok</title>
   <meta name="description" content="Track Guinness prices across Bangkok and find the bars pouring the best-value pint." />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
@@ -19,25 +18,14 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8BP0BPQ5GP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8BP0BPQ5GP');
-</script>
-  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BP0BPQ5GP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8BP0BPQ5GP');
   </script>
-  -->
-
-  <!-- Optional: Cloudflare Web Analytics -->
-  <!-- Replace with your real token if using Cloudflare -->
-  <!--
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN"}'></script>
-  -->
 </head>
 
 <body>
@@ -87,6 +75,9 @@
       <p class="intro-small">
         Track Guinness prices across Bangkok and spot the bars serving the best-value pint.
       </p>
+
+      <div id="last-updated" class="last-updated">Prices last updated: —</div>
+
       <div id="price-chart"></div>
     </div>
 
@@ -111,33 +102,28 @@
   </div>
 
   <footer id="footer">
-  <div class="footer-inner">
-    <p>
-      Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy, completeness, or availability of any listed prices or details.
-    </p>
-    <p>
-      This is an independent, community-led project and is not affiliated with, endorsed by, or representative of any venues listed.
-    </p>
-    <p>
-      All content is provided for general information purposes only.
-    </p>
-    <p>
-      Spotted something wrong or have a better pint? Let us know.
-    </p>
-    <p class="footer-signoff">
-      Built in Bangkok in 2026.
-    </p>
-  </div>
-</footer>
+    <div class="footer-inner">
+      <p>
+        Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy, completeness, or availability of any listed prices or details.
+      </p>
+      <p>
+        This is an independent, community-led project and is not affiliated with, endorsed by, or representative of any venues listed.
+      </p>
+      <p>
+        All content is provided for general information purposes only.
+      </p>
+      <p>
+        Spotted something wrong or have a better pint? Let us know.
+      </p>
+      <p class="footer-signoff">
+        Built in Bangkok in 2026.
+      </p>
+    </div>
+  </footer>
 
 </div>
 
 <script>
-/*
-  Important:
-  - Restrict your Mapbox token by domain in Mapbox account settings.
-  - For stronger CSP later, move this script into app.js and remove 'unsafe-inline'.
-*/
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
 const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
@@ -172,10 +158,7 @@ function sanitizeURL(url) {
 function trackEvent(name, params = {}) {
   try {
     if (typeof gtag === "function") {
-      gtag("event", name, params);
-    }
-    if (window.plausible) {
-      window.plausible(name, { props: params });
+      gtag('event', name, params);
     }
   } catch (err) {
     console.warn("Analytics tracking skipped:", err);
@@ -227,7 +210,27 @@ fetch(SHEET_URL)
     let validCount = 0;
 
     const chart = document.getElementById("price-chart");
+    const updatedEl = document.getElementById("last-updated");
     chart.innerHTML = "";
+
+    const possibleDates = pubs
+      .map(p => p.last_updated || p.updated || p.date || p.timestamp)
+      .filter(Boolean)
+      .map(d => new Date(d))
+      .filter(d => !isNaN(d));
+
+    if (updatedEl) {
+      if (possibleDates.length > 0) {
+        const latest = new Date(Math.max(...possibleDates));
+        updatedEl.textContent = `Prices last updated: ${latest.toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        })}`;
+      } else {
+        updatedEl.textContent = "Prices last updated: Recently";
+      }
+    }
 
     const pricedPubs = pubs
       .filter(p => p.price && !isNaN(parseFloat(p.price)))
