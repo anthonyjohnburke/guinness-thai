@@ -20,52 +20,58 @@
 <body>
 <div class="page-wrap">
 
+  <!-- LOGO -->
   <div id="top-section">
-  <img src="pint-glass-logo.svg" alt="Pints of Bangkok logo" id="logo">
-</div>
+    <img src="pint-glass-logo.svg" alt="Pints of Bangkok logo" id="logo">
+  </div>
 
   <div id="note">
     "The perfect Guinness head is approx 12% of the pint height."
   </div>
 
+  <!-- MAP -->
   <section id="map-section">
     <div id="map"></div>
   </section>
 
+  <!-- TITLE -->
   <h1 id="question">
     Who’s pouring the finest pint of Guinness in Bangkok?
   </h1>
 
+  <!-- TOP STATS -->
   <div id="top-stats">
-  <div class="stat-card">
-    <div class="stat-number" id="stat-pubs">18</div>
-    <div class="stat-label">Pubs tracked</div>
+    <div class="stat-card">
+      <div class="stat-number" id="stat-pubs">–</div>
+      <div class="stat-label">Pubs tracked</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number" id="stat-cheapest">–</div>
+      <div class="stat-label">Cheapest pint</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number" id="stat-expensive">–</div>
+      <div class="stat-label">Most expensive</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number" id="stat-gap">–</div>
+      <div class="stat-label">Price gap</div>
+    </div>
   </div>
 
-  <div class="stat-card">
-    <div class="stat-number" id="stat-cheapest">฿249</div>
-    <div class="stat-label">Cheapest pint</div>
-  </div>
-
-  <div class="stat-card">
-    <div class="stat-number" id="stat-expensive">฿365</div>
-    <div class="stat-label">Most expensive</div>
-  </div>
-
-  <div class="stat-card">
-    <div class="stat-number" id="stat-gap">฿116</div>
-    <div class="stat-label">Price gap</div>
-  </div>
-</div>
-
+  <!-- CONTENT -->
   <div id="intro">
 
-    <!-- LEFT (WIDE) -->
+    <!-- LEFT -->
     <div class="intro-col intro-col-wide">
       <h2 class="intro-heading">Bangkok Guinness Price Watch</h2>
       <p class="intro-small">
         Track Guinness prices across Bangkok and spot the bars serving the best-value pint.
       </p>
+
       <div id="price-chart"></div>
     </div>
 
@@ -105,20 +111,15 @@
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
-/* ---------- UTIL ---------- */
+/* UTIL */
 function escapeHTML(str) {
-  return String(str).replace(/[&<>"']/g, function (m) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[m];
-  });
+  return String(str).replace(/[&<>"']/g, m => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#39;"
+  }[m]));
 }
 
-/* ---------- MAP ---------- */
+/* MAP */
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
@@ -130,7 +131,7 @@ const map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 map.scrollZoom.disable();
 
-/* ---------- DATA ---------- */
+/* DATA */
 fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1")
 .then(res => res.json())
 .then(pubs => {
@@ -138,15 +139,12 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
 
-  /* ---------- CHART ---------- */
   const chart = document.getElementById("price-chart");
+  chart.innerHTML = "";
 
   const pricedPubs = pubs
     .filter(p => p.price && !isNaN(parseFloat(p.price)))
-    .map(p => ({
-      name: p.name,
-      price: parseFloat(p.price)
-    }))
+    .map(p => ({ name: p.name, price: parseFloat(p.price) }))
     .sort((a, b) => a.price - b.price);
 
   if (pricedPubs.length > 0) {
@@ -155,11 +153,11 @@ fetch("https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/She
     const min = Math.min(...pricedPubs.map(p => p.price));
     const gap = max - min;
 
-    // Top stats
-document.getElementById("stat-pubs").textContent = pricedPubs.length;
-document.getElementById("stat-cheapest").textContent = `฿${min}`;
-document.getElementById("stat-expensive").textContent = `฿${max}`;
-document.getElementById("stat-gap").textContent = `฿${gap}`;
+    // TOP STATS
+    document.getElementById("stat-pubs").textContent = pricedPubs.length;
+    document.getElementById("stat-cheapest").textContent = `฿${min}`;
+    document.getElementById("stat-expensive").textContent = `฿${max}`;
+    document.getElementById("stat-gap").textContent = `฿${gap}`;
 
     chart.innerHTML += `
       <div class="chart-summary">
@@ -171,7 +169,6 @@ document.getElementById("stat-gap").textContent = `฿${gap}`;
     `;
 
     pricedPubs.forEach((pub, i) => {
-
       const width = ((max - pub.price) / (max - min || 1)) * 100;
 
       const row = document.createElement("div");
@@ -187,47 +184,37 @@ document.getElementById("stat-gap").textContent = `฿${gap}`;
 
       chart.appendChild(row);
 
-      const bar = row.querySelector(".bar");
       setTimeout(() => {
-        bar.style.width = bar.dataset.width;
+        row.querySelector(".bar").style.width = width + "%";
       }, 150 + i * 80);
     });
   }
 
-  /* ---------- GEOJSON ---------- */
   const geojson = {
     type: "FeatureCollection",
     features: pubs
       .filter(p => p.lat && p.lon)
       .map(p => {
-
         const lat = parseFloat(p.lat);
         const lon = parseFloat(p.lon);
-
-        if (Number.isNaN(lat) || Number.isNaN(lon)) return null;
+        if (isNaN(lat) || isNaN(lon)) return null;
 
         validCount++;
         bounds.extend([lon, lat]);
 
         return {
           type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [lon, lat]
-          },
+          geometry: { type: "Point", coordinates: [lon, lat] },
           properties: p
         };
       })
       .filter(Boolean)
   };
 
-  /* ---------- ADD LAYER ---------- */
   const addPubLayer = () => {
+    if (map.getSource('pubs')) return;
 
-    map.addSource('pubs', {
-      type: 'geojson',
-      data: geojson
-    });
+    map.addSource('pubs', { type: 'geojson', data: geojson });
 
     map.addLayer({
       id: 'pubs-layer',
@@ -236,30 +223,24 @@ document.getElementById("stat-gap").textContent = `฿${gap}`;
       layout: {
         'icon-image': 'pint-icon',
         'icon-size': [
-          'interpolate',
-          ['linear'],
-          ['zoom'],
-          9, 0.4,
-          12, 0.55,
-          15, 0.7
+          'interpolate', ['linear'], ['zoom'],
+          9, 0.4, 12, 0.55, 15, 0.7
         ],
         'icon-anchor': 'bottom',
         'icon-allow-overlap': true
       }
     });
 
-    /* POPUPS */
     map.on('click', 'pubs-layer', (e) => {
-
       const p = e.features[0].properties;
 
       const html = `
         <div class="popup-card modern">
           ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
           <div class="popup-title">${escapeHTML(p.name)}</div>
-          ${p.isNew === "yes" ? `<span class="tag-new">New</span>` : ""}
+          ${p.isNew && String(p.isNew).toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
           ${p.price ? `<div class="popup-price">Guinness: ฿${p.price}</div>` : ""}
-          ${p.happy_hour_price ? `<div class="popup-happy">Happy hour: ฿${p.happy_hour_price}</div>` : ""}
+          ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${p.happy_hour_price}</div>` : ""}
           ${p.link ? `<a href="${p.link}" target="_blank" class="popup-link">View pub →</a>` : ""}
         </div>
       `;
@@ -270,62 +251,45 @@ document.getElementById("stat-gap").textContent = `฿${gap}`;
         .addTo(map);
     });
 
-    map.on('mouseenter', 'pubs-layer', () => map.getCanvas().style.cursor = 'pointer');
-    map.on('mouseleave', 'pubs-layer', () => map.getCanvas().style.cursor = '');
-
     if (validCount > 1) {
       map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
     }
   };
 
-  /* ---------- LOAD ICON (FIXED) ---------- */
   const loadIcon = () => {
-
-    map.loadImage('pint-glass.png', (error, image) => {
-      if (error || !image) {
-        console.error("Icon failed", error);
-        return;
-      }
-
-      map.addImage('pint-icon', image);
+    map.loadImage('pint-glass.png', (err, img) => {
+      if (err || !img) return console.error("Icon failed");
+      map.addImage('pint-icon', img);
       addPubLayer();
     });
   };
 
-  if (map.isStyleLoaded()) {
-  loadIcon();
-} else {
-  map.once('load', loadIcon);
-}
+  if (map.isStyleLoaded()) loadIcon();
+  else map.once('load', loadIcon);
 
 });
 
-/* ---------- FORM ---------- */
+/* FORM */
 function submitAnswer() {
-
   const input = document.getElementById("response");
   const hp = document.getElementById("website");
   const btn = document.getElementById("submit-btn");
 
   if (hp.value !== "") return;
-
-  const val = input.value.trim();
-  if (!val) return alert("Please enter a suggestion!");
+  if (!input.value.trim()) return alert("Please enter a suggestion!");
 
   btn.disabled = true;
 
-  fetch("YOUR_SCRIPT_URL", {
+  fetch("https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec", {
     method: "POST",
     mode: "no-cors",
-    body: JSON.stringify({ suggestion: val })
+    body: JSON.stringify({ suggestion: input.value })
   })
   .then(() => {
     alert("Go raibh maith agat!");
     input.value = "";
   })
-  .finally(() => {
-    setTimeout(() => btn.disabled = false, 1500);
-  });
+  .finally(() => setTimeout(() => btn.disabled = false, 1500));
 }
 </script>
 
