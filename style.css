@@ -278,6 +278,13 @@ body {
     filter: invert(1) brightness(2);
 }
 
+.stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3em;
+    letter-spacing: 1px;
+    will-change: contents;
+}
+
 /* Popup */
 .mapboxgl-popup-content {
     background: transparent;
