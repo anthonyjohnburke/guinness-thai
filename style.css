@@ -299,6 +299,11 @@ body {
     filter: invert(1) brightness(2);
 }
 
+.mapboxgl-ctrl-group button {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 /* Popup */
 .mapboxgl-popup-content {
     background: transparent;
