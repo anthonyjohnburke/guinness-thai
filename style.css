@@ -328,9 +328,9 @@ body {
 }
 
 .popup-meta {
-    font-size: 1.05em;
+    font-size: 1.15em;
     color: #7f7f7f;
-    line-height: 1.2;
+    line-height: 1.1;
 }
 
 .popup-name-wrap {
@@ -343,10 +343,10 @@ body {
     background: #111;
     color: #fff;
     font-weight: 700;
-    font-size: 1.45em;
-    line-height: 1.15;
-    padding: 14px 20px;
-    border-radius: 18px;
+    font-size: 1.40em;
+    line-height: 1.10;
+    padding: 10px 40px;
+    border-radius: 12px;
     display: inline-block;
     max-width: 100%;
 }
