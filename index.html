@@ -540,6 +540,16 @@ fetch(SHEET_URL)
   }
 });
 
+// Hover effect
+map.on('mouseenter', 'pubs-layer', () => {
+  map.setPaintProperty('pubs-layer', 'icon-opacity', 1);
+});
+
+map.on('mouseleave', 'pubs-layer', () => {
+  map.setPaintProperty('pubs-layer', 'icon-opacity', 0.9);
+});
+      
+
       map.on('click', 'pubs-layer', (e) => {
         const p = e.features[0].properties;
         const safeLink = sanitizeURL(p.link);
