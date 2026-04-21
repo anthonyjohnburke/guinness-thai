@@ -443,8 +443,26 @@ body {
     color: rgba(255,255,255,0.85);
 }
 
+.happy-prices {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
 .happy-price {
     color: #d4af37;
+    font-weight: 700;
+}
+
+.happy-full-price {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.88em;
+}
+
+.happy-saving {
+    color: #8bc34a;
+    font-size: 0.82em;
     font-weight: 600;
 }
 
