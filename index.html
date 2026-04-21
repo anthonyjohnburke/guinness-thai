@@ -195,8 +195,58 @@ const map = new mapboxgl.Map({
   projection: 'mercator'
 });
 
+const INITIAL_VIEW = {
+  center: [100.5018, 13.7563],
+  zoom: 11.2
+};
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
+  center: INITIAL_VIEW.center,
+  zoom: INITIAL_VIEW.zoom,
+  projection: 'mercator'
+});
+
+  
+
 map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 map.scrollZoom.disable();
+
+class ResetControl {
+  onAdd(map) {
+    this.map = map;
+    this.container = document.createElement('div');
+    this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
+
+    const button = document.createElement('button');
+    button.innerHTML = '⌂'; // home icon
+    button.title = 'Reset view';
+
+    button.onclick = () => {
+      map.easeTo({
+        center: INITIAL_VIEW.center,
+        zoom: INITIAL_VIEW.zoom,
+        duration: 800
+      });
+    };
+
+    this.container.appendChild(button);
+    return this.container;
+  }
+
+  onRemove() {
+    this.container.parentNode.removeChild(this.container);
+    this.map = undefined;
+  }
+}
+
+map.addControl(new ResetControl(), 'top-right');
+
+
+
+
+  
 
 fetch(SHEET_URL)
   .then(res => {
