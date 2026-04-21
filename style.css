@@ -340,14 +340,10 @@ body {
 }
 
 .popup-title {
-    background: #111;
-    color: #fff;
+    color: #111;
     font-weight: 700;
-    font-size: 1.40em;
+    font-size: 1.30em;
     line-height: 1.10;
-    padding: 10px 40px;
-    border-radius: 12px;
-    display: inline-block;
     max-width: 100%;
 }
 
