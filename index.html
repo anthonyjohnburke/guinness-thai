@@ -217,7 +217,7 @@ function buildPopupHTML(pub, safeLink) {
       </div>
 
       ${pub.price
-        ? `<div class="popup-price-box popup-price-main">Guinness normal price ฿${escapeHTML(pub.price)}</div>`
+        ? `<div class="popup-price-box popup-price-main">Guinness price ฿${escapeHTML(pub.price)}</div>`
         : ""}
 
       ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a"
