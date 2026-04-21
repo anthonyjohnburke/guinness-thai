@@ -320,10 +320,8 @@ body {
     width: 250px;
     text-align: center;
     box-shadow: 0 10px 28px rgba(0,0,0,0.3);
-
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 12px;
 }
 
@@ -370,10 +368,10 @@ body {
 .tag-new {
     background: #f6dcdc;
     color: #d53030;
-    font-size: 0.95em;
+    font-size: 1em;
     padding: 10px 16px;
     border-radius: 12px;
-    font-weight: 600;
+    font-weight: 500;
     display: inline-block;
 }
 
