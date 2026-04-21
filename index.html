@@ -316,9 +316,10 @@ fetch(SHEET_URL)
         } else {
           width = ((max - pub.price) / (max - min)) * 100;
         }
-
-        const row = document.createElement("div");
-        row.className = "bar-row";
+        
+const row = document.createElement("div");
+row.className = "bar-row";
+row.dataset.pubName = pub.name;
 
         row.innerHTML = `
           <div class="bar-label">${escapeHTML(pub.name)}</div>
