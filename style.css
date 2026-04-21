@@ -411,6 +411,39 @@ body {
     text-transform: uppercase;
 }
 
+#happy-hour {
+    margin-bottom: 30px;
+}
+
+.happy-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6em;
+    margin-bottom: 14px;
+}
+
+.happy-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.happy-rank {
+    margin-right: 8px;
+}
+
+.happy-name {
+    flex: 1;
+    color: rgba(255,255,255,0.85);
+}
+
+.happy-price {
+    color: #d4af37;
+    font-weight: 600;
+}
+
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
