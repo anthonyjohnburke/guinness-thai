@@ -83,9 +83,9 @@
 
     <div class="intro-col">
       <div id="happy-hour" class="section-block">
-  <h2 class="intro-heading">Top 5 Happy Hour Guinness</h2>
-  <div id="happy-list"></div>
-</div>
+        <h2 class="intro-heading">Top 5 Happy Hour Guinness</h2>
+        <div id="happy-list"></div>
+      </div>
 
       <h2 class="intro-heading">Suggest a pub</h2>
       <p>
@@ -131,11 +131,11 @@
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
- SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
- FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYNGNwFHCLN934thYjzdlFnoJS6zFIvF31EVluSNu2fTpUGVxBsHfCSvXloPCqrv7s/exec";
- SUBMIT_COOLDOWN_MS = 30000;
+const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYNGNwFHCLN934thYjzdlFnoJS6zFIvF31EVluSNu2fTpUGVxBsHfCSvXloPCqrv7s/exec";
+const SUBMIT_COOLDOWN_MS = 30000;
 
- INITIAL_VIEW = {
+const INITIAL_VIEW = {
   center: [100.5018, 13.7563],
   zoom: 11.2
 };
@@ -155,7 +155,7 @@ function escapeHTML(str) {
 function sanitizeURL(url) {
   if (!url) return "";
   try {
-     parsed = new URL(url, window.location.origin);
+    const parsed = new URL(url, window.location.origin);
     if (parsed.protocol === "http:" || parsed.protocol === "https:") {
       return parsed.href;
     }
@@ -176,10 +176,10 @@ function trackEvent(name, params = {}) {
 }
 
 function animateCount(id, endValue, prefix = "", duration = 1200) {
-   el = document.getElementById(id);
+  const el = document.getElementById(id);
   if (!el) return;
 
-   startTime = performance.now();
+  const startTime = performance.now();
 
   function update(now) {
     const progress = Math.min((now - startTime) / duration, 1);
@@ -196,6 +196,33 @@ function animateCount(id, endValue, prefix = "", duration = 1200) {
   }
 
   requestAnimationFrame(update);
+}
+
+function buildPopupHTML(pub, safeLink) {
+  return `
+    <div class="popup-card modern">
+      ${pub.type ? `<div class="popup-meta">${escapeHTML(pub.type)}</div>` : ""}
+      <div class="popup-name-wrap">
+        <div class="popup-title-text">${escapeHTML(pub.name || "")}</div>
+      </div>
+
+      ${pub.isNew && String(pub.isNew).toLowerCase() === "yes"
+        ? `<span class="tag-new">New</span>`
+        : ""}
+
+      ${pub.price
+        ? `<div class="popup-price-box popup-price-main">Guinness: ฿${escapeHTML(pub.price)}</div>`
+        : ""}
+
+      ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a"
+        ? `<div class="popup-price-box popup-price-happy">Happy hour: ฿${escapeHTML(pub.happy_hour_price)}</div>`
+        : ""}
+
+      ${safeLink
+        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View pub →</a>`
+        : ""}
+    </div>
+  `;
 }
 
 const map = new mapboxgl.Map({
@@ -283,6 +310,44 @@ fetch(SHEET_URL)
       }
     }
 
+    function highlightChartPub(pubName) {
+      document.querySelectorAll('.bar-row').forEach(row => {
+        row.classList.remove('is-highlighted');
+      });
+
+      const target = Array.from(document.querySelectorAll('.bar-row'))
+        .find(row => row.dataset.pubName === pubName);
+
+      if (target) {
+        target.classList.add('is-highlighted');
+      }
+    }
+
+    function zoomToPub(pubName, allPubs) {
+      const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
+      if (!targetPub) return;
+
+      const lat = parseFloat(targetPub.lat);
+      const lon = parseFloat(targetPub.lon);
+      if (isNaN(lat) || isNaN(lon)) return;
+
+      const safeLink = sanitizeURL(targetPub.link);
+      const html = buildPopupHTML(targetPub, safeLink);
+
+      map.easeTo({
+        center: [lon, lat],
+        zoom: 15,
+        duration: 900
+      });
+
+      setTimeout(() => {
+        new mapboxgl.Popup({ offset: 10 })
+          .setLngLat([lon, lat])
+          .setHTML(html)
+          .addTo(map);
+      }, 700);
+    }
+
     const pricedPubs = pubs
       .filter(p => p.price && !isNaN(parseFloat(p.price)))
       .map(p => ({
@@ -301,81 +366,19 @@ fetch(SHEET_URL)
       animateCount("stat-expensive", max, "฿", 1400);
       animateCount("stat-gap", gap, "฿", 1600);
 
-const cheapestPub = pricedPubs.length > 0 ? pricedPubs[0] : null;
-
-      function highlightChartPub(pubName) {
-  document.querySelectorAll('.bar-row').forEach(row => {
-    row.classList.remove('is-highlighted');
-  });
-
-  const target = Array.from(document.querySelectorAll('.bar-row'))
-    .find(row => row.dataset.pubName === pubName);
-
-  if (target) {
-    target.classList.add('is-highlighted');
-  }
-}
-
+      const cheapestPub = pricedPubs[0];
       const cheapestCard = document.getElementById("stat-cheapest")?.closest(".stat-card");
 
-if (cheapestCard && cheapestPub) {
-  cheapestCard.style.cursor = "pointer";
+      if (cheapestCard && cheapestPub) {
+        cheapestCard.classList.add("is-clickable");
 
-  cheapestCard.addEventListener("click", () => {
-    highlightChartPub(cheapestPub.name);
-    zoomToPub(cheapestPub.name, pubs);
-    trackEvent("stat_cheapest_click", { pub_name: cheapestPub.name });
-  });
-}
+        cheapestCard.addEventListener("click", () => {
+          highlightChartPub(cheapestPub.name);
+          zoomToPub(cheapestPub.name, pubs);
+          trackEvent("stat_cheapest_click", { pub_name: cheapestPub.name });
+        });
+      }
 
-      function zoomToPub(pubName, pubs) {
-  const targetPub = pubs.find(p => p.name === pubName && p.lat && p.lon);
-  if (!targetPub) return;
-
-  const lat = parseFloat(targetPub.lat);
-  const lon = parseFloat(targetPub.lon);
-  if (isNaN(lat) || isNaN(lon)) return;
-
-  const safeLink = sanitizeURL(targetPub.link);
-
- const html = `
-  <div class="popup-card modern">
-    ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
-    <div class="popup-name-wrap">
-      <div class="popup-title-text">${escapeHTML(p.name || "")}</div>
-    </div>
-
-    ${p.isNew && String(p.isNew).toLowerCase() === "yes"
-      ? `<span class="tag-new">New</span>`
-      : ""}
-
-    ${p.price ? `<div class="popup-price-box popup-price-main">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
-
-    ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a"
-      ? `<div class="popup-price-box popup-price-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
-      : ""}
-
-    ${safeLink
-      ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>`
-      : ""}
-  </div>
-`;
-
-        
-  map.easeTo({
-    center: [lon, lat],
-    zoom: 15,
-    duration: 900
-  });
-
-  setTimeout(() => {
-    new mapboxgl.Popup({ offset: 10 })
-      .setLngLat([lon, lat])
-      .setHTML(html)
-      .addTo(map);
-  }, 700);
-}
-      
       chart.innerHTML += `
         <div class="chart-summary">
           <span>Price range: ฿${min}–฿${max}</span>
@@ -392,10 +395,10 @@ if (cheapestCard && cheapestPub) {
         } else {
           width = ((max - pub.price) / (max - min)) * 100;
         }
-        
-const row = document.createElement("div");
-row.className = "bar-row";
-row.dataset.pubName = pub.name;
+
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        row.dataset.pubName = pub.name;
 
         row.innerHTML = `
           <div class="bar-label">${escapeHTML(pub.name)}</div>
@@ -415,27 +418,27 @@ row.dataset.pubName = pub.name;
     }
 
     const happyPubs = pubs
-  .filter(p =>
-    p.happy_hour_price &&
-    String(p.happy_hour_price).toLowerCase() !== "n/a" &&
-    p.price &&
-    !isNaN(parseFloat(p.price))
-  )
-  .map(p => {
-    const hh = parseFloat(p.happy_hour_price);
-    const full = parseFloat(p.price);
-    const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
+      .filter(p =>
+        p.happy_hour_price &&
+        String(p.happy_hour_price).toLowerCase() !== "n/a" &&
+        p.price &&
+        !isNaN(parseFloat(p.price))
+      )
+      .map(p => {
+        const hh = parseFloat(p.happy_hour_price);
+        const full = parseFloat(p.price);
+        const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
 
-    return {
-      name: p.name,
-      happyPrice: hh,
-      fullPrice: full,
-      savingPct: savingPct
-    };
-  })
-  .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
-  .sort((a, b) => a.happyPrice - b.happyPrice)
-  .slice(0, 5);
+        return {
+          name: p.name,
+          happyPrice: hh,
+          fullPrice: full,
+          savingPct: savingPct
+        };
+      })
+      .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
+      .sort((a, b) => a.happyPrice - b.happyPrice)
+      .slice(0, 5);
 
     const medals = ["🥇", "🥈", "🥉"];
 
@@ -447,16 +450,16 @@ row.dataset.pubName = pub.name;
       row.style.animationDelay = `${150 + i * 120}ms`;
 
       row.innerHTML = `
-  <div class="happy-name">
-    <span class="happy-rank">${rank}</span>
-    ${escapeHTML(pub.name)}
-  </div>
-  <div class="happy-prices">
-    <span class="happy-price">฿${pub.happyPrice}</span>
-    <span class="happy-full-price">/ ฿${pub.fullPrice}</span>
-    <span class="happy-saving">-${pub.savingPct}%</span>
-  </div>
-`;
+        <div class="happy-name">
+          <span class="happy-rank">${rank}</span>
+          ${escapeHTML(pub.name)}
+        </div>
+        <div class="happy-prices">
+          <span class="happy-price">฿${pub.happyPrice}</span>
+          <span class="happy-full-price">/ ฿${pub.fullPrice}</span>
+          <span class="happy-saving">-${pub.savingPct}%</span>
+        </div>
+      `;
 
       happyList.appendChild(row);
     });
@@ -510,33 +513,8 @@ row.dataset.pubName = pub.name;
       map.on('click', 'pubs-layer', (e) => {
         const p = e.features[0].properties;
         const safeLink = sanitizeURL(p.link);
+        const html = buildPopupHTML(p, safeLink);
 
-        const html = `
-  <div class="popup-card modern">
-    ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
-    
-    <div class="popup-name-wrap">
-      <div class="popup-title-text">${escapeHTML(p.name || "")}</div>
-    </div>
-
-    ${p.isNew && String(p.isNew).toLowerCase() === "yes"
-      ? `<span class="tag-new">New</span>`
-      : ""}
-
-    ${p.price
-      ? `<div class="popup-price-box popup-price-main">Guinness: ฿${escapeHTML(p.price)}</div>`
-      : ""}
-
-    ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a"
-      ? `<div class="popup-price-box popup-price-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
-      : ""}
-
-    ${safeLink
-      ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>`
-      : ""}
-  </div>
-`;
-        
         new mapboxgl.Popup({ offset: 10 })
           .setLngLat(e.features[0].geometry.coordinates)
           .setHTML(html)
