@@ -346,16 +346,17 @@ if (cheapestCard && cheapestPub) {
       <div class="popup-title">${escapeHTML(p.name || "")}</div>
     </div>
 
-    ${p.price ? `<div class="popup-price-box popup-price-main">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
-    ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a"
-      ? `<div class="popup-price-box popup-price-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
-      : ""}
+    <div class="popup-prices-box">
+      ${p.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
+      ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a"
+        ? `<div class="popup-happy">Guinness happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
+        : ""}
+    </div>
 
     <div class="popup-actions">
       ${p.isNew && String(p.isNew).toLowerCase() === "yes"
         ? `<span class="tag-new">New</span>`
         : `<span class="popup-action-spacer"></span>`}
-
       ${safeLink
         ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>`
         : ""}
@@ -363,6 +364,7 @@ if (cheapestCard && cheapestPub) {
   </div>
 `;
 
+        
   map.easeTo({
     center: [lon, lat],
     zoom: 15,
