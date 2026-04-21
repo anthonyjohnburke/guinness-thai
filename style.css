@@ -488,6 +488,15 @@ body {
     margin-top: 22px;
 }
 
+.bar-row.is-highlighted .bar-label {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.bar-row.is-highlighted .bar {
+    filter: brightness(1.08);
+}
+
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
