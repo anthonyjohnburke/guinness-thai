@@ -216,16 +216,16 @@ function buildPopupHTML(pub, safeLink) {
         <div class="popup-title-text">${escapeHTML(pub.name || "")}</div>
       </div>
 
-      ${pub.isNew && String(pub.isNew).toLowerCase() === "yes"
-        ? `<span class="tag-new">New</span>`
-        : ""}
-
       ${pub.price
-        ? `<div class="popup-price-box popup-price-main">Guinness: ฿${escapeHTML(pub.price)}</div>`
+        ? `<div class="popup-price-box popup-price-main">Guinness normal price ฿${escapeHTML(pub.price)}</div>`
         : ""}
 
       ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a"
-        ? `<div class="popup-price-box popup-price-happy">Happy hour: ฿${escapeHTML(pub.happy_hour_price)}</div>`
+        ? `<div class="popup-price-box popup-price-happy">Happy hour price: ฿${escapeHTML(pub.happy_hour_price)}</div>`
+        : ""}
+
+      ${pub.isNew && String(pub.isNew).toLowerCase() === "yes"
+        ? `<span class="tag-new">New</span>`
         : ""}
 
       ${safeLink
