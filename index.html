@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Best Guinness in Bangkok</title>
-  <meta name="description" content="Track Guinness prices across Bangkok and find the bars pouring the best-value pint." />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
@@ -15,24 +13,14 @@
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BP0BPQ5GP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-8BP0BPQ5GP');
-  </script>
 </head>
 
 <body>
 <div class="page-wrap">
 
   <div id="top-section">
-    <img src="pint-glass-logo.svg" alt="Pints of Bangkok logo" id="logo">
+    <img src="pint-glass-logo.svg" alt="logo" id="logo">
   </div>
 
   <div id="note">
@@ -70,6 +58,8 @@
   </div>
 
   <div id="intro">
+
+    <!-- LEFT -->
     <div class="intro-col intro-col-wide">
       <h2 class="intro-heading">Bangkok Guinness Price Watch</h2>
       <p class="intro-small">
@@ -80,119 +70,33 @@
       <div id="last-updated" class="last-updated">Prices last updated: —</div>
     </div>
 
+    <!-- RIGHT -->
     <div class="intro-col">
 
+      <!-- NEW HAPPY HOUR BLOCK -->
       <div id="happy-hour">
-  <h3 class="happy-title">Top 5 Happy Hour Guinness</h3>
-  <div id="happy-list"></div>
-</div>
+        <h3 class="happy-title">Top 5 Happy Hour Guinness</h3>
+        <div id="happy-list"></div>
+      </div>
 
-      
       <h2 class="intro-heading">Suggest a pub</h2>
       <p>
-        Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
+        Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home?
       </p>
 
       <div class="inline-form">
-        <input
-          type="text"
-          id="response"
-          placeholder="Tell me which bar has the best pint..."
-          maxlength="150"
-          autocomplete="off"
-        />
-        <input type="text" id="website" class="hp-field" tabindex="-1" autocomplete="off" />
+        <input id="response" placeholder="Tell me which bar has the best pint..." />
+        <input id="website" class="hp-field" />
         <button id="submit-btn" onclick="submitAnswer()">Submit</button>
       </div>
+
     </div>
   </div>
-
-  <footer id="footer">
-    <div class="footer-inner">
-      <p>
-        Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy, completeness, or availability of any listed prices or details.
-      </p>
-      <p>
-        This is an independent, community-led project and is not affiliated with, endorsed by, or representative of any venues listed.
-      </p>
-      <p>
-        All content is provided for general information purposes only.
-      </p>
-      <p>
-        Spotted something wrong or have a better pint? Let us know.
-      </p>
-      <p class="footer-signoff">
-        Built in Bangkok in 2026.
-      </p>
-    </div>
-  </footer>
 
 </div>
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
-
-const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
-const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwlMDd1D3Sldgpf2Q1Nh6Vjcfw0zbw32MPCOX20UmYsVElB1kdh3mVrxqPx4o2wo_Fz/exec";
-const SUBMIT_COOLDOWN_MS = 30000;
-
-function escapeHTML(str) {
-  return String(str).replace(/[&<>"']/g, function (m) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[m];
-  });
-}
-
-function sanitizeURL(url) {
-  if (!url) return "";
-  try {
-    const parsed = new URL(url, window.location.origin);
-    if (parsed.protocol === "http:" || parsed.protocol === "https:") {
-      return parsed.href;
-    }
-    return "";
-  } catch {
-    return "";
-  }
-}
-
-function trackEvent(name, params = {}) {
-  try {
-    if (typeof gtag === "function") {
-      gtag('event', name, params);
-    }
-  } catch (err) {
-    console.warn("Analytics tracking skipped:", err);
-  }
-}
-
-function animateCount(id, endValue, prefix = "", duration = 1200) {
-  const el = document.getElementById(id);
-  if (!el) return;
-
-  const startTime = performance.now();
-
-  function update(now) {
-    const progress = Math.min((now - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const current = Math.round(endValue * eased);
-
-    el.textContent = `${prefix}${current}`;
-
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    } else {
-      el.textContent = `${prefix}${endValue}`;
-    }
-  }
-
-  requestAnimationFrame(update);
-}
+mapboxgl.accessToken = 'YOUR_KEY';
 
 const INITIAL_VIEW = {
   center: [100.5018, 13.7563],
@@ -203,32 +107,22 @@ const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
   center: INITIAL_VIEW.center,
-  zoom: INITIAL_VIEW.zoom,
-  projection: 'mercator'
+  zoom: INITIAL_VIEW.zoom
 });
 
 map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 map.scrollZoom.disable();
 
+/* RESET BUTTON */
 class ResetControl {
   onAdd(map) {
     this.map = map;
-
     this.container = document.createElement('div');
     this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
 
     const button = document.createElement('button');
-    button.className = 'mapboxgl-ctrl-icon';   // ✅ THIS IS KEY
-    button.type = 'button';
-    button.title = 'Reset view';
-
-    // Use SVG instead of text (clean + consistent)
-    button.innerHTML = `
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 10.5L12 3l9 7.5"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-    `;
+    button.className = 'mapboxgl-ctrl-icon';
+    button.innerHTML = '⌂';
 
     button.onclick = () => {
       map.easeTo({
@@ -242,291 +136,55 @@ class ResetControl {
     return this.container;
   }
 
-  onRemove() {
-    this.container.parentNode.removeChild(this.container);
-    this.map = undefined;
-  }
+  onRemove() {}
 }
 
 map.addControl(new ResetControl(), 'top-right');
-fetch(SHEET_URL)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load pub data");
-    return res.json();
-  })
+
+/* DATA LOAD */
+fetch("YOUR_SHEET_URL")
+  .then(res => res.json())
   .then(pubs => {
-    const bounds = new mapboxgl.LngLatBounds();
-    let validCount = 0;
 
-    const chart = document.getElementById("price-chart");
-    const updatedEl = document.getElementById("last-updated");
-    chart.innerHTML = "";
+    /* ===== HAPPY HOUR TOP 5 ===== */
+    const happyList = document.getElementById("happy-list");
 
-    const dates = pubs
-      .map(p => p.last_updated)
-      .filter(Boolean)
-      .map(d => new Date(d))
-      .filter(d => !isNaN(d));
-
-    if (updatedEl) {
-      if (dates.length > 0) {
-        const latest = new Date(Math.max(...dates));
-        updatedEl.textContent =
-          "Prices last updated: " +
-          latest.toLocaleDateString('en-GB', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
-          });
-      } else {
-        updatedEl.textContent = "Prices last updated: Recently";
-      }
-    }
-
-    const pricedPubs = pubs
-      .filter(p => p.price && !isNaN(parseFloat(p.price)))
+    const happyPubs = pubs
+      .filter(p => p.happy_hour_price && p.happy_hour_price !== "n/a")
       .map(p => ({
         name: p.name,
-        price: parseFloat(p.price)
+        price: parseFloat(p.happy_hour_price)
       }))
-      .sort((a, b) => a.price - b.price);
+      .filter(p => !isNaN(p.price))
+      .sort((a, b) => a.price - b.price)
+      .slice(0, 5);
 
-    if (pricedPubs.length > 0) {
-      const max = Math.max(...pricedPubs.map(p => p.price));
-      const min = Math.min(...pricedPubs.map(p => p.price));
-      const gap = max - min;
+    const medals = ["🥇", "🥈", "🥉"];
 
-      animateCount("stat-pubs", pricedPubs.length, "", 1000);
-      animateCount("stat-cheapest", min, "฿", 1200);
-      animateCount("stat-expensive", max, "฿", 1400);
-      animateCount("stat-gap", gap, "฿", 1600);
+    happyList.innerHTML = "";
 
-      chart.innerHTML += `
-        <div class="chart-summary">
-          <span>Price range: ฿${min}–฿${max}</span>
-          <span class="chart-dot">·</span>
-          <span>Gap: ฿${gap}</span>
+    happyPubs.forEach((pub, i) => {
+      const rank = i < 3 ? medals[i] : `${i + 1}.`;
+
+      const row = document.createElement("div");
+      row.className = "happy-item";
+      row.style.animationDelay = `${150 + i * 120}ms`;
+
+      row.innerHTML = `
+        <div class="happy-name">
+          <span class="happy-rank">${rank}</span>
+          ${pub.name}
         </div>
-        <div class="chart-key">Longer bar = better value</div>
+        <div class="happy-price">฿${pub.price}</div>
       `;
 
-      pricedPubs.forEach((pub, i) => {
-        let width;
-        if (max === min) {
-          width = 100;
-        } else {
-          width = ((max - pub.price) / (max - min)) * 100;
-        }
+      happyList.appendChild(row);
+    });
 
-        const row = document.createElement("div");
-        row.className = "bar-row";
-
-        row.innerHTML = `
-          <div class="bar-label">${escapeHTML(pub.name)}</div>
-          <div class="bar-wrap">
-            <div class="bar" style="width:0%" data-width="${width}%"></div>
-          </div>
-          <div class="bar-price">฿${pub.price}</div>
-        `;
-
-        chart.appendChild(row);
-
-        setTimeout(() => {
-          const mainBar = row.querySelector(".bar");
-          if (mainBar) mainBar.style.width = mainBar.dataset.width;
-        }, 150 + i * 80);
-      });
-    }
-
-    const geojson = {
-      type: "FeatureCollection",
-      features: pubs
-        .filter(p => p.lat && p.lon)
-        .map(p => {
-          const lat = parseFloat(p.lat);
-          const lon = parseFloat(p.lon);
-
-          if (isNaN(lat) || isNaN(lon)) return null;
-
-          validCount++;
-          bounds.extend([lon, lat]);
-
-          return {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [lon, lat]
-            },
-            properties: p
-          };
-        })
-        .filter(Boolean)
-    };
-
-    const addPubLayer = () => {
-      if (map.getSource('pubs')) return;
-
-      map.addSource('pubs', {
-        type: 'geojson',
-        data: geojson
-      });
-
-      map.addLayer({
-        id: 'pubs-layer',
-        type: 'symbol',
-        source: 'pubs',
-        layout: {
-          'icon-image': 'pint-icon',
-          'icon-size': 0.5,
-          'icon-anchor': 'bottom',
-          'icon-offset': [0, 6],
-          'icon-allow-overlap': true
-        }
-      });
-
-      map.on('click', 'pubs-layer', (e) => {
-        const p = e.features[0].properties;
-        const safeLink = sanitizeURL(p.link);
-
-        const html = `
-          <div class="popup-card modern">
-            ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
-            <div class="popup-title">${escapeHTML(p.name || "")}</div>
-            ${p.isNew && String(p.isNew).toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
-            ${p.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
-            ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>` : ""}
-            ${safeLink ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>` : ""}
-          </div>
-        `;
-
-        new mapboxgl.Popup({ offset: 10 })
-          .setLngLat(e.features[0].geometry.coordinates)
-          .setHTML(html)
-          .addTo(map);
-
-        trackEvent("popup_open", {
-          pub_name: p.name || "unknown"
-        });
-      });
-
-      map.on('mouseenter', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-
-      map.on('mouseleave', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = '';
-      });
-
-      if (validCount > 1) {
-        map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
-      }
-    };
-
-    const loadIcon = () => {
-      if (map.hasImage('pint-icon')) {
-        addPubLayer();
-        return;
-      }
-
-      map.loadImage('pint-glass.png', (err, img) => {
-        if (err || !img) {
-          console.error("Icon failed", err);
-          return;
-        }
-
-        if (!map.hasImage('pint-icon')) {
-          map.addImage('pint-icon', img);
-        }
-
-        addPubLayer();
-      });
-    };
-
-    if (map.isStyleLoaded()) {
-      loadIcon();
-    } else {
-      map.once('load', loadIcon);
-    }
-  })
-  .catch(err => {
-    console.error(err);
-    const chart = document.getElementById("price-chart");
-    if (chart) {
-      chart.innerHTML = `<div class="chart-error">Could not load pub data right now.</div>`;
-    }
   });
-
-document.addEventListener("click", (e) => {
-  const link = e.target.closest("[data-pub-link]");
-  if (!link) return;
-
-  trackEvent("pub_link_click", {
-    pub_name: link.getAttribute("data-pub-link") || "unknown"
-  });
-});
-
-function canSubmitAgain() {
-  const lastSubmit = localStorage.getItem("last_pub_submit");
-  if (!lastSubmit) return true;
-  return (Date.now() - Number(lastSubmit)) > SUBMIT_COOLDOWN_MS;
-}
-
-function markSubmitTime() {
-  localStorage.setItem("last_pub_submit", String(Date.now()));
-}
 
 function submitAnswer() {
-  const input = document.getElementById("response");
-  const hp = document.getElementById("website");
-  const btn = document.getElementById("submit-btn");
-
-  if (hp.value !== "") return;
-
-  const val = input.value.trim();
-
-  if (!val) {
-    alert("Please enter a suggestion!");
-    trackEvent("pub_submit_invalid", { reason: "empty" });
-    return;
-  }
-
-  if (val.length < 3) {
-    alert("Please enter a slightly longer suggestion.");
-    trackEvent("pub_submit_invalid", { reason: "too_short" });
-    return;
-  }
-
-  if (!canSubmitAgain()) {
-    alert("Please wait a little before submitting again.");
-    trackEvent("pub_submit_invalid", { reason: "cooldown" });
-    return;
-  }
-
-  btn.disabled = true;
-
-  fetch(FORM_ENDPOINT, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify({ suggestion: val })
-  })
-  .then(() => {
-    alert("Go raibh maith agat!");
-    input.value = "";
-    markSubmitTime();
-    trackEvent("pub_submit", { form_name: "suggest_pub" });
-  })
-  .catch(() => {
-    alert("Something went wrong. Please try again.");
-    trackEvent("pub_submit_error", { form_name: "suggest_pub" });
-  })
-  .finally(() => {
-    setTimeout(() => {
-      btn.disabled = false;
-    }, 1500);
-  });
+  alert("Submitted!");
 }
 </script>
 
