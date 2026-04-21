@@ -338,14 +338,27 @@ fetch(SHEET_URL)
     }
 
     const happyPubs = pubs
-      .filter(p => p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a")
-      .map(p => ({
-        name: p.name,
-        price: parseFloat(p.happy_hour_price)
-      }))
-      .filter(p => !isNaN(p.price))
-      .sort((a, b) => a.price - b.price)
-      .slice(0, 5);
+  .filter(p =>
+    p.happy_hour_price &&
+    String(p.happy_hour_price).toLowerCase() !== "n/a" &&
+    p.price &&
+    !isNaN(parseFloat(p.price))
+  )
+  .map(p => {
+    const hh = parseFloat(p.happy_hour_price);
+    const full = parseFloat(p.price);
+    const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
+
+    return {
+      name: p.name,
+      happyPrice: hh,
+      fullPrice: full,
+      savingPct: savingPct
+    };
+  })
+  .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
+  .sort((a, b) => a.happyPrice - b.happyPrice)
+  .slice(0, 5);
 
     const medals = ["🥇", "🥈", "🥉"];
 
@@ -357,12 +370,16 @@ fetch(SHEET_URL)
       row.style.animationDelay = `${150 + i * 120}ms`;
 
       row.innerHTML = `
-        <div class="happy-name">
-          <span class="happy-rank">${rank}</span>
-          ${escapeHTML(pub.name)}
-        </div>
-        <div class="happy-price">฿${pub.price}</div>
-      `;
+  <div class="happy-name">
+    <span class="happy-rank">${rank}</span>
+    ${escapeHTML(pub.name)}
+  </div>
+  <div class="happy-prices">
+    <span class="happy-price">฿${pub.happyPrice}</span>
+    <span class="happy-full-price">/ ฿${pub.fullPrice}</span>
+    <span class="happy-saving">-${pub.savingPct}%</span>
+  </div>
+`;
 
       happyList.appendChild(row);
     });
