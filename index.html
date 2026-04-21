@@ -619,7 +619,7 @@ function submitAnswer() {
     headers: {
       "Content-Type": "text/plain;charset=utf-8"
     },
-    body: JSON.stringify({ response: val })
+    body: JSON.stringify({ suggestion: val })
   })
   .then(() => {
     alert("Go raibh maith agat!");
