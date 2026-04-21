@@ -512,16 +512,31 @@ row.dataset.pubName = pub.name;
         const safeLink = sanitizeURL(p.link);
 
         const html = `
-          <div class="popup-card modern">
-            ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
-            <div class="popup-title">${escapeHTML(p.name || "")}</div>
-            ${p.isNew && String(p.isNew).toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
-            ${p.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
-            ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>` : ""}
-            ${safeLink ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>` : ""}
-          </div>
-        `;
+  <div class="popup-card modern">
+    ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
+    
+    <div class="popup-name-wrap">
+      <div class="popup-title-text">${escapeHTML(p.name || "")}</div>
+    </div>
 
+    ${p.isNew && String(p.isNew).toLowerCase() === "yes"
+      ? `<span class="tag-new">New</span>`
+      : ""}
+
+    ${p.price
+      ? `<div class="popup-price-box popup-price-main">Guinness: ฿${escapeHTML(p.price)}</div>`
+      : ""}
+
+    ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a"
+      ? `<div class="popup-price-box popup-price-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
+      : ""}
+
+    ${safeLink
+      ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>`
+      : ""}
+  </div>
+`;
+        
         new mapboxgl.Popup({ offset: 10 })
           .setLngLat(e.features[0].geometry.coordinates)
           .setHTML(html)
