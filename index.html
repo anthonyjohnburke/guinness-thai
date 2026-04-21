@@ -131,11 +131,11 @@
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
-const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
-const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYNGNwFHCLN934thYjzdlFnoJS6zFIvF31EVluSNu2fTpUGVxBsHfCSvXloPCqrv7s/exec";
-const SUBMIT_COOLDOWN_MS = 30000;
+ SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
+ FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYNGNwFHCLN934thYjzdlFnoJS6zFIvF31EVluSNu2fTpUGVxBsHfCSvXloPCqrv7s/exec";
+ SUBMIT_COOLDOWN_MS = 30000;
 
-const INITIAL_VIEW = {
+ INITIAL_VIEW = {
   center: [100.5018, 13.7563],
   zoom: 11.2
 };
@@ -155,7 +155,7 @@ function escapeHTML(str) {
 function sanitizeURL(url) {
   if (!url) return "";
   try {
-    const parsed = new URL(url, window.location.origin);
+     parsed = new URL(url, window.location.origin);
     if (parsed.protocol === "http:" || parsed.protocol === "https:") {
       return parsed.href;
     }
@@ -176,10 +176,10 @@ function trackEvent(name, params = {}) {
 }
 
 function animateCount(id, endValue, prefix = "", duration = 1200) {
-  const el = document.getElementById(id);
+   el = document.getElementById(id);
   if (!el) return;
 
-  const startTime = performance.now();
+   startTime = performance.now();
 
   function update(now) {
     const progress = Math.min((now - startTime) / duration, 1);
@@ -341,22 +341,22 @@ if (cheapestCard && cheapestPub) {
   const html = `
   <div class="popup-card modern">
     ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
-    
+
     <div class="popup-name-wrap">
       <div class="popup-title">${escapeHTML(p.name || "")}</div>
     </div>
 
-    <div class="popup-prices">
+    <div class="popup-prices-box">
       ${p.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
       ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a"
-        ? `<div class="popup-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
+        ? `<div class="popup-happy">Guinness happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
         : ""}
     </div>
 
     <div class="popup-actions">
       ${p.isNew && String(p.isNew).toLowerCase() === "yes"
         ? `<span class="tag-new">New</span>`
-        : ""}
+        : `<span class="popup-action-spacer"></span>`}
       ${safeLink
         ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>`
         : ""}
