@@ -525,17 +525,20 @@ fetch(SHEET_URL)
       });
 
       map.addLayer({
-        id: 'pubs-layer',
-        type: 'symbol',
-        source: 'pubs',
-        layout: {
-          'icon-image': 'pint-icon',
-          'icon-size': 0.5,
-          'icon-anchor': 'bottom',
-          'icon-offset': [0, 6],
-          'icon-allow-overlap': true
-        }
-      });
+  id: 'pubs-layer',
+  type: 'symbol',
+  source: 'pubs',
+  layout: {
+    'icon-image': 'pint-icon',
+    'icon-size': 0.65, // 👈 bigger (try 0.6–0.75 range)
+    'icon-anchor': 'bottom',
+    'icon-offset': [0, 6],
+    'icon-allow-overlap': true
+  },
+  paint: {
+    'icon-opacity': 0.9 // 👈 90% opacity
+  }
+});
 
       map.on('click', 'pubs-layer', (e) => {
         const p = e.features[0].properties;
