@@ -339,15 +339,30 @@ if (cheapestCard && cheapestPub) {
   const safeLink = sanitizeURL(targetPub.link);
 
   const html = `
-    <div class="popup-card modern">
-      ${targetPub.type ? `<div class="popup-meta">${escapeHTML(targetPub.type)}</div>` : ""}
-      <div class="popup-title">${escapeHTML(targetPub.name || "")}</div>
-      ${targetPub.isNew && String(targetPub.isNew).toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
-      ${targetPub.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(targetPub.price)}</div>` : ""}
-      ${targetPub.happy_hour_price && String(targetPub.happy_hour_price).toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${escapeHTML(targetPub.happy_hour_price)}</div>` : ""}
-      ${safeLink ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(targetPub.name || 'unknown')}">View pub →</a>` : ""}
+  <div class="popup-card modern">
+    ${p.type ? `<div class="popup-meta">${escapeHTML(p.type)}</div>` : ""}
+    
+    <div class="popup-name-wrap">
+      <div class="popup-title">${escapeHTML(p.name || "")}</div>
     </div>
-  `;
+
+    <div class="popup-prices">
+      ${p.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(p.price)}</div>` : ""}
+      ${p.happy_hour_price && String(p.happy_hour_price).toLowerCase() !== "n/a"
+        ? `<div class="popup-happy">Happy hour: ฿${escapeHTML(p.happy_hour_price)}</div>`
+        : ""}
+    </div>
+
+    <div class="popup-actions">
+      ${p.isNew && String(p.isNew).toLowerCase() === "yes"
+        ? `<span class="tag-new">New</span>`
+        : ""}
+      ${safeLink
+        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(p.name || 'unknown')}">View pub →</a>`
+        : ""}
+    </div>
+  </div>
+`;
 
   map.easeTo({
     center: [lon, lat],
