@@ -365,15 +365,27 @@ body {
 }
 
 .popup-price {
-    font-size: 1.2em;
+    background: #111;
+    color: #fff;
     font-weight: 700;
-    color: #111;
+    font-size: 1.40em;
+    line-height: 1.10;
+    padding: 10px 40px;
+    border-radius: 12px;
+    display: inline-block;
+    max-width: 100%;
 }
 
 .popup-happy {
-    font-size: 1em;
-    color: #4f4f4f;
-    font-weight: 600;
+    background: #d4af37;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.40em;
+    line-height: 1.10;
+    padding: 10px 40px;
+    border-radius: 12px;
+    display: inline-block;
+    max-width: 100%;
 }
 
 .popup-actions {
