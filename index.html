@@ -300,6 +300,68 @@ fetch(SHEET_URL)
       animateCount("stat-expensive", max, "฿", 1400);
       animateCount("stat-gap", gap, "฿", 1600);
 
+const cheapestPub = pricedPubs.length > 0 ? pricedPubs[0] : null;
+
+      function highlightChartPub(pubName) {
+  document.querySelectorAll('.bar-row').forEach(row => {
+    row.classList.remove('is-highlighted');
+  });
+
+  const target = Array.from(document.querySelectorAll('.bar-row'))
+    .find(row => row.dataset.pubName === pubName);
+
+  if (target) {
+    target.classList.add('is-highlighted');
+  }
+}
+
+      const cheapestCard = document.getElementById("stat-cheapest")?.closest(".stat-card");
+
+if (cheapestCard && cheapestPub) {
+  cheapestCard.style.cursor = "pointer";
+
+  cheapestCard.addEventListener("click", () => {
+    highlightChartPub(cheapestPub.name);
+    zoomToPub(cheapestPub.name, pubs);
+    trackEvent("stat_cheapest_click", { pub_name: cheapestPub.name });
+  });
+}
+
+      function zoomToPub(pubName, pubs) {
+  const targetPub = pubs.find(p => p.name === pubName && p.lat && p.lon);
+  if (!targetPub) return;
+
+  const lat = parseFloat(targetPub.lat);
+  const lon = parseFloat(targetPub.lon);
+  if (isNaN(lat) || isNaN(lon)) return;
+
+  const safeLink = sanitizeURL(targetPub.link);
+
+  const html = `
+    <div class="popup-card modern">
+      ${targetPub.type ? `<div class="popup-meta">${escapeHTML(targetPub.type)}</div>` : ""}
+      <div class="popup-title">${escapeHTML(targetPub.name || "")}</div>
+      ${targetPub.isNew && String(targetPub.isNew).toLowerCase() === "yes" ? `<span class="tag-new">New</span>` : ""}
+      ${targetPub.price ? `<div class="popup-price">Guinness: ฿${escapeHTML(targetPub.price)}</div>` : ""}
+      ${targetPub.happy_hour_price && String(targetPub.happy_hour_price).toLowerCase() !== "n/a" ? `<div class="popup-happy">Happy hour: ฿${escapeHTML(targetPub.happy_hour_price)}</div>` : ""}
+      ${safeLink ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(targetPub.name || 'unknown')}">View pub →</a>` : ""}
+    </div>
+  `;
+
+  map.easeTo({
+    center: [lon, lat],
+    zoom: 15,
+    duration: 900
+  });
+
+  setTimeout(() => {
+    new mapboxgl.Popup({ offset: 10 })
+      .setLngLat([lon, lat])
+      .setHTML(html)
+      .addTo(map);
+  }, 700);
+}
+      
       chart.innerHTML += `
         <div class="chart-summary">
           <span>Price range: ฿${min}–฿${max}</span>
