@@ -510,6 +510,10 @@ body {
     transform: translateY(-1px);
 }
 
+.mapboxgl-ctrl-group button svg {
+    display: block;
+    margin: 0 auto;
+}
 
 
 /* Mobile */
