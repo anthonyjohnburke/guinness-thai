@@ -315,7 +315,7 @@ body {
 .popup-card.modern {
     background: #ececec;
     color: #111;
-    padding: 22px 20px 18px;
+    padding: 22px 20px 20px;
     border-radius: 22px;
     width: 290px;
     text-align: center;
@@ -328,9 +328,9 @@ body {
 }
 
 .popup-meta {
-    font-size: 1.15em;
+    font-size: 1.05em;
     color: #7f7f7f;
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
 .popup-name-wrap {
@@ -340,48 +340,30 @@ body {
 }
 
 .popup-title {
-    color: #111;
     font-weight: 700;
-    font-size: 1.30em;
-    line-height: 1.10;
+    font-size: 1.45em;
+    line-height: 1.15;
+    color: #111;
     max-width: 100%;
 }
 
-.popup-prices-box {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 16px 18px;
+.popup-price-box {
     width: 100%;
     box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+    border-radius: 18px;
+    padding: 16px 18px;
+    font-weight: 700;
+    font-size: 1.2em;
 }
 
-.popup-price {
+.popup-price-main {
     background: #111;
     color: #fff;
-    font-weight: 700;
-    font-size: 1.40em;
-    line-height: 1.10;
-    padding: 10px 40px;
-    border-radius: 12px;
-    display: inline-block;
-    max-width: 100%;
 }
 
-.popup-happy {
+.popup-price-happy {
     background: #d4af37;
     color: #fff;
-    font-weight: 700;
-    font-size: 1.40em;
-    line-height: 1.10;
-    padding: 10px 40px;
-    border-radius: 12px;
-    display: inline-block;
-    max-width: 100%;
 }
 
 .popup-actions {
@@ -389,7 +371,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .popup-action-spacer {
