@@ -317,18 +317,18 @@ body {
     color: #111;
     padding: 22px 20px 20px;
     border-radius: 22px;
-    width: 290px;
+    width: 300px;
     text-align: center;
     box-shadow: 0 10px 28px rgba(0,0,0,0.3);
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
 }
 
 .popup-meta {
-    font-size: 1.05em;
+    font-size: 1.1em;
     color: #7f7f7f;
     line-height: 1.2;
 }
@@ -340,10 +340,14 @@ body {
 }
 
 .popup-title {
+    background: #111;
+    color: #fff;
     font-weight: 700;
     font-size: 1.45em;
     line-height: 1.15;
-    color: #111;
+    padding: 14px 22px;
+    border-radius: 18px;
+    display: inline-block;
     max-width: 100%;
 }
 
