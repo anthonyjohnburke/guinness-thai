@@ -198,6 +198,16 @@ function animateCount(id, endValue, prefix = "", duration = 1200) {
   requestAnimationFrame(update);
 }
 
+function scrollToMap() {
+  const mapSection = document.getElementById("map-section");
+  if (!mapSection) return;
+
+  mapSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
 function buildPopupHTML(pub, safeLink) {
   return `
     <div class="popup-card modern">
@@ -334,18 +344,22 @@ fetch(SHEET_URL)
       const safeLink = sanitizeURL(targetPub.link);
       const html = buildPopupHTML(targetPub, safeLink);
 
-      map.easeTo({
-        center: [lon, lat],
-        zoom: 15,
-        duration: 900
-      });
+      scrollToMap();
 
       setTimeout(() => {
-        new mapboxgl.Popup({ offset: 10 })
-          .setLngLat([lon, lat])
-          .setHTML(html)
-          .addTo(map);
-      }, 700);
+        map.easeTo({
+          center: [lon, lat],
+          zoom: 15,
+          duration: 900
+        });
+
+        setTimeout(() => {
+          new mapboxgl.Popup({ offset: 10 })
+            .setLngLat([lon, lat])
+            .setHTML(html)
+            .addTo(map);
+        }, 700);
+      }, 550);
     }
 
     const pricedPubs = pubs
@@ -367,7 +381,10 @@ fetch(SHEET_URL)
       animateCount("stat-gap", gap, "฿", 1600);
 
       const cheapestPub = pricedPubs[0];
+      const mostExpensivePub = pricedPubs[pricedPubs.length - 1];
+
       const cheapestCard = document.getElementById("stat-cheapest")?.closest(".stat-card");
+      const expensiveCard = document.getElementById("stat-expensive")?.closest(".stat-card");
 
       if (cheapestCard && cheapestPub) {
         cheapestCard.classList.add("is-clickable");
@@ -376,6 +393,16 @@ fetch(SHEET_URL)
           highlightChartPub(cheapestPub.name);
           zoomToPub(cheapestPub.name, pubs);
           trackEvent("stat_cheapest_click", { pub_name: cheapestPub.name });
+        });
+      }
+
+      if (expensiveCard && mostExpensivePub) {
+        expensiveCard.classList.add("is-clickable");
+
+        expensiveCard.addEventListener("click", () => {
+          highlightChartPub(mostExpensivePub.name);
+          zoomToPub(mostExpensivePub.name, pubs);
+          trackEvent("stat_most_expensive_click", { pub_name: mostExpensivePub.name });
         });
       }
 
