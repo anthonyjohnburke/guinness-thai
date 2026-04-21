@@ -497,6 +497,21 @@ body {
     filter: brightness(1.08);
 }
 
+.bar-row.is-highlighted .bar-price {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.stat-card.is-clickable {
+    cursor: pointer;
+}
+
+.stat-card.is-clickable:hover {
+    transform: translateY(-1px);
+}
+
+
+
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
