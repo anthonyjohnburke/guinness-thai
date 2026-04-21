@@ -369,7 +369,7 @@ body {
     background: #f6dcdc;
     color: #d53030;
     font-size: 1em;
-    padding: 10px 16px;
+    padding: 8px 16px;
     border-radius: 12px;
     font-weight: 500;
     display: inline-block;
@@ -380,7 +380,7 @@ body {
     color: #1d7f3f;
     font-size: 0.95em;
     font-weight: 700;
-    padding: 10px 16px;
+    padding: 8px 16px;
     border-radius: 12px;
     text-decoration: none;
     display: inline-block;
