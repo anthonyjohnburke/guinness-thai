@@ -206,12 +206,22 @@ map.scrollZoom.disable();
 class ResetControl {
   onAdd(map) {
     this.map = map;
+
     this.container = document.createElement('div');
     this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
 
     const button = document.createElement('button');
-    button.innerHTML = '⌂'; // home icon
+    button.className = 'mapboxgl-ctrl-icon';   // ✅ THIS IS KEY
+    button.type = 'button';
     button.title = 'Reset view';
+
+    // Use SVG instead of text (clean + consistent)
+    button.innerHTML = `
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 10.5L12 3l9 7.5"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+    `;
 
     button.onclick = () => {
       map.easeTo({
