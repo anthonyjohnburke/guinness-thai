@@ -313,11 +313,11 @@ body {
 }
 
 .popup-card.modern {
-    background: #f4f4f4;
+    background: #ececec;
     color: #111;
     padding: 22px 20px 18px;
     border-radius: 22px;
-    width: 280px;
+    width: 290px;
     text-align: center;
     box-shadow: 0 10px 28px rgba(0,0,0,0.3);
 
@@ -345,44 +345,58 @@ body {
     font-weight: 700;
     font-size: 1.45em;
     line-height: 1.15;
-    padding: 12px 18px;
-    border-radius: 14px;
+    padding: 14px 20px;
+    border-radius: 18px;
     display: inline-block;
     max-width: 100%;
 }
 
-.popup-prices {
+.popup-prices-box {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 16px 18px;
+    width: 100%;
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
     align-items: center;
 }
 
 .popup-price {
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 700;
+    color: #111;
 }
 
 .popup-happy {
-    font-size: 1.02em;
+    font-size: 1em;
     color: #4f4f4f;
+    font-weight: 600;
 }
 
 .popup-actions {
+    width: 100%;
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.popup-action-spacer {
+    width: 88px;
+    height: 1px;
 }
 
 .tag-new {
     background: #f6dcdc;
     color: #d53030;
     font-size: 0.95em;
-    padding: 9px 16px;
+    padding: 10px 16px;
     border-radius: 12px;
     font-weight: 600;
+    display: inline-block;
 }
 
 .popup-link {
@@ -390,7 +404,7 @@ body {
     color: #1d7f3f;
     font-size: 0.95em;
     font-weight: 700;
-    padding: 9px 16px;
+    padding: 10px 16px;
     border-radius: 12px;
     text-decoration: none;
     display: inline-block;
@@ -402,8 +416,10 @@ body {
 }
 
 .mapboxgl-popup-tip {
-    border-top-color: #f4f4f4 !important;
+    border-top-color: #ececec !important;
 }
+
+
 /* Stats */
 #top-stats {
     width: 100%;
