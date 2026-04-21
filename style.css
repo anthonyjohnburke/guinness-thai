@@ -315,20 +315,20 @@ body {
 .popup-card.modern {
     background: #ececec;
     color: #111;
-    padding: 22px 20px 18px;
+    padding: 22px 20px 20px;
     border-radius: 22px;
-    width: 290px;
+    width: 300px;
     text-align: center;
     box-shadow: 0 10px 28px rgba(0,0,0,0.3);
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 18px;
 }
 
 .popup-meta {
-    font-size: 1.05em;
+    font-size: 1.1em;
     color: #7f7f7f;
     line-height: 1.2;
 }
@@ -339,54 +339,31 @@ body {
     justify-content: center;
 }
 
-.popup-title {
-    background: #111;
-    color: #fff;
+.popup-title-text {
     font-weight: 700;
     font-size: 1.45em;
     line-height: 1.15;
-    padding: 14px 20px;
-    border-radius: 18px;
-    display: inline-block;
+    color: #111;
     max-width: 100%;
 }
 
-.popup-prices-box {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 16px 18px;
+.popup-price-box {
     width: 100%;
     box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-}
-
-.popup-price {
-    font-size: 1.2em;
+    border-radius: 18px;
+    padding: 16px 18px;
     font-weight: 700;
-    color: #111;
+    font-size: 1.2em;
 }
 
-.popup-happy {
-    font-size: 1em;
-    color: #4f4f4f;
-    font-weight: 600;
+.popup-price-main {
+    background: #111;
+    color: #fff;
 }
 
-.popup-actions {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.popup-action-spacer {
-    width: 88px;
-    height: 1px;
+.popup-price-happy {
+    background: #d4af37;
+    color: #fff;
 }
 
 .tag-new {
