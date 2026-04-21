@@ -232,12 +232,6 @@ class ResetControl {
 }
 
 map.addControl(new ResetControl(), 'top-right');
-
-
-
-
-  
-
 fetch(SHEET_URL)
   .then(res => {
     if (!res.ok) throw new Error("Failed to load pub data");
