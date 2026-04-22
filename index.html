@@ -536,7 +536,7 @@ fetch(SHEET_URL)
     'icon-allow-overlap': true
   },
   paint: {
-    'icon-opacity': 0.7 // 👈 70% opacity
+    'icon-opacity': 0.6 // 👈 60% opacity
   }
 });
 
@@ -546,7 +546,7 @@ map.on('mouseenter', 'pubs-layer', () => {
 });
 
 map.on('mouseleave', 'pubs-layer', () => {
-  map.setPaintProperty('pubs-layer', 'icon-opacity', 0.9);
+  map.setPaintProperty('pubs-layer', 'icon-opacity', 0.8);
 });
       
 
