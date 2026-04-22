@@ -538,6 +538,15 @@ body {
     margin: 0 auto;
 }
 
+.bar-label.clickable {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.bar-label.clickable:hover {
+    opacity: 0.7;
+}
+
 
 /* Mobile */
 @media (max-width: 900px) {
