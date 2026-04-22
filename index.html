@@ -87,6 +87,11 @@
         <div id="happy-list"></div>
       </div>
 
+      <div id="cheap-list-block" class="section-block">
+      <h2 class="intro-heading">Top 5 Cheapest Guinness in Bangkok</h2>
+      <div id="cheap-list"></div>
+      </div>
+
       <h2 class="intro-heading">Suggest a pub</h2>
       <p>
         Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
@@ -460,6 +465,44 @@ fetch(SHEET_URL)
         });
       });
     }
+
+    const cheapList = document.getElementById("cheap-list");
+
+if (cheapList && pricedPubs.length > 0) {
+  const mostExpensivePrice = pricedPubs[pricedPubs.length - 1].price;
+
+  const cheapestFive = pricedPubs.slice(0, 5).map(pub => ({
+    name: pub.name,
+    price: pub.price,
+    saving: mostExpensivePrice - pub.price
+  }));
+
+  cheapList.innerHTML = "";
+
+  cheapestFive.forEach((pub, i) => {
+    const medals = ["🥇", "🥈", "🥉"];
+    const rank = i < 3 ? medals[i] : `${i + 1}.`;
+
+    const row = document.createElement("div");
+    row.className = "happy-item";
+    row.style.animationDelay = `${150 + i * 120}ms`;
+
+    row.innerHTML = `
+      <div class="happy-name">
+        <span class="happy-rank">${rank}</span>
+        ${escapeHTML(pub.name)}
+      </div>
+      <div class="happy-prices">
+        <span class="happy-price">฿${pub.price}</span>
+        <span class="happy-saving">save ฿${pub.saving}</span>
+      </div>
+    `;
+
+    cheapList.appendChild(row);
+  });
+}
+
+    
 
     const happyPubs = pubs
       .filter(p =>
