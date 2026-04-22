@@ -428,12 +428,21 @@ fetch(SHEET_URL)
         row.dataset.pubName = pub.name;
 
         row.innerHTML = `
-          <div class="bar-label">${escapeHTML(pub.name)}</div>
-          <div class="bar-wrap">
-            <div class="bar" style="width:0%" data-width="${width}%"></div>
-          </div>
-          <div class="bar-price">฿${pub.price}</div>
-        `;
+  <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">${escapeHTML(pub.name)}</div>
+  <div class="bar-wrap">
+    <div class="bar" style="width:0%" data-width="${width}%"></div>
+  </div>
+  <div class="bar-price">฿${pub.price}</div>
+`;
+
+        document.querySelectorAll('.bar-label.clickable').forEach(el => {
+  el.addEventListener('click', () => {
+    const name = el.dataset.pub;
+    highlightChartPub(name);
+    zoomToPub(name, pubs);
+    trackEvent("chart_pub_click", { pub_name: name });
+  });
+});
 
         chart.appendChild(row);
 
