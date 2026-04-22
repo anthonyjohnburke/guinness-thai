@@ -395,6 +395,18 @@ body {
     border-top-color: #ececec !important;
 }
 
+.popup-map-link {
+    display: block;
+    font-size: 12px;
+    color: rgba(0,0,0,0.55);
+    text-decoration: none;
+    margin-top: -6px;
+}
+
+.popup-map-link:hover {
+    color: #111;
+}
+
 
 /* Stats */
 #top-stats {
