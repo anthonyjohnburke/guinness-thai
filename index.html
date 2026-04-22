@@ -209,6 +209,10 @@ function scrollToMap() {
 }
 
 function buildPopupHTML(pub, safeLink) {
+  const mapsLink = (pub.lat && pub.lon)
+    ? `https://www.google.com/maps?q=${pub.lat},${pub.lon}`
+    : "";
+
   return `
     <div class="popup-card modern">
       ${pub.type ? `<div class="popup-meta">${escapeHTML(pub.type)}</div>` : ""}
@@ -230,6 +234,10 @@ function buildPopupHTML(pub, safeLink) {
 
       ${safeLink
         ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View pub →</a>`
+        : ""}
+
+      ${mapsLink
+        ? `<a href="${mapsLink}" target="_blank" rel="noopener noreferrer" class="popup-map-link">📍 Open in Google Maps</a>`
         : ""}
     </div>
   `;
@@ -428,21 +436,12 @@ fetch(SHEET_URL)
         row.dataset.pubName = pub.name;
 
         row.innerHTML = `
-  <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">${escapeHTML(pub.name)}</div>
-  <div class="bar-wrap">
-    <div class="bar" style="width:0%" data-width="${width}%"></div>
-  </div>
-  <div class="bar-price">฿${pub.price}</div>
-`;
-
-        document.querySelectorAll('.bar-label.clickable').forEach(el => {
-  el.addEventListener('click', () => {
-    const name = el.dataset.pub;
-    highlightChartPub(name);
-    zoomToPub(name, pubs);
-    trackEvent("chart_pub_click", { pub_name: name });
-  });
-});
+          <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">${escapeHTML(pub.name)}</div>
+          <div class="bar-wrap">
+            <div class="bar" style="width:0%" data-width="${width}%"></div>
+          </div>
+          <div class="bar-price">฿${pub.price}</div>
+        `;
 
         chart.appendChild(row);
 
@@ -450,6 +449,15 @@ fetch(SHEET_URL)
           const mainBar = row.querySelector(".bar");
           if (mainBar) mainBar.style.width = mainBar.dataset.width;
         }, 150 + i * 80);
+      });
+
+      document.querySelectorAll('.bar-label.clickable').forEach(el => {
+        el.addEventListener('click', () => {
+          const name = el.dataset.pub;
+          highlightChartPub(name);
+          zoomToPub(name, pubs);
+          trackEvent("chart_pub_click", { pub_name: name });
+        });
       });
     }
 
@@ -534,30 +542,30 @@ fetch(SHEET_URL)
       });
 
       map.addLayer({
-  id: 'pubs-layer',
-  type: 'symbol',
-  source: 'pubs',
-  layout: {
-    'icon-image': 'pint-icon',
-    'icon-size': 0.75, // 👈 bigger (try 0.6–0.75 range)
-    'icon-anchor': 'bottom',
-    'icon-offset': [0, 6],
-    'icon-allow-overlap': true
-  },
-  paint: {
-    'icon-opacity': 0.6 // 👈 60% opacity
-  }
-});
+        id: 'pubs-layer',
+        type: 'symbol',
+        source: 'pubs',
+        layout: {
+          'icon-image': 'pint-icon',
+          'icon-size': 0.75,
+          'icon-anchor': 'bottom',
+          'icon-offset': [0, 6],
+          'icon-allow-overlap': true
+        },
+        paint: {
+          'icon-opacity': 0.6
+        }
+      });
 
-// Hover effect
-map.on('mouseenter', 'pubs-layer', () => {
-  map.setPaintProperty('pubs-layer', 'icon-opacity', 1);
-});
+      map.on('mouseenter', 'pubs-layer', () => {
+        map.getCanvas().style.cursor = 'pointer';
+        map.setPaintProperty('pubs-layer', 'icon-opacity', 1);
+      });
 
-map.on('mouseleave', 'pubs-layer', () => {
-  map.setPaintProperty('pubs-layer', 'icon-opacity', 0.8);
-});
-      
+      map.on('mouseleave', 'pubs-layer', () => {
+        map.getCanvas().style.cursor = '';
+        map.setPaintProperty('pubs-layer', 'icon-opacity', 0.6);
+      });
 
       map.on('click', 'pubs-layer', (e) => {
         const p = e.features[0].properties;
@@ -572,14 +580,6 @@ map.on('mouseleave', 'pubs-layer', () => {
         trackEvent("popup_open", {
           pub_name: p.name || "unknown"
         });
-      });
-
-      map.on('mouseenter', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-
-      map.on('mouseleave', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = '';
       });
 
       if (validCount > 1) {
