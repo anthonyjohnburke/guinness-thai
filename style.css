@@ -48,11 +48,11 @@ body {
 /* Note */
 #note {
     font-family: 'Shadows Into Light', cursive;
-    font-size: 0.9em;
-    color: rgba(0,0,0,0.6);
-    margin: 0 auto;
+    font-size: 1.05em;
+    color: rgba(255,255,255,0.78);
     text-align: center;
-    flex: 1;
+    margin: 18px 0 22px;
+    padding: 0 20px;
 }
 
 /* Did you know */
