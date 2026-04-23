@@ -477,7 +477,7 @@ body {
     padding: 18px 18px;
 }
 
-.popup-grid::after {
+.popup-grid.has-happy-hour::after {
     content: "";
     position: absolute;
     left: 18px;
