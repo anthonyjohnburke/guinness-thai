@@ -39,6 +39,7 @@ body {
 
 #top-bar.is-scrolled {
     padding: 10px 40px 8px;
+    gap: 16px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.08);
 }
 
@@ -61,6 +62,12 @@ body {
 
 #top-bar.is-scrolled #logo {
     height: 54px;
+}
+
+#top-bar.is-scrolled #did-you-know-top {
+    transform: scale(0.92);
+    transform-origin: right center;
+    opacity: 0.9;
 }
 
 /* Note */
