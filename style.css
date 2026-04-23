@@ -70,6 +70,12 @@ body {
     opacity: 0.9;
 }
 
+#top-bar,
+#logo,
+#did-you-know-top {
+    transition: all 0.25s ease;
+}
+
 /* Note */
 #note {
     font-family: 'Shadows Into Light', cursive;
