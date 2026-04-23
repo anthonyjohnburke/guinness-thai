@@ -676,3 +676,14 @@ body {
         font-size: 0.64em;
     }
 }
+
+@media (max-width: 768px) {
+  #top-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #did-you-know-top {
+    max-width: 100%;
+  }
+}
