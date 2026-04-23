@@ -244,7 +244,7 @@ function buildPopupHTML(pub, safeLink) {
       <div class="popup-title-text">${escapeHTML(pub.name || "")}</div>
     </div>
 
-    <div class="popup-grid">
+    <div class="popup-grid ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? "has-happy-hour" : ""}">
     ${pub.price ? `
   <div class="popup-label">Guinness</div>
   <div class="popup-value popup-value-price">฿${escapeHTML(pub.price)}</div>
