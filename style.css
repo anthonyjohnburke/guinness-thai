@@ -536,15 +536,22 @@ body {
 .popup-grid {
     display: grid;
     grid-template-columns: 1fr auto;
-    row-gap: 12px;
     column-gap: 10px;
+    row-gap: 18px;
+    align-items: center;
 }
 
-/* Divider between Guinness and Happy Hour */
-.popup-grid .popup-label:nth-of-type(3) {
-    border-top: 1px solid rgba(0,0,0,0.08);
+.popup-grid .popup-label,
+.popup-grid .popup-value {
+    position: relative;
+}
+
+/* divider above the Happy Hour row */
+.popup-grid .popup-label:nth-child(3),
+.popup-grid .popup-value:nth-child(4) {
+    border-top: 1px solid rgba(0,0,0,0.06);
     padding-top: 12px;
-    grid-column: 1 / -1;
+    margin-top: 2px;
 }
 
 #suggest-section {
