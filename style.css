@@ -533,6 +533,12 @@ body {
     color: #8f1d1d;
 }
 
+.popup-price-box .price-row + .price-row {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
 #suggest-section {
     width: 100%;
     max-width: 1400px;
