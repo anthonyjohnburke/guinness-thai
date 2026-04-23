@@ -694,12 +694,25 @@ body {
 @media (max-width: 768px) {
     #top-bar {
         flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
+        gap: 14px;
+        align-items: center;     /* center everything */
+        text-align: center;
+        padding: 16px 20px;
+    }
+
+    .top-logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #logo {
+        height: 68px;  /* slightly smaller for mobile balance */
     }
 
     #did-you-know-top {
         max-width: 100%;
+        text-align: center;
         padding-top: 0;
     }
 }
