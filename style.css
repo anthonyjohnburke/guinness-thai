@@ -463,14 +463,27 @@ body {
 }
 
 .popup-grid {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 12px 14px;
+    column-gap: 10px;
+    row-gap: 22px;
     align-items: center;
     text-align: left;
     background: rgba(0,0,0,0.04);
     border-radius: 18px;
     padding: 18px 18px;
+}
+
+.popup-grid::after {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 50%;
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    transform: translateY(-0.5px);
 }
 
 .popup-label,
@@ -490,6 +503,7 @@ body {
     text-align: right;
     white-space: nowrap;
     line-height: 1;
+    align-self: center;
 }
 
 .popup-value-price {
@@ -499,7 +513,8 @@ body {
 
 .popup-value-happy {
     color: #d4af37;
-    font-size: 1.15em;
+    font-size: 1.2em;
+    font-weight: 800;
 }
 
 .popup-actions {
@@ -540,45 +555,24 @@ body {
     color: #8f1d1d;
 }
 
-.popup-grid {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: 10px;
-    row-gap: 18px;
-    align-items: center;
-}
-
-.popup-grid .popup-label,
-.popup-grid .popup-value {
-    position: relative;
-}
-
-.popup-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: 10px;
-    row-gap: 22px;
-    align-items: center;
-}
-
-.popup-grid::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: 1px;
-    background: rgba(0,0,0,0.06);
-    transform: translateY(-0.5px);
-}
-
 .mapboxgl-popup-close-button {
-    top: 12px !important;
-    right: 16px !important;
-    font-size: 30px !important;
+    top: 10px !important;
+    right: 18px !important;
+    font-size: 32px !important;
     line-height: 1 !important;
     color: #111 !important;
+}
+
+.popup-missing {
+    grid-column: span 2;
+    text-align: center;
+    font-size: 0.95em;
+    color: #666;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(0,0,0,0.05);
+    font-style: italic;
+    line-height: 1.4;
 }
 
 #suggest-section {
