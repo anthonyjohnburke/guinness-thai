@@ -92,6 +92,14 @@
       <div id="cheap-list"></div>
       </div>
 
+      <div id="expensive-list-block" class="section-block">
+  <h2 class="intro-heading">Top 5 Most Expensive Guinness in Bangkok</h2>
+  <p class="intro-small">
+    Not all pints are priced equally. These are the most expensive Guinness pours in Bangkok right now.
+  </p>
+  <div id="expensive-list"></div>
+</div>
+
       <h2 class="intro-heading">Suggest a pub</h2>
       <p>
         Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
@@ -501,6 +509,41 @@ if (cheapList && pricedPubs.length > 0) {
     `;
 
     cheapList.appendChild(row);
+  });
+}
+
+    const expensiveList = document.getElementById("expensive-list");
+
+if (expensiveList && pricedPubs.length > 0) {
+  const avgPrice = Math.round(
+    pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
+  );
+
+  const mostExpensiveFive = [...pricedPubs]
+    .sort((a, b) => b.price - a.price)
+    .slice(0, 5);
+
+  expensiveList.innerHTML = "";
+
+  mostExpensiveFive.forEach((pub, i) => {
+    const diff = pub.price - avgPrice;
+
+    const row = document.createElement("div");
+    row.className = "happy-item"; // reuse your existing style
+    row.style.animationDelay = `${150 + i * 120}ms`;
+
+    row.innerHTML = `
+      <div class="happy-name">
+        ${escapeHTML(pub.name)}
+      </div>
+
+      <div class="happy-prices">
+        <span class="happy-price">฿${pub.price}</span>
+        <span class="happy-saving">+฿${diff} above average</span>
+      </div>
+    `;
+
+    expensiveList.appendChild(row);
   });
 }
 
