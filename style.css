@@ -849,6 +849,72 @@ body {
     .price-line.saving .value.green {
         font-size: 0.9em;
     }
+
+     #top-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 0 16px;
+        margin: 10px auto 26px;
+    }
+
+    .stat-card {
+        padding: 16px 12px;
+        border-radius: 8px;
+    }
+
+    .stat-number {
+        font-size: 2.6em;
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-size: 0.72em;
+        letter-spacing: 0.04em;
+    }
+
+    /* last card centered on its own row */
+    #top-stats .stat-card:last-child {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 7px);
+        margin: 0 auto;
+    }
+
+     #price-chart {
+        margin-top: 6px;
+    }
+
+    .chart-summary {
+        font-size: 0.78em;
+        gap: 8px;
+        margin-bottom: 4px;
+    }
+
+    .chart-key {
+        font-size: 0.68em;
+        margin-bottom: 12px;
+        line-height: 1.45;
+    }
+
+    .bar-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        margin-bottom: 12px;
+    }
+
+    .bar-label {
+        font-size: 0.9em;
+        line-height: 1.25;
+    }
+
+    .bar-wrap {
+        width: 82%;
+        height: 7px;
+    }
+
+    .bar-price {
+        font-size: 0.86em;
+        text-align: left;
+    }
 }
 
 @media (max-width: 600px) {
