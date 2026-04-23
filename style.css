@@ -570,11 +570,9 @@ body {
 .popup-missing {
     grid-column: span 2;
     text-align: center;
-    font-size: 0.95em;
+    font-size: 1.1em;
     color: #666;
     padding: 16px;
-    border-radius: 16px;
-    background: rgba(0,0,0,0.05);
     font-style: italic;
     line-height: 1.4;
 }
