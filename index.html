@@ -830,6 +830,18 @@ function submitAnswer() {
     }, 1500);
   });
 }
+
+<script>
+window.addEventListener("scroll", () => {
+  const topBar = document.getElementById("top-bar");
+  if (!topBar) return;
+
+  if (window.scrollY > 30) {
+    topBar.classList.add("is-scrolled");
+  } else {
+    topBar.classList.remove("is-scrolled");
+  }
+});
 </script>
 
 </body>
