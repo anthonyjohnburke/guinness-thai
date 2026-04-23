@@ -704,6 +704,11 @@ body {
         grid-template-columns: 1fr;
     }
 
+    #top-bar.is-scrolled #did-you-know-top {
+    transform: scale(0.95);
+    transform-origin: center;
+}
+
     #question {
         font-size: 3em;
         line-height: 0.95;
@@ -753,9 +758,6 @@ body {
         text-align: center;
         padding-top: 0;
     }
-}
-.did-you-know-title {
-    text-align: left;
 }
 
 @media (max-width: 600px) {
