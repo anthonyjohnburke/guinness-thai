@@ -19,14 +19,19 @@ body {
 #top-bar {
     width: calc(100vw - 40px);
     max-width: 1600px;
+    margin: 0 auto;
+    padding: 14px 20px 10px;
+
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 24px;
-    padding: 12px 0 6px;
-    margin: 0 auto;
-    box-sizing: border-box;
+
+    background: #ffffff;   /* 👈 KEY CHANGE */
+    color: #111;           /* dark text */
+    border-radius: 10px;   /* optional but nice */
 }
+
 .top-left {
     display: flex;
     flex-direction: column;
@@ -72,6 +77,18 @@ body {
 
 #did-you-know-text {
     transition: opacity 0.4s ease;
+}
+
+#top-bar #note {
+    color: rgba(0,0,0,0.6);
+}
+
+#top-bar #did-you-know-top {
+    color: rgba(0,0,0,0.8);
+}
+
+#top-bar .did-you-know-title {
+    color: #d4af37; /* keep gold */
 }
 
 /* Title */
