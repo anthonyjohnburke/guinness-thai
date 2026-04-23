@@ -235,11 +235,15 @@ body {
 }
 
 .chart-key {
-    font-size: 0.72em;
-    color: rgba(255,255,255,0.45);
-    margin-bottom: 16px;
-    letter-spacing: 0.05em;
+    font-size: 0.75em;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 18px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+}
+
+.highlight {
+    color: #d4af37;
 }
 
 .chart-error {
