@@ -717,12 +717,12 @@ body {
 .section-divider {
     width: 100%;
     max-width: 1200px;
-    height: 1px;
+    height: 2px;
     margin: 36px auto 16px;
     background: linear-gradient(
         to right,
         transparent,
-        rgba(255,255,255,0.2),
+        rgba(255,255,255,0.4),
         transparent
     );
 }
