@@ -573,6 +573,14 @@ body {
     transform: translateY(-0.5px);
 }
 
+.mapboxgl-popup-close-button {
+    top: 12px !important;
+    right: 16px !important;
+    font-size: 30px !important;
+    line-height: 1 !important;
+    color: #111 !important;
+}
+
 #suggest-section {
     width: 100%;
     max-width: 1400px;
