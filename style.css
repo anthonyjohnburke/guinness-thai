@@ -176,11 +176,11 @@ body {
 /* Layout */
 #intro {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 56px;
+    grid-template-columns: 2.15fr 1fr;
+    gap: 64px;
     max-width: 1500px;
     width: 100%;
-    padding: 0 20px;
+    padding: 0 28px;
     margin-top: 28px;
     box-sizing: border-box;
     align-items: start;
