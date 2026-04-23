@@ -362,7 +362,7 @@ body {
 /* Footer */
 #footer {
     width: 100%;
-    max-width: 900px;
+    max-width: 1500px;
     margin: 60px auto 0;
     padding: 20px;
     border-top: 1px solid rgba(255,255,255,0.05);
@@ -372,7 +372,7 @@ body {
 .footer-inner {
     font-size: 0.7em;
     color: rgba(255,255,255,0.45);
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     line-height: 1.5;
 }
