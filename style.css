@@ -473,6 +473,12 @@ body {
     padding: 18px 18px;
 }
 
+.popup-label,
+.popup-value {
+    position: relative;
+    z-index: 1;
+}
+
 .popup-label {
     font-size: 1.15em;
     color: #666;
@@ -483,6 +489,7 @@ body {
     font-weight: 700;
     text-align: right;
     white-space: nowrap;
+    line-height: 1;
 }
 
 .popup-value-price {
