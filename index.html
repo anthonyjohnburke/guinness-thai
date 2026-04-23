@@ -527,29 +527,37 @@ if (cheapList && pricedPubs.length > 0) {
       .sort((a, b) => a.happyPrice - b.happyPrice)
       .slice(0, 5);
 
-    const medals = ["🥇", "🥈", "🥉"];
+   const medals = ["🥇", "🥈", "🥉"];
 
-    happyPubs.forEach((pub, i) => {
-      const rank = i < 3 ? medals[i] : `${i + 1}.`;
+happyPubs.forEach((pub, i) => {
+  const rank = i < 3 ? medals[i] : `${i + 1}.`;
+  const savingAmount = pub.fullPrice - pub.happyPrice;
 
-      const row = document.createElement("div");
-      row.className = "happy-item";
-      row.style.animationDelay = `${150 + i * 120}ms`;
+  const row = document.createElement("div");
+  row.className = "happy-item";
+  row.style.animationDelay = `${150 + i * 120}ms`;
 
-      row.innerHTML = `
-        <div class="happy-name">
-          <span class="happy-rank">${rank}</span>
-          ${escapeHTML(pub.name)}
-        </div>
-        <div class="happy-prices">
-          <span class="happy-price">฿${pub.happyPrice}</span>
-          <span class="happy-full-price">/ ฿${pub.fullPrice}</span>
-          <span class="happy-saving">-${pub.savingPct}%</span>
-        </div>
-      `;
+  row.innerHTML = `
+    <div class="happy-name">
+      <span class="happy-rank">${rank}</span>
+      ${escapeHTML(pub.name)}
+    </div>
 
-      happyList.appendChild(row);
-    });
+    <div class="happy-prices stacked compact">
+      <div class="price-line">
+        <span class="label">Happy Hour:</span>
+        <span class="value gold">฿${pub.happyPrice}</span>
+      </div>
+
+      <div class="price-line saving">
+        <span class="label">Save:</span>
+        <span class="value green">฿${savingAmount} (-${pub.savingPct}%)</span>
+      </div>
+    </div>
+  `;
+
+  happyList.appendChild(row);
+});
 
     const geojson = {
       type: "FeatureCollection",
