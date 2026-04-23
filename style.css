@@ -533,10 +533,18 @@ body {
     color: #8f1d1d;
 }
 
-.popup-price-box .price-row + .price-row {
+.popup-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    row-gap: 12px;
+    column-gap: 10px;
+}
+
+/* Divider between Guinness and Happy Hour */
+.popup-grid .popup-label:nth-of-type(3) {
     border-top: 1px solid rgba(0,0,0,0.08);
-    margin-top: 10px;
-    padding-top: 10px;
+    padding-top: 12px;
+    grid-column: 1 / -1;
 }
 
 #suggest-section {
