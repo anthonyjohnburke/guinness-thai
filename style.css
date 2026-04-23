@@ -259,23 +259,32 @@ body {
 
 .bar-row {
     display: grid;
-    grid-template-columns: 1.3fr 3fr auto;
-    gap: 12px;
+    grid-template-columns: 230px minmax(0, 1fr) 90px;
+    gap: 16px;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .bar-label {
-    font-size: 0.9em;
+    font-size: 0.82em;
     color: rgba(255,255,255,0.8);
     line-height: 1.25;
 }
 
 .bar-wrap {
+    width: 100%;
     background: rgba(255,255,255,0.06);
     border-radius: 5px;
     height: 8px;
     overflow: hidden;
+}
+
+.bar-price {
+    font-size: 0.82em;
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
+    text-align: right;
+    justify-self: end;
 }
 
 .bar {
@@ -290,11 +299,7 @@ body {
     filter: brightness(1.15);
 }
 
-.bar-price {
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.8);
-    white-space: nowrap;
-}
+
 
 /* Form */
 .inline-form {
