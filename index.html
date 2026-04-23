@@ -472,10 +472,11 @@ if (cheapList && pricedPubs.length > 0) {
   const mostExpensivePrice = pricedPubs[pricedPubs.length - 1].price;
 
   const cheapestFive = pricedPubs.slice(0, 5).map(pub => ({
-    name: pub.name,
-    price: pub.price,
-    saving: mostExpensivePrice - pub.price
-  }));
+  name: pub.name,
+  price: pub.price,
+  saving: mostExpensivePrice - pub.price,
+  savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100)
+}));
 
   cheapList.innerHTML = "";
 
@@ -494,7 +495,8 @@ if (cheapList && pricedPubs.length > 0) {
       </div>
       <div class="happy-prices">
         <span class="happy-price">฿${pub.price}</span>
-        <span class="happy-saving">save ฿${pub.saving}</span>
+        <span class="happy-saving">save ฿${pub.saving} (${pub.savingPct}%)</span>
+        <span class="happy-ref">vs ฿${mostExpensivePrice}</span>
       </div>
     `;
 
