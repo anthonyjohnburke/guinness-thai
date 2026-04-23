@@ -17,19 +17,17 @@ body {
 
 /* Top bar */
 #top-bar {
-    width: calc(100vw - 40px);
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 14px 20px 10px;
+    width: 100%;
+    padding: 18px 40px 14px;
 
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 24px;
 
-    background: #ffffff;   /* 👈 KEY CHANGE */
-    color: #111;           /* dark text */
-    border-radius: 10px;   /* optional but nice */
+    background: #ffffff;
+    color: #111;
+    box-sizing: border-box;
 }
 
 .top-left {
@@ -40,9 +38,9 @@ body {
     gap: 8px;
 }
 #logo {
-    height: 54px;
+    height: 72px;   /* was 54px */
     width: auto;
-    max-width: 320px;
+    max-width: 360px;
     object-fit: contain;
     display: block;
 }
@@ -50,10 +48,11 @@ body {
 /* Note */
 #note {
     font-family: 'Shadows Into Light', cursive;
-    font-size: 1.1em;
-    color: #ffffffa0;
-    margin: 0;
-    text-align: left;
+    font-size: 0.9em;
+    color: rgba(0,0,0,0.6);
+    margin: 0 auto;
+    text-align: center;
+    flex: 1;
 }
 
 /* Did you know */
