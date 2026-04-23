@@ -18,7 +18,7 @@ body {
 /* Top bar */
 #top-bar {
     width: 100%;
-    padding: 18px 40px 14px;
+    padding: 22px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
