@@ -546,12 +546,24 @@ body {
     position: relative;
 }
 
-/* divider above the Happy Hour row */
-.popup-grid .popup-label:nth-child(3),
-.popup-grid .popup-value:nth-child(4) {
-    border-top: 1px solid rgba(0,0,0,0.06);
-    padding-top: 12px;
-    margin-top: 2px;
+.popup-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 10px;
+    row-gap: 22px;
+    align-items: center;
+}
+
+.popup-grid::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    transform: translateY(-0.5px);
 }
 
 #suggest-section {
