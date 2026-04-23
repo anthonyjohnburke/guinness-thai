@@ -895,26 +895,29 @@ body {
         line-height: 1.45;
     }
 
-    .bar-row {
-        grid-template-columns: 1fr;
-        gap: 5px;
-        margin-bottom: 12px;
-    }
+   .bar-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-bottom: 14px;
+}
 
-    .bar-label {
-        font-size: 0.9em;
-        line-height: 1.25;
-    }
+.bar-label {
+    font-size: 0.9em;
+    line-height: 1.25;
+}
 
-    .bar-wrap {
-        width: 75%;
-        height: 7px;
-    }
+.bar-wrap {
+    width: 100%;
+    max-width: none;
+    height: 7px;
+}
 
-    .bar-price {
-        font-size: 0.86em;
-        text-align: left;
-    }
+.bar-price {
+    font-size: 0.9em;
+    text-align: right;
+    white-space: nowrap;
+}
 }
 
 @media (max-width: 600px) {
