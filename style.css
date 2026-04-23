@@ -1023,8 +1023,8 @@ body {
     }
 
     .bar-price {
-        text-align: left;
-    }
+    text-align: right;
+}
 
     .popup-card.modern {
         width: 220px;
