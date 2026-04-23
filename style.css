@@ -16,19 +16,26 @@ body {
 }
 
 /* Top bar */
-#top-section {
-    background-color: white;
+#top-bar {
     width: 100%;
-    height: 14vh;
+    max-width: 1600px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 20px 20px 10px;
     box-sizing: border-box;
 }
 
+.top-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
 #logo {
-    height: 80%;
+    height: 95px;
     max-height: 95px;
     object-fit: contain;
 }
@@ -38,7 +45,31 @@ body {
     font-family: 'Shadows Into Light', cursive;
     font-size: 1.1em;
     color: #ffffffa0;
-    margin: 12px 0 30px;
+    margin: 10px 0 0;
+    text-align: left;
+}
+
+/* Did you know */
+#did-you-know-top {
+    max-width: 280px;
+    text-align: left;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.82);
+    padding-top: 8px;
+}
+
+.did-you-know-title {
+    font-size: 0.72em;
+    font-weight: 700;
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+
+#did-you-know-text {
+    transition: opacity 0.4s ease;
 }
 
 /* Title */
@@ -410,7 +441,6 @@ body {
     color: #111;
 }
 
-
 /* Stats */
 #top-stats {
     width: 100%;
@@ -467,7 +497,6 @@ body {
     font-size: 0.9em;
     padding: 6px 0;
     border-bottom: 1px solid rgba(255,255,255,0.05);
-
     opacity: 0;
     transform: translateY(8px);
     animation: happyReveal 0.5s ease forwards;
@@ -568,7 +597,6 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-/* extra spacing before next section */
 .section-block + .intro-heading {
     margin-top: 22px;
 }
@@ -616,7 +644,6 @@ body {
     margin-top: 2px;
 }
 
-
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
@@ -626,6 +653,7 @@ body {
     .intro-col-wide {
         border-right: none;
         padding-right: 0;
+        min-height: auto;
     }
 
     #top-stats {
@@ -646,6 +674,19 @@ body {
     #footer {
         max-width: 100%;
         margin-top: 45px;
+    }
+}
+
+@media (max-width: 768px) {
+    #top-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    #did-you-know-top {
+        max-width: 100%;
+        padding-top: 0;
     }
 }
 
@@ -675,15 +716,12 @@ body {
     .last-updated {
         font-size: 0.64em;
     }
-}
 
-@media (max-width: 768px) {
-  #top-bar {
-    flex-direction: column;
-    gap: 10px;
-  }
+    #logo {
+        height: 74px;
+    }
 
-  #did-you-know-top {
-    max-width: 100%;
-  }
+    #note {
+        font-size: 1em;
+    }
 }
