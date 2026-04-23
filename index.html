@@ -68,6 +68,14 @@
       <div class="stat-number" id="stat-gap">–</div>
       <div class="stat-label">Price gap</div>
     </div>
+
+    <div class="stat-card">
+  <div class="stat-number" id="stat-average">–</div>
+  <div class="stat-label">Average price</div>
+</div>
+
+
+    
   </div>
 
   <div id="intro">
@@ -395,11 +403,15 @@ fetch(SHEET_URL)
       const max = Math.max(...pricedPubs.map(p => p.price));
       const min = Math.min(...pricedPubs.map(p => p.price));
       const gap = max - min;
+      const avg = Math.round(
+  pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
+);
 
       animateCount("stat-pubs", pricedPubs.length, "", 1000);
       animateCount("stat-cheapest", min, "฿", 1200);
       animateCount("stat-expensive", max, "฿", 1400);
       animateCount("stat-gap", gap, "฿", 1600);
+      animateCount("stat-average", avg, "฿", 1800);
 
       const cheapestPub = pricedPubs[0];
       const mostExpensivePub = pricedPubs[pricedPubs.length - 1];
