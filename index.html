@@ -691,30 +691,25 @@ fetch(SHEET_URL)
       });
 
       map.addLayer({
-        id: 'pubs-layer',
-        type: 'symbol',
-        source: 'pubs',
-        layout: {
-          'icon-image': 'pint-icon',
-          'icon-size': [
-  'case',
-  ['boolean', ['feature-state', 'hover'], false],
-  0.9,
-  0.75
-],
-'icon-anchor': 'bottom',
-          'icon-offset': [0, 6],
-          'icon-allow-overlap': true
-        },
-        paint: {
-  'icon-opacity': [
-    'case',
-    ['boolean', ['feature-state', 'hover'], false],
-    1,
-    0.4
-  ]
-}
-      });
+  id: 'pubs-layer',
+  type: 'symbol',
+  source: 'pubs',
+  layout: {
+    'icon-image': 'pint-icon',
+    'icon-size': 0.75,
+    'icon-anchor': 'bottom',
+    'icon-offset': [0, 6],
+    'icon-allow-overlap': true
+  },
+  paint: {
+    'icon-opacity': [
+      'case',
+      ['boolean', ['feature-state', 'hover'], false],
+      1,
+      0.4
+    ]
+  }
+});
 
       map.on('mousemove', 'pubs-layer', (e) => {
   map.getCanvas().style.cursor = 'pointer';
