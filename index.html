@@ -895,15 +895,16 @@ function typeWriter(el, text, speed = 35) {
   type();
 }
 
-// Run on load
-window.addEventListener("load", () => {
+  window.addEventListener("load", () => {
   const el = document.getElementById("question");
   if (!el) return;
 
   const text = el.getAttribute("data-text");
-  typeWriter(el, text, 28);
-});
 
+  setTimeout(() => {
+    typeWriter(el, text, 28);
+  }, 400);
+});
   
 </script>
 
