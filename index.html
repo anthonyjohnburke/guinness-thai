@@ -814,11 +814,18 @@ map.on('mouseleave', 'pubs-layer', () => {
       });
     };
 
-    if (map.isStyleLoaded()) {
-      loadIcon();
-    } else {
-      map.once('load', loadIcon);
-    }
+   if (map.isStyleLoaded()) {
+  loadIcon();
+} else {
+  map.once('load', loadIcon);
+}
+
+if (window.innerWidth <= 768) {
+  map.on('click', () => {
+    map.dragPan.enable();
+  });
+}
+    
   })
   .catch(err => {
     console.error(err);
@@ -1012,8 +1019,8 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
   }
 
   zoomToPub(best.name, pubs);
-   highlightChartPub(targetPub.name);
-}
+highlightChartPub(best.name);
+ }
 
 </script>
 
