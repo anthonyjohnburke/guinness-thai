@@ -602,12 +602,62 @@ body {
 #suggest-section {
     width: 100%;
     max-width: 1500px;
-    padding: 20px 15px;
+    padding: 28px 24px;
     box-sizing: border-box;
     text-align: left;
     margin-top: 10px;
     background: rgba(255,255,255,0.02);
     border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.nearby-col {
+    border-left: 1px solid rgba(255,255,255,0.08);
+    padding-left: 40px;
+}
+
+#find-nearby-btn {
+    background: #8bc34a;
+    color: #061006;
+    border: none;
+    padding: 16px 28px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+#find-nearby-btn:hover {
+    background: #9bd75a;
+    transform: translateY(-1px);
+}
+
+#find-nearby-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (max-width: 768px) {
+    #suggest-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .nearby-col {
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding-left: 0;
+        padding-top: 26px;
+    }
+
+    #find-nearby-btn {
+        width: 100%;
+    }
 }
 
 /* Stats */
