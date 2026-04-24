@@ -347,9 +347,16 @@ if (window.innerWidth <= 768) {
 if (hint) {
   hint.style.opacity = 0;
 
+ setTimeout(() => {
+  typeWriter(el, text, 28);
+
+  el.classList.add("cursor-active");
+
   setTimeout(() => {
-    hint.style.display = "none";
-  }, 400);
+    el.classList.remove("cursor-active");
+  }, 2400);
+
+}, 400);
 }
      });
 }
