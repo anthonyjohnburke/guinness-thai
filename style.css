@@ -365,7 +365,7 @@ body {
 #footer {
     width: 100%;
     max-width: 1500px;
-    margin: 56px auto 0;
+    margin: 20px auto 0;
     padding: 28px 28px 36px;
     border-top: 1px solid rgba(255,255,255,0.08);
     box-sizing: border-box;
@@ -580,14 +580,13 @@ body {
 
 #suggest-section {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1500px;
     padding: 20px 15px;
     box-sizing: border-box;
     text-align: left;
     margin-top: 10px;
     background: rgba(255,255,255,0.02);
     border-radius: 12px;
-    padding-bottom: 30px;
 }
 
 /* Stats */
@@ -834,10 +833,6 @@ body {
         animation: none;
     }
 
-    #footer {
-        max-width: 100%;
-        margin-top: 45px;
-    }
 }
 
 @media (max-width: 768px) {
