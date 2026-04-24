@@ -1091,10 +1091,6 @@ body {
         white-space: nowrap;
     }
 
-    #submit-btn {
-        width: 100%;
-    }
-
     .inline-form {
         flex-direction: row;
         align-items: stretch;
