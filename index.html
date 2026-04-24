@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Best Guinness in Bangkok</title>
+<title>Best Guinness in Bangkok | Prices, Maps & Cheapest Pints</title>
   <meta name="description" content="Track Guinness prices across Bangkok and find the bars pouring the best-value pint." />
   <meta name="keywords" content="Guinness Bangkok, best Guinness Bangkok, Irish pubs Bangkok">
   <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -16,8 +16,38 @@
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
 
+  <link rel="canonical" href="https://guinnessthailand.com">
+  <link rel="preconnect" href="https://api.mapbox.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+script-src 'self' 'unsafe-inline' https://api.mapbox.com https://www.googletagmanager.com;
+    style-src 'self' 'unsafe-inline' https://api.mapbox.com https://fonts.googleapis.com;
+  font-src https://fonts.gstatic.com;
+  img-src 'self' data:;
+  connect-src https://opensheet.elk.sh https://api.mapbox.com;
+">
+
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Best Guinness in Bangkok">
+<meta property="og:description" content="Track Guinness prices across Bangkok and find the best-value pint.">
+<meta property="og:image" content="https://guinnessthailand.com/preview.jpg">
+  <meta property="og:url" content="https://guinnessthailand.com">
+<meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Best Guinness in Bangkok">
+<meta name="twitter:description" content="Find the best-value Guinness in Bangkok 🍻">
+<meta name="twitter:image" content="https://guinnessthailand.com/preview.jpg">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BP0BPQ5GP"></script>
@@ -27,6 +57,18 @@
     gtag('js', new Date());
     gtag('config', 'G-8BP0BPQ5GP');
   </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Best Guinness in Bangkok",
+  "url": "https://guinnessthailand.com",
+  "description": "Track Guinness prices across Bangkok and find the best-value pint.",
+  "inLanguage": "en"
+}
+</script>
+  
 </head>
 
 <body>
@@ -290,6 +332,11 @@ const map = new mapboxgl.Map({
   zoom: INITIAL_VIEW.zoom,
   projection: 'mercator'
 });
+
+if (window.innerWidth <= 768) {
+  map.dragPan.disable();
+  map.touchZoomRotate.enable();
+}
 
 if (window.innerWidth <= 768) {
   map.on('click', () => {
