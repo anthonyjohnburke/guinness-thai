@@ -292,8 +292,12 @@ const map = new mapboxgl.Map({
 });
 
 if (window.innerWidth <= 768) {
-  map.dragPan.disable();
-  map.touchZoomRotate.enable();
+  map.on('click', () => {
+    map.dragPan.enable();
+
+    const hint = document.querySelector(".map-mobile-hint");
+    if (hint) hint.style.opacity = 0;
+  });
 }
 
   let hoveredId = null;
