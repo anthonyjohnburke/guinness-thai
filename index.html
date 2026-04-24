@@ -51,9 +51,7 @@
     <div id="map"></div>
   </section>
 
-  <h1 id="question">
-    Who’s pouring the finest pint of Guinness in Bangkok?
-  </h1>
+  <h1 id="question" data-text="Who’s pouring the finest pint of Guinness in Bangkok?"></h1>
 
   <div id="top-stats">
     <div class="stat-card">
@@ -881,6 +879,32 @@ window.addEventListener("scroll", () => {
     topBar.classList.remove("is-scrolled");
   }
 });
+
+function typeWriter(el, text, speed = 35) {
+  let i = 0;
+  el.textContent = "";
+
+  function type() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
+}
+
+// Run on load
+window.addEventListener("load", () => {
+  const el = document.getElementById("question");
+  if (!el) return;
+
+  const text = el.getAttribute("data-text");
+  typeWriter(el, text, 28);
+});
+
+  
 </script>
 
 </body>
