@@ -147,10 +147,13 @@ body {
 }
 
 #question::after {
-    content: "|";
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: currentColor;
     margin-left: 4px;
-    font-weight: 300;
-    opacity: 1;
+    vertical-align: middle;
     animation: blink 0.8s ease-in-out 3;
 }
 
