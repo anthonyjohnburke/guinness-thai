@@ -281,6 +281,8 @@ const map = new mapboxgl.Map({
   projection: 'mercator'
 });
 
+  let hoveredId = null;
+
 map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 map.scrollZoom.disable();
 
@@ -606,7 +608,7 @@ fetch(SHEET_URL)
         p.price &&
         !isNaN(parseFloat(p.price))
       )
-      .map(p => {
+      .map((p, i) => {
         const hh = parseFloat(p.happy_hour_price);
         const full = parseFloat(p.price);
         const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
@@ -658,7 +660,7 @@ fetch(SHEET_URL)
       type: "FeatureCollection",
       features: pubs
         .filter(p => p.lat && p.lon)
-        .map(p => {
+        .map((p, i) => {
           const lat = parseFloat(p.lat);
           const lon = parseFloat(p.lon);
 
@@ -694,8 +696,13 @@ fetch(SHEET_URL)
         source: 'pubs',
         layout: {
           'icon-image': 'pint-icon',
-          'icon-size': 0.75,
-          'icon-anchor': 'bottom',
+          'icon-size': [
+  'case',
+  ['boolean', ['feature-state', 'hover'], false],
+  0.9,
+  0.75
+],
+'icon-anchor': 'bottom',
           'icon-offset': [0, 6],
           'icon-allow-overlap': true
         },
@@ -709,15 +716,38 @@ fetch(SHEET_URL)
 }
       });
 
-      map.on('mouseenter', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = 'pointer';
-        map.setPaintProperty('pubs-layer', 'icon-opacity', 1);
-      });
+      map.on('mousemove', 'pubs-layer', (e) => {
+  map.getCanvas().style.cursor = 'pointer';
 
-      map.on('mouseleave', 'pubs-layer', () => {
-        map.getCanvas().style.cursor = '';
-        map.setPaintProperty('pubs-layer', 'icon-opacity', 0.6);
-      });
+  if (e.features.length > 0) {
+    if (hoveredId !== null) {
+      map.setFeatureState(
+        { source: 'pubs', id: hoveredId },
+        { hover: false }
+      );
+    }
+
+    hoveredId = e.features[0].id;
+
+    map.setFeatureState(
+      { source: 'pubs', id: hoveredId },
+      { hover: true }
+    );
+  }
+});
+
+map.on('mouseleave', 'pubs-layer', () => {
+  map.getCanvas().style.cursor = '';
+
+  if (hoveredId !== null) {
+    map.setFeatureState(
+      { source: 'pubs', id: hoveredId },
+      { hover: false }
+    );
+  }
+
+  hoveredId = null;
+});
 
       map.on('click', 'pubs-layer', (e) => {
         const p = e.features[0].properties;
