@@ -114,26 +114,36 @@
 </div> <!-- END #intro -->
   <div class="section-divider"></div>
   <div id="suggest-section">
+  <div class="suggest-col">
     <h2 class="intro-heading">Suggest a pub</h2>
-<p class="intro-small">
-  Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
-</p>
+    <p class="intro-small">
+      Bangkok’s full of Irish pubs and lively bars, but where’s the pint that truly pours like home? Share your go-to spot for the smoothest Guinness in town.
+    </p>
 
-      <div class="inline-form">
-        <input
-          type="text"
-          id="response"
-          placeholder="Tell me which bar has the best pint..."
-          maxlength="150"
-          autocomplete="off"
-        />
-        <input type="text" id="website" class="hp-field" tabindex="-1" autocomplete="off" />
-        <button id="submit-btn" onclick="submitAnswer()">Submit</button>
-      </div>
+    <div class="inline-form">
+      <input
+        type="text"
+        id="response"
+        placeholder="Tell me which bar has the best pint..."
+        maxlength="150"
+        autocomplete="off"
+      />
+      <input type="text" id="website" class="hp-field" tabindex="-1" autocomplete="off" />
+      <button id="submit-btn" onclick="submitAnswer()">Submit</button>
     </div>
+  </div>
+
+  <div class="nearby-col">
+    <h2 class="intro-heading">Find the cheapest pint near you</h2>
+    <p class="intro-small">
+      Allow location access and we’ll point you to the best-value Guinness within 5km.
+    </p>
+
+    <button id="find-nearby-btn">Find nearest deal</button>
+  </div>
+</div>
 
   <footer id="footer">
-    <button id="find-nearby-btn">Find cheapest pint near you</button>
     <div class="footer-inner">
       <p>
         Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy or completeness of any listings.
