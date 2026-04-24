@@ -663,6 +663,7 @@ body {
 
 .map-mobile-hint {
     display: none;
+    transition: opacity 0.4s ease;
 }
 
 @media (max-width: 768px) {
@@ -687,11 +688,13 @@ body {
         min-height: 360px;
     }
 
-    .map-mobile-hint {
+   .map-mobile-hint {
         display: block;
         font-size: 0.75em;
         color: rgba(255,255,255,0.65);
         margin-top: 8px;
+        text-align: center;
+        transition: opacity 0.4s ease; /* optional here too */
     }
 }
 
