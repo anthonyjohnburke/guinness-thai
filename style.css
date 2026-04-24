@@ -923,6 +923,10 @@ body {
         animation: none;
     }
 
+    .hp-field {
+    display: none !important;
+}
+
 }
 
 @media (max-width: 768px) {
@@ -1089,6 +1093,22 @@ body {
 
     #submit-btn {
         width: 100%;
+    }
+
+    .inline-form {
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .inline-form input#response {
+        flex: 0 1 75%;
+        width: 75%;
+    }
+
+    #submit-btn {
+        flex: 0 0 auto;
+        width: auto;
     }
 }
 
