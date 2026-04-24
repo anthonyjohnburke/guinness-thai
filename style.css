@@ -154,6 +154,11 @@ body {
     background: currentColor;
     margin-left: 4px;
     vertical-align: middle;
+    opacity: 0; /* hidden initially */
+}
+
+#question.cursor-active::after {
+    opacity: 1;
     animation: blink 0.8s ease-in-out 3;
 }
 
