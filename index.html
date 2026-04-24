@@ -889,12 +889,14 @@ function typeWriter(el, text, speed = 35) {
       el.textContent += text.charAt(i);
       i++;
       setTimeout(type, speed);
+    } else {
+      // 👇 start cursor AFTER typing finishes
+      el.classList.add("cursor-active");
     }
   }
 
   type();
 }
-
   window.addEventListener("load", () => {
   const el = document.getElementById("question");
   if (!el) return;
