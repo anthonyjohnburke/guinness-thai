@@ -1071,6 +1071,11 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
 
   zoomToPub(best.name, pubs);
 highlightChartPub(best.name);
+   const row = Array.from(document.querySelectorAll('.bar-row'))
+  .find(r => r.dataset.pubName === best.name);
+if (row) {
+  row.scrollIntoView({ behavior: "smooth", block: "center" });
+}
  }
 
 </script>
