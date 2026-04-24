@@ -309,7 +309,7 @@ body {
 }
 
 .bar-price {
-    font-size: 0.9em;
+    font-size: 1em;
     color: rgba(255,255,255,0.8);
     white-space: nowrap;
     text-align: right;
