@@ -668,13 +668,14 @@ fetch(SHEET_URL)
           bounds.extend([lon, lat]);
 
           return {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [lon, lat]
-            },
-            properties: p
-          };
+  type: "Feature",
+  id: `${p.name}-${i}`, // unique id
+  geometry: {
+    type: "Point",
+    coordinates: [lon, lat]
+  },
+  properties: p
+};
         })
         .filter(Boolean)
     };
