@@ -295,9 +295,15 @@ if (window.innerWidth <= 768) {
   map.on('click', () => {
     map.dragPan.enable();
 
-    const hint = document.querySelector(".map-mobile-hint");
-    if (hint) hint.style.opacity = 0;
-  });
+  const hint = document.querySelector(".map-mobile-hint");
+if (hint) {
+  hint.style.opacity = 0;
+
+  setTimeout(() => {
+    hint.style.display = "none";
+  }, 400);
+}
+     });
 }
 
   let hoveredId = null;
@@ -823,12 +829,6 @@ map.on('mouseleave', 'pubs-layer', () => {
 } else {
   map.once('load', loadIcon);
 }
-
-if (window.innerWidth <= 768) {
-  map.on('click', () => {
-    map.dragPan.enable();
-  });
-}
     
   })
   .catch(err => {
@@ -1012,7 +1012,7 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
   if (didYouKnowEl) {
     if (!isInBangkok) {
       didYouKnowEl.innerHTML = `
-        Looks like you're outside Bangkok — showing closest available pubs.<br>
+        Looks like you're outside Bangkok — showing the best-value option available.<br>
         Best option: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)
       `;
     } else {
