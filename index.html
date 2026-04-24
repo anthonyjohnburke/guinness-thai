@@ -331,6 +331,11 @@ fetch(SHEET_URL)
     const bounds = new mapboxgl.LngLatBounds();
     let validCount = 0;
 
+    document.getElementById("find-nearby-btn")
+  .addEventListener("click", () => {
+    findNearestCheapest(pubs, zoomToPub);
+  });
+
     const chart = document.getElementById("price-chart");
     const updatedEl = document.getElementById("last-updated");
     const happyList = document.getElementById("happy-list");
@@ -908,6 +913,65 @@ function typeWriter(el, text, speed = 35) {
     typeWriter(el, text, 28);
   }, 400);
 });
+
+  function findNearestCheapest(pubs, zoomToPub) {
+  if (!navigator.geolocation) {
+    alert("Geolocation not supported");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(position => {
+    const userLat = position.coords.latitude;
+    const userLon = position.coords.longitude;
+
+    processNearest(userLat, userLon, pubs, zoomToPub);
+  }, () => {
+    alert("Location access denied");
+  });
+}
+
+  function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+
+  const a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI/180) *
+    Math.cos(lat2 * Math.PI/180) *
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+  function processNearest(userLat, userLon, pubs, zoomToPub) {
+  const nearby = pubs
+    .filter(p => p.lat && p.lon && p.price)
+    .map(p => ({
+      ...p,
+      distance: getDistance(userLat, userLon, parseFloat(p.lat), parseFloat(p.lon))
+    }))
+    .filter(p => p.distance < 5); // 🔥 radius in km
+
+  if (nearby.length === 0) {
+    alert("No pubs nearby 😢");
+    return;
+  }
+
+  nearby.sort((a, b) => a.price - b.price);
+
+  const best = nearby[0];
+
+const didYouKnowEl = document.getElementById("did-you-know-text");
+
+if (didYouKnowEl) {
+  didYouKnowEl.innerHTML = `
+    Best pint near you: <strong>${best.name}</strong> — ฿${best.price}
+  `;
+}
+
+zoomToPub(best.name, pubs);}
   
 </script>
 
