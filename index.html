@@ -423,7 +423,7 @@ fetch(SHEET_URL)
             .setHTML(html)
             .addTo(map);
         }, 700);
-      }, 550);
+      }, 150);
     }
 
     const pricedPubs = pubs
@@ -972,33 +972,43 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
   return R * c;
 }
 
-  function processNearest(userLat, userLon, pubs, zoomToPub) {
-  const nearby = pubs
+ function processNearest(userLat, userLon, pubs, zoomToPub) {
+
+  const allWithDistance = pubs
     .filter(p => p.lat && p.lon && p.price)
     .map(p => ({
       ...p,
       distance: getDistance(userLat, userLon, parseFloat(p.lat), parseFloat(p.lon))
-    }))
-    .filter(p => p.distance < 5); // 🔥 radius in km
+    }));
 
-  if (nearby.length === 0) {
-    alert("No pubs nearby 😢");
-    return;
+  const nearby = allWithDistance.filter(p => p.distance < 5);
+
+  const isInBangkok = allWithDistance.some(p => p.distance < 20);
+
+  const candidates = nearby.length > 0 ? nearby : allWithDistance;
+
+  candidates.sort((a, b) => a.price - b.price);
+  const best = candidates[0];
+
+  const didYouKnowEl = document.getElementById("did-you-know-text");
+
+  if (didYouKnowEl) {
+    if (!isInBangkok) {
+      didYouKnowEl.innerHTML = `
+        Looks like you're outside Bangkok — showing closest available pubs.<br>
+        Best option: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)
+      `;
+    } else {
+      didYouKnowEl.innerHTML = `
+        Best pint near you: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)
+      `;
+    }
   }
 
-  nearby.sort((a, b) => a.price - b.price);
-
-  const best = nearby[0];
-
-const didYouKnowEl = document.getElementById("did-you-know-text");
-
-if (didYouKnowEl) {
-  didYouKnowEl.innerHTML = `
-Best pint near you: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)  `;
+  zoomToPub(best.name, pubs);
+   highlightChartPub(targetPub.name);
 }
 
-zoomToPub(best.name, pubs);}
-  
 </script>
 
 </body>
