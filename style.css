@@ -1106,6 +1106,18 @@ body {
         flex: 0 0 auto;
         width: auto;
     }
+
+    #submit-btn,
+    #find-nearby-btn {
+        font-size: 0.9em;   /* 👈 slightly smaller */
+        font-weight: 700;   /* 👈 softer weight */
+        padding: 14px 20px; /* 👈 slightly tighter */
+    }
+
+.footer-inner {
+    font-size: 0.68em;
+    line-height: 1.7;
+}
 }
 
 @media (max-width: 600px) {
