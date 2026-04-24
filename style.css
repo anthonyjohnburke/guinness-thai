@@ -663,6 +663,7 @@ body {
 
 .map-mobile-hint {
     display: none;
+    opacity: 1; /* 👈 ADD THIS */
     transition: opacity 0.4s ease;
 }
 
