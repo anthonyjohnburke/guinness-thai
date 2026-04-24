@@ -338,32 +338,26 @@ body {
 
 /* Form */
 .inline-form {
-    margin-top: 20px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
+    gap: 12px;
+    align-items: stretch;   /* 👈 THIS is key */
+    max-width: 520px;
+    justify-content: space-between;
+}
+
+.inline-form input[type="text"] {
+    flex: 1;
 }
 
 .inline-form input {
     width: 100%;
-    max-width: 420px;
-    padding: 12px;
-    border-radius: 6px;
+    padding: 16px 14px;   /* 👈 match button height */
+    border-radius: 8px;   /* 👈 match button */
     border: none;
     background: #f2f2f2;
     color: #222;
     box-sizing: border-box;
-}
-
-.inline-form button {
-    background: #d4af37;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #000;
+    font-size: 1em;
 }
 
 .inline-form button:hover {
@@ -380,6 +374,31 @@ body {
     left: -9999px !important;
     opacity: 0 !important;
     pointer-events: none !important;
+}
+
+#submit-btn {
+    background: #d4af37;
+    color: #000;
+    border: none;
+    padding: 16px 28px;   /* match green button */
+    border-radius: 8px;
+    font-size: 1em;       /* match */
+    font-weight: 800;     /* match */
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#submit-btn:hover {
+    background: #c49c2f;
+    transform: translateY(-1px);
+}
+
+#submit-btn,
+#find-nearby-btn {
+    padding: 16px 28px;
+    font-size: 1em;
+    font-weight: 800;
+    border-radius: 8px;
 }
 
 /* Footer */
@@ -1066,6 +1085,10 @@ body {
         font-size: 0.9em;
         text-align: right;
         white-space: nowrap;
+    }
+
+    #submit-btn {
+        width: 100%;
     }
 }
 
