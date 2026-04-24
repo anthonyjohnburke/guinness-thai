@@ -661,6 +661,10 @@ body {
     transform: none;
 }
 
+.map-mobile-hint {
+    display: none;
+}
+
 @media (max-width: 768px) {
     #suggest-section {
         grid-template-columns: 1fr;
@@ -676,6 +680,18 @@ body {
 
     #find-nearby-btn {
         width: 100%;
+    }
+
+     #map {
+        height: 48vh;
+        min-height: 360px;
+    }
+
+    .map-mobile-hint {
+        display: block;
+        font-size: 0.75em;
+        color: rgba(255,255,255,0.65);
+        margin-top: 8px;
     }
 }
 
