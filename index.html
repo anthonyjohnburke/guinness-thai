@@ -291,6 +291,11 @@ const map = new mapboxgl.Map({
   projection: 'mercator'
 });
 
+if (window.innerWidth <= 768) {
+  map.dragPan.disable();
+  map.touchZoomRotate.enable();
+}
+
   let hoveredId = null;
   let userMarker = null;
 
