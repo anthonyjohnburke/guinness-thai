@@ -281,6 +281,7 @@ const map = new mapboxgl.Map({
 });
 
   let hoveredId = null;
+  let userMarker = null;
 
 map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 map.scrollZoom.disable();
@@ -331,9 +332,18 @@ fetch(SHEET_URL)
     const bounds = new mapboxgl.LngLatBounds();
     let validCount = 0;
 
-    document.getElementById("find-nearby-btn")
+   document.getElementById("find-nearby-btn")
   .addEventListener("click", () => {
+    const btn = document.getElementById("find-nearby-btn");
+    btn.textContent = "Finding best pint…";
+    btn.disabled = true;
+
     findNearestCheapest(pubs, zoomToPub);
+
+    setTimeout(() => {
+      btn.textContent = "Find cheapest pint near you";
+      btn.disabled = false;
+    }, 3000);
   });
 
     const chart = document.getElementById("price-chart");
@@ -923,6 +933,13 @@ function typeWriter(el, text, speed = 35) {
   navigator.geolocation.getCurrentPosition(position => {
     const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
+    if (userMarker) {
+  userMarker.remove();
+}
+
+userMarker = new mapboxgl.Marker({ color: "#ffffff" })
+  .setLngLat([userLon, userLat])
+  .addTo(map);
 
     processNearest(userLat, userLon, pubs, zoomToPub);
   }, () => {
@@ -967,8 +984,7 @@ const didYouKnowEl = document.getElementById("did-you-know-text");
 
 if (didYouKnowEl) {
   didYouKnowEl.innerHTML = `
-    Best pint near you: <strong>${best.name}</strong> — ฿${best.price}
-  `;
+Best pint near you: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)  `;
 }
 
 zoomToPub(best.name, pubs);}
