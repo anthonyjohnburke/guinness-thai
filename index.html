@@ -335,11 +335,6 @@ const map = new mapboxgl.Map({
 });
 
 if (window.innerWidth <= 768) {
-  map.dragPan.disable();
-  map.touchZoomRotate.enable();
-}
-
-if (window.innerWidth <= 768) {
   map.on('click', () => {
     map.dragPan.enable();
 
