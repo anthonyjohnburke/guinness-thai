@@ -584,19 +584,6 @@ input, button {
     max-width: 100%;
 }
 
-
-
-.popup-grid.has-happy-hour::after {
-    content: "";
-    position: absolute;
-    left: 18px;
-    right: 18px;
-    top: 50%;
-    height: 1px;
-    background: rgba(0,0,0,0.06);
-    transform: translateY(-0.5px);
-}
-
 .popup-label,
 .popup-value {
     position: relative;
