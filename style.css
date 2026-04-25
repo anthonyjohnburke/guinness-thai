@@ -614,15 +614,12 @@ font-size: 2.5em;
 
 .popup-label,
 .popup-value {
-    position: relative;
-    z-index: 1.15;
-    font-size: 1.15em;
+  font-size: 1.2em;
 }
 
 .popup-label {
-    font-size: 1.15em;
-    color: #666;
-    font-weight: 600;
+  color: #666;
+  font-weight: 500; /* slightly lighter than value */
 }
 
 .popup-value {
@@ -640,7 +637,6 @@ font-size: 2.5em;
 
 .popup-value-happy {
     color: #d4af37;
-    font-size: 1.3em;
     font-weight: 800;
 }
 
@@ -654,11 +650,11 @@ font-size: 2.5em;
   flex: 1;
   text-align: center;
   padding: 10px 12px;
-  font-size: 13px;
+  font-size: 0.95em;   /* 👈 same everywhere */
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .popup-actions a:first-child {
@@ -1114,11 +1110,15 @@ font-size: 2.5em;
   }
 
   .popup-actions a {
-    flex: 1;
-    padding: 10px 8px;
-    font-size: 13px;
-    border-radius: 10px;
-  }
+  flex: 1;
+  text-align: center;
+  padding: 10px 12px;
+  font-size: 0.95em;   /* 👈 same everywhere */
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
 
   /* 👇 Tighten the "under investigation" box */
   .popup-price-box:empty,
