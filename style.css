@@ -1090,7 +1090,7 @@ top: 4px !important;
   }
 
   .mapboxgl-popup-content {
-    padding: 12px 12px 14px;
+    padding: 0px 12px 14px;
     border-radius: 14px;
     max-width: 260px;
   }
