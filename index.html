@@ -350,7 +350,6 @@ const map = new mapboxgl.Map({
 
 if (window.innerWidth <= 768) {
   map.dragPan.disable();
-  map.scrollZoom.disable();
   map.touchZoomRotate.disableRotation();
 
   const unlockBtn = document.getElementById("map-unlock-btn");
