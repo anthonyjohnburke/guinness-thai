@@ -693,9 +693,12 @@ font-size: 2.5em;
 
 .popup-row {
   display: flex;
-  justify-content: space-between;
   padding: 12px 0;
   border-bottom: 1px solid rgba(0,0,0,0.08);
+  align-items: center;
+  justify-content: flex-start;   /* 👈 key change */
+  gap: 10px;                     /* 👈 controls spacing */
+}
 }
 
 .popup-row:last-child {
