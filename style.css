@@ -958,6 +958,13 @@ font-size: 2.5em;
         rgba(255,255,255,0.4),
         transparent
     );
+
+ .popup-actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 18px;   /* 👈 increase bottom padding */
+  margin-top: 4px;    
+}
 }
 
 /* Mobile */
@@ -1138,14 +1145,6 @@ font-size: 2.5em;
   .popup-price-happy {
     font-size: 15px;
   }
-
-  /* 👇 Make buttons sit side by side */
- .popup-actions {
-  display: flex;
-  gap: 8px;
-  padding: 10px 14px 18px;   /* 👈 increase bottom padding */
-  margin-top: 4px;    
-}
 
   /* 👇 Tighten the "under investigation" box */
   .popup-price-box:empty,
