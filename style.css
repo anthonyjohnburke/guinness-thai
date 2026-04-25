@@ -447,6 +447,15 @@ input, button {
     border-radius: 8px;
 }
 
+#map-unlock-btn {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.06); }
+}
+
 /* Footer */
 #footer {
     width: 100%;
