@@ -1071,6 +1071,10 @@ input, button {
     margin-bottom: 2px;
   }
 
+ .popup-header .popup-meta {
+    font-size: 0.85em;
+  }
+        
   .popup-title-text {
     font-size: 18px;
     line-height: 1.2;
