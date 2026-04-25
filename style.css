@@ -591,7 +591,8 @@ input, button {
 }
 
 .popup-header .popup-meta {
-  color: rgba(255,255,255,0.85);
+color: rgba(255,255,255,0.85);
+margin-bottom: 6px;
 }
 
 .popup-header .popup-title-text {
@@ -631,16 +632,16 @@ font-size: 2.5em;
 
 .popup-label,
 .popup-value {
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 .popup-label {
   color: #666;
-  font-weight: 500; /* slightly lighter than value */
+  font-weight: 600; /* slightly lighter than value */
 }
 
 .popup-value {
-    font-weight: 700;
+    font-weight: 800;
     text-align: right;
     white-space: nowrap;
     line-height: 1;
