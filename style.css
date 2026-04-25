@@ -1045,7 +1045,7 @@ flex-wrap: wrap;
 
 /* Mobile popup close button */
 .mapboxgl-popup-close-button {
-  top: 6px !important;
+  top: 2px !important;
   right: 8px !important;
   width: 26px !important;
   height: 26px !important;
@@ -1094,10 +1094,6 @@ flex-wrap: wrap;
   .popup-header .popup-title-text {
     font-size: 1.75em;
     line-height: 0.95;
-  }
-
-  .popup-header .popup-meta {
-    font-size: 0.78em;
   }
 
   .popup-body {
