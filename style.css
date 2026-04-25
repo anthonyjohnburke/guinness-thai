@@ -690,6 +690,18 @@ height: 20px !important;
 font-size: 21px !important;
 padding: 0 !important;
 z-index: 30 !important;
+      background: transparent !important;
+  border: none !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background: transparent !important;
+}
+
+.mapboxgl-popup-close-button:focus {
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .popup-missing {
