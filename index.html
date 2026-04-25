@@ -336,18 +336,28 @@ const map = new mapboxgl.Map({
 });
 
 if (window.innerWidth <= 768) {
-  map.on('click', () => {
-    map.dragPan.enable();
+  map.dragPan.disable();
+  map.scrollZoom.disable();
+  map.touchZoomRotate.disableRotation();
 
-    const hint = document.querySelector(".map-mobile-hint");
-    if (hint) {
-      hint.style.opacity = 0;
+  const unlockBtn = document.getElementById("map-unlock-btn");
+  const hint = document.querySelector(".map-mobile-hint");
 
-      setTimeout(() => {
-        hint.style.display = "none";
-      }, 400);
-    }
-  });
+  if (unlockBtn) {
+    unlockBtn.addEventListener("click", () => {
+      map.dragPan.enable();
+      map.touchZoomRotate.enable();
+
+      unlockBtn.style.display = "none";
+
+      if (hint) {
+        hint.style.opacity = 0;
+        setTimeout(() => {
+          hint.style.display = "none";
+        }, 400);
+      }
+    });
+  }
 }
   
   let hoveredId = null;
