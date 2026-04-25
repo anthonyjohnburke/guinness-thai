@@ -231,10 +231,13 @@ body {
 
 /* Mobile popup close button */
 .mapboxgl-popup-close-button {
-  top: 8px !important;
-  right: 10px !important;
-  font-size: 22px !important;
-  z-index: 10;
+  top: 6px !important;
+  right: 8px !important;
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 26px !important;
+  line-height: 22px !important;
+  z-index: 20 !important;
 }
 
 /* Fix mobile popup arrow */
