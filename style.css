@@ -188,8 +188,10 @@ body {
 
 /* Map */
 #map-section {
-    width: calc(100vw - 40px);
+    width: 100%;
+    padding: 0 20px;
     max-width: 1600px;
+    box-sizing: border-box;
     margin: 0 auto 40px;
     border-bottom: 1px solid rgba(255,255,255,0.03);
 }
