@@ -1027,6 +1027,60 @@ input, button {
 }
 
 @media (max-width: 768px) {
+
+    @media (max-width: 768px) {
+
+  .mapboxgl-popup-content {
+    padding: 12px 12px 14px;
+    border-radius: 14px;
+    max-width: 260px;
+  }
+
+  .popup-card {
+    gap: 8px;
+  }
+
+  .popup-meta {
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  .popup-title-text {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .popup-price-box {
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .popup-price-main,
+  .popup-price-happy {
+    font-size: 15px;
+  }
+
+  /* 👇 Make buttons sit side by side */
+  .popup-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .popup-actions a {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  /* 👇 Tighten the "under investigation" box */
+  .popup-price-box:empty,
+  .popup-price-box {
+    min-height: auto;
+  }
+
+}
     
   .page-wrap {
     display: flex;
