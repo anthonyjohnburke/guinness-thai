@@ -213,40 +213,6 @@ body {
   display: none;
 }
 
-@media (max-width: 768px) {
-  #map-unlock-btn {
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: 18px;
-    transform: translateX(-50%);
-    z-index: 5;
-    border: none;
-    border-radius: 999px;
-    padding: 12px 18px;
-    background: #d4af37;
-    color: #000;
-    font-weight: 800;
-  }
-
-/* Mobile popup close button */
-.mapboxgl-popup-close-button {
-  top: 6px !important;
-  right: 8px !important;
-  width: 26px !important;
-  height: 26px !important;
-  font-size: 26px !important;
-  line-height: 22px !important;
-  z-index: 20 !important;
-}
-
-/* Fix mobile popup arrow */
-.mapboxgl-popup-tip {
-  border-top-color: #ececec !important;
-  border-bottom-color: #ececec !important;
-}    
-}
-
 /* Layout */
 #intro {
     display: grid;
@@ -389,24 +355,6 @@ body {
 
 #toggle-chart-btn {
   display: none;
-}
-
-@media (max-width: 768px) {
-  #toggle-chart-btn {
-    display: block;
-    width: 100%;
-    margin: 18px 0 8px;
-    padding: 14px 20px;
-    border: 1px solid rgba(255,255,255,0.18);
-    background: rgba(255,255,255,0.06);
-    color: #fff;
-    border-radius: 8px;
-    font-weight: 700;
-  }
-
-  #price-chart.is-collapsed .bar-row:nth-of-type(n+11) {
-    display: none;
-  }
 }
 
 /* Form */
@@ -805,38 +753,6 @@ flex-wrap: wrap;
     transition: opacity 0.4s ease;
 }
 
-@media (max-width: 768px) {
-    #suggest-section {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .nearby-col {
-        border-left: none;
-        border-top: 1px solid rgba(255,255,255,0.08);
-        padding-left: 0;
-        padding-top: 26px;
-    }
-
-    #find-nearby-btn {
-        width: 100%;
-    }
-
-     #map {
-        height: 48vh;
-        min-height: 360px;
-    }
-
-   .map-mobile-hint {
-        display: block;
-        font-size: 0.75em;
-        color: rgba(255,255,255,0.65);
-        margin-top: 8px;
-        text-align: center;
-        transition: opacity 0.4s ease; /* optional here too */
-    }
-}
-
 /* Stats */
 #top-stats {
     width: 100%;
@@ -1088,6 +1004,84 @@ flex-wrap: wrap;
 }
     @media (max-width: 768px) {
 
+         #suggest-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .nearby-col {
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding-left: 0;
+        padding-top: 26px;
+    }
+
+    #find-nearby-btn {
+        width: 100%;
+    }
+
+     #map {
+        height: 48vh;
+        min-height: 360px;
+    }
+
+   .map-mobile-hint {
+        display: block;
+        font-size: 0.75em;
+        color: rgba(255,255,255,0.65);
+        margin-top: 8px;
+        text-align: center;
+        transition: opacity 0.4s ease; /* optional here too */
+    }
+
+        #map-unlock-btn {
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 5;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    background: #d4af37;
+    color: #000;
+    font-weight: 800;
+  }
+
+/* Mobile popup close button */
+.mapboxgl-popup-close-button {
+  top: 6px !important;
+  right: 8px !important;
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 26px !important;
+  line-height: 22px !important;
+  z-index: 20 !important;
+}
+
+/* Fix mobile popup arrow */
+.mapboxgl-popup-tip {
+  border-top-color: #ececec !important;
+  border-bottom-color: #ececec !important;
+}    
+
+         #toggle-chart-btn {
+    display: block;
+    width: 100%;
+    margin: 18px 0 8px;
+    padding: 14px 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  #price-chart.is-collapsed .bar-row:nth-of-type(n+11) {
+    display: none;
+  }
+
   .mapboxgl-popup-content {
     padding: 12px 12px 14px;
     border-radius: 14px;
@@ -1138,11 +1132,6 @@ flex-wrap: wrap;
         
   .popup-card {
     gap: 8px;
-  }
-
-  .popup-meta {
-    font-size: 11px;
-    margin-bottom: 2px;
   }
 
  .popup-header .popup-meta {
