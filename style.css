@@ -635,6 +635,13 @@ font-size: 2.5em;
   padding: 18px 16px 10px;
 }
 
+.popup-actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 18px;   /* 👈 increase bottom padding */
+  margin-top: 4px;    
+}
+
 .popup-row {
   display: flex;
   padding: 6px 0;
@@ -957,14 +964,7 @@ font-size: 2.5em;
         transparent,
         rgba(255,255,255,0.4),
         transparent
-    );
-
- .popup-actions {
-  display: flex;
-  gap: 8px;
-  padding: 10px 14px 18px;   /* 👈 increase bottom padding */
-  margin-top: 4px;    
-}
+    )
 }
 
 /* Mobile */
