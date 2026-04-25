@@ -743,13 +743,14 @@ font-size: 2.5em;
 }
 
 .popup-missing {
-    grid-column: span 2;
-    text-align: center;
-    font-size: 1.1em;
-    color: #666;
-    padding: 5px;
-    font-style: italic;
-    line-height: 1.4;
+  text-align: center;
+  font-size: 1em;
+  color: #666;
+  padding: 6px 4px;
+  font-style: italic;
+  line-height: 1.3;
+  white-space: normal;
+  word-break: break-word;
 }
 
 #suggest-section {
