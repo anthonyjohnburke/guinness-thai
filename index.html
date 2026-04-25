@@ -881,7 +881,7 @@ map.on('mouseleave', 'pubs-layer', () => {
   const coordinates = feature.geometry.coordinates.slice(); // ✅ now works
 
   const popup = new mapboxgl.Popup({
-  offset: 18,
+  offset: window.innerWidth <= 768 ? 28 : 18,
   closeButton: true,
   closeOnClick: true,
   maxWidth: "240px"
