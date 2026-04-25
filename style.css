@@ -584,9 +584,9 @@ input, button {
 }
 
 .popup-meta {
-    font-size: 1.15em;
+    font-size: 0.95em;
     color: #8a8a8a;
-    line-height: 1.1;
+    font-weight: 500;
 }
 
 .popup-title-text {
