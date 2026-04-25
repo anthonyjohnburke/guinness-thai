@@ -1108,9 +1108,7 @@ font-size: 2.5em;
   .popup-actions a {
     font-size: 0.82em;
     padding: 9px 8px;
-  }
-}
-
+  }   
         
   .popup-card {
     gap: 8px;
@@ -1165,8 +1163,6 @@ font-size: 2.5em;
   .popup-price-box {
     min-height: auto;
   }
-
-}
     
   .page-wrap {
     display: flex;
