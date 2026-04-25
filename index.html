@@ -285,6 +285,19 @@ function scrollToMap() {
   });
 }
 
+  function highlightChartPub(pubName) {
+      document.querySelectorAll('.bar-row').forEach(row => {
+        row.classList.remove('is-highlighted');
+      });
+
+      const target = Array.from(document.querySelectorAll('.bar-row'))
+        .find(row => row.dataset.pubName === pubName);
+
+      if (target) {
+        target.classList.add('is-highlighted');
+      }
+    }
+
 function buildPopupHTML(pub, safeLink) {
   const mapsLink = (pub.lat && pub.lon)
     ? `https://www.google.com/maps?q=${pub.lat},${pub.lon}`
@@ -454,18 +467,6 @@ fetch(SHEET_URL)
       }
     }
 
-    function highlightChartPub(pubName) {
-      document.querySelectorAll('.bar-row').forEach(row => {
-        row.classList.remove('is-highlighted');
-      });
-
-      const target = Array.from(document.querySelectorAll('.bar-row'))
-        .find(row => row.dataset.pubName === pubName);
-
-      if (target) {
-        target.classList.add('is-highlighted');
-      }
-    }
 
     function zoomToPub(pubName, allPubs) {
       const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
