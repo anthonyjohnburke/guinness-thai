@@ -875,15 +875,14 @@ map.on('mouseleave', 'pubs-layer', () => {
         const safeLink = sanitizeURL(p.link);
         const html = buildPopupHTML(p, safeLink);
 
-     const popup = new mapboxgl.Popup({
+    const popup = new mapboxgl.Popup({
   offset: 18,
   closeButton: true,
   closeOnClick: true
 });
 
-popup
-  .setLngLat(e.features[0].geometry.coordinates)
-  .setHTML(html);
+popup.setHTML(html);
+popup.setLngLat(coordinates);
 
 requestAnimationFrame(() => {
   popup.addTo(map);
