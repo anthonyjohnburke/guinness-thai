@@ -881,15 +881,37 @@ map.on('mouseleave', 'pubs-layer', () => {
   const coordinates = feature.geometry.coordinates.slice(); // ✅ now works
 
   const popup = new mapboxgl.Popup({
-    offset: 18,
-    closeButton: true,
-    closeOnClick: true
+  offset: 18,
+  closeButton: true,
+  closeOnClick: true,
+  maxWidth: "240px"
+});
+
+if (window.innerWidth <= 768) {
+  map.easeTo({
+    center: coordinates,
+    zoom: Math.max(map.getZoom(), 14),
+    duration: 350,
+    padding: {
+      top: 100,
+      bottom: 220,
+      left: 40,
+      right: 40
+    }
   });
 
+  setTimeout(() => {
+    popup
+      .setLngLat(coordinates)
+      .setHTML(html)
+      .addTo(map);
+  }, 360);
+} else {
   popup
     .setLngLat(coordinates)
     .setHTML(html)
     .addTo(map);
+}
 
   trackEvent("popup_open", {
     pub_name: p.name || "unknown"
