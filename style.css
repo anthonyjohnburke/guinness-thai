@@ -690,15 +690,15 @@ height: 20px !important;
 font-size: 21px !important;
 padding: 0 !important;
 z-index: 30 !important;
-      background: transparent !important;
-  border: none !important;
+background: transparent !important;
+border: none !important;
+-webkit-appearance: none !important;  
+appearance: none !important;
 }
 
-.mapboxgl-popup-close-button:hover {
-  background: transparent !important;
-}
-
-.mapboxgl-popup-close-button:focus {
+.mapboxgl-popup-close-button:hover,
+.mapboxgl-popup-close-button:focus,
+.mapboxgl-popup-close-button:active {
   background: transparent !important;
   outline: none !important;
   box-shadow: none !important;
@@ -1072,6 +1072,7 @@ z-index: 30 !important;
   line-height: 18px !important;
   padding: 0 !important;
   z-index: 30 !important;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Pull popup down so it connects to the triangle */
