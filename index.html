@@ -870,28 +870,31 @@ map.on('mouseleave', 'pubs-layer', () => {
   hoveredId = null;
 });
 
-      map.on('click', 'pubs-layer', (e) => {
-        const p = e.features[0].properties;
-        const safeLink = sanitizeURL(p.link);
-        const html = buildPopupHTML(p, safeLink);
+   map.on('click', 'pubs-layer', (e) => {
+  const feature = e.features && e.features[0];
+  if (!feature) return;
 
-    const popup = new mapboxgl.Popup({
-  offset: 18,
-  closeButton: true,
-  closeOnClick: true
+  const p = feature.properties;
+  const safeLink = sanitizeURL(p.link);
+  const html = buildPopupHTML(p, safeLink);
+
+  const coordinates = feature.geometry.coordinates.slice(); // ✅ now works
+
+  const popup = new mapboxgl.Popup({
+    offset: 18,
+    closeButton: true,
+    closeOnClick: true
+  });
+
+  popup
+    .setLngLat(coordinates)
+    .setHTML(html)
+    .addTo(map);
+
+  trackEvent("popup_open", {
+    pub_name: p.name || "unknown"
+  });
 });
-
-popup.setHTML(html);
-popup.setLngLat(coordinates);
-
-requestAnimationFrame(() => {
-  popup.addTo(map);
-});
-
-        trackEvent("popup_open", {
-          pub_name: p.name || "unknown"
-        });
-      });
 
       if (validCount > 1) {
         map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
