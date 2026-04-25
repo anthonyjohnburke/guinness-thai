@@ -425,6 +425,36 @@ fetch(SHEET_URL)
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
 
+    function zoomToPub(pubName, allPubs) {
+      const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
+      if (!targetPub) return;
+
+      const lat = parseFloat(targetPub.lat);
+      const lon = parseFloat(targetPub.lon);
+      if (isNaN(lat) || isNaN(lon)) return;
+
+      const safeLink = sanitizeURL(targetPub.link);
+      const html = buildPopupHTML(targetPub, safeLink);
+
+      scrollToMap();
+
+      setTimeout(() => {
+        map.easeTo({
+          center: [lon, lat],
+          zoom: 15,
+          duration: 900
+        });
+
+        setTimeout(() => {
+          new mapboxgl.Popup({ offset: 10 })
+            .setLngLat([lon, lat])
+            .setHTML(html)
+            .addTo(map);
+        }, 700);
+      }, 150);
+    }
+
+
   const nearbyBtn = document.getElementById("find-nearby-btn");
 
 if (nearbyBtn) {
@@ -468,36 +498,6 @@ if (nearbyBtn) {
       } else {
         updatedEl.textContent = "Prices last updated: Recently";
       }
-    }
-
-
-    function zoomToPub(pubName, allPubs) {
-      const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
-      if (!targetPub) return;
-
-      const lat = parseFloat(targetPub.lat);
-      const lon = parseFloat(targetPub.lon);
-      if (isNaN(lat) || isNaN(lon)) return;
-
-      const safeLink = sanitizeURL(targetPub.link);
-      const html = buildPopupHTML(targetPub, safeLink);
-
-      scrollToMap();
-
-      setTimeout(() => {
-        map.easeTo({
-          center: [lon, lat],
-          zoom: 15,
-          duration: 900
-        });
-
-        setTimeout(() => {
-          new mapboxgl.Popup({ offset: 10 })
-            .setLngLat([lon, lat])
-            .setHTML(html)
-            .addTo(map);
-        }, 700);
-      }, 150);
     }
 
     const pricedPubs = pubs
@@ -883,7 +883,7 @@ map.on('mouseleave', 'pubs-layer', () => {
         return;
       }
 
-      map.loadImage('pint-glass1.png', (err, img) => {
+      map.loadImage('/pint-glass1.png', (err, img) => {
         if (err || !img) {
           console.error("Icon failed", err);
           return;
