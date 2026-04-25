@@ -338,24 +338,17 @@ if (window.innerWidth <= 768) {
   map.on('click', () => {
     map.dragPan.enable();
 
-  const hint = document.querySelector(".map-mobile-hint");
-if (hint) {
-  hint.style.opacity = 0;
+    const hint = document.querySelector(".map-mobile-hint");
+    if (hint) {
+      hint.style.opacity = 0;
 
- setTimeout(() => {
-  typeWriter(el, text, 28);
-
-  el.classList.add("cursor-active");
-
-  setTimeout(() => {
-    el.classList.remove("cursor-active");
-  }, 2400);
-
-}, 400);
+      setTimeout(() => {
+        hint.style.display = "none";
+      }, 400);
+    }
+  });
 }
-     });
-}
-
+  
   let hoveredId = null;
   let userMarker = null;
 
