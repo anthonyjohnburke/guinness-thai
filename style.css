@@ -370,6 +370,28 @@ body {
     filter: brightness(1.15);
 }
 
+#toggle-chart-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #toggle-chart-btn {
+    display: block;
+    width: 100%;
+    margin: 18px 0 8px;
+    padding: 14px 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  #price-chart.is-collapsed .bar-row:nth-of-type(n+11) {
+    display: none;
+  }
+}
+
 
 
 /* Form */
