@@ -621,7 +621,22 @@ fetch(SHEET_URL)
           trackEvent("chart_pub_click", { pub_name: name });
         });
       });
-    }
+
+    const toggleChartBtn = document.getElementById("toggle-chart-btn");
+
+if (window.innerWidth <= 768 && toggleChartBtn) {
+  chart.classList.add("is-collapsed");
+
+  toggleChartBtn.textContent = "See full Guinness ranking";
+
+  toggleChartBtn.addEventListener("click", () => {
+    chart.classList.toggle("is-collapsed");
+
+    toggleChartBtn.textContent = chart.classList.contains("is-collapsed")
+      ? "See full Guinness ranking"
+      : "Show fewer prices";
+  });
+}
 
     const cheapList = document.getElementById("cheap-list");
 
