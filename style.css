@@ -1222,6 +1222,12 @@ input, button {
     font-size: 0.68em;
     line-height: 1.7;
 }
+
+    #did-you-know-top,
+  #note {
+    display: none;
+  }
+    
 }
 
 @media (max-width: 600px) {
