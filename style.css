@@ -1064,7 +1064,7 @@ font-size: 2.5em;
 
 /* Pull popup down so it connects to the triangle */
 .mapboxgl-popup {
-  transform: translateY(8px);
+  transform: translateY(2px);
 }
 
 .mapboxgl-popup-tip {
