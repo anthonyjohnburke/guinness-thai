@@ -565,13 +565,6 @@ input, button {
     line-height: 1.1;
 }
 
-.popup-name-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    text-transform: uppercase;
-}
-
 .popup-title-text {
     font-family: 'Bebas Neue', sans-serif;
     font-weight: 700;
@@ -582,18 +575,7 @@ input, button {
     max-width: 100%;
 }
 
-.popup-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: 10px;
-    row-gap: 22px;
-    align-items: center;
-    text-align: left;
-    background: rgba(0,0,0,0.04);
-    border-radius: 18px;
-    padding: 18px 18px;
-}
+
 
 .popup-grid.has-happy-hour::after {
     content: "";
@@ -657,6 +639,33 @@ input, button {
 .popup-actions a:first-child {
   background: #d4af37; /* gold */
   color: #000;
+}
+
+.popup-header {
+  background: #d4af37;
+  color: #fff;
+  padding: 14px 16px 12px;
+  border-radius: 18px 18px 0 0;
+  text-align: center;
+}
+
+.popup-body {
+  padding: 14px 16px 6px;
+}
+
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.popup-row:last-child {
+  border-bottom: none;
+}
+
+.popup-value-happy {
+  color: #d4af37;
 }
 
 /* Secondary */
