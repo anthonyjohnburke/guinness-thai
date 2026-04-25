@@ -11,8 +11,11 @@ body {
 .page-wrap {
     display: flex;
     flex-direction: column;
-    align-items: center;
     min-height: 100vh;
+}
+
+#footer {
+    margin-top: auto;
 }
 
 /* Top bar */
@@ -358,6 +361,16 @@ body {
     color: #222;
     box-sizing: border-box;
     font-size: 1em;
+}
+
+.inline-form input:focus {
+    outline: none;
+    background: #ffffff;
+}
+
+input, button {
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .inline-form button:hover {
@@ -950,6 +963,13 @@ body {
 }
 
 @media (max-width: 768px) {
+    
+  .page-wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+    
     #top-bar {
         flex-direction: column;
         gap: 14px;
