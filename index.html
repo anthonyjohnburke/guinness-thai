@@ -921,8 +921,12 @@ map.on('mouseleave', 'pubs-layer', () => {
       });
     };
 
-  map.on('load', loadIcon); 
-      }
+if (map.loaded()) {
+  loadIcon();
+} else {
+  map.once('load', loadIcon);
+}
+    }
   })
   .catch(err => {
     console.error(err);
