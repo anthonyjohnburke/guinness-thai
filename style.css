@@ -1,4 +1,9 @@
 /* General Page */
+
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
