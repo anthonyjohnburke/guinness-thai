@@ -351,7 +351,7 @@ const map = new mapboxgl.Map({
 
 if (window.innerWidth <= 768) {
   map.dragPan.disable();
-  map.touchZoomRotate.disableRotation();
+  map.touchZoomRotate.disableRotation(); // keep this
 
   const unlockBtn = document.getElementById("map-unlock-btn");
   const hint = document.querySelector(".map-mobile-hint");
@@ -359,7 +359,7 @@ if (window.innerWidth <= 768) {
   if (unlockBtn) {
     unlockBtn.addEventListener("click", () => {
       map.dragPan.enable();
-      map.touchZoomRotate.enable();
+      map.touchZoomRotate.enable(); // 👈 ADD THIS BACK
 
       unlockBtn.style.display = "none";
 
