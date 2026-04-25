@@ -244,10 +244,7 @@ body {
 .mapboxgl-popup-tip {
   border-top-color: #ececec !important;
   border-bottom-color: #ececec !important;
-}
-
-
-    
+}    
 }
 
 /* Layout */
@@ -411,8 +408,6 @@ body {
     display: none;
   }
 }
-
-
 
 /* Form */
 .inline-form {
@@ -1127,7 +1122,7 @@ flex-wrap: wrap;
 
   .popup-label,
   .popup-value {
-    font-size: 1em;
+    font-size: 1.2em;
   }
 
  .popup-actions a {
