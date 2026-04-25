@@ -1143,8 +1143,8 @@ font-size: 2.5em;
  .popup-actions {
   display: flex;
   gap: 8px;
-  padding: 10px 14px 14px;
-  margin-top: 0;
+  padding: 10px 14px 18px;   /* 👈 increase bottom padding */
+  margin-top: 4px;    
 }
 
   /* 👇 Tighten the "under investigation" box */
