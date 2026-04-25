@@ -697,7 +697,7 @@ font-size: 2.5em;
 
 .popup-row {
   display: flex;
-  padding: 10px 0;
+  padding: 6px 0;
   align-items: center;
   justify-content: flex-start;   /* 👈 key change */
   gap: 8px;                     /* 👈 controls spacing */
