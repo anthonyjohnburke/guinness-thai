@@ -682,13 +682,14 @@ font-size: 2.5em;
 }
 
 .mapboxgl-popup-close-button {
-  color: #111 !important;           /* 👈 force black */
-  right: 16px !important;
-  width: 20px !important;
-  height: 20px !important;
-  font-size: 20px !important;
-  padding: 0 !important;
-  z-index: 30 !important;
+color: #111 !important;           /* 👈 force black */
+right: 2px !important;
+top: 8px !important;
+width: 20px !important;
+height: 20px !important;
+font-size: 21px !important;
+padding: 0 !important;
+z-index: 30 !important;
 }
 
 .popup-missing {
