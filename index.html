@@ -311,37 +311,45 @@ function buildPopupHTML(pub, safeLink) {
 
   return `
   <div class="popup-card modern">
-    ${pub.type ? `<div class="popup-meta">${escapeHTML(pub.type)}</div>` : ""}
 
-    <div class="popup-name-wrap">
+    <div class="popup-header">
+      ${pub.type ? `<div class="popup-meta">${escapeHTML(pub.type)}</div>` : ""}
       <div class="popup-title-text">${escapeHTML(pub.name || "")}</div>
     </div>
 
-    <div class="popup-grid ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? "has-happy-hour" : ""}">
-    ${pub.price ? `
-  <div class="popup-label">Guinness</div>
-  <div class="popup-value popup-value-price">฿${escapeHTML(pub.price)}</div>
-` : `
-  <div class="popup-missing">
-    Guinness under investigation…
-  </div>
-`}
+    <div class="popup-body">
+
+      ${pub.price ? `
+        <div class="popup-row">
+          <span class="popup-label">Guinness</span>
+          <span class="popup-value">฿${escapeHTML(pub.price)}</span>
+        </div>
+      ` : `
+        <div class="popup-row">
+          <span class="popup-label">Guinness</span>
+          <span class="popup-value">Under investigation 🍺</span>
+        </div>
+      `}
 
       ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
-        <div class="popup-label">Happy Hour</div>
-        <div class="popup-value popup-value-happy">฿${escapeHTML(pub.happy_hour_price)}</div>
+        <div class="popup-row">
+          <span class="popup-label">Happy Hour</span>
+          <span class="popup-value popup-value-happy">฿${escapeHTML(pub.happy_hour_price)}</span>
+        </div>
       ` : ""}
+
     </div>
 
     <div class="popup-actions">
       ${safeLink
-        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="popup-link" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub</a>`
+        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub</a>`
         : ""}
 
-      ${mapsLink
-        ? `<a href="${mapsLink}" target="_blank" rel="noopener noreferrer" class="popup-map-link">Google Maps</a>`
+      ${(pub.lat && pub.lon)
+        ? `<a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">Google Maps</a>`
         : ""}
     </div>
+
   </div>
 `;
 }
