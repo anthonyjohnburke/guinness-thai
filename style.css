@@ -1061,9 +1061,6 @@ font-size: 2.5em;
 }
 
 }
-
-@media (max-width: 768px) {
-
     @media (max-width: 768px) {
 
   .mapboxgl-popup-content {
@@ -1072,6 +1069,49 @@ font-size: 2.5em;
     max-width: 260px;
   }
 
+.popup-card.modern {
+    width: 210px;
+    border-radius: 18px;
+  }
+
+  .popup-header {
+    padding: 10px 14px 12px;
+  }
+
+  .popup-header .popup-title-text {
+    font-size: 1.75em;
+    line-height: 0.95;
+  }
+
+  .popup-header .popup-meta {
+    font-size: 0.78em;
+  }
+
+  .popup-body {
+    padding: 14px 14px 6px;
+  }
+
+  .popup-row {
+    padding: 9px 0;
+  }
+
+  .popup-label,
+  .popup-value {
+    font-size: 1em;
+  }
+
+  .popup-actions {
+    padding: 10px 14px 14px;
+    gap: 8px;
+  }
+
+  .popup-actions a {
+    font-size: 0.82em;
+    padding: 9px 8px;
+  }
+}
+
+        
   .popup-card {
     gap: 8px;
   }
@@ -1344,10 +1384,6 @@ font-size: 2.5em;
     .bar-price {
     text-align: right;
 }
-
-    .popup-card.modern {
-        width: 220px;
-    }
 
     #question {
         font-size: 2.4em;
