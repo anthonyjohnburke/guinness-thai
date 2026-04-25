@@ -875,10 +875,19 @@ map.on('mouseleave', 'pubs-layer', () => {
         const safeLink = sanitizeURL(p.link);
         const html = buildPopupHTML(p, safeLink);
 
-        new mapboxgl.Popup({ offset: 10 })
-          .setLngLat(e.features[0].geometry.coordinates)
-          .setHTML(html)
-          .addTo(map);
+     const popup = new mapboxgl.Popup({
+  offset: 18,
+  closeButton: true,
+  closeOnClick: true
+});
+
+popup
+  .setLngLat(e.features[0].geometry.coordinates)
+  .setHTML(html);
+
+requestAnimationFrame(() => {
+  popup.addTo(map);
+});
 
         trackEvent("popup_open", {
           pub_name: p.name || "unknown"
