@@ -111,13 +111,12 @@ body {
 #did-you-know-top {
     max-width: 280px;
     text-align: left;
-    font-size: 0.9em;
+    font-size: 1.1em;
     line-height: 1.5;
     padding-top: 4px;
 }
 
 .did-you-know-title {
-    font-size: 0.8em;
     font-weight: 600;
     color: #d4af37;
     text-transform: uppercase;
