@@ -421,12 +421,15 @@ fetch(SHEET_URL)
     return res.json();
   })
   .then(pubs => {
-    const bounds = new mapboxgl.LngLatBounds();
-    let validCount = 0;
 
-   document.getElementById("find-nearby-btn")
-  .addEventListener("click", () => {
-    const btn = document.getElementById("find-nearby-btn");
+  const bounds = new mapboxgl.LngLatBounds();
+  let validCount = 0;
+
+  const nearbyBtn = document.getElementById("find-nearby-btn");
+
+if (nearbyBtn) {
+  nearbyBtn.addEventListener("click", () => {
+    const btn = nearbyBtn;
     btn.textContent = "Finding best pint…";
     btn.disabled = true;
 
@@ -437,6 +440,7 @@ fetch(SHEET_URL)
       btn.disabled = false;
     }, 3000);
   });
+}
 
     const chart = document.getElementById("price-chart");
     const updatedEl = document.getElementById("last-updated");
@@ -893,11 +897,7 @@ map.on('mouseleave', 'pubs-layer', () => {
       });
     };
 
-   if (map.isStyleLoaded()) {
-  loadIcon();
-} else {
-  map.once('load', loadIcon);
-}
+  map.on('load', loadIcon);
     
   })
   .catch(err => {
