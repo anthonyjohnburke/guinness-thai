@@ -474,7 +474,8 @@ fetch(SHEET_URL)
     }
 
 
-  const nearbyBtn = document.getElementById("find-nearby-btn");
+const nearbyBtn = document.getElementById("find-nearby-btn");
+const radiusSelect = document.getElementById("radius-select");
 
 if (nearbyBtn) {
   nearbyBtn.addEventListener("click", () => {
@@ -482,7 +483,9 @@ if (nearbyBtn) {
     btn.textContent = "Finding best pint…";
     btn.disabled = true;
 
-    findNearestCheapest(pubs, zoomToPub);
+    const radiusValue = radiusSelect ? radiusSelect.value : "3";
+
+    findNearestCheapest(pubs, zoomToPub, radiusValue);
 
     setTimeout(() => {
       btn.textContent = "Find cheapest pint near you";
@@ -1076,7 +1079,7 @@ function typeWriter(el, text, speed = 35) {
   }, 400);
 });
 
-  function findNearestCheapest(pubs, zoomToPub) {
+  function findNearestCheapest(pubs, zoomToPub, radiusValue = "3") {
   if (!navigator.geolocation) {
     alert("Geolocation not supported");
     return;
@@ -1093,7 +1096,7 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
   .setLngLat([userLon, userLat])
   .addTo(map);
 
-    processNearest(userLat, userLon, pubs, zoomToPub);
+processNearest(userLat, userLon, pubs, zoomToPub, radiusValue);
   }, () => {
     alert("Location access was denied. Please allow location access in your browser settings, or search the map manually.");
   });
@@ -1114,7 +1117,7 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
   return R * c;
 }
 
- function processNearest(userLat, userLon, pubs, zoomToPub) {
+ function processNearest(userLat, userLon, pubs, zoomToPub, radiusValue) {
 
   const allWithDistance = pubs
     .filter(p => p.lat && p.lon && p.price)
@@ -1123,11 +1126,17 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
       distance: getDistance(userLat, userLon, parseFloat(p.lat), parseFloat(p.lon))
     }));
 
-  const nearby = allWithDistance.filter(p => p.distance < 5);
+let candidates;
 
+if (radiusValue === "all") {
+  candidates = allWithDistance;
+} else {
+  const radiusKm = Number(radiusValue);
+  const nearby = allWithDistance.filter(p => p.distance <= radiusKm);
+
+  candidates = nearby.length > 0 ? nearby : allWithDistance;
+}
   const isInBangkok = allWithDistance.some(p => p.distance < 20);
-
-  const candidates = nearby.length > 0 ? nearby : allWithDistance;
 
   candidates.sort((a, b) => a.price - b.price);
   const best = candidates[0];
@@ -1141,9 +1150,13 @@ userMarker = new mapboxgl.Marker({ color: "#ffffff" })
         Best option: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)
       `;
     } else {
-      didYouKnowEl.innerHTML = `
-        Best pint near you: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)
-      `;
+      const label = radiusValue === "all"
+  ? "Best pint in Bangkok"
+  : `Best pint within ${radiusValue}km`;
+
+didYouKnowEl.innerHTML = `
+  ${label}: <strong>${best.name}</strong> — ฿${best.price} (${best.distance.toFixed(1)}km away)
+`;
     }
   }
 
