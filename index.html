@@ -186,10 +186,16 @@
 
   <div class="nearby-col">
     <h2 class="intro-heading">Find the cheapest pint near you</h2>
-    <p class="intro-small">
-      In Bangkok? Allow location access and we’ll point you to the best-value Guinness within 5km.
-    </p>
-
+   <p class="intro-small">
+  In Bangkok? Allow location access and we’ll point you to the best-value Guinness near you.
+</p>
+    
+<select id="radius-select">
+  <option value="1">Within 1 km</option>
+  <option value="3" selected>Within 3 km</option>
+  <option value="all">All Bangkok</option>
+</select>
+    
     <button id="find-nearby-btn">Find nearest deal</button>
   </div>
 </div>
