@@ -993,7 +993,8 @@ font-size: 0.8em;
         transparent,
         rgba(255,255,255,0.4),
         transparent
-    )
+  );
+}
         
 #radius-select {
   appearance: none;
@@ -1017,6 +1018,23 @@ font-size: 0.8em;
   cursor: pointer;
   position: relative;
 }
+
+#submit-btn,
+#find-nearby-btn,
+.contact-link,
+#radius-select {
+  height: 48px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#submit-btn,
+#find-nearby-btn,
+.contact-link {
+  font-size: 0.85em;
+  font-weight: 800;
 }
 
 /* Mobile */
