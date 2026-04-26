@@ -726,10 +726,26 @@ appearance: none !important;
     margin: 10px auto 0;
     background: rgba(255,255,255,0.02);
     border-radius: 12px;
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 48px;
+    grid-template-columns: repeat(3, 1fr);
     align-items: start;
+    display: grid;
+    gap: 30px;
+}
+
+.contact-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #d4af37;
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.contact-link:hover {
+  opacity: 0.85;
 }
 
 .nearby-col {
