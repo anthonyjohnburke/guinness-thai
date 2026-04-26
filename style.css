@@ -729,7 +729,7 @@ appearance: none !important;
     grid-template-columns: repeat(3, 1fr);
     align-items: start;
     display: grid;
-    gap: 30px;
+    gap: 40px;
 }
 
 .contact-link {
