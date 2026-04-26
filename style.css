@@ -423,14 +423,6 @@ input, button {
     transform: translateY(-1px);
 }
 
-#submit-btn,
-#find-nearby-btn {
-    padding: 16px 28px;
-    font-size: 0.8em;
-    font-weight: 800;
-    border-radius: 8px;
-}
-
 #map-unlock-btn {
   animation: pulse 1.6s ease-in-out infinite;
 }
@@ -1029,16 +1021,17 @@ font-size: 0.8em;
 .contact-link,
 #radius-select {
   height: 48px;
-  padding: 0 18px;
+  padding: 0 25px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+    border-radius: 8px;
 }
 
 #submit-btn,
 #find-nearby-btn,
 .contact-link {
-  font-size: 0.85em;
+  font-size: 0.8em;
   font-weight: 800;
 }
 
@@ -1417,7 +1410,7 @@ font-size: 0.8em;
 
     #submit-btn,
     #find-nearby-btn {
-        font-size: 0.9em;   /* 👈 slightly smaller */
+        font-size: 0.8em;   /* 👈 slightly smaller */
         font-weight: 700;   /* 👈 softer weight */
         padding: 14px 20px; /* 👈 slightly tighter */
     }
