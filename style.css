@@ -977,6 +977,20 @@ appearance: none !important;
         rgba(255,255,255,0.4),
         transparent
     )
+
+#radius-select {
+  margin: 8px 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #f2f2f2;
+  color: #111;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+
+    
 }
 
 /* Mobile */
