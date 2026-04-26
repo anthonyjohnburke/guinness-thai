@@ -1027,7 +1027,7 @@ font-size: 0.8em;
   background-size: 16px;
 
   position: relative;
-  top: -1px;
+  top: 0px;
 }
 
 #submit-btn:hover,
@@ -1051,7 +1051,7 @@ font-size: 0.8em;
 .nearby-actions {
  display: flex;
   gap: 8px;
-  align-items: center;
+  align-items: stretch;
 }
 
 .suggest-col,
