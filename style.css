@@ -1163,13 +1163,6 @@ font-size: 0.8em;
     margin-top: 22px;
   }
 
-    .nearby-col {
-        border-left: none;
-        border-top: 1px solid rgba(255,255,255,0.08);
-        padding-left: 0;
-        padding-top: 26px;
-    }
-
     #find-nearby-btn {
         width: 100%;
     }
@@ -1178,7 +1171,7 @@ font-size: 0.8em;
         height: 48vh;
         min-height: 360px;
     }
-
+        
    .map-mobile-hint {
         display: block;
         font-size: 0.75em;
@@ -1479,7 +1472,7 @@ font-size: 0.8em;
 
         .suggest-col + .nearby-col,
 .nearby-col + .contact-col {
-  margin-top: 6px;
+  margin-top: 0;
 }
 
     #submit-btn,
