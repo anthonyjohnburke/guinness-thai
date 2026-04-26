@@ -1049,9 +1049,19 @@ font-size: 0.8em;
 }
 
 .nearby-actions {
- display: flex;
+  display: flex;
   gap: 8px;
   align-items: stretch;
+}
+
+.inline-form,
+.nearby-actions {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.contact-col {
+  margin-top: auto;
 }
 
 .suggest-col,
@@ -1060,18 +1070,6 @@ font-size: 0.8em;
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.inline-form,
-.nearby-actions,
-.contact-link {
-  margin-top: auto;
-}
-
-.inline-form,
-.nearby-actions {
-  margin-top: auto;
-  padding-top: 10px;
 }
 
 
