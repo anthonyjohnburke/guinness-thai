@@ -209,10 +209,18 @@
     Found a better pint, a new price, or something outdated? Let me know and I’ll update it.
   </p>
 
- <a href="mailto:pintsofbangkok@gmail.com?subject=Guinness Bangkok Update&body=Hi,%20I%20found%20a%20better%20pint%20at..."
-   class="contact-link">
+<a href="#" class="contact-link" id="contact-link">
   Get in touch
 </a>
+
+<script>
+  const contactLink = document.getElementById("contact-link");
+  if (contactLink) {
+    const user = "pintsofbangkok";
+    const domain = "gmail.com";
+    contactLink.href = `mailto:${user}@${domain}?subject=Guinness Bangkok Update`;
+  }
+</script>
 </div>
 
     
