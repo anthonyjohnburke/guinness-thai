@@ -1063,6 +1063,20 @@ font-size: 0.8em;
   align-items: center;
 }
 
+.suggest-col,
+.nearby-col,
+.contact-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.inline-form,
+.nearby-actions,
+.contact-link {
+  margin-top: auto;
+}
+
 
 
 /* Mobile */
