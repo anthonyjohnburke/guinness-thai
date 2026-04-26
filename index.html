@@ -202,28 +202,28 @@
 </div>
     </div>
 
-    <div class="contact-col">
+  <div class="contact-col">
+
   <h2 class="intro-heading">Spotted something wrong?</h2>
 
   <p class="intro-small">
     Found a better pint, a new price, or something outdated? Let me know and I’ll update it.
   </p>
 
-<a href="#" class="contact-link" id="contact-link">
-  Get in touch
-</a>
+  <a href="mailto:pintsofbangkok@gmail.com" class="contact-link" id="contact-link" rel="noopener noreferrer">
+    Get in touch
+  </a>
 
-<script>
-  const contactLink = document.getElementById("contact-link");
-  if (contactLink) {
-    const user = "pintsofbangkok";
-    const domain = "gmail.com";
-    contactLink.href = `mailto:${user}@${domain}?subject=Guinness Bangkok Update`;
-  }
-</script>
-</div>
+  <script>
+    const contactLink = document.getElementById("contact-link");
+    if (contactLink) {
+      const parts = ["pintsofbangkok", "gmail", "com"];
+      const email = parts[0] + "@" + parts[1] + "." + parts[2];
 
-    
+      contactLink.href = `mailto:${email}?subject=Guinness Bangkok Update`;
+    }
+  </script>
+
 </div>
 
   <footer id="footer">
