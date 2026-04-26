@@ -1025,15 +1025,45 @@ font-size: 0.8em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-    border-radius: 8px;
-}
-
-#submit-btn,
-#find-nearby-btn,
-.contact-link {
+  border-radius: 8px;
   font-size: 0.8em;
   font-weight: 800;
+  line-height: 1;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
 }
+
+#submit-btn:hover,
+#find-nearby-btn:hover,
+.contact-link:hover,
+#radius-select:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+#radius-select {
+  min-width: 150px;
+  background-color: #f2f2f2;
+  color: #111;
+}
+
+.nearby-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.nearby-col select,
+.nearby-col button {
+  margin-top: 0;
+}
+
+.nearby-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
 
 /* Mobile */
 @media (max-width: 900px) {
