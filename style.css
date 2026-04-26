@@ -12,6 +12,7 @@ body {
     color: white;
     text-align: center;
     min-height: 100vh;
+    padding-top: 118px;
 }
 
 .page-wrap {
@@ -33,9 +34,12 @@ body {
     background: rgba(255,255,255,0.96);
     color: #111;
     box-sizing: border-box;
-    position: sticky;
+
+    position: fixed;
     top: 0;
-    z-index: 1000;
+    left: 0;
+    z-index: 9999;
+
     border-bottom: 1px solid rgba(0,0,0,0.06);
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     backdrop-filter: blur(6px);
@@ -1119,9 +1123,9 @@ font-size: 0.8em;
     grid-template-columns: 1fr;
   }
 
-        .suggest-col,
-  .nearby-col,
-  .contact-col {
+    .suggest-col,
+    .nearby-col,
+    .contact-col {
     height: auto;
     padding: 0;
     margin: 0;
@@ -1155,6 +1159,10 @@ font-size: 0.8em;
 
   .contact-link {
     margin-top: 4px;
+  }
+        
+    body {
+    padding-top: 118px;
   }
 
   #footer {
