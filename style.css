@@ -617,11 +617,12 @@ font-size: 2.5em;
 }
 
 .popup-header {
-  background: #d4af37;
-  color: #fff;
-  padding: 14px 16px 16px;
-  border-radius: 18px 18px 0 0;
-  text-align: center;
+    background: #d4af37;
+    color: #fff;
+    padding: 14px 16px 16px;
+    border-radius: 18px 18px 0 0;
+    text-align: center;
+    margin-bottom: 6px;
 }
 
 .popup- {
