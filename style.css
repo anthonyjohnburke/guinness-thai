@@ -244,10 +244,10 @@ body {
 }
 
 .intro-small {
-    font-size: 0.95em;
+    font-size: 0.9em;
     color: rgba(255,255,255,0.7);
     margin: 0 0 22px;
-    line-height: 1.55;
+    line-height: 1.5;
 }
 
 .last-updated {
@@ -1111,10 +1111,57 @@ font-size: 0.8em;
 }
     @media (max-width: 768px) {
 
-         #suggest-section {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
+
+    #suggest-section {
+    width: calc(100% - 32px);
+    margin: 18px auto 0;
+    padding: 24px 18px;
+    gap: 0;
+    border-radius: 14px;
+    grid-template-columns: 1fr;
+  }
+
+        .suggest-col,
+  .nearby-col,
+  .contact-col {
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nearby-col,
+  .contact-col {
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    margin-top: 24px;
+  }
+
+  .inline-form,
+  .nearby-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 4px;
+    padding-top: 0;
+  }
+
+  .inline-form input,
+  #submit-btn,
+  #radius-select,
+  #find-nearby-btn,
+  .contact-link {
+    width: 100%;
+    max-width: none;
+  }
+
+  .contact-link {
+    margin-top: 4px;
+  }
+
+  #footer {
+    margin-top: 22px;
+  }
 
     .nearby-col {
         border-left: none;
@@ -1430,21 +1477,10 @@ font-size: 0.8em;
         white-space: nowrap;
     }
 
-    .inline-form {
-        flex-direction: row;
-        align-items: stretch;
-        width: 100%;
-    }
-
-    .inline-form input#response {
-        flex: 0 1 75%;
-        width: 75%;
-    }
-
-    #submit-btn {
-        flex: 0 0 auto;
-        width: auto;
-    }
+        .suggest-col + .nearby-col,
+.nearby-col + .contact-col {
+  margin-top: 6px;
+}
 
     #submit-btn,
     #find-nearby-btn {
@@ -1507,4 +1543,9 @@ font-size: 0.8em;
         min-width: 0;
         white-space: nowrap;
     }
+
+    
+
+
+    
 }
