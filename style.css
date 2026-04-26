@@ -1058,7 +1058,7 @@ font-size: 0.8em;
 }
 
 .nearby-actions {
-  display: flex;
+ display: flex;
   gap: 8px;
   align-items: center;
 }
