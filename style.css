@@ -119,11 +119,11 @@ body {
 }
 
 .did-you-know-title {
-    font-weight: 600;
+    font-weight: 800;
     color: #d4af37;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 2px;
+    margin-bottom: 0;
     text-align: left;
 }
 
