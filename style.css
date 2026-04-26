@@ -994,20 +994,29 @@ font-size: 0.8em;
         rgba(255,255,255,0.4),
         transparent
     )
-
+        
 #radius-select {
-  margin: 8px 0 12px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  height: 48px;                 /* 👈 match button height */
+  padding: 0 38px 0 14px;       /* 👈 space for arrow */
+  border-radius: 10px;
+
   background: #f2f2f2;
   color: #111;
-  font-size: 0.9em;
+
+  font-family: inherit;
+  font-size: 0.95em;
   font-weight: 600;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+  position: relative;
 }
-
-
-    
 }
 
 /* Mobile */
