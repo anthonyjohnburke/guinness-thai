@@ -1077,6 +1077,12 @@ font-size: 0.8em;
   margin-top: auto;
 }
 
+.inline-form,
+.nearby-actions {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
 
 
 /* Mobile */
