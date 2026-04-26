@@ -1049,7 +1049,7 @@ font-size: 0.8em;
 
 .nearby-actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: stretch;
 }
 
