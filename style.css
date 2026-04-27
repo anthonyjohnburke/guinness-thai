@@ -306,6 +306,12 @@ body {
     margin-bottom: 14px;
 }
 
+.bar-area {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.9em;
+line-height: 1.25;
+}
+
 .bar-bottom {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 72px;
