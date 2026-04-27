@@ -334,7 +334,7 @@ line-height: 1.25;
 
 .bar-wrap {
     width: 100%;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.09);
     border-radius: 5px;
     height: 9px;
     overflow: hidden;
