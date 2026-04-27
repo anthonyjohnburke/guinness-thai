@@ -671,7 +671,10 @@ if (nearbyBtn) {
         row.dataset.pubName = pub.name;
 
         row.innerHTML = `
-  <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">${escapeHTML(pub.name)}</div>
+  <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
+  ${escapeHTML(pub.name)}
+  ${pub.area ? `<span class="bar-area"> — ${escapeHTML(pub.area)}</span>` : ""}
+</div>
   <div class="bar-bottom">
     <div class="bar-wrap">
       <div class="bar" style="width:0%" data-width="${width}%"></div>
