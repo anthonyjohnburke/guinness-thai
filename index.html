@@ -29,12 +29,14 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
- <meta http-equiv="Content-Security-Policy" content="
-default-src 'self' https:;
-img-src 'self' data: blob: https:;
-script-src 'self' 'unsafe-inline' https:;
-style-src 'self' 'unsafe-inline' https:;
-connect-src 'self' https:;
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://api.mapbox.com https://www.googletagmanager.com;
+  style-src 'self' 'unsafe-inline' https://api.mapbox.com https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data: blob: https://api.mapbox.com https://*.mapbox.com;
+  connect-src 'self' https://opensheet.elk.sh https://api.mapbox.com https://*.mapbox.com https://script.google.com https://script.googleusercontent.com https://www.google-analytics.com;
+  worker-src blob:;
 ">
 
   <meta http-equiv="X-Frame-Options" content="DENY">
@@ -146,11 +148,13 @@ connect-src 'self' https:;
     
     <h2 class="intro-heading">Doing God’s work</h2>
     <p class="intro-small">
-      I’m Irish, so I do enjoy a proper pint of Guinness (and Murphy's). You know the one with a lovely creamy head served in a clean glass, and a pour that isn’t rushed. 
+      I’m an Irish lad, so I have a soft spot for a proper pint of Guinness. 
+      You know the one with a lovely creamy head served in a clean glass, and a pour that isn’t rushed. 
       In Bangkok and around Thailand, it can be a bit hit and miss. Sometimes you get a great pint at a fair price. 
-      Other times… not so much.<br><br>After spending more than I’d like to admit chasing a decent pint around the city, 
-      I started keeping track of where it’s actually worth ordering. This is a simple attempt to map it all out.
-      No big agenda here, just a guide to help you find a proper pint of Guinness in Thailand without overpaying for it. 
+      Other times… not so much. After spending more than I’d like to admit chasing a decent pint around the city, 
+      I started keeping track of where it’s actually worth ordering.  
+      This is just me mapping what I find. No big agenda — just trying to find a good pint without overpaying.
+This is a simple attempt to map it all out. No big agenda here, just a guide to help you find a proper Guinness in Thailand without overpaying for it. 
       I’m not here to name and shame, just mapping what I find. Corcaigh abú!
     </p>
   </div>
