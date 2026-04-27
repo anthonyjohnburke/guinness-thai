@@ -300,7 +300,7 @@ body {
 
 .bar-row {
     display: grid;
-    grid-template-columns: minmax(280px, 34%) minmax(0, 1fr);
+    grid-template-columns: minmax(250px, 32%) minmax(0, 1fr);
     gap: 18px;
     align-items: center;
     margin-bottom: 14px;
