@@ -574,10 +574,11 @@ if (nearbyBtn) {
 
     const pricedPubs = pubs
       .filter(p => p.price && !isNaN(parseFloat(p.price)))
-      .map(p => ({
-        name: p.name,
-        price: parseFloat(p.price)
-      }))
+      map(p => ({
+  name: p.name,
+  area: p.area, 
+  price: parseFloat(p.price)
+}))
       .sort((a, b) => a.price - b.price);
 
     if (pricedPubs.length > 0) {
