@@ -792,19 +792,19 @@ font-size: 0.8em;
 
 .featured {
   display: inline-block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #ddd;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 5px 12px;
   border-radius: 6px;
   margin-bottom: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .featured a {
   color: #e6c15a; /* your gold */
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .featured a:hover {
