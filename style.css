@@ -791,8 +791,12 @@ font-size: 0.8em;
 }
 
 .featured {
-  font-size: 0.9rem;
-  color: #777;
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #ccc;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 4px 10px;
+  border-radius: 20px;
   margin-bottom: 10px;
 }
 
