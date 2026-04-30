@@ -793,20 +793,23 @@ font-size: 0.8em;
 .featured {
   display: inline-block;
   font-size: 0.85rem;
-  color: #ccc;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 4px 10px;
-  border-radius: 20px;
-  margin-bottom: 10px;
+  color: #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .featured a {
-  color: inherit;
-  text-decoration: underline;
+  color: #e6c15a; /* your gold */
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .featured a:hover {
-  color: #000;
+  color: #f2d47a; /* lighter gold on hover */
+  text-decoration: underline;
 }
 
 /* Stats */
