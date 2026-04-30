@@ -790,6 +790,21 @@ font-size: 0.8em;
     transition: opacity 0.4s ease;
 }
 
+.featured {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.featured a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.featured a:hover {
+  color: #000;
+}
+
 /* Stats */
 #top-stats {
     width: 100%;
