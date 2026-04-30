@@ -1260,7 +1260,8 @@ font-size: 0.8em;
   border-bottom-color: #ececec !important;
 }
         
-         #toggle-chart-btn {
+    #toggle-chart-btn {
+    font-size: 0.9em;
     display: block;
     width: 100%;
     margin: 18px 0 8px;
