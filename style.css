@@ -173,9 +173,10 @@ body {
 }
 
 .seo-sub {
-  font-size: 0.9em;
-  color: rgba(255,255,255,0.5);
-  margin-top: -10px;
+    font-size: 0.9em;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    margin-top: -10px;
 }
 
 @keyframes blink {
