@@ -686,14 +686,30 @@ if (nearbyBtn) {
         row.className = "bar-row";
         row.dataset.pubName = pub.name;
 
+
+        function formatDate(dateStr) {
+  if (!dateStr) return "Recently";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+}
+
         row.innerHTML = `
   <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
-  ${escapeHTML(pub.name)}
-  ${pub.area ? `<span class="bar-area">  ${escapeHTML(pub.area)}</span>` : ""}
-</div>
+    ${escapeHTML(pub.name)}
+    ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
+  </div>
+
   <div class="bar-bottom">
     <div class="bar-wrap">
-      <div class="bar" style="width:0%" data-width="${width}%"></div>
+      <div class="bar"
+           style="width:0%"
+           data-width="${width}%"
+           title="Verified ${formatDate(pub.last_updated)}">
+      </div>
     </div>
     <div class="bar-price">฿${pub.price}</div>
   </div>
