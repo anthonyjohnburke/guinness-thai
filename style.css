@@ -311,7 +311,7 @@ body {
     grid-template-columns: minmax(250px, 32%) minmax(0, 1fr);
     gap: 18px;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 15px;
 }
 
 .bar-area {
