@@ -697,7 +697,7 @@ if (nearbyBtn) {
   });
 }
 
-        row.innerHTML = `
+       row.innerHTML = `
   <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
     ${escapeHTML(pub.name)}
     ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
@@ -711,10 +711,12 @@ if (nearbyBtn) {
            title="Verified ${formatDate(pub.last_updated)}">
       </div>
     </div>
-    <div class="bar-price" title="Verified ${formatDate(pub.last_updated)}">฿${pub.price}</div>
+    <div class="bar-price"
+         title="Verified ${formatDate(pub.last_updated)}">
+      ฿${pub.price}
+    </div>
   </div>
 `;
-
         chart.appendChild(row);
 
         setTimeout(() => {
