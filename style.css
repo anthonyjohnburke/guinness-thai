@@ -904,8 +904,41 @@ font-size: 0.8em;
 }
 
 .happy-name {
-    flex: 1;
-    color: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  color: rgba(255,255,255,0.85);
+  min-width: 0;
+}
+
+.pub-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pub-name {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.pub-meta {
+  margin-top: 2px;
+  font-size: 0.74em;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.25;
+}
+
+.pub-meta a {
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.pub-meta a:hover {
+  color: #f2d47a;
+  text-decoration: underline;
 }
 
 .happy-prices {
