@@ -1223,6 +1223,7 @@ font-size: 0.8em;
     margin-bottom: 10px;
     line-height: 1.4;
     letter-spacing: 0.02em;
+    opacity: 0.85;
   }
 
     #find-nearby-btn {
