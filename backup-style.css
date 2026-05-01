@@ -142,7 +142,7 @@ body {
 /* Title */
 #question {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 5.2em;
+    font-size: 4.5em;
     line-height: 0.95;
     margin: 40px auto 18px;
     letter-spacing: 1px;
@@ -170,6 +170,14 @@ body {
 #question.cursor-active::after {
     opacity: 1;
     animation: blink 0.8s ease-in-out 3;
+}
+
+.seo-sub {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9em;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  margin-top: -10px;
 }
 
 @keyframes blink {
@@ -790,6 +798,28 @@ font-size: 0.8em;
     transition: opacity 0.4s ease;
 }
 
+.featured {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.featured a {
+  color: #e6c15a; /* your gold */
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.featured a:hover {
+  color: #f2d47a; /* lighter gold on hover */
+  text-decoration: underline;
+}
+
 /* Stats */
 #top-stats {
     width: 100%;
@@ -845,12 +875,13 @@ font-size: 0.8em;
     justify-content: space-between;
     align-items: center;
     font-size: 1em;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 16px 0;   /* ↑ more breathing room */
+    margin-bottom: 6px; 
+    border-bottom: 1px solid rgba(255,255,255,0.08); /* slightly clearer */
     opacity: 0;
     transform: translateY(8px);
     animation: happyReveal 0.5s ease forwards;
-    gap: 10px;
+    gap: 12px; 
 }
 
 .happy-rank {
@@ -889,7 +920,7 @@ font-size: 0.8em;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    align-items: flex-end;
+    align-items: flex-start;
     font-size: 0.9em;
     min-width: 140px;
 }
@@ -907,14 +938,17 @@ font-size: 0.8em;
 }
 
 .price-line .label {
-    color: rgba(255,255,255,0.55);
-    font-size: 0.82em;
+    color: #d6d6d6;
+    font-size: 0.9em;
     white-space: nowrap;
+    text-align: left;
+    opacity: 0.6;
 }
 
 .price-line .value {
     font-weight: 700;
     white-space: nowrap;
+    text-align: right;
 }
 
 .price-line .value.gold {
@@ -1007,7 +1041,7 @@ font-size: 0.8em;
 #find-nearby-btn,
 .contact-link,
 #radius-select {
-  height: 48px;
+  height: 42px;
   padding: 0 25px;
   display: inline-flex;
   align-items: center;
@@ -1149,7 +1183,7 @@ font-size: 0.8em;
   .contact-col {
     border-left: none;
     border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 24px;
+    padding-top: 30px;
     margin-top: 24px;
   }
 
@@ -1181,6 +1215,18 @@ font-size: 0.8em;
 
   #footer {
     margin-top: 22px;
+  }
+
+        .seo-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8em;          /* smaller */
+    font-weight: 300;          /* lighter */
+    color: rgba(255,255,255,0.6);
+    margin-top: -6px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
   }
 
     #find-nearby-btn {
@@ -1238,7 +1284,8 @@ font-size: 0.8em;
   border-bottom-color: #ececec !important;
 }
         
-         #toggle-chart-btn {
+    #toggle-chart-btn {
+    font-size: 0.9em;
     display: block;
     width: 100%;
     margin: 18px 0 8px;
@@ -1422,7 +1469,7 @@ font-size: 0.8em;
     }
 
     .stat-number {
-        font-size: 2.6em;
+        font-size: 2.1em;
         line-height: 1;
     }
 
@@ -1484,7 +1531,7 @@ font-size: 0.8em;
     }
 
     .bar-price {
-        font-size: 0.9em;
+        font-size: 1em;
         text-align: right;
         white-space: nowrap;
     }
@@ -1521,7 +1568,7 @@ font-size: 0.8em;
     .bar-row {
         grid-template-columns: 1fr;
         gap: 6px;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
     }
 
     .bar-price {
@@ -1555,5 +1602,9 @@ font-size: 0.8em;
         min-width: 0;
         white-space: nowrap;
     }
+
+    
+
+
     
 }
