@@ -930,7 +930,7 @@ font-size: 0.8em;
 }
 
 .price-line {
-    display: contents;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 8px;
