@@ -1029,7 +1029,7 @@ font-size: 0.8em;
 #find-nearby-btn,
 .contact-link,
 #radius-select {
-  height: 48px;
+  height: 42px;
   padding: 0 25px;
   display: inline-flex;
   align-items: center;
