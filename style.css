@@ -99,6 +99,20 @@ body {
     font-size: 0.85em;
 }
 
+.tooltip {
+  position: fixed;
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 9999;
+  border: 1px solid rgba(230,193,90,0.3);
+}
+
 /* Note */
 #note {
     font-family: 'Shadows Into Light', cursive;
