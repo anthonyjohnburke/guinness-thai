@@ -876,12 +876,12 @@ font-size: 0.8em;
     align-items: center;
     font-size: 1em;
     padding: 16px 0;   /* ↑ more breathing room */
-    margin-bottom: 8px; /* ↑ space between rows */
+    margin-bottom: 6px; 
     border-bottom: 1px solid rgba(255,255,255,0.08); /* slightly clearer */
     opacity: 0;
     transform: translateY(8px);
     animation: happyReveal 0.5s ease forwards;
-    gap: 14px; /* ↑ a bit more separation */
+    gap: 12px; 
 }
 
 .happy-rank {
