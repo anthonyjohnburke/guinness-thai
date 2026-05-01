@@ -589,11 +589,13 @@ if (nearbyBtn) {
       }
     }
 
-   const pricedPubs = pubs
+  const pricedPubs = pubs
   .filter(p => p.price && !isNaN(parseFloat(p.price)))
   .map(p => ({
     name: p.name,
     area: p.area,
+    lat: p.lat,
+    lon: p.lon,
     price: parseFloat(p.price),
     last_updated: p.last_updated
   }))
@@ -839,25 +841,28 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
       });
     }
 
-    const happyPubs = pubs
-      .filter(p =>
-        p.happy_hour_price &&
-        String(p.happy_hour_price).toLowerCase() !== "n/a" &&
-        p.price &&
-        !isNaN(parseFloat(p.price))
-      )
-      .map((p, i) => {
-        const hh = parseFloat(p.happy_hour_price);
-        const full = parseFloat(p.price);
-        const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
+   const happyPubs = pubs
+  .filter(p =>
+    p.happy_hour_price &&
+    String(p.happy_hour_price).toLowerCase() !== "n/a" &&
+    p.price &&
+    !isNaN(parseFloat(p.price))
+  )
+  .map((p, i) => {
+    const hh = parseFloat(p.happy_hour_price);
+    const full = parseFloat(p.price);
+    const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
 
-        return {
-          name: p.name,
-          happyPrice: hh,
-          fullPrice: full,
-          savingPct: savingPct
-        };
-      })
+    return {
+      name: p.name,
+      area: p.area,   // 👈 ADD
+      lat: p.lat,     // 👈 ADD
+      lon: p.lon,     // 👈 ADD
+      happyPrice: hh,
+      fullPrice: full,
+      savingPct: savingPct
+    };
+  })
       .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
       .sort((a, b) => a.happyPrice - b.happyPrice)
       .slice(0, 5);
@@ -881,25 +886,35 @@ happyPubs.forEach((pub, i) => {
       row.style.animationDelay = `${150 + i * 120}ms`;
 
       row.innerHTML = `
-        <div class="happy-name">
-          <span class="happy-rank">${rank}</span>
-          ${escapeHTML(pub.name)}
-        </div>
+  <div class="happy-name">
+    <span class="happy-rank">${rank}</span>
 
-        <div class="happy-prices stacked compact">
-          <div class="price-line">
-            <span class="label">Happy Hour:</span>
-            <span class="value gold">฿${pub.happyPrice}</span>
-          </div>
+    <div class="pub-info">
+      <div class="pub-name">${escapeHTML(pub.name)}</div>
+      <div class="pub-meta">
+        ${pub.area ? escapeHTML(pub.area) : ""}
+${pub.area && pub.lat && pub.lon ? " • " : ""}
+${pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+` : ""}
+      </div>
+    </div>
+  </div>
 
-          <div class="price-line saving">
-            <span class="label">Save:</span>
-            <span class="value green">฿${savingAmount} (-${pub.savingPct}%)</span>
-          </div>
-        </div>
-      `;
+  <div class="happy-prices stacked compact">
+    <div class="price-line">
+      <span class="label">Happy Hour:</span>
+      <span class="value gold">฿${pub.happyPrice}</span>
+    </div>
 
-      happyList.appendChild(row);
+    <div class="price-line saving">
+      <span class="label">Save:</span>
+      <span class="value green">฿${savingAmount} (-${pub.savingPct}%)</span>
+    </div>
+  </div>
+`;
+  
+  happyList.appendChild(row);
     });
 
     const geojson = {
