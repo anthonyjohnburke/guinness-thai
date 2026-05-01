@@ -875,12 +875,13 @@ font-size: 0.8em;
     justify-content: space-between;
     align-items: center;
     font-size: 1em;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 16px 0;   /* ↑ more breathing room */
+    margin-bottom: 8px; /* ↑ space between rows */
+    border-bottom: 1px solid rgba(255,255,255,0.08); /* slightly clearer */
     opacity: 0;
     transform: translateY(8px);
     animation: happyReveal 0.5s ease forwards;
-    gap: 10px;
+    gap: 14px; /* ↑ a bit more separation */
 }
 
 .happy-rank {
@@ -919,7 +920,7 @@ font-size: 0.8em;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    align-items: flex-end;
+    align-items: flex-start;
     font-size: 0.9em;
     min-width: 140px;
 }
@@ -938,7 +939,7 @@ font-size: 0.8em;
 
 .price-line .label {
     color: rgba(255,255,255,0.55);
-    font-size: 0.82em;
+    font-size: 0.9em;
     white-space: nowrap;
 }
 
