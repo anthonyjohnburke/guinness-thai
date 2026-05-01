@@ -1214,6 +1214,17 @@ font-size: 0.8em;
     margin-top: 22px;
   }
 
+        .seo-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8em;          /* smaller */
+    font-weight: 300;          /* lighter */
+    color: rgba(255,255,255,0.6);
+    margin-top: -6px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+
     #find-nearby-btn {
         width: 100%;
     }
