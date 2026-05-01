@@ -172,6 +172,12 @@ body {
     animation: blink 0.8s ease-in-out 3;
 }
 
+.seo-sub {
+  font-size: 0.9em;
+  color: rgba(255,255,255,0.5);
+  margin-top: -10px;
+}
+
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
