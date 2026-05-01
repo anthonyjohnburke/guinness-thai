@@ -894,9 +894,10 @@ font-size: 0.8em;
 }
 
 .happy-prices {
-    display: flex;
+    display: grid;
+    grid-template-columns: 80px auto; /* fixed price column */
+    gap: 10px;
     align-items: center;
-    gap: 6px;
     white-space: nowrap;
 }
 
@@ -917,10 +918,10 @@ font-size: 0.8em;
 }
 
 .happy-prices.stacked {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 80px auto; /* match main layout */
+    gap: 4px 10px;
+    align-items: center;
     font-size: 0.9em;
     min-width: 140px;
 }
@@ -930,22 +931,26 @@ font-size: 0.8em;
 }
 
 .price-line {
-    display: flex;
+    display: contents;
     justify-content: space-between;
     align-items: center;
     gap: 8px;
     width: 100%;
+    display: contents;
 }
 
 .price-line .label {
     color: rgba(255,255,255,0.55);
     font-size: 0.9em;
     white-space: nowrap;
+    text-align: left;
+    opacity: 0.6;
 }
 
 .price-line .value {
     font-weight: 700;
     white-space: nowrap;
+    text-align: right;
 }
 
 .price-line .value.gold {
