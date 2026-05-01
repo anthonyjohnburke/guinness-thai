@@ -687,8 +687,9 @@ if (nearbyBtn) {
         row.dataset.pubName = pub.name;
 
 
-        function formatDate(dateStr) {
-  if (!dateStr) return "Recently";
+       function formatDate(dateStr) {
+  if (!dateStr) return "Unknown";
+
   const d = new Date(dateStr);
   return d.toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -708,11 +709,11 @@ if (nearbyBtn) {
       <div class="bar"
            style="width:0%"
            data-width="${width}%"
-           title="Verified ${formatDate(pub.last_updated)}">
+           title="Verified ${formatDate(pub.last_updated)}"
       </div>
     </div>
     <div class="bar-price"
-         title="Verified ${formatDate(pub.last_updated)}">
+         title="Verified ${formatDate(pub.last_updated)}"
       ฿${pub.price}
     </div>
   </div>
