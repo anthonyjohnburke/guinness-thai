@@ -894,10 +894,9 @@ font-size: 0.8em;
 }
 
 .happy-prices {
-    display: grid;
-    grid-template-columns: 80px auto; /* fixed price column */
-    gap: 10px;
+    display: flex;
     align-items: center;
+    gap: 6px;
     white-space: nowrap;
 }
 
@@ -918,10 +917,10 @@ font-size: 0.8em;
 }
 
 .happy-prices.stacked {
-    display: grid;
-    grid-template-columns: 80px auto; /* match main layout */
-    gap: 4px 10px;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
     font-size: 0.9em;
     min-width: 140px;
 }
