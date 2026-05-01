@@ -837,11 +837,19 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
       .sort((a, b) => a.happyPrice - b.happyPrice)
       .slice(0, 5);
 
-    const medals = ["🥇", "🥈", "🥉"];
+ const medals = ["🥇", "🥈", "🥉"];
 
-    happyPubs.forEach((pub, i) => {
-      const rank = i < 3 ? medals[i] : `${i + 1}.`;
-      const savingAmount = pub.fullPrice - pub.happyPrice;
+let lastHappyPrice = null;
+let happyMedalIndex = -1;
+
+happyPubs.forEach((pub, i) => {
+  if (pub.happyPrice !== lastHappyPrice) {
+    happyMedalIndex++;
+    lastHappyPrice = pub.happyPrice;
+  }
+
+  const rank = medals[happyMedalIndex] || `${happyMedalIndex + 1}.`;
+  const savingAmount = pub.fullPrice - pub.happyPrice;
 
       const row = document.createElement("div");
       row.className = "happy-item";
