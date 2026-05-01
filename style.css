@@ -906,7 +906,7 @@ font-size: 0.8em;
 .happy-name {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   flex: 1;
   color: rgba(255,255,255,0.85);
   min-width: 0;
