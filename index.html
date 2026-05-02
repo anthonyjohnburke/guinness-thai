@@ -836,20 +836,16 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
   let lastPrice = null;
   let medalIndex = -1;
 
-const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
-  if (pub.price !== lastPrice) {
-    medalIndex++;
-    lastPrice = pub.price;
-  }
-
-  return {
-    name: pub.name,
-    price: pub.price,
-    saving: mostExpensivePrice - pub.price,
-    savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
-    medal: medals[medalIndex] || `${medalIndex + 1}.`
-  };
-});
+const cheapestFive = pricedPubs.slice(0, 5).map(pub => ({
+  name: pub.name,
+  area: pub.area,
+  lat: pub.lat,
+  lon: pub.lon,
+  price: pub.price,
+  saving: mostExpensivePrice - pub.price,
+  savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
+  medal: medals[medalIndex] || `${medalIndex + 1}.`
+}));
 
       cheapList.innerHTML = "";
 
@@ -862,9 +858,19 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
 
         row.innerHTML = `
           <div class="happy-name">
-            <span class="happy-rank">${rank}</span>
-            ${escapeHTML(pub.name)}
-          </div>
+  <span class="happy-rank">${rank}</span>
+
+  <div class="pub-info">
+    <div class="pub-name">${escapeHTML(pub.name)}</div>
+    <div class="pub-meta">
+      ${pub.area ? escapeHTML(pub.area) : ""}
+      ${pub.area && pub.lat && pub.lon ? " • " : ""}
+      ${pub.lat && pub.lon ? `
+        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+      ` : ""}
+    </div>
+  </div>
+</div>
          <div class="happy-prices stacked compact">
   <div class="price-line">
   <span class="label">Price:</span>
@@ -890,9 +896,16 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
         pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
       );
 
-      const mostExpensiveFive = [...pricedPubs]
-        .sort((a, b) => b.price - a.price)
-        .slice(0, 5);
+     const mostExpensiveFive = [...pricedPubs]
+  .sort((a, b) => b.price - a.price)
+  .slice(0, 5)
+  .map(pub => ({
+    name: pub.name,
+    area: pub.area,
+    lat: pub.lat,
+    lon: pub.lon,
+    price: pub.price
+  }));
 
       expensiveList.innerHTML = "";
 
@@ -904,9 +917,18 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
         row.style.animationDelay = `${150 + i * 120}ms`;
 
         row.innerHTML = `
-          <div class="happy-name">
-            ${escapeHTML(pub.name)}
-          </div>
+        <div class="happy-name">
+  <div class="pub-info">
+    <div class="pub-name">${escapeHTML(pub.name)}</div>
+    <div class="pub-meta">
+      ${pub.area ? escapeHTML(pub.area) : ""}
+      ${pub.area && pub.lat && pub.lon ? " • " : ""}
+      ${pub.lat && pub.lon ? `
+        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+      ` : ""}
+    </div>
+  </div>
+</div>
 
           <div class="happy-prices stacked compact">
   <div class="price-line">
