@@ -108,9 +108,14 @@ body {
   font-size: 0.75rem;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.15s ease;
   z-index: 9999;
   border: 1px solid rgba(230,193,90,0.3);
+    transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.tooltip[style*="opacity: 1"] {
+  transform: translateY(0);
 }
 
 /* Note */
@@ -281,16 +286,33 @@ body {
     letter-spacing: 0.02em;
 }
 
-/* Chart summary */
-.chart-summary {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-size: 0.82em;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 6px;
-    flex-wrap: wrap;
+.wisdom-strip {
+  max-width: 1500px;
+  margin: 24px auto 10px;
+  padding: 14px 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  text-align: center;
 }
+
+.wisdom-label {
+  display: block;
+  font-size: 0.72em;
+  color: #d4af37;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+#wisdom-text {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 1.35em;
+  color: rgba(255,255,255,0.82);
+}
+
+/* Chart summary */
 
 .chart-dot {
     color: rgba(255,255,255,0.3);
@@ -299,7 +321,7 @@ body {
 .chart-key {
     font-size: 0.9em;
     color: rgba(255,255,255,0.6);
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -376,6 +398,7 @@ line-height: 1.25;
     padding: 0;
     position: relative;
     top: -1px;
+    cursor: pointer;
 }
 
 .bar {
@@ -388,6 +411,18 @@ line-height: 1.25;
 
 .bar:hover {
     filter: brightness(1.15);
+}
+
+.last-updated {
+font-size: 0.7em;
+color: rgba(255,255,255,0.55);
+margin-top: 2px;
+}
+
+.verification-note {
+font-size: 0.7em;
+color: rgba(255,255,255,0.55);
+margin-top: 2px;
 }
 
 #toggle-chart-btn {
@@ -817,7 +852,7 @@ font-size: 0.8em;
   display: inline-block;
   font-size: 0.9rem;
   color: #ddd;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 5px 12px;
   border-radius: 6px;
   margin-bottom: 12px;
@@ -891,7 +926,7 @@ font-size: 0.8em;
     align-items: center;
     font-size: 1em;
     padding: 16px 0;   /* ↑ more breathing room */
-    margin-bottom: 6px; 
+    margin-bottom: 4px; 
     border-bottom: 1px solid rgba(255,255,255,0.08); /* slightly clearer */
     opacity: 0;
     transform: translateY(8px);
@@ -904,8 +939,41 @@ font-size: 0.8em;
 }
 
 .happy-name {
-    flex: 1;
-    color: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  color: rgba(255,255,255,0.85);
+  min-width: 0;
+}
+
+.pub-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pub-name {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.pub-meta {
+  margin-top: 4px;
+  font-size: 0.9em;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.25;
+}
+
+.pub-meta a {
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.pub-meta a:hover {
+  color: #f2d47a;
+  text-decoration: underline;
 }
 
 .happy-prices {
@@ -934,9 +1002,7 @@ font-size: 0.8em;
 .happy-prices.stacked {
     display: flex;
     flex-direction: column;
-    gap: 4px;
     align-items: flex-start;
-    font-size: 0.9em;
     min-width: 140px;
 }
 
@@ -968,7 +1034,7 @@ font-size: 0.8em;
 
 .price-line .value.gold {
     color: #d4af37;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .price-line .value.muted {
@@ -994,7 +1060,6 @@ font-size: 0.8em;
 .section-block {
     margin-bottom: 52px;
     padding-bottom: 30px;
-    border-bottom: 1.5px solid rgba(255,255,255,0.2);
 }
 
 .section-block + .intro-heading {
@@ -1176,6 +1241,25 @@ font-size: 0.8em;
 }
     @media (max-width: 768px) {
 
+    .featured {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 0;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+}
+
+    .pub-meta {
+      margin-top: 3px;
+      font-size: 0.8em;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.25;
+}
 
     #suggest-section {
     width: calc(100% - 32px);
@@ -1198,8 +1282,7 @@ font-size: 0.8em;
   .contact-col {
     border-left: none;
     border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 30px;
-    margin-top: 24px;
+    padding-top: 40px;
   }
 
   .inline-form,
@@ -1262,7 +1345,7 @@ font-size: 0.8em;
         transition: opacity 0.4s ease; /* optional here too */
     }
 
-        #map-unlock-btn {
+    #map-unlock-btn {
     display: block;
     position: absolute;
     left: 50%;
@@ -1427,7 +1510,7 @@ font-size: 0.8em;
     }
 
     .section-block {
-        margin-bottom: 28px;
+        margin-bottom: 35px;
         padding-bottom: 18px;
     }
 
@@ -1503,13 +1586,7 @@ font-size: 0.8em;
      #price-chart {
         margin-top: 6px;
     }
-
-    .chart-summary {
-        font-size: 0.78em;
-        gap: 8px;
-        margin-bottom: 4px;
-    }
-
+        
     .chart-key {
         font-size: 0.68em;
         margin-bottom: 12px;
