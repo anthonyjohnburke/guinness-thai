@@ -326,6 +326,14 @@ function sanitizeURL(url) {
   }
 }
 
+  function setRandomWisdom() {
+  const el = document.getElementById("wisdom-text");
+  if (!el) return;
+
+  const random = wisdoms[Math.floor(Math.random() * wisdoms.length)];
+  el.textContent = random;
+}
+
 function trackEvent(name, params = {}) {
   try {
     if (typeof gtag === "function") {
@@ -1311,6 +1319,9 @@ if (row) {
   row.scrollIntoView({ behavior: "smooth", block: "center" });
 }
  }
+
+  setRandomWisdom();
+setInterval(setRandomWisdom, 6000);
 
 </script>
 
