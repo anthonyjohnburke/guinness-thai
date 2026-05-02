@@ -1227,7 +1227,7 @@ font-size: 0.8em;
 
     #question {
         font-size: 3em;
-        line-height: 0.95;
+        line-height: 1.1;
         max-width: 100%;
         padding: 0 16px;
         white-space: normal;
@@ -1676,6 +1676,7 @@ font-size: 0.8em;
 
     #question {
         font-size: 2.4em;
+        line-height: 1.1;
     }
 
     .last-updated {
