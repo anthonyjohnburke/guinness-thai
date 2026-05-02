@@ -1379,6 +1379,7 @@ font-size: 0.8em;
     line-height: 1.4;
     letter-spacing: 0.02em;
     opacity: 0.85;
+    padding: 0 15px;
   }
 
     #find-nearby-btn {
