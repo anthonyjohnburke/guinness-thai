@@ -306,8 +306,8 @@ body {
 
 .price-line .value.expensive-line {
   color: #d4af37;
-  font-weight: 400;
-  font-size: 0.85em;
+  font-weight: 300;
+  font-size: 0.8em;
 }
 
 /* Chart summary */
@@ -1040,8 +1040,8 @@ font-size: 0.8em;
 
 .price-line.saving .value.green {
     color: #8bc34a;
-    font-size: 0.85em;
-    font-weight: 400;
+    font-size: 0.8em;
+    font-weight: 300;
 }
 
 @keyframes happyReveal {
