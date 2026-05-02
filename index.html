@@ -990,9 +990,10 @@ ${pub.lat && pub.lon ? `
     </div>
 
     <div class="price-line saving">
-      <span class="label">Save:</span>
-      <span class="value green">฿${savingAmount} (-${pub.savingPct}%)</span>
-    </div>
+  <span class="value green">
+    Save ฿${pub.saving} (${pub.savingPct}%) vs ฿${mostExpensivePrice}
+  </span>
+</div>
   </div>
 `;
   
