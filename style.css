@@ -396,8 +396,8 @@ line-height: 1.25;
 }
 
 .last-updated + .verification-note {
-  font-size: 0.68em;
-  color: rgba(255,255,255,0.4);
+  font-size: 0.7em;
+  color: rgba(255,255,255,0.55);
   margin-top: 2px;
 }
 
