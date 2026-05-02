@@ -1355,6 +1355,8 @@ font-size: 0.8em;
   .contact-link {
     width: 100%;
     max-width: none;
+    height: 48px;
+    min-height: 48px;
   }
 
   .contact-link {
@@ -1381,10 +1383,6 @@ font-size: 0.8em;
     opacity: 0.85;
     padding: 0 15px;
   }
-
-    #find-nearby-btn {
-        width: 100%;
-    }
 
      #map {
         height: 48vh;
@@ -1698,7 +1696,7 @@ font-size: 0.8em;
     #find-nearby-btn {
         font-size: 0.8em;   /* 👈 slightly smaller */
         font-weight: 700;   /* 👈 softer weight */
-        padding: 14px 20px; /* 👈 slightly tighter */
+        padding: 0 20px; /* 👈 slightly tighter */
     }
 
 .footer-inner {
