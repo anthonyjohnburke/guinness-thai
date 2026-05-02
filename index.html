@@ -831,21 +831,28 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
     if (cheapList && pricedPubs.length > 0) {
       const mostExpensivePrice = pricedPubs[pricedPubs.length - 1].price;
 
-   const medals = ["🥇", "🥈", "🥉"];
+const medals = ["🥇", "🥈", "🥉"];
 
-  let lastPrice = null;
-  let medalIndex = -1;
+let lastPrice = null;
+let medalIndex = -1;
 
-const cheapestFive = pricedPubs.slice(0, 5).map(pub => ({
-  name: pub.name,
-  area: pub.area,
-  lat: pub.lat,
-  lon: pub.lon,
-  price: pub.price,
-  saving: mostExpensivePrice - pub.price,
-  savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
-  medal: medals[medalIndex] || `${medalIndex + 1}.`
-}));
+const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
+  if (pub.price !== lastPrice) {
+    medalIndex++;
+    lastPrice = pub.price;
+  }
+
+  return {
+    name: pub.name,
+    area: pub.area,
+    lat: pub.lat,
+    lon: pub.lon,
+    price: pub.price,
+    saving: mostExpensivePrice - pub.price,
+    savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
+    medal: medals[medalIndex] || `${medalIndex + 1}.`
+  };
+});
 
       cheapList.innerHTML = "";
 
