@@ -282,15 +282,6 @@ body {
 }
 
 /* Chart summary */
-.chart-summary {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-size: 0.82em;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 6px;
-    flex-wrap: wrap;
-}
 
 .chart-dot {
     color: rgba(255,255,255,0.3);
@@ -1546,13 +1537,7 @@ font-size: 0.8em;
      #price-chart {
         margin-top: 6px;
     }
-
-    .chart-summary {
-        font-size: 0.78em;
-        gap: 8px;
-        margin-bottom: 4px;
-    }
-
+        
     .chart-key {
         font-size: 0.68em;
         margin-bottom: 12px;
