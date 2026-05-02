@@ -749,21 +749,29 @@ if (nearbyBtn) {
         
 const priceEl = row.querySelector(".bar-price");
 
-if (priceEl) {
-  priceEl.addEventListener("click", (e) => {
+let tooltipTimeout;
+
+priceEl.addEventListener("click", (e) => {
   const tooltip = document.getElementById("tooltip");
+
+  clearTimeout(tooltipTimeout);
 
   const x = e.touches ? e.touches[0].clientX : e.clientX;
   const y = e.touches ? e.touches[0].clientY : e.clientY;
 
   tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
   tooltip.style.opacity = "1";
-  const maxX = window.innerWidth - 120;
-const maxY = window.innerHeight - 40;
 
-tooltip.style.left = Math.min(x + 10, maxX) + "px";
-tooltip.style.top = Math.min(Math.max(y - 40, 10), maxY) + "px";
-  });
+  const maxX = window.innerWidth - 120;
+  const maxY = window.innerHeight - 40;
+
+  tooltip.style.left = Math.min(x + 10, maxX) + "px";
+  tooltip.style.top = Math.min(Math.max(y - 40, 10), maxY) + "px";
+
+  tooltipTimeout = setTimeout(() => {
+    tooltip.style.opacity = "0";
+  }, 1000);
+});
 }
 
 setTimeout(() => {
