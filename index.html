@@ -1347,7 +1347,7 @@ setInterval(setRandomWisdom, 6000);
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".bar-price")) {
     const tooltip = document.getElementById("tooltip");
-    if (tooltip) tooltip.style.display = "none";
+    if (tooltip) tooltip.style.opacity = "0";
   }
 });
 
