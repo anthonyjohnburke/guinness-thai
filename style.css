@@ -302,8 +302,14 @@ body {
   font-family: 'Shadows Into Light', cursive;
   font-size: 1.5em;
   color: rgba(255,255,255,0.82);
-    opacity: 1;
-  transition: opacity 0.4s ease;
+     opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#wisdom-text.fade-out {
+  opacity: 0;
+  transform: translateY(6px);
 }
 
 .price-line .value.expensive-line {
