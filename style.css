@@ -157,10 +157,6 @@ body {
     color: #d4af37;
 }
 
-.price-line.saving .value {
-  white-space: nowrap;
-}
-
 /* Title */
 #question {
     font-family: 'Bebas Neue', sans-serif;
