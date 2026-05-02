@@ -291,6 +291,22 @@ body {
   text-align: center;
 }
 
+.wisdom-label {
+  display: block;
+  font-size: 0.72em;
+  color: #d4af37;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+#wisdom-text {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 1.35em;
+  color: rgba(255,255,255,0.82);
+}
+
 /* Chart summary */
 
 .chart-dot {
