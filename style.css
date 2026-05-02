@@ -1292,6 +1292,15 @@ font-size: 0.8em;
     padding: 0 10px;
 }
 
+    .insight-box:first-child .insight-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8em;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+    font-weight: bold;
+    
+}
+
     .intro-col-wide {
         border-right: none;
         padding-right: 0;
