@@ -1054,7 +1054,6 @@ font-size: 0.8em;
 .section-block {
     margin-bottom: 52px;
     padding-bottom: 30px;
-    border-bottom: 1.5px solid rgba(255,255,255,0.2);
 }
 
 .section-block + .intro-heading {
