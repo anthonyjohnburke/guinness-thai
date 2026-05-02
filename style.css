@@ -304,11 +304,12 @@ body {
   color: rgba(255,255,255,0.82);
 }
 
-.value.expensive-line {
-  color: rgba(255,255,255,0.5);  /* light grey */
-  font-weight: 400;             /* softer */
+.price-line .value.expensive-line {
+  color: rgba(255,255,255,0.5);
+  font-weight: 400;
   font-size: 0.9em;
 }
+
 /* Chart summary */
 
 .chart-dot {
