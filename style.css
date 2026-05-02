@@ -903,7 +903,7 @@ font-size: 0.8em;
     align-items: center;
     font-size: 1em;
     padding: 16px 0;   /* ↑ more breathing room */
-    margin-bottom: 6px; 
+    margin-bottom: 4px; 
     border-bottom: 1px solid rgba(255,255,255,0.08); /* slightly clearer */
     opacity: 0;
     transform: translateY(8px);
