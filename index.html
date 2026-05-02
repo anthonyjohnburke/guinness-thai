@@ -362,19 +362,19 @@ function sanitizeURL(url) {
   }
 }
 
- function setRandomWisdom() {
+function setRandomWisdom() {
   const el = document.getElementById("wisdom-text");
   if (!el) return;
 
-  el.style.opacity = 0;
+  el.classList.add("fade-out");
 
   setTimeout(() => {
     const random = wisdoms[Math.floor(Math.random() * wisdoms.length)];
     el.textContent = random;
-    el.style.opacity = 1;
+    el.classList.remove("fade-out");
   }, 400);
 }
-
+  
 function trackEvent(name, params = {}) {
   try {
     if (typeof gtag === "function") {
