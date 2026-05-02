@@ -1234,6 +1234,7 @@ font-size: 0.8em;
         opacity: 1;
         transform: none;
         animation: none;
+        margin-bottom: 10px;
     }
 
     .hp-field {
