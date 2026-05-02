@@ -862,11 +862,20 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
             <span class="happy-rank">${rank}</span>
             ${escapeHTML(pub.name)}
           </div>
-          <div class="happy-prices">
-            <span class="happy-price">฿${pub.price}</span>
-            <span class="happy-saving">save ฿${pub.saving} (${pub.savingPct}%)</span>
-            <span class="happy-ref">vs ฿${mostExpensivePrice}</span>
-          </div>
+         <div class="happy-prices stacked compact">
+  <div class="price-line">
+  <span class="label">Price:</span>
+    <span class="value gold">฿${pub.price}</span>
+  </div>
+
+  <div class="price-line saving">
+    <span class="value green">Save ฿${pub.saving} (${pub.savingPct}%)</span>
+  </div>
+
+  <div class="price-line">
+    <span class="value muted">vs ฿${mostExpensivePrice}</span>
+  </div>
+</div>
         `;
 
         cheapList.appendChild(row);
@@ -898,10 +907,16 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
             ${escapeHTML(pub.name)}
           </div>
 
-          <div class="happy-prices">
-            <span class="happy-price">฿${pub.price}</span>
-            <span class="happy-saving">+฿${diff} above average</span>
-          </div>
+          <div class="happy-prices stacked compact">
+  <div class="price-line">
+  <span class="label">Price:</span>
+    <span class="value gold">฿${pub.price}</span>
+  </div>
+
+  <div class="price-line saving">
+    <span class="value muted">+฿${diff} above average</span>
+  </div>
+</div>
         `;
 
         expensiveList.appendChild(row);
