@@ -1235,6 +1235,12 @@ font-size: 0.8em;
 }
     @media (max-width: 768px) {
 
+    .pub-meta {
+      margin-top: 3px;
+      font-size: 0.8em;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.25;
+}
 
     #suggest-section {
     width: calc(100% - 32px);
@@ -1321,7 +1327,7 @@ font-size: 0.8em;
         transition: opacity 0.4s ease; /* optional here too */
     }
 
-        #map-unlock-btn {
+    #map-unlock-btn {
     display: block;
     position: absolute;
     left: 50%;
