@@ -758,8 +758,11 @@ if (priceEl) {
 
   tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
   tooltip.style.display = "block";
-  tooltip.style.left = x + "px";
-  tooltip.style.top = y + "px";
+  const maxX = window.innerWidth - 120;
+const maxY = window.innerHeight - 40;
+
+tooltip.style.left = Math.min(x + 10, maxX) + "px";
+tooltip.style.top = Math.min(Math.max(y - 40, 10), maxY) + "px";
   });
 }
 
