@@ -1235,6 +1235,11 @@ font-size: 0.8em;
         grid-template-columns: 1fr;
     }
 
+    #wisdom-text {
+    font-size: 1em;
+    padding: 0 10px;
+}
+
     .intro-col-wide {
         border-right: none;
         padding-right: 0;
