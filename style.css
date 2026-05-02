@@ -1606,10 +1606,6 @@ font-size: 0.8em;
         font-size: 1em;
     }
 
-    .price-line.saving .value.green {
-        font-size: 0.85em;
-    }
-
     #top-stats {
   grid-template-columns: repeat(6, 1fr);
   gap: 8px;
