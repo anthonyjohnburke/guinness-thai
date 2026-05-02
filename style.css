@@ -976,9 +976,9 @@ font-size: 0.8em;
 
 .happy-prices {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
+    flex-direction: column;   /* 👈 KEY FIX */
+    align-items: flex-end;    /* 👈 right align whole block */
+    gap: 2px;
 }
 
 .happy-price {
@@ -1000,7 +1000,7 @@ font-size: 0.8em;
 .happy-prices.stacked {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;   /* 👈 KEY FIX */
     min-width: 140px;
 }
 
@@ -1012,7 +1012,7 @@ font-size: 0.8em;
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 100%;
+    width: auto;
 }
 
 .price-line .label {
@@ -1026,7 +1026,6 @@ font-size: 0.8em;
 .price-line .value {
     font-weight: 700;
     white-space: nowrap;
-    text-align: right;
 }
 
 .price-line .value.gold {
