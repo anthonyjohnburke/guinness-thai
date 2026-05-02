@@ -747,10 +747,23 @@ if (nearbyBtn) {
 `;
         chart.appendChild(row);
 
-        setTimeout(() => {
-          const mainBar = row.querySelector(".bar");
-          if (mainBar) mainBar.style.width = mainBar.dataset.width;
-        }, 150 + i * 80);
+// 👇 ADD THIS BLOCK HERE
+const priceEl = row.querySelector(".bar-price");
+
+if (priceEl) {
+  priceEl.addEventListener("click", (e) => {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
+    tooltip.style.display = "block";
+    tooltip.style.top = e.clientY + "px";
+    tooltip.style.left = e.clientX + "px";
+  });
+}
+
+setTimeout(() => {
+  const mainBar = row.querySelector(".bar");
+  if (mainBar) mainBar.style.width = mainBar.dataset.width;
+}, 150 + i * 80);
       });
 
       document.querySelectorAll('.bar-label.clickable').forEach(el => {
