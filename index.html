@@ -701,6 +701,8 @@ if (nearbyBtn) {
 </div>
       `;
 
+      let tooltipTimeout;  // ✅ GLOBAL (shared across all rows)
+
       pricedPubs.forEach((pub, i) => {
         let width;
         if (max === min) {
@@ -748,8 +750,6 @@ if (nearbyBtn) {
         chart.appendChild(row);
         
 const priceEl = row.querySelector(".bar-price");
-
-let tooltipTimeout;
 
 priceEl.addEventListener("click", (e) => {
   const tooltip = document.getElementById("tooltip");
