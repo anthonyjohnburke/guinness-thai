@@ -1190,6 +1190,38 @@ font-size: 0.8em;
   height: 100%;
 }
 
+.insight-strip {
+  max-width: 1500px;
+  margin: 24px auto 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.insight-box {
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  text-align: center;
+}
+
+.insight-label {
+  font-size: 0.72em;
+  color: #d4af37;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.insight-text {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 1.25em;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+}
+
 
 
 /* Mobile */
