@@ -393,6 +393,7 @@ line-height: 1.25;
     padding: 0;
     position: relative;
     top: -1px;
+    cursor: pointer;
 }
 
 .bar {
