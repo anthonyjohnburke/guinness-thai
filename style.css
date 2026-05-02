@@ -1259,6 +1259,17 @@ font-size: 0.8em;
   opacity: 0.95;
 }
 
+.timeout-caption {
+  margin-top: 8px;
+  font-size: 0.8em;
+  opacity: 0.7;
+    cursor: pointer;
+}
+
+.timeout-caption:hover {
+  opacity: 1;
+}
+
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
