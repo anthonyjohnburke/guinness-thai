@@ -746,17 +746,20 @@ if (nearbyBtn) {
   </div>
 `;
         chart.appendChild(row);
-
-// 👇 ADD THIS BLOCK HERE
+        
 const priceEl = row.querySelector(".bar-price");
 
 if (priceEl) {
   priceEl.addEventListener("click", (e) => {
-    const tooltip = document.getElementById("tooltip");
-    tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
-    tooltip.style.display = "block";
-    tooltip.style.top = e.clientY + "px";
-    tooltip.style.left = e.clientX + "px";
+  const tooltip = document.getElementById("tooltip");
+
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+  tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
+  tooltip.style.display = "block";
+  tooltip.style.left = x + "px";
+  tooltip.style.top = y + "px";
   });
 }
 
@@ -1338,9 +1341,11 @@ if (row) {
   setRandomWisdom();
 setInterval(setRandomWisdom, 6000);
 
-  document.addEventListener("click", () => {
-  const tooltip = document.getElementById("tooltip");
-  if (tooltip) tooltip.style.display = "none";
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".bar-price")) {
+    const tooltip = document.getElementById("tooltip");
+    if (tooltip) tooltip.style.display = "none";
+  }
 });
 
 </script>
