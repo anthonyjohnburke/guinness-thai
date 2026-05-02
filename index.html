@@ -1338,6 +1338,11 @@ if (row) {
   setRandomWisdom();
 setInterval(setRandomWisdom, 6000);
 
+  document.addEventListener("click", () => {
+  const tooltip = document.getElementById("tooltip");
+  if (tooltip) tooltip.style.display = "none";
+});
+
 </script>
 
 </body>
