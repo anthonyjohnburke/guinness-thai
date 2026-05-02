@@ -87,7 +87,7 @@
 
   <div id="did-you-know-top">
     <div class="did-you-know-title">Did you know?</div>
-    <div id="did-you-know-text">Loading...</div>
+    <div id="did-you-know-text">Tracking Bangkok’s Guinness prices, one pint at a time.</div>
   </div>
 </div>
 
@@ -101,7 +101,9 @@
     <button id="map-unlock-btn">Explore map</button>
 </section>
   
-  <h1 id="question" data-text="Who’s pouring the finest pint of Guinness in Bangkok?"></h1>
+  <h1 id="question" data-text="Who’s pouring the finest pint of Guinness in Bangkok?" aria-label="Who’s pouring the finest pint of Guinness in Bangkok?">
+  Who’s pouring the finest pint of Guinness in Bangkok?
+</h1>
   <h2 class="seo-sub">
   Best Draught Guinness in Bangkok, Thailand – Pint Prices, Happy Hour Deals & Pub Map Locations
   </h2>
@@ -137,11 +139,14 @@
     <div class="intro-col intro-col-wide">
       <h2 class="intro-heading">Bangkok Guinness Price Watch</h2>
       <p class="intro-small">
-        Track Guinness prices across Bangkok and spot the bars serving the best-value pint in Thailand.
+        Track Guinness prices across Bangkok and spot the bars serving the best-value pint. For adults of legal drinking age. Enjoy the pint, but mind yourself.
       </p>
 
       <div id="price-chart"></div>
       <button id="toggle-chart-btn">See full Guinness ranking</button>
+      <div class="verification-note">
+  Prices verified regularly using community submissions and direct checks. Tap or hover on a price to see the last verified date.
+</div>
       <div id="last-updated" class="last-updated">Prices last updated: —</div>
     </div>
 
@@ -160,13 +165,13 @@
       </p>
 
        <p class="featured">
-      Featured in <a href="https://www.timeout.com/bangkok/news/find-the-cheapest-guinness-in-bangkok-042826" target="_blank" rel="noopener noreferrer">Time Out Bangkok</a>
+      🏆  Featured in <a href="https://www.timeout.com/bangkok/news/find-the-cheapest-guinness-in-bangkok-042826" target="_blank" rel="noopener noreferrer">Time Out Bangkok</a>
     </p>
       
     </div>
 
     <div id="happy-hour" class="section-block">
-      <h2 class="intro-heading">Top 5 Happy Hour Guinness</h2>
+      <h2 class="intro-heading">Top 5 Happy Hour Guinness Deals</h2>
       <div id="happy-list"></div>
     </div>
 
@@ -181,7 +186,7 @@
     <div id="expensive-list-block" class="section-block">
       <h2 class="intro-heading">Most Expensive Guinness in Bangkok</h2>
       <p class="intro-small">
-        Not all pints are priced equally. These are the most expensive Guinness pours in Bangkok we found so far.
+        Not all pints are priced equally. These are the most expensive Guinness pours we’ve found in Bangkok so far.
       </p>
       <div id="expensive-list"></div>
     </div>
@@ -192,7 +197,12 @@
   <div id="tooltip" class="tooltip"></div>
 
   <div class="section-divider"></div>
-  
+
+  <div class="wisdom-strip">
+  <span class="wisdom-label">Guinness Wisdom</span>
+  <span id="wisdom-text">A good pint should never look rushed.</span>
+</div>
+
   <div id="suggest-section">
   <div class="suggest-col">
     <h2 class="intro-heading">Suggest a pub</h2>
@@ -214,7 +224,7 @@
   </div>
 
   <div class="nearby-col">
-    <h2 class="intro-heading">Find the cheapest pint near you</h2>
+    <h2 class="intro-heading">Explore pubs near you</h2>
    <p class="intro-small">
   In Bangkok? Allow location access and we’ll point you to the best-value Guinness near you.
 </p>
@@ -226,7 +236,7 @@
     <option value="all">All Bangkok</option>
   </select>
 
-  <button id="find-nearby-btn">Find nearest deal</button>
+  <button id="find-nearby-btn">Find nearby pubs</button>
 </div>
     </div>
 
@@ -262,7 +272,7 @@
         Rankings and comparisons reflect only the pubs currently tracked on this site and do not represent all venues in Bangkok.
       </p>
       <p>
-        This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only. Spotted something wrong or have a better pint? Let us know.
+        This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only.
       </p>
       <p class="footer-signoff">
         Built in Bangkok in 2026.
@@ -283,6 +293,15 @@ const INITIAL_VIEW = {
   center: [100.5018, 13.7563],
   zoom: 11.2
 };
+
+  const wisdoms = [
+  "If you’ve crossed Sukhumvit for it, it better be a creamy one.",
+  "That was an absolute creamer… if you know, you know.",
+  "If the glass has bubbles on the side, questions must be asked.",
+  "The first sip tells you everything.",
+  "Some nights start with “just one creamy pint”… and somehow end on Soi Cowboy.",
+  "Good things come to those who wait… especially in Bangkok traffic."
+];
 
 function escapeHTML(str) {
   return String(str).replace(/[&<>"']/g, function (m) {
@@ -307,6 +326,14 @@ function sanitizeURL(url) {
   } catch {
     return "";
   }
+}
+
+  function setRandomWisdom() {
+  const el = document.getElementById("wisdom-text");
+  if (!el) return;
+
+  const random = wisdoms[Math.floor(Math.random() * wisdoms.length)];
+  el.textContent = random;
 }
 
 function trackEvent(name, params = {}) {
@@ -555,7 +582,7 @@ if (nearbyBtn) {
     findNearestCheapest(pubs, zoomToPub, radiusValue);
 
     setTimeout(() => {
-      btn.textContent = "Find cheapest pint near you";
+      btn.textContent = "Find nearby pubs";
       btn.disabled = false;
     }, 3000);
   });
@@ -589,11 +616,13 @@ if (nearbyBtn) {
       }
     }
 
-   const pricedPubs = pubs
+  const pricedPubs = pubs
   .filter(p => p.price && !isNaN(parseFloat(p.price)))
   .map(p => ({
     name: p.name,
     area: p.area,
+    lat: p.lat,
+    lon: p.lon,
     price: parseFloat(p.price),
     last_updated: p.last_updated
   }))
@@ -667,15 +696,12 @@ if (nearbyBtn) {
       }
 
       chart.innerHTML += `
-        <div class="chart-summary">
-          <span>Price range: ฿${min}–฿${max}</span>
-          <span class="chart-dot">·</span>
-          <span>Gap: ฿${gap}</span>
-        </div>
         <div class="chart-key">
   Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
 </div>
       `;
+
+      let tooltipTimeout;  // ✅ GLOBAL (shared across all rows)
 
       pricedPubs.forEach((pub, i) => {
         let width;
@@ -722,11 +748,35 @@ if (nearbyBtn) {
   </div>
 `;
         chart.appendChild(row);
+        
+const priceEl = row.querySelector(".bar-price");
 
-        setTimeout(() => {
-          const mainBar = row.querySelector(".bar");
-          if (mainBar) mainBar.style.width = mainBar.dataset.width;
-        }, 150 + i * 80);
+priceEl.addEventListener("click", (e) => {
+  const tooltip = document.getElementById("tooltip");
+
+  clearTimeout(tooltipTimeout);
+
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+  tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
+  tooltip.style.opacity = "1";
+
+  const maxX = window.innerWidth - 120;
+  const maxY = window.innerHeight - 40;
+
+  tooltip.style.left = Math.min(x + 10, maxX) + "px";
+  tooltip.style.top = Math.min(Math.max(y - 40, 10), maxY) + "px";
+
+  tooltipTimeout = setTimeout(() => {
+    tooltip.style.opacity = "0";
+  }, 1000);
+});
+
+setTimeout(() => {
+  const mainBar = row.querySelector(".bar");
+  if (mainBar) mainBar.style.width = mainBar.dataset.width;
+}, 150 + i * 80);
       });
 
       document.querySelectorAll('.bar-label.clickable').forEach(el => {
@@ -839,25 +889,28 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
       });
     }
 
-    const happyPubs = pubs
-      .filter(p =>
-        p.happy_hour_price &&
-        String(p.happy_hour_price).toLowerCase() !== "n/a" &&
-        p.price &&
-        !isNaN(parseFloat(p.price))
-      )
-      .map((p, i) => {
-        const hh = parseFloat(p.happy_hour_price);
-        const full = parseFloat(p.price);
-        const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
+   const happyPubs = pubs
+  .filter(p =>
+    p.happy_hour_price &&
+    String(p.happy_hour_price).toLowerCase() !== "n/a" &&
+    p.price &&
+    !isNaN(parseFloat(p.price))
+  )
+  .map((p, i) => {
+    const hh = parseFloat(p.happy_hour_price);
+    const full = parseFloat(p.price);
+    const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
 
-        return {
-          name: p.name,
-          happyPrice: hh,
-          fullPrice: full,
-          savingPct: savingPct
-        };
-      })
+    return {
+      name: p.name,
+      area: p.area,   // 👈 ADD
+      lat: p.lat,     // 👈 ADD
+      lon: p.lon,     // 👈 ADD
+      happyPrice: hh,
+      fullPrice: full,
+      savingPct: savingPct
+    };
+  })
       .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
       .sort((a, b) => a.happyPrice - b.happyPrice)
       .slice(0, 5);
@@ -881,25 +934,35 @@ happyPubs.forEach((pub, i) => {
       row.style.animationDelay = `${150 + i * 120}ms`;
 
       row.innerHTML = `
-        <div class="happy-name">
-          <span class="happy-rank">${rank}</span>
-          ${escapeHTML(pub.name)}
-        </div>
+  <div class="happy-name">
+    <span class="happy-rank">${rank}</span>
 
-        <div class="happy-prices stacked compact">
-          <div class="price-line">
-            <span class="label">Happy Hour:</span>
-            <span class="value gold">฿${pub.happyPrice}</span>
-          </div>
+    <div class="pub-info">
+      <div class="pub-name">${escapeHTML(pub.name)}</div>
+      <div class="pub-meta">
+        ${pub.area ? escapeHTML(pub.area) : ""}
+${pub.area && pub.lat && pub.lon ? " • " : ""}
+${pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+` : ""}
+      </div>
+    </div>
+  </div>
 
-          <div class="price-line saving">
-            <span class="label">Save:</span>
-            <span class="value green">฿${savingAmount} (-${pub.savingPct}%)</span>
-          </div>
-        </div>
-      `;
+  <div class="happy-prices stacked compact">
+    <div class="price-line">
+      <span class="label">Happy Hour:</span>
+      <span class="value gold">฿${pub.happyPrice}</span>
+    </div>
 
-      happyList.appendChild(row);
+    <div class="price-line saving">
+      <span class="label">Save:</span>
+      <span class="value green">฿${savingAmount} (-${pub.savingPct}%)</span>
+    </div>
+  </div>
+`;
+  
+  happyList.appendChild(row);
     });
 
     const geojson = {
@@ -1284,6 +1347,16 @@ if (row) {
   row.scrollIntoView({ behavior: "smooth", block: "center" });
 }
  }
+
+  setRandomWisdom();
+setInterval(setRandomWisdom, 6000);
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".bar-price")) {
+    const tooltip = document.getElementById("tooltip");
+    if (tooltip) tooltip.style.opacity = "0";
+  }
+});
 
 </script>
 
