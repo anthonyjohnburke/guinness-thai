@@ -1561,12 +1561,25 @@ font-size: 0.8em;
         font-size: 0.9em;
     }
 
-     #top-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-        padding: 0 16px;
-        margin: 10px auto 26px;
-    }
+    #top-stats {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding: 0 16px;
+  margin: 10px auto 26px;
+}
+
+#top-stats .stat-card {
+  grid-column: span 2;
+}
+
+/* Row 2: center the last two */
+#top-stats .stat-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+#top-stats .stat-card:nth-child(5) {
+  grid-column: 4 / span 2;
+}
 
     .stat-card {
         padding: 16px 12px;
@@ -1581,13 +1594,6 @@ font-size: 0.8em;
     .stat-label {
         font-size: 0.72em;
         letter-spacing: 0.04em;
-    }
-
-    /* last card centered on its own row */
-    #top-stats .stat-card:last-child {
-        grid-column: 1 / -1;
-        max-width: calc(50% - 7px);
-        margin: 0 auto;
     }
 
      #price-chart {
