@@ -1227,7 +1227,16 @@ font-size: 0.8em;
   line-height: 1.5;
 }
 
+.insight-text a {
+  color: #d4af37; /* your gold */
+  font-weight: 700;
+  text-decoration: none;
+}
 
+.insight-text a:hover {
+  text-decoration: underline;
+  color: #f2d47a;
+}
 
 /* Mobile */
 @media (max-width: 900px) {
