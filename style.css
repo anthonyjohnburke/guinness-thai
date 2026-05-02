@@ -846,7 +846,7 @@ font-size: 0.8em;
   display: inline-block;
   font-size: 0.9rem;
   color: #ddd;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 5px 12px;
   border-radius: 6px;
   margin-bottom: 12px;
@@ -1234,6 +1234,19 @@ font-size: 0.8em;
 
 }
     @media (max-width: 768px) {
+
+    .featured {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 0;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+}
 
     .pub-meta {
       margin-top: 3px;
