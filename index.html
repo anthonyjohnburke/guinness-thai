@@ -1247,11 +1247,17 @@ function typeWriter(el, text, speed = 35) {
 
   type();
 }
-  window.addEventListener("load", () => {
+ window.addEventListener("load", () => {
   const el = document.getElementById("question");
   if (!el) return;
 
   const text = el.getAttribute("data-text");
+
+  // 👉 Disable animation on mobile
+  if (window.innerWidth <= 768) {
+    el.textContent = text;
+    return;
+  }
 
   setTimeout(() => {
     typeWriter(el, text, 28);
