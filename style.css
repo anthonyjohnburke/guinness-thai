@@ -1056,8 +1056,8 @@ font-size: 0.8em;
 }
 
 .section-block {
-    margin-bottom: 40px;
-    padding-bottom: 30px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .section-block + .intro-heading {
