@@ -869,12 +869,11 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
   </div>
 
   <div class="price-line saving">
-    <span class="value green">Save ฿${pub.saving} (${pub.savingPct}%)</span>
-  </div>
-
-  <div class="price-line">
-    <span class="value muted">vs ฿${mostExpensivePrice}</span>
-  </div>
+  <span class="label">Save:</span>
+  <span class="value green cheap-save-line">
+    Save ฿${pub.saving} (${pub.savingPct}%) vs ฿${mostExpensivePrice}
+  </span>
+</div>
 </div>
         `;
 
@@ -990,9 +989,9 @@ ${pub.lat && pub.lon ? `
     </div>
 
     <div class="price-line saving">
-  <span class="value green">
-    Save ฿${pub.saving} (${pub.savingPct}%) vs ฿${mostExpensivePrice}
-  </span>
+<span class="value green">
+  Save ฿${savingAmount} (${pub.savingPct}%)
+</span>
 </div>
   </div>
 `;
