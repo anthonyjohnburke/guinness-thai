@@ -861,7 +861,7 @@ font-size: 0.8em;
 
 .insight-box:first-child .insight-text {
   font-family: 'Open Sans', sans-serif;
-  font-size: 0.85em;
+  font-size: 0.9em;
   color: rgba(255,255,255,0.75);
 }
 
@@ -1207,13 +1207,12 @@ font-size: 0.8em;
 .insight-box {
   padding: 16px 18px;
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.08);
   background: rgba(255,255,255,0.02);
   text-align: center;
 }
 
 .insight-label {
-  font-size: 0.72em;
+  font-size: 0.8em;
   color: #d4af37;
   text-transform: uppercase;
   letter-spacing: 0.08em;
