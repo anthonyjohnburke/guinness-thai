@@ -1237,6 +1237,10 @@ font-size: 0.8em;
         margin-bottom: 10px;
     }
 
+    #map-section {
+    margin-top: 10px;
+}
+
     .hp-field {
     display: none !important;
 }
