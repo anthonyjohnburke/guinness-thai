@@ -365,11 +365,6 @@ line-height: 1.25;
     text-overflow: ellipsis;
 }
 
-.value.red {
-  color: #ff5a5a;
-  font-weight: 600;
-}
-
 .bar-wrap {
     width: 100%;
     background: rgba(255,255,255,0.09);
