@@ -391,14 +391,15 @@ line-height: 1.25;
 }
 
 .last-updated {
-  font-size: 0.7em;
-  color: rgba(255,255,255,0.55);
+font-size: 0.7em;
+color: rgba(255,255,255,0.55);
+margin-top: 2px;
 }
 
-.last-updated + .verification-note {
-  font-size: 0.7em;
-  color: rgba(255,255,255,0.55);
-  margin-top: 2px;
+.verification-note {
+font-size: 0.7em;
+color: rgba(255,255,255,0.55);
+margin-top: 2px;
 }
 
 #toggle-chart-btn {
