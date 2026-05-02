@@ -757,7 +757,7 @@ if (priceEl) {
   const y = e.touches ? e.touches[0].clientY : e.clientY;
 
   tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
-  tooltip.style.display = "block";
+  tooltip.style.opacity = "1";
   const maxX = window.innerWidth - 120;
 const maxY = window.innerHeight - 40;
 
