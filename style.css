@@ -1010,7 +1010,6 @@ font-size: 0.8em;
 
 .price-line {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 8px;
     width: 100%;
