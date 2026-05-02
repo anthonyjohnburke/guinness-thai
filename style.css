@@ -1241,6 +1241,23 @@ font-size: 0.8em;
   color: #f2d47a;
 }
 
+.timeout-link {
+  display: block;
+  margin-top: 6px;
+}
+
+.timeout-logo {
+  width: 100%;        /* 👈 full column width */
+  height: auto;       /* keep proportions */
+  border-radius: 8px; /* optional, looks nice */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.timeout-logo:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
