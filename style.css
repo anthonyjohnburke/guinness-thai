@@ -390,6 +390,17 @@ line-height: 1.25;
     filter: brightness(1.15);
 }
 
+.last-updated {
+  font-size: 0.7em;
+  color: rgba(255,255,255,0.55);
+}
+
+.last-updated + .verification-note {
+  font-size: 0.68em;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
 #toggle-chart-btn {
   display: none;
 }
