@@ -1039,7 +1039,8 @@ font-size: 0.8em;
 
 .price-line.saving .value.green {
     color: #8bc34a;
-    font-size: 0.95em;
+    font-size: 0.9em;
+    font-weight: 400;
 }
 
 @keyframes happyReveal {
