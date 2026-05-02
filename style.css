@@ -142,7 +142,6 @@ body {
     color: #d4af37;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    : 0;
     text-align: left;
 }
 
@@ -279,13 +278,6 @@ body {
     line-height: 1.5;
 }
 
-.last-updated {
-    font-size: 0.68em;
-    color: rgba(255,255,255,0.45);
-    margin: 10px 0 0;
-    letter-spacing: 0.02em;
-}
-
 .wisdom-strip {
   max-width: 1500px;
   margin: 24px auto 10px;
@@ -354,6 +346,7 @@ body {
   color: rgba(255,255,255,0.45);
   font-size: 0.9em;
 line-height: 1.25;
+    white-space: nowrap;
 }
 
 .bar-bottom {
@@ -372,9 +365,7 @@ line-height: 1.25;
     text-overflow: ellipsis;
 }
 
-.bar-area {
-  white-space: nowrap;
-}
+
 
 .bar-wrap {
     width: 100%;
@@ -694,10 +685,6 @@ font-size: 2.5em;
     border-radius: 18px 18px 0 0;
     text-align: center;
     margin-bottom: 8px;
-}
-
-.popup- {
-  padding: 18px 16px 10px;
 }
 
 .popup-actions {
@@ -1259,6 +1246,7 @@ font-size: 0.8em;
     font-weight: 700;
     text-align: center;
     width: 100%;
+    box-sizing: border-box;
 }
 
     .pub-meta {
