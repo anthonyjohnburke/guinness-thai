@@ -1137,3 +1137,10 @@ document.addEventListener("click", (e) => {
 
       contactLink.href = `mailto:${email}?subject=Guinness Bangkok Update`;
     }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const submitBtn = document.getElementById("submit-btn");
+  if (submitBtn) {
+    submitBtn.addEventListener("click", submitAnswer);
+  }
+});
