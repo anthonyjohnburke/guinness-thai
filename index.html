@@ -611,6 +611,8 @@ fetch(SHEET_URL)
         ? pubs
         : pubs.filter(pub => pub.area && pub.area.trim() === selectedArea);
 
+      renderFromData(filteredPubs);
+
 // 🔁 Update map markers
 const newGeojson = {
   type: "FeatureCollection",
@@ -693,6 +695,30 @@ if (nearbyBtn) {
   });
 }
 
+    function renderFromData(data) {
+
+  const chart = document.getElementById("price-chart");
+  const happyList = document.getElementById("happy-list");
+  const cheapList = document.getElementById("cheap-list");
+  const expensiveList = document.getElementById("expensive-list");
+
+  // reset UI
+  if (chart) chart.innerHTML = "";
+  if (happyList) happyList.innerHTML = "";
+  if (cheapList) cheapList.innerHTML = "";
+  if (expensiveList) expensiveList.innerHTML = "";
+
+  // 👇 REUSE your existing logic
+  // replace "pubs" with "data" in:
+  // - pricedPubs
+  // - stats
+  // - chart
+  // - lists
+
+}
+    
+renderFromData(pubs);
+    
     const chart = document.getElementById("price-chart");
     const updatedEl = document.getElementById("last-updated");
     const happyList = document.getElementById("happy-list");
