@@ -100,9 +100,6 @@
   <div class="map-mobile-hint">Tap map to explore • scroll with one finger</div>
     <button id="map-unlock-btn">Explore map</button>
 </section>
-
-<div class="area-title">Filter by area</div>
-<div id="area-filters"></div>
   
   <h1 id="question" data-text="Who’s pouring the finest pint of Guinness in Bangkok?" aria-label="Who’s pouring the finest pint of Guinness in Bangkok?">
   Who’s pouring the finest pint of Guinness in Bangkok?
@@ -571,102 +568,6 @@ fetch(SHEET_URL)
   })
   .then(pubs => {
 
-    const areaFilters = document.getElementById("area-filters");
-
-    if (areaFilters) {
-      const areaCounts = pubs.reduce((map, pub) => {
-        if (!pub.area) return map;
-
-        const area = pub.area.trim();
-        map.set(area, (map.get(area) || 0) + 1);
-        return map;
-      }, new Map());
-
-      const topAreas = [...areaCounts.entries()]
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5);
-
-      areaFilters.innerHTML = `
-        <button data-area="all" class="active">All</button>
-      `;
-
-      topAreas.forEach(([area, count]) => {
-        areaFilters.innerHTML += `
-          <button data-area="${escapeHTML(area)}">
-            ${escapeHTML(area)} <span>${count}</span>
-          </button>
-        `;
-      });
-
-      areaFilters.querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", () => {
-      const selectedArea = button.dataset.area;
-
-scrollToMap();
-
-      areaFilters.querySelectorAll("button").forEach(btn => {
-        btn.classList.remove("active");
-      });
-
-      button.classList.add("active");
-
-      const filteredPubs = selectedArea === "all"
-        ? pubs
-        : pubs.filter(pub => pub.area && pub.area.trim() === selectedArea);
-
-// 🔁 Update map markers
-const newGeojson = {
-  type: "FeatureCollection",
-  features: filteredPubs
-    .filter(p => p.lat && p.lon)
-    .map((p, i) => ({
-      type: "Feature",
-      id: `${p.name}-${i}`,
-      geometry: {
-        type: "Point",
-        coordinates: [parseFloat(p.lon), parseFloat(p.lat)]
-      },
-      properties: p
-    }))
-};
-
-if (map.getSource('pubs')) {
-  map.getSource('pubs').setData(newGeojson);
-}
-
-// 🎯 Smart zoom
-if (selectedArea === "all") {
-  // reset to original clean view
-  map.easeTo({
-    center: INITIAL_VIEW.center,
-    zoom: INITIAL_VIEW.zoom,
-    duration: 800
-  });
-
-} else if (filteredPubs.length > 0) {
-  const bounds = new mapboxgl.LngLatBounds();
-
-  filteredPubs.forEach(p => {
-    if (p.lat && p.lon) {
-      bounds.extend([parseFloat(p.lon), parseFloat(p.lat)]);
-    }
-  });
-
-  if (!bounds.isEmpty()) {
-    map.fitBounds(bounds, {
-      padding: 80,
-      maxZoom: 15,
-      duration: 800
-    });
-  }
-}
-
-renderFromData(filteredPubs);
-    
-    });
-  });
-}
-
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
 
@@ -726,217 +627,427 @@ if (nearbyBtn) {
   });
 }
 
-function renderFromData(data) {
+    const chart = document.getElementById("price-chart");
+    const updatedEl = document.getElementById("last-updated");
+    const happyList = document.getElementById("happy-list");
 
-  const chart = document.getElementById("price-chart");
-  const happyList = document.getElementById("happy-list");
-  const cheapList = document.getElementById("cheap-list");
-  const expensiveList = document.getElementById("expensive-list");
-  const updatedEl = document.getElementById("last-updated");
+    chart.innerHTML = "";
+    happyList.innerHTML = "";
 
-  if (chart) chart.innerHTML = "";
-  if (happyList) happyList.innerHTML = "";
-  if (cheapList) cheapList.innerHTML = "";
-  if (expensiveList) expensiveList.innerHTML = "";
+    const dates = pubs
+      .map(p => p.last_updated)
+      .filter(Boolean)
+      .map(d => new Date(d))
+      .filter(d => !isNaN(d));
 
-  const pricedPubs = data
-    .filter(p => p.price && !isNaN(parseFloat(p.price)))
-    .map(p => ({
-      ...p,
-      price: parseFloat(p.price)
-    }))
-    .sort((a, b) => a.price - b.price);
-
-  if (pricedPubs.length === 0) return;
-
-  const max = Math.max(...pricedPubs.map(p => p.price));
-  const min = Math.min(...pricedPubs.map(p => p.price));
-  const gap = max - min;
-  const avg = Math.round(
-    pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
-  );
-
-  animateCount("stat-pubs", pricedPubs.length, "", 1000);
-  animateCount("stat-cheapest", min, "฿", 1200);
-  animateCount("stat-expensive", max, "฿", 1400);
-  animateCount("stat-gap", gap, "฿", 1600);
-  animateCount("stat-average", avg, "฿", 1800);
-
-  const dates = data
-    .map(p => p.last_updated)
-    .filter(Boolean)
-    .map(d => new Date(d))
-    .filter(d => !isNaN(d));
-
-  if (updatedEl) {
-    if (dates.length > 0) {
-      const latest = new Date(Math.max(...dates));
-      updatedEl.textContent =
-        "Prices last updated: " +
-        latest.toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "short",
-          year: "numeric"
-        });
-    } else {
-      updatedEl.textContent = "Prices last updated: Recently";
+    if (updatedEl) {
+      if (dates.length > 0) {
+        const latest = new Date(Math.max(...dates));
+        updatedEl.textContent =
+          "Prices last updated: " +
+          latest.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          });
+      } else {
+        updatedEl.textContent = "Prices last updated: Recently";
+      }
     }
-  }
 
-  chart.innerHTML += `
-    <div class="chart-key">
-      Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
-    </div>
-  `;
+  const pricedPubs = pubs
+  .filter(p => p.price && !isNaN(parseFloat(p.price)))
+  .map(p => ({
+    name: p.name,
+    area: p.area,
+    lat: p.lat,
+    lon: p.lon,
+    price: parseFloat(p.price),
+    last_updated: p.last_updated
+  }))
+  .sort((a, b) => a.price - b.price);
 
-  pricedPubs.forEach(pub => {
-    const width = max === min ? 100 : ((max - pub.price) / (max - min)) * 100;
+    if (pricedPubs.length > 0) {
+      const max = Math.max(...pricedPubs.map(p => p.price));
+      const min = Math.min(...pricedPubs.map(p => p.price));
+      const gap = max - min;
+      const avg = Math.round(
+        pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
+      );
 
-    const row = document.createElement("div");
-    row.className = "bar-row";
-    row.dataset.pubName = pub.name;
+      animateCount("stat-pubs", pricedPubs.length, "", 1000);
+      animateCount("stat-cheapest", min, "฿", 1200);
+      animateCount("stat-expensive", max, "฿", 1400);
+      animateCount("stat-gap", gap, "฿", 1600);
+      animateCount("stat-average", avg, "฿", 1800);
 
-    row.innerHTML = `
-      <div class="bar-label">
-        ${escapeHTML(pub.name)}
-        ${pub.area ? `<div class="bar-area">${escapeHTML(pub.area)}</div>` : ""}
-      </div>
+      const didYouKnowEl = document.getElementById("did-you-know-text");
+      if (didYouKnowEl) {
+        const underDeal = Math.max(avg - 40, min);
+        const over400Count = pricedPubs.filter(p => p.price >= 400).length;
 
-      <div class="bar-bottom">
-        <div class="bar-wrap">
-          <div class="bar" style="width:${width}%"></div>
-        </div>
-        <div class="bar-price">฿${pub.price}</div>
-      </div>
-    `;
+        const facts = [
+          `The average pint in Bangkok is <strong>฿${avg}</strong>… so anything under ฿${underDeal} is a proper deal`,
+          `The price gap between the cheapest and most expensive pint is <strong>฿${gap}</strong>.`,
+          `You can still find a pint for <strong>฿${min}</strong> if you know where to look.`,
+          over400Count > 0
+            ? `<strong>${over400Count}</strong> pub${over400Count === 1 ? "" : "s"} now charge ฿400 or more for a pint 👀`
+            : `No pub has crossed ฿400 yet… which feels like a small win.`
+        ];
 
-    chart.appendChild(row);
+        let factIndex = 0;
+        didYouKnowEl.innerHTML = facts[factIndex];
+
+        setInterval(() => {
+          didYouKnowEl.style.opacity = 0;
+          setTimeout(() => {
+            factIndex = (factIndex + 1) % facts.length;
+            didYouKnowEl.innerHTML = facts[factIndex];
+            didYouKnowEl.style.opacity = 1;
+          }, 400);
+        }, 5000);
+      }
+
+      const cheapestPub = pricedPubs[0];
+      const mostExpensivePub = pricedPubs[pricedPubs.length - 1];
+
+      const cheapestCard = document.getElementById("stat-cheapest")?.closest(".stat-card");
+      const expensiveCard = document.getElementById("stat-expensive")?.closest(".stat-card");
+
+      if (cheapestCard && cheapestPub) {
+        cheapestCard.classList.add("is-clickable");
+
+        cheapestCard.addEventListener("click", () => {
+          highlightChartPub(cheapestPub.name);
+          zoomToPub(cheapestPub.name, pubs);
+          trackEvent("stat_cheapest_click", { pub_name: cheapestPub.name });
+        });
+      }
+
+      if (expensiveCard && mostExpensivePub) {
+        expensiveCard.classList.add("is-clickable");
+
+        expensiveCard.addEventListener("click", () => {
+          highlightChartPub(mostExpensivePub.name);
+          zoomToPub(mostExpensivePub.name, pubs);
+          trackEvent("stat_most_expensive_click", { pub_name: mostExpensivePub.name });
+        });
+      }
+
+      chart.innerHTML += `
+        <div class="chart-key">
+  Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
+</div>
+      `;
+
+      let tooltipTimeout;  // ✅ GLOBAL (shared across all rows)
+
+      pricedPubs.forEach((pub, i) => {
+        let width;
+        if (max === min) {
+          width = 100;
+        } else {
+          width = ((max - pub.price) / (max - min)) * 100;
+        }
+
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        row.dataset.pubName = pub.name;
+
+
+       function formatDate(dateStr) {
+  if (!dateStr) return "Unknown";
+
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
   });
-
-  const medals = ["🥇", "🥈", "🥉"];
-
-  // Happy hour
-  const happyPubs = pricedPubs
-    .filter(p =>
-      p.happy_hour_price &&
-      String(p.happy_hour_price).toLowerCase() !== "n/a" &&
-      !isNaN(parseFloat(p.happy_hour_price))
-    )
-    .map(p => {
-      const happyPrice = parseFloat(p.happy_hour_price);
-      const savingAmount = p.price - happyPrice;
-      const savingPct = Math.round((savingAmount / p.price) * 100);
-
-      return {
-        ...p,
-        happyPrice,
-        savingAmount,
-        savingPct
-      };
-    })
-    .sort((a, b) => a.happyPrice - b.happyPrice)
-    .slice(0, 5);
-
-  if (happyList) {
-    happyPubs.forEach((pub, i) => {
-      const rank = medals[i] || `${i + 1}.`;
-
-      const row = document.createElement("div");
-      row.className = "happy-item";
-      row.style.animationDelay = `${150 + i * 120}ms`;
-
-      row.innerHTML = `
-        <div class="happy-name">
-          <span class="happy-rank">${rank}</span>
-          <div class="pub-info">
-            <div class="pub-name">${escapeHTML(pub.name)}</div>
-            ${pub.area ? `<div class="pub-meta">${escapeHTML(pub.area)}</div>` : ""}
-          </div>
-        </div>
-
-        <div class="happy-prices stacked compact">
-          <div class="price-line">
-            <span class="label">Happy Hour:</span>
-            <span class="value gold">฿${pub.happyPrice}</span>
-          </div>
-          <div class="price-line saving">
-            <span class="label">Save:</span>
-            <span class="value green">฿${pub.savingAmount} (-${pub.savingPct}%)</span>
-          </div>
-        </div>
-      `;
-
-      happyList.appendChild(row);
-    });
-  }
-
-  // Cheapest
-  if (cheapList) {
-    pricedPubs.slice(0, 5).forEach((pub, i) => {
-      const rank = medals[i] || `${i + 1}.`;
-      const saving = max - pub.price;
-      const savingPct = Math.round((saving / max) * 100);
-
-      const row = document.createElement("div");
-      row.className = "happy-item";
-      row.style.animationDelay = `${150 + i * 120}ms`;
-
-      row.innerHTML = `
-        <div class="happy-name">
-          <span class="happy-rank">${rank}</span>
-          <div class="pub-info">
-            <div class="pub-name">${escapeHTML(pub.name)}</div>
-            ${pub.area ? `<div class="pub-meta">${escapeHTML(pub.area)}</div>` : ""}
-          </div>
-        </div>
-
-        <div class="happy-prices stacked compact">
-          <div class="price-line">
-            <span class="value gold">฿${pub.price}</span>
-          </div>
-          <div class="price-line saving">
-            <span class="value green">save ฿${saving} (${savingPct}%)</span>
-          </div>
-        </div>
-      `;
-
-      cheapList.appendChild(row);
-    });
-  }
-
-  // Expensive
-  if (expensiveList) {
-    [...pricedPubs].reverse().slice(0, 5).forEach(pub => {
-      const aboveAvg = pub.price - avg;
-
-      const row = document.createElement("div");
-      row.className = "happy-item";
-
-      row.innerHTML = `
-        <div class="happy-name">
-          <div class="pub-info">
-            <div class="pub-name">${escapeHTML(pub.name)}</div>
-            ${pub.area ? `<div class="pub-meta">${escapeHTML(pub.area)}</div>` : ""}
-          </div>
-        </div>
-
-        <div class="happy-prices stacked compact">
-          <div class="price-line">
-            <span class="value gold">฿${pub.price}</span>
-          </div>
-          <div class="price-line saving">
-            <span class="value green">+฿${aboveAvg} above average</span>
-          </div>
-        </div>
-      `;
-
-      expensiveList.appendChild(row);
-    });
-  }
 }
-    
-    
-renderFromData(pubs);
+
+      row.innerHTML = `
+  <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
+    ${escapeHTML(pub.name)}
+    ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
+  </div>
+
+  <div class="bar-bottom">
+    <div class="bar-wrap">
+      <div class="bar"
+           style="width:0%"
+           data-width="${width}%"
+           title="Verified ${formatDate(pub.last_updated)}">
+      </div>
+    </div>
+    <div class="bar-price"
+         title="Verified ${formatDate(pub.last_updated)}">
+      ฿${pub.price}
+    </div>
+  </div>
+`;
+        chart.appendChild(row);
+        
+const priceEl = row.querySelector(".bar-price");
+
+priceEl.addEventListener("click", (e) => {
+  const tooltip = document.getElementById("tooltip");
+
+  clearTimeout(tooltipTimeout);
+
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+  tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
+  tooltip.style.opacity = "1";
+
+  const maxX = window.innerWidth - 120;
+  const maxY = window.innerHeight - 40;
+
+  tooltip.style.left = Math.min(x + 10, maxX) + "px";
+  tooltip.style.top = Math.min(Math.max(y - 40, 10), maxY) + "px";
+
+  tooltipTimeout = setTimeout(() => {
+    tooltip.style.opacity = "0";
+  }, 1000);
+});
+
+setTimeout(() => {
+  const mainBar = row.querySelector(".bar");
+  if (mainBar) mainBar.style.width = mainBar.dataset.width;
+}, 150 + i * 80);
+      });
+
+      document.querySelectorAll('.bar-label.clickable').forEach(el => {
+        el.addEventListener('click', () => {
+          const name = el.dataset.pub;
+          highlightChartPub(name);
+          zoomToPub(name, pubs);
+          trackEvent("chart_pub_click", { pub_name: name });
+        });
+      });
+
+    const toggleChartBtn = document.getElementById("toggle-chart-btn");
+
+if (window.innerWidth <= 768 && toggleChartBtn) {
+  chart.classList.add("is-collapsed");
+
+  toggleChartBtn.textContent = "See full Guinness ranking";
+
+  toggleChartBtn.addEventListener("click", () => {
+    chart.classList.toggle("is-collapsed");
+
+    toggleChartBtn.textContent = chart.classList.contains("is-collapsed")
+      ? "See full Guinness ranking"
+      : "Show fewer prices";
+  });
+}
+
+    const cheapList = document.getElementById("cheap-list");
+
+    if (cheapList && pricedPubs.length > 0) {
+      const mostExpensivePrice = pricedPubs[pricedPubs.length - 1].price;
+
+const medals = ["🥇", "🥈", "🥉"];
+
+let lastPrice = null;
+let medalIndex = -1;
+
+const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
+  if (pub.price !== lastPrice) {
+    medalIndex++;
+    lastPrice = pub.price;
+  }
+
+  return {
+    name: pub.name,
+    area: pub.area,
+    lat: pub.lat,
+    lon: pub.lon,
+    price: pub.price,
+    saving: mostExpensivePrice - pub.price,
+    savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
+    medal: medals[medalIndex] || `${medalIndex + 1}.`
+  };
+});
+
+      cheapList.innerHTML = "";
+
+      cheapestFive.forEach((pub, i) => {
+        const rank = pub.medal;
+
+        const row = document.createElement("div");
+        row.className = "happy-item";
+        row.style.animationDelay = `${150 + i * 120}ms`;
+
+        row.innerHTML = `
+          <div class="happy-name">
+  <span class="happy-rank">${rank}</span>
+
+  <div class="pub-info">
+    <div class="pub-name">${escapeHTML(pub.name)}</div>
+    <div class="pub-meta">
+      ${pub.area ? escapeHTML(pub.area) : ""}
+      ${pub.area && pub.lat && pub.lon ? " • " : ""}
+      ${pub.lat && pub.lon ? `
+        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+      ` : ""}
+    </div>
+  </div>
+</div>
+         <div class="happy-prices stacked compact">
+  <div class="price-line">
+  <span class="label">Price:</span>
+    <span class="value gold">฿${pub.price}</span>
+  </div>
+
+  <div class="price-line saving">
+ <span class="value green cheap-save-line">
+  Save ฿${pub.saving} (${pub.savingPct}%) vs ฿${mostExpensivePrice}
+</span>
+</div>
+</div>
+        `;
+
+        cheapList.appendChild(row);
+      });
+    }
+
+    const expensiveList = document.getElementById("expensive-list");
+
+    if (expensiveList && pricedPubs.length > 0) {
+      const avgPrice = Math.round(
+        pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
+      );
+
+     const mostExpensiveFive = [...pricedPubs]
+  .sort((a, b) => b.price - a.price)
+  .slice(0, 5)
+  .map(pub => ({
+    name: pub.name,
+    area: pub.area,
+    lat: pub.lat,
+    lon: pub.lon,
+    price: pub.price
+  }));
+
+      expensiveList.innerHTML = "";
+
+      mostExpensiveFive.forEach((pub, i) => {
+        const diff = pub.price - avgPrice;
+
+        const row = document.createElement("div");
+        row.className = "happy-item";
+        row.style.animationDelay = `${150 + i * 120}ms`;
+
+        row.innerHTML = `
+        <div class="happy-name">
+  <div class="pub-info">
+    <div class="pub-name">${escapeHTML(pub.name)}</div>
+    <div class="pub-meta">
+      ${pub.area ? escapeHTML(pub.area) : ""}
+      ${pub.area && pub.lat && pub.lon ? " • " : ""}
+      ${pub.lat && pub.lon ? `
+        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+      ` : ""}
+    </div>
+  </div>
+</div>
+
+          <div class="happy-prices stacked compact">
+  <div class="price-line">
+  <span class="label">Price:</span>
+    <span class="value gold">฿${pub.price}</span>
+  </div>
+
+  <div class="price-line saving">
+  <span class="value expensive-line">
+    +฿${diff} above average
+  </span>
+</div>
+</div>
+        `;
+
+        expensiveList.appendChild(row);
+      });
+    }
+
+   const happyPubs = pubs
+  .filter(p =>
+    p.happy_hour_price &&
+    String(p.happy_hour_price).toLowerCase() !== "n/a" &&
+    p.price &&
+    !isNaN(parseFloat(p.price))
+  )
+  .map((p, i) => {
+    const hh = parseFloat(p.happy_hour_price);
+    const full = parseFloat(p.price);
+    const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
+
+    return {
+      name: p.name,
+      area: p.area,   // 👈 ADD
+      lat: p.lat,     // 👈 ADD
+      lon: p.lon,     // 👈 ADD
+      happyPrice: hh,
+      fullPrice: full,
+      savingPct: savingPct
+    };
+  })
+      .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
+      .sort((a, b) => a.happyPrice - b.happyPrice)
+      .slice(0, 5);
+
+ const medals = ["🥇", "🥈", "🥉"];
+
+let lastHappyPrice = null;
+let happyMedalIndex = -1;
+
+happyPubs.forEach((pub, i) => {
+  if (pub.happyPrice !== lastHappyPrice) {
+    happyMedalIndex++;
+    lastHappyPrice = pub.happyPrice;
+  }
+
+  const rank = medals[happyMedalIndex] || `${happyMedalIndex + 1}.`;
+  const savingAmount = pub.fullPrice - pub.happyPrice;
+
+      const row = document.createElement("div");
+      row.className = "happy-item";
+      row.style.animationDelay = `${150 + i * 120}ms`;
+
+      row.innerHTML = `
+  <div class="happy-name">
+    <span class="happy-rank">${rank}</span>
+
+    <div class="pub-info">
+      <div class="pub-name">${escapeHTML(pub.name)}</div>
+      <div class="pub-meta">
+        ${pub.area ? escapeHTML(pub.area) : ""}
+${pub.area && pub.lat && pub.lon ? " • " : ""}
+${pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+` : ""}
+      </div>
+    </div>
+  </div>
+
+  <div class="happy-prices stacked compact">
+    <div class="price-line">
+      <span class="label">Happy Hour:</span>
+      <span class="value gold">฿${pub.happyPrice}</span>
+    </div>
+
+    <div class="price-line saving">
+<span class="value green">
+  Save ฿${savingAmount} (${pub.savingPct}%)
+</span>
+</div>
+  </div>
+`;
+  
+  happyList.appendChild(row);
+    });
 
     const geojson = {
       type: "FeatureCollection",
@@ -1109,6 +1220,7 @@ if (map.loaded()) {
 } else {
   map.once('load', loadIcon);
 }
+    }
   })
   .catch(err => {
     console.error(err);
