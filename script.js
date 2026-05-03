@@ -444,6 +444,36 @@ if (nearbyBtn) {
 
     chart.appendChild(row);
 
+    const priceEl = row.querySelector(".bar-price");
+
+priceEl.addEventListener("click", (e) => {
+  const tooltip = document.getElementById("tooltip");
+  if (!tooltip) return;
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "Unknown";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+  };
+
+  tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
+  tooltip.style.opacity = "1";
+
+  const x = e.clientX;
+  const y = e.clientY;
+
+  tooltip.style.left = (x + 10) + "px";
+  tooltip.style.top = (y - 30) + "px";
+
+  setTimeout(() => {
+    tooltip.style.opacity = "0";
+  }, 1000);
+});
+
     setTimeout(() => {
       const mainBar = row.querySelector(".bar");
       if (mainBar) mainBar.style.width = mainBar.dataset.width;
@@ -563,101 +593,6 @@ zoomToArea(filtered);
           trackEvent("stat_most_expensive_click", { pub_name: mostExpensivePub.name });
         });
       }
-
-      chart.innerHTML += `
-        <div class="chart-key">
-  Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
-</div>
-      `;
-
-      let tooltipTimeout;  // ✅ GLOBAL (shared across all rows)
-
-      pricedPubs.forEach((pub, i) => {
-        let width;
-        if (max === min) {
-          width = 100;
-        } else {
-          width = ((max - pub.price) / (max - min)) * 100;
-        }
-
-        const row = document.createElement("div");
-        row.className = "bar-row";
-        row.dataset.pubName = pub.name;
-
-
-       function formatDate(dateStr) {
-  if (!dateStr) return "Unknown";
-
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  });
-}
-
-      row.innerHTML = `
-  <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
-    ${escapeHTML(pub.name)}
-    ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
-  </div>
-
-  <div class="bar-bottom">
-    <div class="bar-wrap">
-      <div class="bar"
-           style="width:0%"
-           data-width="${width}%"
-           title="Verified ${formatDate(pub.last_updated)}">
-      </div>
-    </div>
-    <div class="bar-price"
-         title="Verified ${formatDate(pub.last_updated)}">
-      ฿${pub.price}
-    </div>
-  </div>
-`;
-        chart.appendChild(row);
-        
-const priceEl = row.querySelector(".bar-price");
-
-priceEl.addEventListener("click", (e) => {
-  const tooltip = document.getElementById("tooltip");
-
-  clearTimeout(tooltipTimeout);
-
-  const x = e.touches ? e.touches[0].clientX : e.clientX;
-  const y = e.touches ? e.touches[0].clientY : e.clientY;
-
-  tooltip.textContent = `Verified ${formatDate(pub.last_updated)}`;
-  tooltip.style.opacity = "1";
-
-  const maxX = window.innerWidth - 120;
-  const maxY = window.innerHeight - 40;
-
-  tooltip.style.left = Math.min(x + 10, maxX) + "px";
-  tooltip.style.top = Math.min(Math.max(y - 40, 10), maxY) + "px";
-
-  tooltipTimeout = setTimeout(() => {
-    tooltip.style.opacity = "0";
-  }, 1000);
-});
-
-setTimeout(() => {
-  const mainBar = row.querySelector(".bar");
-  if (mainBar) mainBar.style.width = mainBar.dataset.width;
-}, 150 + i * 80);
-      });
-
-      document.querySelectorAll('.bar-label.clickable').forEach(el => {
-        el.addEventListener('click', () => {
-          const name = el.dataset.pub;
-          highlightChartPub(name);
-          zoomToPub(name, pubs);
-          trackEvent("chart_pub_click", { pub_name: name });
-        });
-      });
-
-    const toggleChartBtn = document.getElementById("toggle-chart-btn");
 
 if (window.innerWidth <= 768 && toggleChartBtn) {
   chart.classList.add("is-collapsed");
