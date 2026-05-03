@@ -570,6 +570,70 @@ fetch(SHEET_URL)
   })
   .then(pubs => {
 
+    const areaFilters = document.getElementById("area-filters");
+
+    if (areaFilters) {
+      const areaCounts = pubs.reduce((map, pub) => {
+        if (!pub.area) return map;
+
+        const area = pub.area.trim();
+        map.set(area, (map.get(area) || 0) + 1);
+        return map;
+      }, new Map());
+
+      const topAreas = [...areaCounts.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+      areaFilters.innerHTML = `
+        <button data-area="all" class="active">All</button>
+      `;
+
+      topAreas.forEach(([area, count]) => {
+        areaFilters.innerHTML += `
+          <button data-area="${escapeHTML(area)}">
+            ${escapeHTML(area)} <span>${count}</span>
+          </button>
+        `;
+      });
+
+      areaFilters.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", () => {
+      const selectedArea = button.dataset.area;
+
+      areaFilters.querySelectorAll("button").forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      const filteredPubs = selectedArea === "all"
+        ? pubs
+        : pubs.filter(pub => pub.area && pub.area.trim() === selectedArea);
+
+// 🔁 Update map markers
+const newGeojson = {
+  type: "FeatureCollection",
+  features: filteredPubs
+    .filter(p => p.lat && p.lon)
+    .map((p, i) => ({
+      type: "Feature",
+      id: `${p.name}-${i}`,
+      geometry: {
+        type: "Point",
+        coordinates: [parseFloat(p.lon), parseFloat(p.lat)]
+      },
+      properties: p
+    }))
+};
+
+// Update map source
+if (map.getSource('pubs')) {
+  map.getSource('pubs').setData(newGeojson);
+}    });
+  });
+}
+
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
 
