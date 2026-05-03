@@ -248,6 +248,14 @@ body {
   margin: 8px 0 10px;
 }
 
+#area-filters button:active {
+  transform: scale(0.96);
+}
+
+#area-filters button[data-area="all"] {
+  opacity: 0.8;
+}
+
 #area-filters button {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.08);
