@@ -192,10 +192,13 @@ body {
 
 .seo-sub {
   font-family: 'Open Sans', sans-serif;
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-weight: 300;
-  color: rgba(255,255,255,0.5);
-  margin-top: -10px;
+  color: rgba(255,255,255,0.34);
+  margin: -8px auto 28px;
+  max-width: 900px;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
 }
 
 @keyframes blink {
