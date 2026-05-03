@@ -458,6 +458,59 @@ input, button {
     cursor: not-allowed;
 }
 
+/* ===== Area Filter Strip ===== */
+
+.area-filter-strip {
+  max-width: 1500px;
+  margin: -18px auto 34px;
+  padding: 0 24px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.area-pill {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.75);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.78em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  letter-spacing: 0.02em;
+}
+
+/* Hover */
+.area-pill:hover {
+  border-color: rgba(212,175,55,0.5);
+  color: #fff;
+}
+
+/* Active state */
+.area-pill.active {
+  background: #d4af37;
+  color: #000;
+  border-color: #d4af37;
+  font-weight: 700;
+}
+
+/* Special styling for "All" */
+.area-pill[data-area="all"] {
+  border-color: rgba(212,175,55,0.4);
+  color: #d4af37;
+  font-weight: 800;
+}
+
+/* When "All" is active */
+.area-pill[data-area="all"].active {
+  background: #d4af37;
+  color: #000;
+}
+
 .hp-field {
     position: absolute !important;
     left: -9999px !important;
@@ -1326,7 +1379,25 @@ font-size: 0.8em;
     width: 100%;
     box-sizing: border-box;
 }
+        .area-filter-strip {
+  margin: -24px auto 26px;
+  padding: 0 14px;
+  gap: 8px;
+  justify-content: flex-start;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+}
 
+.area-filter-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.area-pill {
+  flex: 0 0 auto;
+}
+
+        
     .insight-strip {
     grid-template-columns: 1fr;
   }
