@@ -250,8 +250,14 @@ fetch(SHEET_URL)
   })
   .then(pubs => {
 
-  const bounds = new mapboxgl.LngLatBounds();
-  let validCount = 0;
+    function filterByArea(area, pubs) {
+      if (area === "all") return pubs;
+
+      return pubs.filter(p => p.area && p.area.trim() === area);
+    }
+
+    const bounds = new mapboxgl.LngLatBounds();
+    let validCount = 0;
 
     function zoomToPub(pubName, allPubs) {
       const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
