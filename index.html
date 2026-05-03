@@ -667,8 +667,6 @@ renderFromData(filteredPubs);
   });
 }
 
-  
-
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
 
@@ -744,12 +742,8 @@ function renderFromData(data) {
   const pricedPubs = data
     .filter(p => p.price && !isNaN(parseFloat(p.price)))
     .map(p => ({
-      name: p.name,
-      area: p.area,
-      lat: p.lat,
-      lon: p.lon,
-      price: parseFloat(p.price),
-      last_updated: p.last_updated
+      ...p,
+      price: parseFloat(p.price)
     }))
     .sort((a, b) => a.price - b.price);
 
@@ -768,26 +762,26 @@ function renderFromData(data) {
   animateCount("stat-gap", gap, "฿", 1600);
   animateCount("stat-average", avg, "฿", 1800);
 
- const dates = data
-  .map(p => p.last_updated)
-  .filter(Boolean)
-  .map(d => new Date(d))
-  .filter(d => !isNaN(d));
+  const dates = data
+    .map(p => p.last_updated)
+    .filter(Boolean)
+    .map(d => new Date(d))
+    .filter(d => !isNaN(d));
 
-if (updatedEl) {
-  if (dates.length > 0) {
-    const latest = new Date(Math.max(...dates));
-    updatedEl.textContent =
-      "Prices last updated: " +
-      latest.toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-      });
-  } else {
-    updatedEl.textContent = "Prices last updated: Recently";
+  if (updatedEl) {
+    if (dates.length > 0) {
+      const latest = new Date(Math.max(...dates));
+      updatedEl.textContent =
+        "Prices last updated: " +
+        latest.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        });
+    } else {
+      updatedEl.textContent = "Prices last updated: Recently";
+    }
   }
-}
 
   chart.innerHTML += `
     <div class="chart-key">
@@ -795,15 +789,19 @@ if (updatedEl) {
     </div>
   `;
 
-  pricedPubs.forEach((pub, i) => {
+  pricedPubs.forEach(pub => {
     const width = max === min ? 100 : ((max - pub.price) / (max - min)) * 100;
 
     const row = document.createElement("div");
     row.className = "bar-row";
-    row.dataset.pubName = pub.name; // 👈 ADD THIS
+    row.dataset.pubName = pub.name;
 
     row.innerHTML = `
-      <div class="bar-label">${escapeHTML(pub.name)}</div>
+      <div class="bar-label">
+        ${escapeHTML(pub.name)}
+        ${pub.area ? `<div class="bar-area">${escapeHTML(pub.area)}</div>` : ""}
+      </div>
+
       <div class="bar-bottom">
         <div class="bar-wrap">
           <div class="bar" style="width:${width}%"></div>
@@ -815,34 +813,121 @@ if (updatedEl) {
     chart.appendChild(row);
   });
 
-  // cheapest
-  if (cheapList) {
-    const mostExpensivePrice = max;
+  const medals = ["🥇", "🥈", "🥉"];
 
-    pricedPubs.slice(0, 5).forEach(pub => {
-      const saving = mostExpensivePrice - pub.price;
+  // Happy hour
+  const happyPubs = pricedPubs
+    .filter(p =>
+      p.happy_hour_price &&
+      String(p.happy_hour_price).toLowerCase() !== "n/a" &&
+      !isNaN(parseFloat(p.happy_hour_price))
+    )
+    .map(p => {
+      const happyPrice = parseFloat(p.happy_hour_price);
+      const savingAmount = p.price - happyPrice;
+      const savingPct = Math.round((savingAmount / p.price) * 100);
+
+      return {
+        ...p,
+        happyPrice,
+        savingAmount,
+        savingPct
+      };
+    })
+    .sort((a, b) => a.happyPrice - b.happyPrice)
+    .slice(0, 5);
+
+  if (happyList) {
+    happyPubs.forEach((pub, i) => {
+      const rank = medals[i] || `${i + 1}.`;
 
       const row = document.createElement("div");
       row.className = "happy-item";
+      row.style.animationDelay = `${150 + i * 120}ms`;
 
       row.innerHTML = `
-        <div>${escapeHTML(pub.name)}</div>
-        <div>฿${pub.price} (save ฿${saving})</div>
+        <div class="happy-name">
+          <span class="happy-rank">${rank}</span>
+          <div class="pub-info">
+            <div class="pub-name">${escapeHTML(pub.name)}</div>
+            ${pub.area ? `<div class="pub-meta">${escapeHTML(pub.area)}</div>` : ""}
+          </div>
+        </div>
+
+        <div class="happy-prices stacked compact">
+          <div class="price-line">
+            <span class="label">Happy Hour:</span>
+            <span class="value gold">฿${pub.happyPrice}</span>
+          </div>
+          <div class="price-line saving">
+            <span class="label">Save:</span>
+            <span class="value green">฿${pub.savingAmount} (-${pub.savingPct}%)</span>
+          </div>
+        </div>
+      `;
+
+      happyList.appendChild(row);
+    });
+  }
+
+  // Cheapest
+  if (cheapList) {
+    pricedPubs.slice(0, 5).forEach((pub, i) => {
+      const rank = medals[i] || `${i + 1}.`;
+      const saving = max - pub.price;
+      const savingPct = Math.round((saving / max) * 100);
+
+      const row = document.createElement("div");
+      row.className = "happy-item";
+      row.style.animationDelay = `${150 + i * 120}ms`;
+
+      row.innerHTML = `
+        <div class="happy-name">
+          <span class="happy-rank">${rank}</span>
+          <div class="pub-info">
+            <div class="pub-name">${escapeHTML(pub.name)}</div>
+            ${pub.area ? `<div class="pub-meta">${escapeHTML(pub.area)}</div>` : ""}
+          </div>
+        </div>
+
+        <div class="happy-prices stacked compact">
+          <div class="price-line">
+            <span class="value gold">฿${pub.price}</span>
+          </div>
+          <div class="price-line saving">
+            <span class="value green">save ฿${saving} (${savingPct}%)</span>
+          </div>
+        </div>
       `;
 
       cheapList.appendChild(row);
     });
   }
 
-  // expensive
+  // Expensive
   if (expensiveList) {
     [...pricedPubs].reverse().slice(0, 5).forEach(pub => {
+      const aboveAvg = pub.price - avg;
+
       const row = document.createElement("div");
       row.className = "happy-item";
 
       row.innerHTML = `
-        <div>${escapeHTML(pub.name)}</div>
-        <div>฿${pub.price}</div>
+        <div class="happy-name">
+          <div class="pub-info">
+            <div class="pub-name">${escapeHTML(pub.name)}</div>
+            ${pub.area ? `<div class="pub-meta">${escapeHTML(pub.area)}</div>` : ""}
+          </div>
+        </div>
+
+        <div class="happy-prices stacked compact">
+          <div class="price-line">
+            <span class="value gold">฿${pub.price}</span>
+          </div>
+          <div class="price-line saving">
+            <span class="value green">+฿${aboveAvg} above average</span>
+          </div>
+        </div>
       `;
 
       expensiveList.appendChild(row);
