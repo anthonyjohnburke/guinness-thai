@@ -395,6 +395,39 @@ if (areaStrip) {
 
     areaStrip.appendChild(btn);
   });
+
+  areaStrip.addEventListener("click", (e) => {
+  const btn = e.target.closest(".area-pill");
+  if (!btn) return;
+
+  const selectedArea = btn.dataset.area;
+
+  // update active UI
+  areaStrip.querySelectorAll(".area-pill").forEach(p => p.classList.remove("active"));
+  btn.classList.add("active");
+
+  // filter data
+  const filtered = selectedArea === "all"
+    ? pubs
+    : pubs.filter(p => p.area && p.area.trim() === selectedArea);
+
+  // rebuild priced pubs
+  const filteredPriced = filtered
+    .filter(p => p.price && !isNaN(parseFloat(p.price)))
+    .map(p => ({
+      name: p.name,
+      area: p.area,
+      lat: p.lat,
+      lon: p.lon,
+      price: parseFloat(p.price),
+      last_updated: p.last_updated
+    }))
+    .sort((a, b) => a.price - b.price);
+
+  // zoom map
+  zoomToArea(filtered);
+});
+  
 }
 
       const didYouKnowEl = document.getElementById("did-you-know-text");
