@@ -1,1 +1,313 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Best Guinness in Bangkok, Thailand 2026 | Prices, Maps & Cheapest Pints</title>
+  <meta name="description" content="Discover the best Guinness in Bangkok and across Thailand. Compare prices, find top pubs, and see where to get the cheapest pint.">
+  <meta name="keywords" content="Guinness Bangkok, best Guinness Bangkok, Irish pubs Bangkok">
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32x32.png" type="image/png">
+<link rel="icon" href="/favicon-16x16.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
+
+  <!-- Mapbox -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
+
+<link rel="canonical" href="https://www.guinnessthailand.com/">
+  <link rel="preconnect" href="https://api.mapbox.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://api.mapbox.com https://www.googletagmanager.com;
+  style-src 'self' 'unsafe-inline' https://api.mapbox.com https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data: blob: https://api.mapbox.com https://*.mapbox.com;
+  connect-src 'self' https://opensheet.elk.sh https://api.mapbox.com https://*.mapbox.com https://script.google.com https://script.googleusercontent.com https://www.google-analytics.com;
+  worker-src blob:;
+">
+
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Best Guinness in Bangkok">
+<meta property="og:description" content="Track Guinness prices across Bangkok and find the best-value pint.">
+<meta property="og:image" content="https://guinnessthailand.com/preview.jpg">
+  <meta property="og:url" content="https://guinnessthailand.com">
+<meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Best Guinness in Bangkok">
+<meta name="twitter:description" content="Find the best-value Guinness in Bangkok 🍻">
+<meta name="twitter:image" content="https://guinnessthailand.com/preview.jpg">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BP0BPQ5GP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8BP0BPQ5GP');
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Best Guinness in Bangkok",
+  "url": "https://guinnessthailand.com",
+  "description": "Track Guinness prices across Bangkok and find the best-value pint.",
+  "inLanguage": "en"
+}
+</script>
+  
+</head>
+
+<body>
+<div class="page-wrap">
+
+  <div id="top-bar">
+  <div class="top-logo">
+    <img src="pint-glass-logo-new.svg" alt="Pints of Bangkok logo" id="logo">
+  </div>
+
+  <div id="did-you-know-top">
+    <div class="did-you-know-title">Did you know?</div>
+    <div id="did-you-know-text">Tracking Bangkok’s Guinness prices, one pint at a time.</div>
+  </div>
+</div>
+
+  <div id="note">
+    "The perfect Guinness head is approx 12% of the pint height."
+  </div>
+
+  <section id="map-section">
+  <div id="map"></div>
+  <div class="map-mobile-hint">Tap map to explore • scroll with one finger</div>
+    <button id="map-unlock-btn">Explore map</button>
+</section>
+  
+  <h1 id="question" data-text="Who’s pouring the finest pint of Guinness in Bangkok?" aria-label="Who’s pouring the finest pint of Guinness in Bangkok?">
+  Who’s pouring the finest pint of Guinness in Bangkok?
+</h1>
+  <h2 class="seo-sub">
+  Best Draught Guinness in Bangkok, Thailand – Pint Prices, Happy Hour Deals & Pub Map Locations
+  </h2>
+
+  <div id="top-stats">
+    <div class="stat-card">
+      <div class="stat-number" id="stat-pubs">–</div>
+      <div class="stat-label">Pubs tracked</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number" id="stat-cheapest">–</div>
+      <div class="stat-label">Cheapest pint</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number" id="stat-expensive">–</div>
+      <div class="stat-label">Most expensive</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number" id="stat-gap">–</div>
+      <div class="stat-label">Price gap</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number" id="stat-average">–</div>
+      <div class="stat-label">Average price</div>
+    </div>
+  </div>
+
+  <div id="intro">
+    <div class="intro-col intro-col-wide">
+      <h2 class="intro-heading">Bangkok Guinness Price Watch</h2>
+      <p class="intro-small">
+        Track Guinness prices across Bangkok and spot the bars serving the best-value pint. For adults of legal drinking age. Enjoy the pint, but mind yourself.
+      </p>
+
+      <div id="price-chart"></div>
+      <button id="toggle-chart-btn">See full Guinness ranking</button>
+      <div class="verification-note">
+  Prices verified regularly using community submissions and direct checks. Tap or hover on a price to see the last verified date.
+</div>
+      <div id="last-updated" class="last-updated">Prices last updated: —</div>
+    </div>
+
+ <div class="intro-col">
+
+    <div class="section-block">
+      <h2 class="intro-heading">Someone had to do it</h2>
+      <p class="intro-small">
+        I’m Irish, so I do love a proper pint of Guinness. You know the one with a lovely creamy head served in a clean glass, and a pour that isn’t rushed. 
+        In Bangkok and around Thailand, it can be a bit hit and miss. Sometimes you get a great pint at a fair price. Other times… not so much.
+        </p>
+        <p class="intro-small">
+        After spending more baht than I’d like to admit chasing a decent pint around the land of smiles, I started keeping track of where it’s actually worth ordering. 
+        This is a simple attempt to map it all out. No big agenda here, just a guide to help you find a proper Guinness in Thailand without overpaying for it. 
+        I’m not here to name and shame, just mapping what I find. Corcaigh abú!
+      </p>
+      </div>
+
+   <div class="section-block featured-block">
+
+  <a href="https://www.timeout.com/bangkok/news/find-the-cheapest-guinness-in-bangkok-042826"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="timeout-link">
+
+    <img src="timeout.png" alt="Time Out Bangkok article" class="timeout-img">
+
+  </a>
+
+  <div class="timeout-caption">
+    As featured in Time Out Bangkok →
+  </div>
+
+</div>
+
+    <div id="happy-hour" class="section-block">
+      <h2 class="intro-heading">Top 5 Happy Hour Guinness Deals</h2>
+      <p class="intro-small">
+        The best happy hour Guinness deals we’ve found in Bangkok so far. We salute you, fine establishments.
+      </p>
+      <div id="happy-list"></div>
+    </div>
+
+    <div id="cheap-list-block" class="section-block">
+      <h2 class="intro-heading">Top 5 Cheapest Guinness in Bangkok</h2>
+      <p class="intro-small">
+        Not all pints break the bank. These are the cheapest Guinness pours we’ve found in Bangkok so far.
+      </p>
+      <div id="cheap-list"></div>
+    </div>
+
+    <div id="expensive-list-block" class="section-block">
+      <h2 class="intro-heading">Most Expensive Guinness in Bangkok</h2>
+      <p class="intro-small">
+        Not all pints are priced equally. These are the most expensive Guinness pours we’ve found in Bangkok so far.
+      </p>
+      <div id="expensive-list"></div>
+    </div>
+
+  </div>
+</div>
+
+  <div id="tooltip" class="tooltip"></div>
+
+  <div class="section-divider"></div>
+
+  <div class="insight-strip">
+
+  <!-- LEFT: Market Impact -->
+  <div class="insight-box">
+    <div class="insight-label">Real Market Impact</div>
+   <div class="insight-text">
+  <a href="https://www.facebook.com/p/On-The-Square-61579011092046/" target="_blank" rel="noopener noreferrer">
+    On The Square
+  </a> in Silom has reintroduced its ฿270 Guinness Happy Hour (down from ฿290) after checking the tracker. That’s 16% cheaper and pushes them right up the Happy Hour rankings. Big shout out to On The Square. Well done, sir Grant.
+</div>
+  </div>
+
+  <!-- RIGHT: Wisdom -->
+  <div class="insight-box">
+    <div class="insight-label">Guinness Wisdom</div>
+    <div id="wisdom-text" class="insight-text">
+      That was an absolute creamer… if you know, you know.
+    </div>
+  </div>
+
+</div>
+
+<div class="section-divider"></div>
+  
+  <div id="suggest-section">
+  <div class="suggest-col">
+    <h2 class="intro-heading">Suggest a pub</h2>
+    <p class="intro-small">
+      Bangkok’s full of pubs, but where’s the pint that truly pours like home? Share your go-to spot for the best Guinness in town.
+    </p>
+
+    <div class="inline-form">
+      <input
+        type="text"
+        id="response"
+        placeholder="Tell me which bar has the best pint..."
+        maxlength="150"
+        autocomplete="off"
+      />
+      <input type="text" id="website" class="hp-field" tabindex="-1" autocomplete="off" />
+      <button id="submit-btn">Submit</button>
+    </div>
+  </div>
+
+  <div class="nearby-col">
+    <h2 class="intro-heading">Explore pubs near you</h2>
+   <p class="intro-small">
+  In Bangkok? Allow location access and we’ll point you to the best-value Guinness near you.
+</p>
+    
+<div class="nearby-actions">
+  <select id="radius-select">
+    <option value="1">Within 1 km</option>
+    <option value="3" selected>Within 3 km</option>
+    <option value="all">All Bangkok</option>
+  </select>
+
+  <button id="find-nearby-btn">Find nearby pubs</button>
+</div>
+    </div>
+
+  <div class="contact-col">
+
+  <h2 class="intro-heading">Spotted something wrong?</h2>
+
+  <p class="intro-small">
+    Found a better pint, a new price, or something outdated? Let me know and I’ll update it.
+  </p>
+
+  <a href="mailto:pintsofbangkok@gmail.com" class="contact-link" id="contact-link" rel="noopener noreferrer">
+    Get in touch
+  </a>
+
+</div>
+    </div>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <p>
+        Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy or completeness of any listings.
+        Rankings and comparisons reflect only the pubs currently tracked on this site and do not represent all venues in Bangkok.
+      </p>
+      <p>
+        This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only.
+      </p>
+      <p class="footer-signoff">
+        Built in Bangkok in 2026.
+      </p>
+    </div>
+  </footer>
+
+</div>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>
