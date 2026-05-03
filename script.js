@@ -368,18 +368,6 @@ if (nearbyBtn) {
       }
     }
 
-  const pricedPubs = pubs
-  .filter(p => p.price && !isNaN(parseFloat(p.price)))
-  .map(p => ({
-    name: p.name,
-    area: p.area,
-    lat: p.lat,
-    lon: p.lon,
-    price: parseFloat(p.price),
-    last_updated: p.last_updated
-  }))
-  .sort((a, b) => a.price - b.price);
-
     function renderAll(pubs) {
 
   const chart = document.getElementById("price-chart");
@@ -593,7 +581,8 @@ zoomToArea(filtered);
           trackEvent("stat_most_expensive_click", { pub_name: mostExpensivePub.name });
         });
       }
-
+    
+const toggleChartBtn = document.getElementById("toggle-chart-btn");
 if (window.innerWidth <= 768 && toggleChartBtn) {
   chart.classList.add("is-collapsed");
 
