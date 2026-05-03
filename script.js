@@ -250,6 +250,19 @@ fetch(SHEET_URL)
   })
   .then(pubs => {
 
+    const localPricedPubs = pubs
+  .filter(p => p.price && !isNaN(parseFloat(p.price)))
+  .map(p => ({
+    name: p.name,
+    area: p.area,
+    lat: p.lat,
+    lon: p.lon,
+    price: parseFloat(p.price)
+  }))
+  .sort((a, b) => a.price - b.price);
+
+  .sort((a, b) => a.price - b.price);
+
     function filterByArea(area, pubs) {
       if (area === "all") return pubs;
 
