@@ -575,7 +575,7 @@ if (didYouKnowEl) {
         }, 5000);
       }
 
-     const localPricedPubs = pubs
+    const sortedPubs = pubs
   .filter(p => p.price && !isNaN(parseFloat(p.price)))
   .map(p => ({
     name: p.name,
@@ -586,8 +586,8 @@ if (didYouKnowEl) {
   }))
   .sort((a, b) => a.price - b.price);
 
-const cheapestPub = localPricedPubs[0];
-const mostExpensivePub = localPricedPubs[localPricedPubs.length - 1];
+const cheapestPub = sortedPubs[0];
+const mostExpensivePub = sortedPubs[sortedPubs.length - 1];
 
       const cheapestCard = document.getElementById("stat-cheapest")?.closest(".stat-card");
       const expensiveCard = document.getElementById("stat-expensive")?.closest(".stat-card");
