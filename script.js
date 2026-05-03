@@ -294,6 +294,31 @@ fetch(SHEET_URL)
       }, 150);
     }
 
+    function zoomToArea(filteredPubs) {
+  const areaBounds = new mapboxgl.LngLatBounds();
+  let count = 0;
+
+  filteredPubs.forEach(p => {
+    if (!p.lat || !p.lon) return;
+
+    const lat = parseFloat(p.lat);
+    const lon = parseFloat(p.lon);
+
+    if (isNaN(lat) || isNaN(lon)) return;
+
+    areaBounds.extend([lon, lat]);
+    count++;
+  });
+
+  if (count > 0) {
+    map.fitBounds(areaBounds, {
+      padding: 90,
+      maxZoom: 15,
+      duration: 800
+    });
+  }
+}
+
 
 const nearbyBtn = document.getElementById("find-nearby-btn");
 const radiusSelect = document.getElementById("radius-select");
@@ -355,19 +380,86 @@ if (nearbyBtn) {
   }))
   .sort((a, b) => a.price - b.price);
 
-    if (pricedPubs.length > 0) {
-      const max = Math.max(...pricedPubs.map(p => p.price));
-      const min = Math.min(...pricedPubs.map(p => p.price));
-      const gap = max - min;
-      const avg = Math.round(
-        pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
-      );
+    function renderAll(pubs) {
 
-      animateCount("stat-pubs", pricedPubs.length, "", 1000);
-      animateCount("stat-cheapest", min, "฿", 1200);
-      animateCount("stat-expensive", max, "฿", 1400);
-      animateCount("stat-gap", gap, "฿", 1600);
-      animateCount("stat-average", avg, "฿", 1800);
+  const chart = document.getElementById("price-chart");
+  const happyList = document.getElementById("happy-list");
+
+  chart.innerHTML = "";
+  happyList.innerHTML = "";
+
+  const pricedPubs = pubs
+    .filter(p => p.price && !isNaN(parseFloat(p.price)))
+    .map(p => ({
+      name: p.name,
+      area: p.area,
+      lat: p.lat,
+      lon: p.lon,
+      price: parseFloat(p.price),
+      last_updated: p.last_updated
+    }))
+    .sort((a, b) => a.price - b.price);
+
+  if (pricedPubs.length === 0) return;
+
+  const max = Math.max(...pricedPubs.map(p => p.price));
+  const min = Math.min(...pricedPubs.map(p => p.price));
+  const gap = max - min;
+  const avg = Math.round(
+    pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
+  );
+
+  animateCount("stat-pubs", pricedPubs.length, "", 1000);
+  animateCount("stat-cheapest", min, "฿", 1200);
+  animateCount("stat-expensive", max, "฿", 1400);
+  animateCount("stat-gap", gap, "฿", 1600);
+  animateCount("stat-average", avg, "฿", 1800);
+
+  chart.innerHTML += `
+    <div class="chart-key">
+      Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
+    </div>
+  `;
+
+  pricedPubs.forEach((pub, i) => {
+    const width = max === min ? 100 : ((max - pub.price) / (max - min)) * 100;
+
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    row.dataset.pubName = pub.name;
+
+    row.innerHTML = `
+      <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
+        ${escapeHTML(pub.name)}
+        ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
+      </div>
+
+      <div class="bar-bottom">
+        <div class="bar-wrap">
+          <div class="bar" style="width:0%" data-width="${width}%"></div>
+        </div>
+        <div class="bar-price">฿${pub.price}</div>
+      </div>
+    `;
+
+    chart.appendChild(row);
+
+    setTimeout(() => {
+      const mainBar = row.querySelector(".bar");
+      if (mainBar) mainBar.style.width = mainBar.dataset.width;
+    }, 150 + i * 80);
+  });
+
+  document.querySelectorAll('.bar-label.clickable').forEach(el => {
+    el.addEventListener('click', () => {
+      const name = el.dataset.pub;
+      highlightChartPub(name);
+      zoomToPub(name, pubs);
+    });
+  });
+}
+
+    renderAll(pubs);
 
       const areaStrip = document.getElementById("area-filter-strip");
 
@@ -411,21 +503,10 @@ if (areaStrip) {
     ? pubs
     : pubs.filter(p => p.area && p.area.trim() === selectedArea);
 
-  // rebuild priced pubs
-  const filteredPriced = filtered
-    .filter(p => p.price && !isNaN(parseFloat(p.price)))
-    .map(p => ({
-      name: p.name,
-      area: p.area,
-      lat: p.lat,
-      lon: p.lon,
-      price: parseFloat(p.price),
-      last_updated: p.last_updated
-    }))
-    .sort((a, b) => a.price - b.price);
 
   // zoom map
-  zoomToArea(filtered);
+  renderAll(filtered);
+zoomToArea(filtered);
 });
   
 }
