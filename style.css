@@ -240,6 +240,44 @@ body {
   display: none;
 }
 
+#area-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 16px 0 10px;
+}
+
+#area-filters button {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.75);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#area-filters button:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+#area-filters button.active {
+  background: #d4af37;
+  color: #111;
+  border-color: #d4af37;
+  font-weight: 600;
+}
+
+#area-filters button span {
+  margin-left: 6px;
+  font-size: 0.75em;
+  opacity: 0.7;
+}
+
 /* Layout */
 #intro {
     display: grid;
