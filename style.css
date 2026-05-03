@@ -278,26 +278,6 @@ body {
     line-height: 1.5;
 }
 
-.wisdom-strip {
-  max-width: 1500px;
-  margin: 24px auto 10px;
-  padding: 14px 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.02);
-  text-align: center;
-}
-
-.wisdom-label {
-  display: block;
-  font-size: 0.72em;
-  color: #d4af37;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-
 #wisdom-text {
   font-family: 'Shadows Into Light', cursive;
   font-size: 1.5em;
@@ -734,15 +714,6 @@ font-size: 2.5em;
 .popup-actions a:hover {
   transform: translateY(-1px);
   opacity: 0.9;
-}
-
-.popup-link:hover {
-    background: #d1ebd8;
-}
-
-.popup-map-link:hover {
-    background: #ebcfcf;
-    color: #8f1d1d;
 }
 
 .mapboxgl-popup-close-button {
@@ -1555,23 +1526,6 @@ font-size: 0.8em;
 
  .popup-header .popup-meta {
     font-size: 0.95em;
-  }
-
-  .popup-price-box {
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 10px;
-  }
-
-  .popup-price-main,
-  .popup-price-happy {
-    font-size: 15px;
-  }
-
-  /* 👇 Tighten the "under investigation" box */
-  .popup-price-box:empty,
-  .popup-price-box {
-    min-height: auto;
   }
 
     #top-bar {
