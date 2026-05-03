@@ -363,6 +363,34 @@ if (nearbyBtn) {
       animateCount("stat-gap", gap, "฿", 1600);
       animateCount("stat-average", avg, "฿", 1800);
 
+      const areaStrip = document.getElementById("area-filter-strip");
+
+if (areaStrip) {
+  const areaCounts = {};
+
+  pricedPubs.forEach(pub => {
+    if (!pub.area) return;
+
+    const area = pub.area.trim();
+    if (!area) return;
+
+    areaCounts[area] = (areaCounts[area] || 0) + 1;
+  });
+
+  const topAreas = Object.entries(areaCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+
+  topAreas.forEach(([area, count]) => {
+    const btn = document.createElement("button");
+    btn.className = "area-pill";
+    btn.dataset.area = area;
+    btn.textContent = `${area} ${count}`;
+
+    areaStrip.appendChild(btn);
+  });
+}
+
       const didYouKnowEl = document.getElementById("did-you-know-text");
       if (didYouKnowEl) {
         const underDeal = Math.max(avg - 40, min);
