@@ -601,6 +601,8 @@ fetch(SHEET_URL)
     button.addEventListener("click", () => {
       const selectedArea = button.dataset.area;
 
+scrollToMap();
+
       areaFilters.querySelectorAll("button").forEach(btn => {
         btn.classList.remove("active");
       });
@@ -631,11 +633,40 @@ if (map.getSource('pubs')) {
   map.getSource('pubs').setData(newGeojson);
 }
 
+// 🎯 Smart zoom
+if (selectedArea === "all") {
+  // reset to original clean view
+  map.easeTo({
+    center: INITIAL_VIEW.center,
+    zoom: INITIAL_VIEW.zoom,
+    duration: 800
+  });
+
+} else if (filteredPubs.length > 0) {
+  const bounds = new mapboxgl.LngLatBounds();
+
+  filteredPubs.forEach(p => {
+    if (p.lat && p.lon) {
+      bounds.extend([parseFloat(p.lon), parseFloat(p.lat)]);
+    }
+  });
+
+  if (!bounds.isEmpty()) {
+    map.fitBounds(bounds, {
+      padding: 80,
+      maxZoom: 15,
+      duration: 800
+    });
+  }
+}
+
 renderFromData(filteredPubs);
     
     });
   });
 }
+
+  
 
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
