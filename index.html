@@ -611,8 +611,6 @@ fetch(SHEET_URL)
         ? pubs
         : pubs.filter(pub => pub.area && pub.area.trim() === selectedArea);
 
-      renderFromData(filteredPubs);
-
 // 🔁 Update map markers
 const newGeojson = {
   type: "FeatureCollection",
@@ -629,10 +627,13 @@ const newGeojson = {
     }))
 };
 
-// Update map source
 if (map.getSource('pubs')) {
   map.getSource('pubs').setData(newGeojson);
-}    });
+}
+
+renderFromData(filteredPubs);
+    
+    });
   });
 }
 
@@ -735,9 +736,26 @@ function renderFromData(data) {
   animateCount("stat-gap", gap, "฿", 1600);
   animateCount("stat-average", avg, "฿", 1800);
 
-  if (updatedEl) {
-    updatedEl.textContent = `Prices last updated: Recently`;
+ const dates = data
+  .map(p => p.last_updated)
+  .filter(Boolean)
+  .map(d => new Date(d))
+  .filter(d => !isNaN(d));
+
+if (updatedEl) {
+  if (dates.length > 0) {
+    const latest = new Date(Math.max(...dates));
+    updatedEl.textContent =
+      "Prices last updated: " +
+      latest.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+  } else {
+    updatedEl.textContent = "Prices last updated: Recently";
   }
+}
 
   chart.innerHTML += `
     <div class="chart-key">
@@ -750,6 +768,7 @@ function renderFromData(data) {
 
     const row = document.createElement("div");
     row.className = "bar-row";
+    row.dataset.pubName = pub.name; // 👈 ADD THIS
 
     row.innerHTML = `
       <div class="bar-label">${escapeHTML(pub.name)}</div>
