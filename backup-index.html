@@ -163,15 +163,30 @@
         This is a simple attempt to map it all out. No big agenda here, just a guide to help you find a proper Guinness in Thailand without overpaying for it. 
         I’m not here to name and shame, just mapping what I find. Corcaigh abú!
       </p>
+      </div>
 
-       <p class="featured">
-      🏆  Featured in <a href="https://www.timeout.com/bangkok/news/find-the-cheapest-guinness-in-bangkok-042826" target="_blank" rel="noopener noreferrer">Time Out Bangkok</a>
-    </p>
-      
-    </div>
+   <div class="section-block featured-block">
+
+  <a href="https://www.timeout.com/bangkok/news/find-the-cheapest-guinness-in-bangkok-042826"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="timeout-link">
+
+    <img src="timeout.png" alt="Time Out Bangkok article" class="timeout-img">
+
+  </a>
+
+  <div class="timeout-caption">
+    As featured in Time Out Bangkok →
+  </div>
+
+</div>
 
     <div id="happy-hour" class="section-block">
       <h2 class="intro-heading">Top 5 Happy Hour Guinness Deals</h2>
+      <p class="intro-small">
+        The best happy hour Guinness deals we’ve found in Bangkok so far. We salute you, fine establishments.
+      </p>
       <div id="happy-list"></div>
     </div>
 
@@ -198,11 +213,30 @@
 
   <div class="section-divider"></div>
 
-  <div class="wisdom-strip">
-  <span class="wisdom-label">Guinness Wisdom</span>
-  <span id="wisdom-text">A good pint should never look rushed.</span>
+  <div class="insight-strip">
+
+  <!-- LEFT: Market Impact -->
+  <div class="insight-box">
+    <div class="insight-label">Real Market Impact</div>
+   <div class="insight-text">
+  <a href="https://www.facebook.com/p/On-The-Square-61579011092046/" target="_blank" rel="noopener noreferrer">
+    On The Square
+  </a> in Silom has reintroduced its ฿270 Guinness Happy Hour (down from ฿290) after checking the tracker. That’s 16% cheaper and pushes them right up the Happy Hour rankings. Big shout out to On The Square. Well done, sir Grant.
+</div>
+  </div>
+
+  <!-- RIGHT: Wisdom -->
+  <div class="insight-box">
+    <div class="insight-label">Guinness Wisdom</div>
+    <div id="wisdom-text" class="insight-text">
+      That was an absolute creamer… if you know, you know.
+    </div>
+  </div>
+
 </div>
 
+<div class="section-divider"></div>
+  
   <div id="suggest-section">
   <div class="suggest-col">
     <h2 class="intro-heading">Suggest a pub</h2>
@@ -328,14 +362,19 @@ function sanitizeURL(url) {
   }
 }
 
-  function setRandomWisdom() {
+function setRandomWisdom() {
   const el = document.getElementById("wisdom-text");
   if (!el) return;
 
-  const random = wisdoms[Math.floor(Math.random() * wisdoms.length)];
-  el.textContent = random;
-}
+  el.classList.add("fade-out");
 
+  setTimeout(() => {
+    const random = wisdoms[Math.floor(Math.random() * wisdoms.length)];
+    el.textContent = random;
+    el.classList.remove("fade-out");
+  }, 400);
+}
+  
 function trackEvent(name, params = {}) {
   try {
     if (typeof gtag === "function") {
@@ -809,10 +848,10 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
     if (cheapList && pricedPubs.length > 0) {
       const mostExpensivePrice = pricedPubs[pricedPubs.length - 1].price;
 
-   const medals = ["🥇", "🥈", "🥉"];
+const medals = ["🥇", "🥈", "🥉"];
 
-  let lastPrice = null;
-  let medalIndex = -1;
+let lastPrice = null;
+let medalIndex = -1;
 
 const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
   if (pub.price !== lastPrice) {
@@ -822,6 +861,9 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
 
   return {
     name: pub.name,
+    area: pub.area,
+    lat: pub.lat,
+    lon: pub.lon,
     price: pub.price,
     saving: mostExpensivePrice - pub.price,
     savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
@@ -840,14 +882,31 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
 
         row.innerHTML = `
           <div class="happy-name">
-            <span class="happy-rank">${rank}</span>
-            ${escapeHTML(pub.name)}
-          </div>
-          <div class="happy-prices">
-            <span class="happy-price">฿${pub.price}</span>
-            <span class="happy-saving">save ฿${pub.saving} (${pub.savingPct}%)</span>
-            <span class="happy-ref">vs ฿${mostExpensivePrice}</span>
-          </div>
+  <span class="happy-rank">${rank}</span>
+
+  <div class="pub-info">
+    <div class="pub-name">${escapeHTML(pub.name)}</div>
+    <div class="pub-meta">
+      ${pub.area ? escapeHTML(pub.area) : ""}
+      ${pub.area && pub.lat && pub.lon ? " • " : ""}
+      ${pub.lat && pub.lon ? `
+        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+      ` : ""}
+    </div>
+  </div>
+</div>
+         <div class="happy-prices stacked compact">
+  <div class="price-line">
+  <span class="label">Price:</span>
+    <span class="value gold">฿${pub.price}</span>
+  </div>
+
+  <div class="price-line saving">
+ <span class="value green cheap-save-line">
+  Save ฿${pub.saving} (${pub.savingPct}%) vs ฿${mostExpensivePrice}
+</span>
+</div>
+</div>
         `;
 
         cheapList.appendChild(row);
@@ -861,9 +920,16 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
         pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
       );
 
-      const mostExpensiveFive = [...pricedPubs]
-        .sort((a, b) => b.price - a.price)
-        .slice(0, 5);
+     const mostExpensiveFive = [...pricedPubs]
+  .sort((a, b) => b.price - a.price)
+  .slice(0, 5)
+  .map(pub => ({
+    name: pub.name,
+    area: pub.area,
+    lat: pub.lat,
+    lon: pub.lon,
+    price: pub.price
+  }));
 
       expensiveList.innerHTML = "";
 
@@ -875,14 +941,31 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
         row.style.animationDelay = `${150 + i * 120}ms`;
 
         row.innerHTML = `
-          <div class="happy-name">
-            ${escapeHTML(pub.name)}
-          </div>
+        <div class="happy-name">
+  <div class="pub-info">
+    <div class="pub-name">${escapeHTML(pub.name)}</div>
+    <div class="pub-meta">
+      ${pub.area ? escapeHTML(pub.area) : ""}
+      ${pub.area && pub.lat && pub.lon ? " • " : ""}
+      ${pub.lat && pub.lon ? `
+        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+      ` : ""}
+    </div>
+  </div>
+</div>
 
-          <div class="happy-prices">
-            <span class="happy-price">฿${pub.price}</span>
-            <span class="happy-saving">+฿${diff} above average</span>
-          </div>
+          <div class="happy-prices stacked compact">
+  <div class="price-line">
+  <span class="label">Price:</span>
+    <span class="value gold">฿${pub.price}</span>
+  </div>
+
+  <div class="price-line saving">
+  <span class="value expensive-line">
+    +฿${diff} above average
+  </span>
+</div>
+</div>
         `;
 
         expensiveList.appendChild(row);
@@ -956,9 +1039,10 @@ ${pub.lat && pub.lon ? `
     </div>
 
     <div class="price-line saving">
-      <span class="label">Save:</span>
-      <span class="value green">฿${savingAmount} (-${pub.savingPct}%)</span>
-    </div>
+<span class="value green">
+  Save ฿${savingAmount} (${pub.savingPct}%)
+</span>
+</div>
   </div>
 `;
   
@@ -1247,11 +1331,17 @@ function typeWriter(el, text, speed = 35) {
 
   type();
 }
-  window.addEventListener("load", () => {
+ window.addEventListener("load", () => {
   const el = document.getElementById("question");
   if (!el) return;
 
   const text = el.getAttribute("data-text");
+
+  // 👉 Disable animation on mobile
+  if (window.innerWidth <= 768) {
+    el.textContent = text;
+    return;
+  }
 
   setTimeout(() => {
     typeWriter(el, text, 28);
