@@ -1400,6 +1400,7 @@ font-size: 0.8em;
 
 .area-pill {
   flex: 0 0 auto;
+font-size: 0.7em;
 }
 
 .area-filter-strip {
