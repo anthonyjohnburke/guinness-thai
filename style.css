@@ -1393,6 +1393,10 @@ font-size: 0.8em;
 .area-filter-strip::-webkit-scrollbar {
   display: none;
 }
+        
+    .seo-sub {
+    display: none;
+  }
 
 .area-pill {
   flex: 0 0 auto;
