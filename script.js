@@ -250,20 +250,43 @@ fetch(SHEET_URL)
     return res.json();
   })
 
-  .then(pubs => {
+.then(pubs => {
 
-    const areaStrip = document.getElementById("area-filter-strip");
+  const areaStrip = document.getElementById("area-filter-strip");
 
-if (areaStrip) {
-  areaStrip.addEventListener("click", (e) => {
-    const btn = e.target.closest(".area-pill");
-    if (!btn) return;
+  if (areaStrip) {
+    const areaCounts = {};
 
-    const area = btn.dataset.area;
+    pubs.forEach(pub => {
+      if (!pub.area) return;
 
-    console.log("Area clicked:", area);
-  });
-}
+      const area = pub.area.trim();
+      if (!area) return;
+
+      areaCounts[area] = (areaCounts[area] || 0) + 1;
+    });
+
+    const topAreas = Object.entries(areaCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5);
+
+    topAreas.forEach(([area, count]) => {
+      const btn = document.createElement("button");
+      btn.className = "area-pill";
+      btn.dataset.area = area;
+      btn.textContent = `${area} ${count}`;
+      areaStrip.appendChild(btn);
+    });
+
+    areaStrip.addEventListener("click", (e) => {
+      const btn = e.target.closest(".area-pill");
+      if (!btn) return;
+
+      const area = btn.dataset.area;
+
+      console.log("Area clicked:", area);
+    });
+  }
 
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
