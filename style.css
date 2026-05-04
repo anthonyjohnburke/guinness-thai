@@ -923,7 +923,7 @@ font-size: 0.8em;
     border: 1px solid rgba(255,255,255,0.08);
     background: rgba(255,255,255,0.02);
     border-radius: 10px;
-    padding: 22px 18px;
+    padding: 25px 16px;
     text-align: center;
     transition: all 0.2s ease;
 }
@@ -1720,17 +1720,17 @@ font-size: 0.8em;
 }
 
     .stat-card {
-        padding: 16px 12px;
+        padding: 16px 10px;
         border-radius: 8px;
     }
 
     .stat-number {
-        font-size: 2.1em;
+        font-size: 2em;
         line-height: 1;
     }
 
     .stat-label {
-        font-size: 0.72em;
+        font-size: 0.7em;
         letter-spacing: 0.04em;
     }
 
