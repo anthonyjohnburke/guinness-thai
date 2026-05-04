@@ -308,9 +308,9 @@ body {
 }
 
 .chart-key {
-    font-size: 0.9em;
+    font-size: 1em;
     color: rgba(255,255,255,0.6);
-    margin-bottom: 22px;
+    margin: 25px 0;
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
