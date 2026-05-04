@@ -249,7 +249,21 @@ fetch(SHEET_URL)
     if (!res.ok) throw new Error("Failed to load pub data");
     return res.json();
   })
+
   .then(pubs => {
+
+    const areaStrip = document.getElementById("area-filter-strip");
+
+if (areaStrip) {
+  areaStrip.addEventListener("click", (e) => {
+    const btn = e.target.closest(".area-pill");
+    if (!btn) return;
+
+    const area = btn.dataset.area;
+
+    console.log("Area clicked:", area);
+  });
+}
 
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
