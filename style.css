@@ -130,11 +130,11 @@ body {
 
 /* Did you know */
 #did-you-know-top {
-    max-width: 280px;
+    max-width: 350px;
     text-align: left;
     font-size: 0.9em;
     line-height: 1.5;
-    padding-top: 4px;
+    padding-top: 2px;
 }
 
 .did-you-know-title {
