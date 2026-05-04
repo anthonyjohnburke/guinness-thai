@@ -465,7 +465,7 @@ input, button {
   margin: -18px auto 34px;
   padding: 0 24px;
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
   box-sizing: border-box;
@@ -477,7 +477,7 @@ input, button {
   color: rgba(255,255,255,0.75);
   border-radius: 999px;
   padding: 7px 14px;
-  font-size: 0.78em;
+  font-size: 0.8em;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.18s ease;
@@ -1383,7 +1383,7 @@ font-size: 0.8em;
 .area-filter-strip {
   margin: -24px auto 26px;
   padding: 0 14px;
-  gap: 8px;
+  gap: 10px;
   justify-content: flex-start;
   overflow-x: auto;
   flex-wrap: nowrap;
