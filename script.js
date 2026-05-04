@@ -289,15 +289,27 @@ fetch(SHEET_URL)
 btn.classList.add("active");
 
 const filtered = area === "all"
-  ? pricedPubs
-  : pricedPubs.filter(p => p.area && p.area.trim() === area);
+  ? allPricedPubs
+  : allPricedPubs.filter(p => p.area && p.area.trim() === area);
 
 console.log("Filtered pubs:", filtered.length);
+      zoomToArea(filtered);
     });
   }
 
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
+
+  const allPricedPubs = pubs
+  .filter(p => p.price && !isNaN(parseFloat(p.price)))
+  .map(p => ({
+    name: p.name,
+    area: p.area,
+    lat: p.lat,
+    lon: p.lon,
+    price: parseFloat(p.price),
+    last_updated: p.last_updated
+  }));
 
     function zoomToPub(pubName, allPubs) {
       const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
@@ -333,6 +345,31 @@ console.log("Filtered pubs:", filtered.length);
 }, 700);
       }, 150);
     }
+
+  function zoomToArea(filteredPubs) {
+  const areaBounds = new mapboxgl.LngLatBounds();
+  let count = 0;
+
+  filteredPubs.forEach(p => {
+    if (!p.lat || !p.lon) return;
+
+    const lat = parseFloat(p.lat);
+    const lon = parseFloat(p.lon);
+
+    if (isNaN(lat) || isNaN(lon)) return;
+
+    areaBounds.extend([lon, lat]);
+    count++;
+  });
+
+  if (count > 0) {
+    map.fitBounds(areaBounds, {
+      padding: 90,
+      maxZoom: 15,
+      duration: 800
+    });
+  }
+}
 
 
 const nearbyBtn = document.getElementById("find-nearby-btn");
