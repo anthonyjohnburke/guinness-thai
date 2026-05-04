@@ -465,7 +465,7 @@ input, button {
   margin: -18px auto 34px;
   padding: 0 24px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
   box-sizing: border-box;
@@ -477,7 +477,7 @@ input, button {
   color: rgba(255,255,255,0.75);
   border-radius: 999px;
   padding: 7px 14px;
-  font-size: 0.8em;
+  font-size: 0.85em;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.18s ease;
