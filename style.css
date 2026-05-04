@@ -942,7 +942,7 @@ font-size: 0.8em;
 }
 
 .stat-label {
-    font-size: 0.82em;
+    font-size: 0.84em;
     color: rgba(255,255,255,0.6);
     text-transform: uppercase;
 }
@@ -1731,7 +1731,7 @@ font-size: 0.7em;
     }
 
     .stat-label {
-        font-size: 0.7em;
+        font-size: 0.68em;
         letter-spacing: 0.04em;
     }
 
