@@ -1418,6 +1418,9 @@ font-size: 0.8em;
     #wisdom-text {
     width: 92%;
 }
+    #wisdom-box {
+    display: none;
+  }
            
     .featured {
     display: inline-block;
