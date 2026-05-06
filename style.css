@@ -860,7 +860,7 @@ appearance: none !important;
 #suggest-section {
     width: 100%;
     max-width: 1500px;
-    padding: 28px 24px;
+    padding: 12px 24px;
     box-sizing: border-box;
     text-align: left;
     margin: 10px auto 0;
