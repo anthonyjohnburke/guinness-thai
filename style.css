@@ -1878,10 +1878,6 @@ gap: 24px;
         height: 74px;
     }
 
-    #note {
-        font-size: 1em;
-    }
-
     .happy-item {
         flex-direction: row;
         align-items: flex-start;
