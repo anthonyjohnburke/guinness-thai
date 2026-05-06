@@ -249,10 +249,67 @@ fetch(SHEET_URL)
     if (!res.ok) throw new Error("Failed to load pub data");
     return res.json();
   })
-  .then(pubs => {
+
+.then(pubs => {
+
+  const areaStrip = document.getElementById("area-filter-strip");
+
+  if (areaStrip) {
+    const areaCounts = {};
+
+    pubs.forEach(pub => {
+      if (!pub.area) return;
+
+      const area = pub.area.trim();
+      if (!area) return;
+
+      areaCounts[area] = (areaCounts[area] || 0) + 1;
+    });
+
+    const topAreas = Object.entries(areaCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5);
+
+    topAreas.forEach(([area, count]) => {
+      const btn = document.createElement("button");
+      btn.className = "area-pill";
+      btn.dataset.area = area;
+      btn.textContent = `${area} ${count}`;
+      areaStrip.appendChild(btn);
+    });
+
+    areaStrip.addEventListener("click", (e) => {
+      const btn = e.target.closest(".area-pill");
+      if (!btn) return;
+
+      const area = btn.dataset.area;
+
+      console.log("Area clicked:", area);
+      areaStrip.querySelectorAll(".area-pill").forEach(p => p.classList.remove("active"));
+btn.classList.add("active");
+
+const filtered = area === "all"
+  ? allPricedPubs
+  : allPricedPubs.filter(p => p.area && p.area.trim() === area);
+
+console.log("Filtered pubs:", filtered.length);
+      zoomToArea(filtered);
+    });
+  }
 
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
+
+  const allPricedPubs = pubs
+  .filter(p => p.price && !isNaN(parseFloat(p.price)))
+  .map(p => ({
+    name: p.name,
+    area: p.area,
+    lat: p.lat,
+    lon: p.lon,
+    price: parseFloat(p.price),
+    last_updated: p.last_updated
+  }));
 
     function zoomToPub(pubName, allPubs) {
       const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
@@ -288,6 +345,31 @@ fetch(SHEET_URL)
 }, 700);
       }, 150);
     }
+
+  function zoomToArea(filteredPubs) {
+  const areaBounds = new mapboxgl.LngLatBounds();
+  let count = 0;
+
+  filteredPubs.forEach(p => {
+    if (!p.lat || !p.lon) return;
+
+    const lat = parseFloat(p.lat);
+    const lon = parseFloat(p.lon);
+
+    if (isNaN(lat) || isNaN(lon)) return;
+
+    areaBounds.extend([lon, lat]);
+    count++;
+  });
+
+  if (count > 0) {
+    map.fitBounds(areaBounds, {
+      padding: 90,
+      maxZoom: 15,
+      duration: 800
+    });
+  }
+}
 
 
 const nearbyBtn = document.getElementById("find-nearby-btn");
