@@ -283,11 +283,15 @@ body {
 
 #wisdom-text {
   font-family: 'Shadows Into Light', cursive;
-  font-size: 1.6em;
+  font-size: 1.7em;
   color: rgba(255,255,255,0.82);
     opacity: 1;
   transform: translateY(0);
   transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out;
+    width: 78%;
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #wisdom-text.fade-out {
