@@ -1410,6 +1410,18 @@ font-size: 0.8em;
     #wisdom-box {
     display: none;
   }
+        .impact-strip,
+.insight-strip,
+#suggest-section {
+  width: calc(100% - 32px);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+        .insight-strip {
+  gap: 24px;
+}
            
     .featured {
     display: inline-block;
