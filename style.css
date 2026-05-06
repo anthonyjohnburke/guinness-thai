@@ -1308,7 +1308,6 @@ font-size: 0.8em;
 }
 
 .insight-text {
-  font-family: 'Shadows Into Light', cursive;
   font-size: 1.25em;
   color: rgba(255,255,255,0.85);
   line-height: 1.5;
@@ -1371,7 +1370,8 @@ font-size: 0.8em;
     color: rgba(255,255,255,0.75);
     line-height: 1.5;
     font-weight: bold;
-    padding: 0 22px;     
+    padding: 0 22px;  
+        width: 80%;
     
 }
 
