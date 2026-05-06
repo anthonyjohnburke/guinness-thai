@@ -1411,16 +1411,27 @@ font-size: 0.8em;
     display: none;
   }
         
-    .impact-strip,
-    .insight-strip {
+.impact-strip,
+.insight-strip {
   width: calc(100% - 32px);
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
 }
 
-        .insight-strip {
-  gap: 24px;
+.impact-strip,
+.insight-strip,
+.contact-col {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-col {
+padding: 0 6px;
+}
+
+.insight-strip {
+gap: 24px;
 }
            
     .featured {
