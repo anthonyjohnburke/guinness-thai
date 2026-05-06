@@ -1410,9 +1410,9 @@ font-size: 0.8em;
     #wisdom-box {
     display: none;
   }
-        .impact-strip,
-.insight-strip,
-#suggest-section {
+        
+    .impact-strip,
+    .insight-strip {
   width: calc(100% - 32px);
   margin-left: auto;
   margin-right: auto;
