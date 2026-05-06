@@ -518,6 +518,35 @@ input, button {
     pointer-events: none !important;
 }
 
+.impact-strip {
+  margin-top: 26px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,120,0.08),
+    rgba(255,255,255,0.03)
+  );
+  border: 1px solid rgba(255,215,120,0.18);
+}
+
+.impact-strip .insight-label {
+  color: #f5c96a;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.impact-strip .insight-text {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.insight-strip {
+  margin-top: 18px;
+}
+
 #submit-btn {
     background: #d4af37;
     color: #000;
@@ -1379,39 +1408,38 @@ font-size: 0.8em;
     width: 100%;
     box-sizing: border-box;
 }
+
+        .impact-strip {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .impact-strip .insight-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
         
 .area-filter-strip {
-  margin: -24px auto 26px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   padding: 0 14px;
-  gap: 10px;
-  justify-content: flex-start;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  scrollbar-width: none;
+  margin: -24px auto 26px;
+}
+
+.area-pill {
+  width: 100%;
+  text-align: center;
+  font-size: 0.72em;
+  padding: 9px 8px;
 }
 
 .area-filter-strip::-webkit-scrollbar {
   display: none;
 }
-        
+     
     .seo-sub {
     display: none;
-  }
-
-.area-pill {
-  flex: 0 0 auto;
-font-size: 0.7em;
-}
-
-.area-filter-strip {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-
-  .area-pill {
-    width: 100%;
-    text-align: center;
   }
         
     .insight-strip {
