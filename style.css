@@ -1419,13 +1419,6 @@ font-size: 0.8em;
   box-sizing: border-box;
 }
 
-.impact-strip,
-.insight-strip,
-.contact-col {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .contact-col {
 padding: 0 6px;
 }
@@ -1863,19 +1856,14 @@ gap: 24px;
 }
 
 @media (max-width: 600px) {
+  
     #map {
         height: 55vh;
     }
 
-    .bar-row {
-        grid-template-columns: 1fr;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
-
     .bar-price {
     text-align: right;
-}
+    }
 
     #question {
         font-size: 2.2em;
@@ -1904,10 +1892,5 @@ gap: 24px;
         align-items: flex-end;
         min-width: 0;
         white-space: nowrap;
-    }
-
-    
-
-
-    
+    }   
 }
