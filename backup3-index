@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,6 +100,10 @@
   <div class="map-mobile-hint">Tap map to explore • scroll with one finger</div>
     <button id="map-unlock-btn">Explore map</button>
 </section>
+
+<div id="area-filter-strip" class="area-filter-strip">
+  <button class="area-pill active" data-area="all">All</button>
+</div>
   
   <h1 id="question" data-text="Who’s pouring the finest pint of Guinness in Bangkok?" aria-label="Who’s pouring the finest pint of Guinness in Bangkok?">
   Who’s pouring the finest pint of Guinness in Bangkok?
@@ -242,7 +245,7 @@
   <div class="suggest-col">
     <h2 class="intro-heading">Suggest a pub</h2>
     <p class="intro-small">
-      Bangkok’s full of pubs, but where’s the pint that truly pours like home? Share your go-to spot for the best Guinness in town.
+      Bangkok’s full of pubs, but where’s the pint that pours like home? Share your go-to spot for the best Guinness in town.
     </p>
 
     <div class="inline-form">
@@ -294,10 +297,7 @@
     <div class="footer-inner">
       <p>
         Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy or completeness of any listings.
-        Rankings and comparisons reflect only the pubs currently tracked on this site and do not represent all venues in Bangkok.
-      </p>
-      <p>
-        This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only.
+        Rankings and comparisons reflect only the pubs currently tracked on this site and do not represent all venues in Bangkok. This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only.
       </p>
       <p class="footer-signoff">
         Built in Bangkok in 2026.
