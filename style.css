@@ -458,6 +458,15 @@ input, button {
     cursor: not-allowed;
 }
 
+.section-label {
+  color: #f5c96a;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
 /* ===== Area Filter Strip ===== */
 
 .area-filter-strip {
