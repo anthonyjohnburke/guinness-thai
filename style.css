@@ -1368,17 +1368,6 @@ font-size: 0.8em;
     padding: 0 10px;
 }
 
-    .insight-box:first-child .insight-text {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.5;
-    font-weight: bold;
-    padding: 0 22px;  
-        width: 80%;
-    
-}
-
     .intro-col-wide {
         border-right: none;
         padding-right: 0;
@@ -1494,14 +1483,13 @@ font-size: 0.8em;
     grid-template-columns: 1fr;
   }
 
-    .suggest-col,
-    .nearby-col,
-    .contact-col {
-    height: auto;
-    padding: 0;
-    margin: 0;
-        margin-top: 20px;
-  }
+   .suggest-col,
+.nearby-col,
+.contact-col {
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
 
   .nearby-col,
   .contact-col {
@@ -1540,19 +1528,6 @@ font-size: 0.8em;
 
   #footer {
     margin-top: 22px;
-  }
-
-    .seo-sub {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 0.8em;          /* smaller */
-    font-weight: 300;          /* lighter */
-    color: rgba(255,255,255,0.6);
-    margin-top: -6px;
-    margin-bottom: 20px;
-    line-height: 1.4;
-    letter-spacing: 0.02em;
-    opacity: 0.85;
-    padding: 0 15px;
   }
 
      #map {
@@ -1831,18 +1806,14 @@ font-size: 0.8em;
     height: 7px;
     }
 
-    .bar-price {
-    font-size: 1.1rem;
-    font-weight: 700;
-    min-width: 72px;
-    text-align: right;
-    line-height: 1;  
-    top: -5px;
-    }
-
-        .suggest-col + .nearby-col,
-.nearby-col + .contact-col {
-  margin-top: 0;
+   .bar-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  line-height: 1;
 }
 
     #submit-btn,
