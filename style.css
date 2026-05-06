@@ -283,13 +283,13 @@ body {
 
 #wisdom-text {
   font-family: 'Shadows Into Light', cursive;
-  font-size: 1.7em;
+  font-size: 1.3em;
   color: rgba(255,255,255,0.82);
-    opacity: 1;
+opacity: 1;
   transform: translateY(0);
   transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out;
-    width: 78%;
-  max-width: 420px;
+    width: 80%;
+  max-width: 650px;
   margin: 0 auto;
   text-align: center;
 }
