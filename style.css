@@ -1485,7 +1485,7 @@ font-size: 0.7em;
     margin-top: 22px;
   }
 
-        .seo-sub {
+    .seo-sub {
     font-family: 'Open Sans', sans-serif;
     font-size: 0.8em;          /* smaller */
     font-weight: 300;          /* lighter */
@@ -1693,14 +1693,14 @@ font-size: 0.7em;
     }
 
     .price-line .label {
-        font-size: 0.85em;
+    font-size: 0.85em;
     }
 
     .price-line .value.gold {
-        font-size: 1.05em;
+    font-size: 1.05em;
     }
 
-    #top-stats {
+#top-stats {
   grid-template-columns: repeat(6, 1fr);
   gap: 8px;
   padding: 0 12px;
@@ -1758,7 +1758,7 @@ font-size: 0.7em;
         white-space: normal;
     }
 
-        .bar-area {
+    .bar-area {
     white-space: normal;
   }
 
@@ -1770,16 +1770,17 @@ font-size: 0.7em;
     }
 
     .bar-wrap {
-        width: 100%;
-        height: 7px;
+    width: 100%;
+    height: 7px;
     }
 
     .bar-price {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
     min-width: 72px;
     text-align: right;
     line-height: 1;  
+    top: -5px;
     }
 
         .suggest-col + .nearby-col,
