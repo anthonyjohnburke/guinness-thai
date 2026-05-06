@@ -1408,10 +1408,13 @@ font-size: 0.8em;
     .hp-field {
     display: none !important;
 }
-
 }
     @media (max-width: 768px) {
 
+    #wisdom-text {
+    width: 92%;
+}
+           
     .featured {
     display: inline-block;
     font-size: 0.9rem;
