@@ -1775,9 +1775,11 @@ font-size: 0.7em;
     }
 
     .bar-price {
-        font-size: 1em;
-        text-align: right;
-        white-space: nowrap;
+    font-size: 1.15rem;
+    font-weight: 700;
+    min-width: 72px;
+    text-align: right;
+    line-height: 1;  
     }
 
         .suggest-col + .nearby-col,
