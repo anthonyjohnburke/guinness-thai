@@ -924,6 +924,27 @@ appearance: none !important;
   opacity: 0.85;
 }
 
+.faq-contact-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.faq-contact-actions .contact-link,
+.faq-contact-actions .faq-contact-link {
+  width: 170px;
+  height: 46px;
+  margin: 0;
+  padding: 0 18px;
+  border-radius: 12px;
+}
+
+.faq-contact-actions .faq-contact-link {
+  background: #8bc34a;
+  color: #061006;
+}
+
 .nearby-col {
     border-left: 1px solid rgba(255,255,255,0.08);
     padding-left: 40px;
