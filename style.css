@@ -283,7 +283,8 @@ body {
 
 #wisdom-text {
   font-family: 'Shadows Into Light', cursive;
-  font-size: 1.3em;
+  font-size: 1.5em;
+    line-height: 1.5;
   color: rgba(255,255,255,0.82);
 opacity: 1;
   transform: translateY(0);
