@@ -1366,9 +1366,9 @@ appearance: none !important;
 }
 
 .faq-title {
-  text-align: center;
-  font-size: clamp(44px, 6vw, 86px);
-  margin-bottom: 28px;
+font-size: 2rem;
+text-align: center;
+margin-bottom: 28px;
 }
 
 .faq-intro {
