@@ -1291,8 +1291,8 @@ appearance: none !important;
 }
 
 .insight-strip {
-  max-width: 1500px;
-  margin: 24px auto 10px;
+  max-width: 1450px;
+  margin: 26px auto 12px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
