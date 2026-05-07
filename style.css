@@ -1553,8 +1553,7 @@ margin-bottom: 28px;
 .impact-strip,
 .insight-strip {
   width: calc(100% - 32px);
-  margin-left: auto;
-  margin-right: auto;
+    margin: 24px auto 0;
   box-sizing: border-box;
 }
 
