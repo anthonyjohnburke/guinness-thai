@@ -532,7 +532,8 @@ input, button {
 }
 
 .impact-strip {
-  margin: 32px 25px;
+  max-width: 1450px;
+  margin: 42px auto;
   padding: 26px 24px;
   border-radius: 18px;
   background: linear-gradient(
