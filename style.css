@@ -896,14 +896,28 @@ appearance: none !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 15px;
 
   background: #d4af37;
   color: #000;
   text-decoration: none;
 
-  min-width: 140px;   /* optional */
-  white-space: nowrap;
+  padding: 14px 26px;
+  border-radius: 12px;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+
+  margin: 18px auto 0;
+
+  width: fit-content;
+  min-width: unset;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.faq-contact-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .contact-link:hover {
