@@ -1372,10 +1372,11 @@ margin-bottom: 28px;
 }
 
 .faq-intro {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto 56px;
   text-align: center;
   font-size: 1.1rem;
+    font-weight: 700;
   line-height: 1.6;
   color: rgba(255,255,255,0.78);
 }
