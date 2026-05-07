@@ -15,6 +15,10 @@ body {
     padding-top: 120px;
 }
 
+.faq-body {
+  padding-top: 0;
+}
+
 .page-wrap {
     display: block; f
 }
