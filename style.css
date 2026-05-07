@@ -892,6 +892,10 @@ appearance: none !important;
   white-space: nowrap;
 }
 
+faq-contact-link {
+  margin-top: 10px;
+    }
+
 .contact-link:hover {
   opacity: 0.85;
 }
