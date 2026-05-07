@@ -2045,6 +2045,15 @@ gap: 24px;
         height: 55vh;
     }
 
+    .faq-contact-actions {
+    flex-direction: column;
+  }
+
+  .faq-contact-actions .contact-link,
+  .faq-contact-actions .faq-contact-link {
+    width: 100%;
+  }
+
     .bar-price {
     text-align: right;
     }
