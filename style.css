@@ -1484,7 +1484,7 @@ margin-bottom: 28px;
 .faq-page .contact-link {
   display: flex;
   width: fit-content;
-  margin: 10px auto 0;
+  margin-top: 10px;
   padding: 14px 24px;
   border-radius: 12px;
   background: #e2bd2f;
