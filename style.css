@@ -1607,11 +1607,7 @@ margin: 28px auto 10px;
   width: 100%;
   box-sizing: border-box;
 }
-
-.insight-strip {
-gap: 24px;
-}
-           
+       
     .featured {
     display: inline-block;
     font-size: 0.9rem;
@@ -1654,16 +1650,17 @@ gap: 24px;
 
 .area-filter-strip::-webkit-scrollbar {
   display: none;
-}
-     
+}  
     .seo-sub {
     display: none;
   }
         
     .insight-strip {
     grid-template-columns: 1fr;
-  }
-
+    gap: 24px;
+    padding: 18px;
+}
+    
     .insight-text {
     font-size: 1.1em;
   }
@@ -1740,9 +1737,9 @@ gap: 24px;
     margin-top: 22px;
   }
 
-     #map {
-        height: 48vh;
-        min-height: 360px;
+    #map {
+    height: 48vh;
+    min-height: 360px;
     }
         
    .map-mobile-hint {
