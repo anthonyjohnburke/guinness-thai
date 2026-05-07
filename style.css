@@ -1553,12 +1553,18 @@ margin-bottom: 28px;
 .impact-strip,
 .insight-strip {
   width: calc(100% - 32px);
-    margin: 24px auto 0;
+margin: 28px auto 10px;
   box-sizing: border-box;
 }
 
 .contact-col {
-padding: 0 6px;
+  padding: 0;
+}
+
+.faq-box,
+.contact-col {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .insight-strip {
