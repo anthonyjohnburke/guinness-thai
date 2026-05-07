@@ -16,7 +16,7 @@ body {
 }
 
 .page-wrap {
-    display: block;
+    display: block; f
 }
 
 #footer {
@@ -1427,19 +1427,6 @@ margin-bottom: 28px;
   width: fit-content;
 }
 
-@media (max-width: 800px) {
-  .faq-page {
-    padding: 80px 20px 56px;
-  }
-
-  .faq-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .faq-block {
-    padding: 24px;
-  }
-}
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
