@@ -1360,35 +1360,84 @@ appearance: none !important;
 }
 
 .faq-page {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 0 24px;
-  text-align: left;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 110px 32px 80px;
 }
 
 .faq-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 4em;
   text-align: center;
-  margin-bottom: 32px;
+  font-size: clamp(44px, 6vw, 86px);
+  margin-bottom: 28px;
+}
+
+.faq-intro {
+  max-width: 900px;
+  margin: 0 auto 56px;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.78);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .faq-block {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding: 22px 0;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 32px;
 }
 
 .faq-block h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8em;
-  margin: 0 0 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e2bd2f;
+  margin: 0 0 16px;
 }
 
 .faq-block p {
-  color: rgba(255,255,255,0.72);
-  line-height: 1.6;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.75);
 }
 
+.contact-link {
+  display: inline-flex;
+  margin: 48px auto 0;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: #e2bd2f;
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.faq-page .contact-link {
+  display: flex;
+  width: fit-content;
+}
+
+@media (max-width: 800px) {
+  .faq-page {
+    padding: 80px 20px 56px;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-block {
+    padding: 24px;
+  }
+}
 /* Mobile */
 @media (max-width: 900px) {
     #intro {
