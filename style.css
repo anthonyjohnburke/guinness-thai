@@ -892,9 +892,19 @@ appearance: none !important;
   white-space: nowrap;
 }
 
-faq-contact-link {
-  margin-top: 10px;
-    }
+.faq-contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+
+  background: #d4af37;
+  color: #000;
+  text-decoration: none;
+
+  min-width: 140px;   /* optional */
+  white-space: nowrap;
+}
 
 .contact-link:hover {
   opacity: 0.85;
