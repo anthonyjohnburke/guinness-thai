@@ -1293,7 +1293,7 @@ appearance: none !important;
   max-width: 1500px;
   margin: 24px auto 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
 
