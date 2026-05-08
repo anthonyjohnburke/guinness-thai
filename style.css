@@ -2091,3 +2091,25 @@ margin: 28px auto 10px;
         white-space: nowrap;
     }   
 }
+
+/* Desktop spacing improvements */
+@media (min-width: 1024px) {
+
+  #suggest-section {
+    margin-top: 38px;
+  }
+
+  .impact-strip {
+    margin-top: 56px;
+    margin-bottom: 56px;
+  }
+
+  .insight-strip {
+    margin-top: 42px;
+  }
+
+  #footer {
+    margin-top: 40px;
+  }
+
+}
