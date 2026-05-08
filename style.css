@@ -325,7 +325,8 @@ opacity: 1;
 }
 
 .highlight {
-    color: #d4af37;
+    color: #8bc34a;
+    font-weight: 700;
 }
 
 .chart-error {
