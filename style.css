@@ -537,16 +537,18 @@ input, button {
 }
 
 .impact-strip {
-  max-width: 1450px;
-  margin: 42px auto;
+  max-width: 1400px;
+  margin: 56px auto;
   padding: 26px 24px;
   border-radius: 18px;
+
   background: linear-gradient(
     135deg,
-    rgba(255,215,120,0.08),
-    rgba(255,255,255,0.03)
+    rgba(139,195,74,0.08),
+    rgba(255,255,255,0.025)
   );
-  border: 1px solid rgba(255,215,120,0.18);
+
+  border: 1px solid rgba(139,195,74,0.18);
 }
 
 .impact-strip .insight-label {
@@ -2096,12 +2098,12 @@ margin: 28px auto 10px;
 @media (min-width: 1024px) {
 
   #suggest-section {
-    margin-top: 38px;
+    margin-top:42px;
   }
 
   .impact-strip {
-    margin-top: 56px;
-    margin-bottom: 56px;
+    margin-top: 60px;
+    margin-bottom: 60px;
   }
 
   .insight-strip {
@@ -2109,7 +2111,7 @@ margin: 28px auto 10px;
   }
 
   #footer {
-    margin-top: 40px;
+    margin-top: 32px;
   }
 
 }
