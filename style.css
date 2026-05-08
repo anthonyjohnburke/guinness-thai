@@ -552,6 +552,10 @@ input, button {
   border: 1px solid rgba(139,195,74,0.18);
 }
 
+.impact-strip .section-label {
+  color: #8bc34a;
+}
+
 .impact-strip .insight-label {
   color: #f5c96a;
   font-size: 0.82rem;
