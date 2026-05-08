@@ -172,6 +172,16 @@ const map = new mapboxgl.Map({
   projection: 'mercator'
 });
 
+if (window.innerWidth > 768) {
+  map.scrollZoom.disable();
+
+  const mapEl = document.getElementById("map");
+
+  mapEl.addEventListener("click", () => {
+    map.scrollZoom.enable();
+  }, { once: true });
+}
+
 if (window.innerWidth <= 768) {
   map.dragPan.disable();
   map.touchZoomRotate.disableRotation(); // keep this
