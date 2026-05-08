@@ -966,6 +966,8 @@ appearance: none !important;
 .nearby-col {
     border-left: 1px solid rgba(255,255,255,0.08);
     padding-left: 40px;
+    display: flex;
+  flex-direction: column;
 }
 
 #find-nearby-btn {
@@ -1314,11 +1316,6 @@ appearance: none !important;
 #radius-select:hover {
   transform: translateY(-1px);
   opacity: 0.9;
-}
-
-.nearby-col {
-  display: flex;
-  flex-direction: column;
 }
 
 .nearby-col select,
