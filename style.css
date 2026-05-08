@@ -1380,8 +1380,8 @@ appearance: none !important;
 }
 
 .insight-text a {
-  color: #d4af37; /* your gold */
-  font-weight: 700;
+  color: #8bc34a; /* green */
+  font-weight: 600;
   text-decoration: none;
 }
 
