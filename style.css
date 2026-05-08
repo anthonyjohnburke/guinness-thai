@@ -538,18 +538,22 @@ input, button {
 }
 
 .impact-strip {
-  max-width: 1400px;
+  max-width: 1450px;
   margin: 56px auto;
   padding: 26px 24px;
   border-radius: 18px;
 
   background: linear-gradient(
     135deg,
-    rgba(139,195,74,0.08),
-    rgba(255,255,255,0.025)
+    rgba(139,195,74,0.14),
+    rgba(255,255,255,0.035)
   );
 
-  border: 1px solid rgba(139,195,74,0.18);
+  border: 1px solid rgba(139,195,74,0.28);
+
+  box-shadow:
+    0 0 0 1px rgba(139,195,74,0.04),
+    0 10px 30px rgba(0,0,0,0.22);
 }
 
 .impact-strip .section-label {
