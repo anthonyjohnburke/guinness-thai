@@ -564,7 +564,7 @@ input, button {
   margin: 42px auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 5fr 1.15fr;
+  grid-template-columns: 5.4fr 0.9fr;
   gap: 20px;
   box-sizing: border-box;
   align-items: stretch;
@@ -588,6 +588,8 @@ input, button {
   width: 100%;
   height: auto;
   display: block;
+    max-height: 340px;
+    object-fit: contain;
 }
 
 .impact-side:hover img {
@@ -607,12 +609,6 @@ input, button {
   .impact-side {
     grid-column: auto;
   }
-
-  .impact-side img {
-    max-height: 340px;
-    object-fit: cover;
-  }
-}
 
 .impact-strip {
   max-width: 1450px;
