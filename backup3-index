@@ -29,7 +29,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <meta http-equiv="Content-Security-Policy" content="
+ <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self' 'unsafe-inline' https://api.mapbox.com https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline' https://api.mapbox.com https://fonts.googleapis.com;
@@ -37,6 +37,11 @@
   img-src 'self' data: blob: https://api.mapbox.com https://*.mapbox.com;
   connect-src 'self' https://opensheet.elk.sh https://api.mapbox.com https://*.mapbox.com https://script.google.com https://script.googleusercontent.com https://www.google-analytics.com;
   worker-src blob:;
+  object-src 'none';
+  base-uri 'self';
+  frame-ancestors 'none';
+  form-action 'self' https://script.google.com https://script.googleusercontent.com;
+  upgrade-insecure-requests;
 ">
 
   <meta http-equiv="X-Frame-Options" content="DENY">
@@ -90,10 +95,6 @@
     <div id="did-you-know-text">Tracking Bangkok’s Guinness prices, one pint at a time.</div>
   </div>
 </div>
-
-  <div id="note">
-    "The perfect Guinness head is approx 12% of the pint height."
-  </div>
 
   <section id="map-section">
   <div id="map"></div>
@@ -187,7 +188,7 @@
 </div>
 
     <div id="happy-hour" class="section-block">
-      <h2 class="intro-heading">Top 5 Happy Hour Guinness Deals</h2>
+      <h2 class="intro-heading">Happy Hour Guinness Deals</h2>
       <p class="intro-small">
         The best happy hour Guinness deals we’ve found in Bangkok so far. We salute you, fine establishments.
       </p>
@@ -195,7 +196,7 @@
     </div>
 
     <div id="cheap-list-block" class="section-block">
-      <h2 class="intro-heading">Top 5 Cheapest Guinness in Bangkok</h2>
+      <h2 class="intro-heading">Cheap Guinness in Bangkok</h2>
       <p class="intro-small">
         Not all pints break the bank. These are the cheapest Guinness pours we’ve found in Bangkok so far.
       </p>
@@ -203,7 +204,7 @@
     </div>
 
     <div id="expensive-list-block" class="section-block">
-      <h2 class="intro-heading">Most Expensive Guinness in Bangkok</h2>
+      <h2 class="intro-heading">Expensive Guinness in Bangkok</h2>
       <p class="intro-small">
         Not all pints are priced equally. These are the most expensive Guinness pours we’ve found in Bangkok so far.
       </p>
@@ -215,33 +216,25 @@
 
   <div id="tooltip" class="tooltip"></div>
 
-  <div class="section-divider"></div>
+   <div id="suggest-section">
 
-  <div class="insight-strip">
+ <div class="nearby-col">
+    <h2 class="intro-heading">Explore pubs near you</h2>
+   <p class="intro-small">
+  In Bangkok? Allow location access and we’ll point you to nearby Guinness pubs, happy hour deals, and some of the city’s best-value pints.
+</p>
+    
+<div class="nearby-actions">
+  <select id="radius-select">
+    <option value="1">Within 1 km</option>
+    <option value="3" selected>Within 3 km</option>
+    <option value="all">All Bangkok</option>
+  </select>
 
-  <!-- LEFT: Market Impact -->
-  <div class="insight-box">
-    <div class="insight-label">Real Market Impact</div>
-   <div class="insight-text">
-  <a href="https://www.facebook.com/p/On-The-Square-61579011092046/" target="_blank" rel="noopener noreferrer">
-    On The Square
-  </a> in Silom has reintroduced its ฿270 Guinness Happy Hour (down from ฿290) after checking the tracker. That’s 16% cheaper and pushes them right up the Happy Hour rankings. Big shout out to On The Square. Well done, sir Grant.
+  <button id="find-nearby-btn">Find nearby pubs</button>
 </div>
-  </div>
-
-  <!-- RIGHT: Wisdom -->
-  <div class="insight-box">
-    <div class="insight-label">Guinness Wisdom</div>
-    <div id="wisdom-text" class="insight-text">
-      That was an absolute creamer… if you know, you know.
     </div>
-  </div>
 
-</div>
-
-<div class="section-divider"></div>
-  
-  <div id="suggest-section">
   <div class="suggest-col">
     <h2 class="intro-heading">Suggest a pub</h2>
     <p class="intro-small">
@@ -260,39 +253,73 @@
       <button id="submit-btn">Submit</button>
     </div>
   </div>
+       </div>
 
-  <div class="nearby-col">
-    <h2 class="intro-heading">Explore pubs near you</h2>
-   <p class="intro-small">
-  In Bangkok? Allow location access and we’ll point you to the best-value Guinness near you.
-</p>
-    
-<div class="nearby-actions">
-  <select id="radius-select">
-    <option value="1">Within 1 km</option>
-    <option value="3" selected>Within 3 km</option>
-    <option value="all">All Bangkok</option>
-  </select>
-
-  <button id="find-nearby-btn">Find nearby pubs</button>
-</div>
+<div class="impact-row">
+  <div class="impact-strip impact-main">
+    <div class="section-label">Real Market Impact</div>
+    <div class="insight-text">
+      <a href="https://www.facebook.com/p/On-The-Square-61579011092046/" target="_blank" rel="noopener noreferrer">
+        On The Square
+      </a> in Silom has reintroduced its ฿270 Guinness Happy Hour (down from ฿290) after checking the tracker. That’s 16% cheaper and pushes them right up the Happy Hour rankings. Big shout out to On The Square. Well done, sir Grant.
     </div>
+  </div>
 
-  <div class="contact-col">
+<button class="impact-side" id="globe-poster-btn" type="button" aria-label="Open The Globe grand opening poster">
+  <img src="the-globe-opening.jpg"
+       alt="The Globe Pub Bangkok grand opening party">
+</button>
 
-  <h2 class="intro-heading">Spotted something wrong?</h2>
+<div class="poster-lightbox" id="poster-lightbox" aria-hidden="true">
+  <button class="poster-close" id="poster-close" type="button" aria-label="Close poster">×</button>
 
+  <div class="poster-modal">
+    <img src="the-globe-opening.jpg"
+         alt="The Globe Pub Bangkok grand opening party">
+
+    <a href="https://www.instagram.com/p.j.obriens_theglobe/"
+       target="_blank"
+       rel="noopener noreferrer">
+      View on Instagram
+    </a>
+  </div>
+</div>
+  
+</div>
+
+  
+  <div class="insight-strip">
+
+    <div class="insight-box faq-box">
+  <div class="section-label">Frequently Asked Questions</div>
+  <p class="intro-small">
+    How prices are tracked, how rankings work, and how to suggest updates.
+  </p>
+  <a href="faq.html" class="contact-link">Read FAQ</a>
+</div>
+
+    
+  <div class="insight-box" id="wisdom-box">
+    <div class="section-label">Guinness Wisdom</div>
+    <div id="wisdom-text" class="insight-text">
+      That was an absolute creamer… if you know, you know.
+    </div>
+  </div>
+
+    
+     <div class="contact-col">
+  <div class="section-label">Spotted Something Wrong?</div>
   <p class="intro-small">
     Found a better pint, a new price, or something outdated? Let me know and I’ll update it.
   </p>
-
   <a href="mailto:pintsofbangkok@gmail.com" class="contact-link" id="contact-link" rel="noopener noreferrer">
     Get in touch
   </a>
-
 </div>
-    </div>
-
+</div>
+  
+</div>
+  
   <footer id="footer">
     <div class="footer-inner">
       <p>
@@ -300,7 +327,7 @@
         Rankings and comparisons reflect only the pubs currently tracked on this site and do not represent all venues in Bangkok. This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only.
       </p>
       <p class="footer-signoff">
-        Built in Bangkok in 2026.
+      © 2026 Pints of Bangkok. All rights reserved. Guinness® is a registered trademark of Diageo. This site is independent and not affiliated with Guinness or Diageo.
       </p>
     </div>
   </footer>
