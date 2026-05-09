@@ -1529,9 +1529,14 @@ margin-bottom: 28px;
 
 /* Mobile */
 @media (max-width: 900px) {
+    
     #intro {
         grid-template-columns: 1fr;
     }
+
+    .intro-small {
+    font-size: 0.9em;
+}
 
     #wisdom-text {
     font-size: 1.1em;
