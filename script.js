@@ -464,6 +464,7 @@ if (nearbyBtn) {
         const facts = [
           `The average pint in Bangkok is <strong>฿${avg}</strong>… so anything under ฿${underDeal} is a proper deal`,
           `The price gap between the cheapest and most expensive pint is <strong>฿${gap}</strong>.`,
+          `The ideal Guinness head is roughly 12% of the pint height. We take these matters seriously.`,
           `You can still find a pint for <strong>฿${min}</strong> if you know where to look.`,
           over400Count > 0
             ? `<strong>${over400Count}</strong> pub${over400Count === 1 ? "" : "s"} now charge ฿400 or more for a pint 👀`
