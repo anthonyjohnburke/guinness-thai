@@ -172,6 +172,16 @@ const map = new mapboxgl.Map({
   projection: 'mercator'
 });
 
+if (window.innerWidth > 768) {
+  map.scrollZoom.disable();
+
+  const mapEl = document.getElementById("map");
+
+  mapEl.addEventListener("click", () => {
+    map.scrollZoom.enable();
+  }, { once: true });
+}
+
 if (window.innerWidth <= 768) {
   map.dragPan.disable();
   map.touchZoomRotate.disableRotation(); // keep this
@@ -454,6 +464,7 @@ if (nearbyBtn) {
         const facts = [
           `The average pint in Bangkok is <strong>฿${avg}</strong>… so anything under ฿${underDeal} is a proper deal`,
           `The price gap between the cheapest and most expensive pint is <strong>฿${gap}</strong>.`,
+          `The ideal Guinness head is roughly 12% of the pint height. We take these matters seriously.`,
           `You can still find a pint for <strong>฿${min}</strong> if you know where to look.`,
           over400Count > 0
             ? `<strong>${over400Count}</strong> pub${over400Count === 1 ? "" : "s"} now charge ฿400 or more for a pint 👀`
@@ -1227,3 +1238,31 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.addEventListener("click", submitAnswer);
   }
 });
+
+const posterBtn = document.getElementById("globe-poster-btn");
+const posterLightbox = document.getElementById("poster-lightbox");
+const posterClose = document.getElementById("poster-close");
+
+if (posterBtn && posterLightbox && posterClose) {
+
+  posterBtn.addEventListener("click", () => {
+    posterLightbox.classList.add("is-open");
+  });
+
+  posterClose.addEventListener("click", () => {
+    posterLightbox.classList.remove("is-open");
+  });
+
+  posterLightbox.addEventListener("click", (e) => {
+    if (e.target === posterLightbox) {
+      posterLightbox.classList.remove("is-open");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      posterLightbox.classList.remove("is-open");
+    }
+  });
+
+}
