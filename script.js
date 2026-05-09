@@ -1238,3 +1238,31 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.addEventListener("click", submitAnswer);
   }
 });
+
+const posterBtn = document.getElementById("globe-poster-btn");
+const posterLightbox = document.getElementById("poster-lightbox");
+const posterClose = document.getElementById("poster-close");
+
+if (posterBtn && posterLightbox && posterClose) {
+
+  posterBtn.addEventListener("click", () => {
+    posterLightbox.classList.add("is-open");
+  });
+
+  posterClose.addEventListener("click", () => {
+    posterLightbox.classList.remove("is-open");
+  });
+
+  posterLightbox.addEventListener("click", (e) => {
+    if (e.target === posterLightbox) {
+      posterLightbox.classList.remove("is-open");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      posterLightbox.classList.remove("is-open");
+    }
+  });
+
+}
