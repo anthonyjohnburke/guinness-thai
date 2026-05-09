@@ -703,6 +703,11 @@ input, button {
     margin: 28px auto;
   }
 
+    .impact-side {
+  max-width: 240px;
+  margin-top: 20px;
+}
+
   .impact-main,
   .impact-side {
     grid-column: auto;
