@@ -347,6 +347,28 @@ opacity: 1;
     gap: 18px;
     align-items: center;
     margin-bottom: 15px;
+    transition: background 0.18s ease;
+}
+
+.bar-row:hover .bar-label {
+  color: #ffffff;
+}
+
+.bar-row:hover .bar-area {
+  color: rgba(255,255,255,0.72);
+}
+
+.bar-row:hover .bar {
+  filter: brightness(1.12);
+}
+
+.bar-row:hover .bar-price {
+  color: #ffffff;
+}
+
+.bar-row:hover {
+  background: rgba(212,175,55,0.045);
+  border-radius: 8px;
 }
 
 .bar-area {
