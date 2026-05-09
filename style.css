@@ -862,7 +862,7 @@ font-size: 2.3em;
 }
 
 .mapboxgl-popup-close-button {
-color: #111 !important;           /* 👈 force black */
+color: white !important;           /* 👈 force black */
 right: 2px !important;
 top: 8px !important;
 width: 20px !important;
