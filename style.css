@@ -728,7 +728,7 @@ input, button {
 
 .popup-header .popup-meta {
 color: rgba(255,255,255,0.85);
-margin-bottom: 6px;
+margin-bottom: 3px;
 }
 
 .popup-header .popup-title-text {
@@ -814,7 +814,7 @@ font-size: 2.3em;
 }
 
 .popup-header {
-    background: #d4af37;
+    background: black;
     color: #fff;
     padding: 14px 16px 16px;
     border-radius: 18px 18px 0 0;
