@@ -564,35 +564,23 @@ input, button {
   margin: 42px auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 5fr 1.15fr;
   gap: 20px;
   box-sizing: border-box;
   align-items: stretch;
 }
 
 .impact-main {
-  grid-column: span 5;
   margin: 0;
 }
 
 .impact-side {
-  grid-column: span 1;
   display: block;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255,215,120,0.18);
-  background: rgba(255,255,255,0.03);
-}
-
-.impact-side {
-  grid-column: span 1;
-  display: flex;
-  align-items: stretch;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255,215,120,0.18);
-  background: rgba(255,255,255,0.03);
   height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,215,120,0.18);
+  background: rgba(255,255,255,0.03);
 }
 
 .impact-side img {
@@ -628,7 +616,7 @@ input, button {
 
 .impact-strip {
   max-width: 1450px;
-  margin: 56px auto;
+  margin: 0;
   padding: 26px 24px;
   border-radius: 18px;
 
