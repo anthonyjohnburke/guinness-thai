@@ -604,6 +604,68 @@ input, button {
   opacity: 0.95;
 }
 
+.poster-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.84);
+  backdrop-filter: blur(4px);
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10000;
+  padding: 24px;
+}
+
+.poster-lightbox.is-open {
+  display: flex;
+}
+
+.poster-modal {
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.poster-modal img {
+  width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+
+  border-radius: 18px;
+  border: 1px solid rgba(255,215,120,0.22);
+}
+
+.poster-modal a {
+  display: inline-flex;
+  margin-top: 16px;
+
+  padding: 12px 18px;
+  border-radius: 10px;
+
+  background: #d4af37;
+  color: #000;
+
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.poster-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+  font-size: 2.4rem;
+
+  cursor: pointer;
+}
+
 .impact-strip {
   max-width: 1450px;
   margin: 0;
