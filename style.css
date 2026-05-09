@@ -564,7 +564,7 @@ input, button {
   margin: 42px auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 1fr 180px;
+  grid-template-columns: 1fr 150px;
   gap: 20px;
   box-sizing: border-box;
   align-items: stretch;
@@ -584,7 +584,7 @@ input, button {
 
   background: transparent;
 
-  max-width: 180px;
+  max-width: 150px;
   margin: 0 auto;
 }
 
