@@ -607,8 +607,12 @@ input, button {
 .impact-strip {
   max-width: 1450px;
   margin: 0;
-  padding: 26px 24px;
+  padding: 20px 24px;
   border-radius: 18px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   background: linear-gradient(
     135deg,
