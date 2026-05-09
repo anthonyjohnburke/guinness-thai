@@ -352,7 +352,7 @@ opacity: 1;
 
 .bar-row:hover .bar-label {
     color: #ffffff;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .bar-row:hover .bar-area {
