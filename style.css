@@ -1044,7 +1044,7 @@ appearance: none !important;
     margin: 10px auto 0;
     background: rgba(255,255,255,0.02);
     border-radius: 12px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1.4fr 1fr;
     align-items: start;
     display: grid;
     gap: 50px;
@@ -1125,7 +1125,7 @@ appearance: none !important;
 }
 
 .nearby-col {
-    border-left: 1px solid rgba(255,255,255,0.08);
+    border-left: 1px solid rgba(255,255,255,0.05);
     padding-left: 40px;
     display: flex;
   flex-direction: column;
