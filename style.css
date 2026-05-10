@@ -1778,7 +1778,7 @@ margin-bottom: 28px;
   }
         
 .insight-strip {
-width: calc(100% - 62px);
+width: calc(100% - 32px);
 margin: 28px auto 10px;
 box-sizing: border-box;
 }
