@@ -1693,11 +1693,6 @@ margin-bottom: 28px;
   text-decoration: none;
 }
 
-.faq-page .contact-link {
-  display: flex;
-  width: fit-content;
-}
-
 /* Mobile */
 @media (max-width: 900px) {
     
