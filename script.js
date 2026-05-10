@@ -510,11 +510,12 @@ if (nearbyBtn) {
         });
       }
 
-      chart.innerHTML += `
-        <div class="chart-key">
-  Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
-</div>
-      `;
+     chart.innerHTML += `
+  <div class="chart-key">
+    Longer bar = better value — <span class="highlight">less baht, more Guinness 🍺</span><br>
+    <span class="freshness-key"><span class="fresh-dot"></span> recently checked in the field</span>
+  </div>
+`;
 
       let tooltipTimeout;  // ✅ GLOBAL (shared across all rows)
 
