@@ -1549,6 +1549,25 @@ appearance: none !important;
   color: #f2d47a;
 }
 
+.freshness-key {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.82em;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.03em;
+}
+
+.fresh-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #8bc34a;
+  box-shadow: 0 0 6px rgba(139,195,74,0.45);
+  vertical-align: middle;
+}
+
 .timeout-link {
   display: block;
 }
