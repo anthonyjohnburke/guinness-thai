@@ -1561,14 +1561,14 @@ appearance: none !important;
   display: inline-block;
   width: 7px;
   height: 7px;
-  margin-left: 6px;
+  margin-left: 3px;
   border-radius: 50%;
   background: #8bc34a;
   box-shadow: 0 0 6px rgba(139,195,74,0.45);
   vertical-align: middle;
 
   position: relative;
-  top: -1px;
+  top: -2px;
 }
 
 .timeout-link {
