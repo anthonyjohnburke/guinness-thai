@@ -122,16 +122,6 @@ body {
   transform: translateY(0);
 }
 
-/* Note */
-#note {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 1.15em;
-    color: rgba(255,255,255,0.78);
-    text-align: center;
-    margin: 18px 0 22px;
-    padding: 0 20px;
-}
-
 /* Did you know */
 #did-you-know-top {
     max-width: 350px;
@@ -2224,13 +2214,7 @@ box-sizing: border-box;
 .footer-inner {
     font-size: 0.6em;
     line-height: 1.4;
-}
-
-    #did-you-know-top,
-  #note {
-    display: none;
-  }
-    
+}   
 }
 
 @media (max-width: 600px) {
