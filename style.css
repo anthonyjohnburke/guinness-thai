@@ -1555,6 +1555,7 @@ appearance: none !important;
   font-size: 0.82em;
   color: rgba(255,255,255,0.55);
   letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 .fresh-dot {
