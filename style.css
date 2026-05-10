@@ -692,12 +692,6 @@ input, button {
 }
 
 @media (max-width: 768px) {
-   
-.chart-key {
-  text-align: center;
-  font-size: 0.85em;
-  line-height: 1.5;
-}
 
 .freshness-key {
   display: block;
@@ -2166,11 +2160,12 @@ box-sizing: border-box;
         margin-top: 6px;
     }
         
-    .chart-key {
-        font-size: 0.85em;
-        margin-bottom: 18px;
-        line-height: 1.5;
-    }
+.chart-key {
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
 
   .bar-row {
         display: grid;
