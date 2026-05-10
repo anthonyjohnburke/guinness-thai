@@ -1853,14 +1853,16 @@ box-sizing: border-box;
       line-height: 1.25;
 }
 
-    #suggest-section {
+     #suggest-section {
     width: calc(100% - 32px);
     margin: 8px auto 0;
     padding: 24px 18px;
     gap: 0;
     border-radius: 14px;
     grid-template-columns: 1fr;
-  }
+
+    justify-items: center;
+}
 
 .suggest-col,
 .nearby-col {
