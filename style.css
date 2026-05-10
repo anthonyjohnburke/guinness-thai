@@ -942,7 +942,7 @@ font-size: 2.3em;
 }
 
 .popup-value-happy {
-    color: #d4af37;
+    color: #8bc34a; /* green */
     font-weight: 800;
 }
 
@@ -990,10 +990,6 @@ font-size: 2.3em;
 
 .popup-row:last-child {
   border-bottom: none;
-}
-
-.popup-value-happy {
-  color: #8bc34a; /* green */
 }
 
 /* Secondary */
