@@ -90,9 +90,11 @@ body {
     transition: all 0.25s ease;
 }
 
-/* Did you know scroll behavior */
 #top-bar.is-scrolled #did-you-know-top {
-    opacity: 0.9;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    pointer-events: none;
 }
 
 #top-bar.is-scrolled .did-you-know-title {
@@ -129,6 +131,11 @@ body {
     font-size: 0.9em;
     line-height: 1.5;
     padding-top: 2px;
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s ease;
 }
 
 .did-you-know-title {
