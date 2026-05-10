@@ -101,6 +101,17 @@ function scrollToMap() {
   });
 }
 
+function isFresh(dateStr) {
+  if (!dateStr) return false;
+
+  const updated = new Date(dateStr);
+  const now = new Date();
+
+  const diffDays = (now - updated) / (1000 * 60 * 60 * 24);
+
+  return diffDays <= 30;
+}
+
   function highlightChartPub(pubName) {
       document.querySelectorAll('.bar-row').forEach(row => {
         row.classList.remove('is-highlighted');
@@ -557,10 +568,11 @@ if (nearbyBtn) {
            title="Verified ${formatDate(pub.last_updated)}">
       </div>
     </div>
-    <div class="bar-price"
-         title="Verified ${formatDate(pub.last_updated)}">
-      ฿${pub.price}
-    </div>
+   <div class="bar-price"
+     title="Verified ${formatDate(pub.last_updated)}">
+  ฿${pub.price}
+  ${isFresh(pub.last_updated) ? '<span class="fresh-dot"></span>' : ''}
+</div>
   </div>
 `;
         chart.appendChild(row);
