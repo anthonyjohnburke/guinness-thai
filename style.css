@@ -1678,7 +1678,11 @@ margin-bottom: 28px;
 /* Mobile */
 @media (max-width: 900px) {
     
-    #intro {
+.fresh-dot {
+  top: -1px;
+}
+    
+#intro {
         grid-template-columns: 1fr;
     }
 
