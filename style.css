@@ -1909,7 +1909,7 @@ box-sizing: border-box;
   #radius-select,
   #find-nearby-btn,
   .contact-link {
-    width: 90%;
+    width: 100%;
     max-width: none;
     height: 48px;
     min-height: 48px;
