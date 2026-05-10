@@ -685,7 +685,7 @@ input, button {
 }
 
 @media (max-width: 768px) {
-
+   
 .chart-key {
   text-align: center;
   font-size: 0.85em;
@@ -2066,11 +2066,9 @@ box-sizing: border-box;
         height: 52px;
     }
 
-    #did-you-know-top {
-        max-width: 100%;
-        text-align: center;
-        padding-top: 0;
-    }
+   #did-you-know-top {
+    display: none;
+}
 
     .did-you-know-title {
         text-align: center;
