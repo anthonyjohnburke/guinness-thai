@@ -1080,8 +1080,8 @@ appearance: none !important;
   align-items: center;
   justify-content: center;
 
-  background: #d4af37;
-  color: #000;
+  background: #8bc34a;
+  color: #061006;
   text-decoration: none;
 
   padding: 14px 26px;
@@ -1123,11 +1123,6 @@ appearance: none !important;
   margin: 0;
   padding: 0 18px;
   border-radius: 12px;
-}
-
-.faq-contact-link {
-  background: #8bc34a;
-  color: #061006;
 }
 
 .faq-contact-actions .faq-contact-link {
