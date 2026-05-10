@@ -2172,18 +2172,20 @@ box-sizing: border-box;
   margin-bottom: 18px;
 }
 
-  .bar-row {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
+ .bar-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-bottom: 16px;
+  text-align: left;
+}
 
-    .bar-label {
-        font-size: 0.95em;
-        line-height: 1.25;
-        white-space: normal;
-    }
+   .bar-label {
+  font-size: 0.95em;
+  line-height: 1.25;
+  white-space: normal;
+  text-align: left;
+}
 
     .bar-area {
     white-space: normal;
@@ -2191,7 +2193,7 @@ box-sizing: border-box;
 
     .bar-row .bar-bottom {
         display: grid;
-        grid-template-columns: 1fr 72px;
+        grid-template-columns: 1fr 76px;
         gap: 10px;
         align-items: center;
     }
@@ -2201,13 +2203,14 @@ box-sizing: border-box;
     height: 7px;
     }
 
-   .bar-price {
+  .bar-price {
   font-size: 1.1rem;
   font-weight: 700;
-  min-width: 72px;
+  min-width: 78px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  text-align: right;
   line-height: 1;
 }
 
