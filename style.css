@@ -1044,7 +1044,7 @@ appearance: none !important;
     margin: 10px auto 0;
     background: rgba(255,255,255,0.02);
     border-radius: 12px;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 2.15fr 1fr;
     align-items: start;
     display: grid;
     gap: 50px;
