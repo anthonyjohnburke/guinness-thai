@@ -523,7 +523,7 @@ if (nearbyBtn) {
 
      chart.innerHTML += `
   <div class="chart-key">
-    Longer bar = better value — <span class="highlight">less baht, more Guinness 🍺</span><br>
+    Longer bar = better value — <span class="highlight">less baht, more Guinness</span><br>
     <span class="freshness-key"><span class="fresh-dot"></span> recently checked in the field</span>
   </div>
 `;
