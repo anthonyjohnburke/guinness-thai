@@ -698,8 +698,8 @@ input, button {
 
 .chart-key {
   text-align: center;
-  font-size: 0.82em;
-  line-height: 1.6;
+  font-size: 0.85em;
+  line-height: 1.5;
 }
 
 .freshness-key {
@@ -2184,9 +2184,9 @@ box-sizing: border-box;
     }
         
     .chart-key {
-        font-size: 0.68em;
-        margin-bottom: 12px;
-        line-height: 1.45;
+        font-size: 0.75em;
+        margin-bottom: 18px;
+        line-height: 1.5;
     }
 
   .bar-row {
