@@ -1682,26 +1682,30 @@ margin-bottom: 28px;
 }
     
 #intro {
-        grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
     }
 
-    .intro-small {
+.intro-col {
+    text-align: center;
+    }
+
+.intro-small {
     font-size: 0.95em;
 }
 
-    #wisdom-text {
+ #wisdom-text {
     font-size: 1.1em;
     padding: 0 10px;
 }
 
-    .intro-col-wide {
-        border-right: none;
-        padding-right: 0;
-        min-height: auto;
+.intro-col-wide {
+    border-right: none;
+    padding-right: 0;
+    min-height: auto;
     }
 
-    #top-stats {
-        grid-template-columns: 1fr;
+#top-stats {
+    grid-template-columns: 1fr;
     }
 
     #top-bar.is-scrolled #did-you-know-top {
