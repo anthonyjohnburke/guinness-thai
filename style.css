@@ -251,7 +251,7 @@ body {
 #intro {
     display: grid;
     grid-template-columns: 2.15fr 1fr;
-    gap: 64px;
+    gap: 50px;
     max-width: 1500px;
     width: 100%;
     padding: 0 28px;
