@@ -19,6 +19,38 @@ body {
   padding-top: 18px;
 }
 
+.faq-hero {
+  background: #f3f3f3;
+  color: #111;
+  padding: 56px 24px 48px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.faq-hero .faq-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.2rem;
+  line-height: 1;
+  margin: 0 0 18px;
+  color: #111;
+}
+
+.faq-hero .faq-intro {
+  max-width: 950px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(0,0,0,0.72);
+}
+
+.faq-divider {
+  width: 120px;
+  height: 2px;
+  background: #d4af37;
+  margin: 28px auto 0;
+  opacity: 0.85;
+}
+
 .page-wrap {
     display: block;
 }
@@ -1594,25 +1626,15 @@ appearance: none !important;
 }
 
 .faq-page {
-  max-width: 1400px;
+ max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 32px 80px;
+  padding: 42px 32px 80px;
 }
 
 .faq-title {
 font-size: 3rem;
 text-align: center;
 margin-bottom: 28px;
-}
-
-.faq-intro {
-  max-width: 1300px;
-  margin: 0 auto 56px;
-  text-align: center;
-  font-size: 1.1rem;
-    font-weight: 700;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.78);
 }
 
 .faq-grid {
@@ -1729,7 +1751,7 @@ margin-bottom: 28px;
 }
 
     .faq-page {
-  padding: 8px 18px 24px;
+  padding: 32px 18px 32px;
 } 
     
    .faq-title {
@@ -1738,12 +1760,6 @@ margin-bottom: 28px;
   margin-bottom: 18px;
 }
     
-    .faq-intro { 
-        font-size: 0.9rem; 
-        line-height: 1.6; 
-        margin: 0 auto 32px; 
-        color: rgba(255,255,255,0.72); 
-    } 
     .faq-grid { 
         grid-template-columns: 1fr; gap: 18px; 
     } 
@@ -1773,6 +1789,20 @@ margin-bottom: 28px;
     #wisdom-text {
     width: 92%;
 }
+        
+.faq-hero {
+  padding: 46px 20px 40px;
+}
+
+.faq-hero .faq-title {
+  font-size: 2.3rem;
+}
+
+.faq-hero .faq-intro {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+        
     #wisdom-box {
     display: none;
   }
@@ -2281,7 +2311,6 @@ box-sizing: border-box;
   min-width: 120px;
   text-align: right;
   align-items: flex-end;
-    min-width: 0;
     white-space: nowrap;
 }   
 }
