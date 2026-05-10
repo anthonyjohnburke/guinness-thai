@@ -561,7 +561,7 @@ input, button {
 
 .impact-row {
   max-width: 1450px;
-  margin: 42px auto;
+  margin: 48px auto;
   display: grid;
   grid-template-columns: 1fr 150px;
   gap: 20px;
