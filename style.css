@@ -695,7 +695,19 @@ input, button {
 }
 
 @media (max-width: 768px) {
-  .impact-row {
+
+.chart-key {
+  text-align: center;
+  font-size: 0.82em;
+  line-height: 1.6;
+}
+
+.freshness-key {
+  display: block;
+  margin-top: 8px;
+}
+  
+.impact-row {
     grid-template-columns: 1fr;
     width: calc(100% - 32px);
     padding: 0;
