@@ -1689,6 +1689,10 @@ margin-bottom: 28px;
   grid-template-columns: 1fr;
 }
 
+.impact-row.no-promo .impact-side {
+  display: none;
+}
+
 .faq-page .contact-link {
   display: flex;
   width: fit-content;
