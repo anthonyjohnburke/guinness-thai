@@ -1685,6 +1685,10 @@ margin-bottom: 28px;
   line-height: 1.6;
 }
 
+.impact-row.no-promo {
+  grid-template-columns: 1fr;
+}
+
 .faq-page .contact-link {
   display: flex;
   width: fit-content;
