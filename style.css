@@ -729,6 +729,16 @@ input, button {
   display: block;
   margin-top: 8px;
 }
+
+.insight-box,
+.contact-col {
+  justify-content: space-between;
+}
+
+.insight-box .contact-link,
+.contact-col .contact-link {
+  margin-top: 18px;
+}
   
 .impact-row {
     grid-template-columns: 1fr;
@@ -1961,10 +1971,6 @@ box-sizing: border-box;
     max-width: none;
     height: 48px;
     min-height: 48px;
-  }
-
-  .contact-link {
-    margin-top: 4px;
   }
         
     body {
