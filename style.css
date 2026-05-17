@@ -729,10 +729,6 @@ input, button {
   display: block;
   margin-top: 8px;
 }
-
-  .popup-row.price-row .popup-value {
-    font-size: 2.5rem;
-  }
     
 .insight-box,
 .contact-col {
@@ -1797,6 +1793,10 @@ margin-bottom: 28px;
   font-weight: 600;
   letter-spacing: 0.01em;
   color: #000;
+}
+
+.popup-row.price-row .popup-value.popup-value-happy {
+  color: #8bc34a;
 }
 
 .popup-row.price-row .price-divider {
