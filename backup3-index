@@ -157,34 +157,35 @@
 
  <div class="intro-col">
 
-    <div class="section-block">
-      <h2 class="intro-heading">Someone had to do it</h2>
-      <p class="intro-small">
-        I’m Irish, so I do love a proper pint of Guinness. You know the one with a lovely creamy head served in a clean glass, and a pour that isn’t rushed. 
-        In Bangkok and around Thailand, it can be a bit hit and miss. Sometimes you get a great pint at a fair price. Other times… not so much.
-        </p>
-        <p class="intro-small">
-        After spending more baht than I’d like to admit chasing a decent pint around the land of smiles, I started keeping track of where it’s actually worth ordering. 
-        This is a simple attempt to map it all out. No big agenda here, just a guide to help you find a proper Guinness in Thailand without overpaying for it. 
-        I’m not here to name and shame, just mapping what I find. Corcaigh abú!
-      </p>
-      </div>
+  <div class="section-block featured-block">
 
-   <div class="section-block featured-block">
+  <h2 class="intro-heading">Someone had to do it</h2>
+
+  <p class="intro-small">
+    I’m Irish, so I do love a proper pint of Guinness. You know the one with a lovely creamy head served in a clean glass, and a pour that isn’t rushed. 
+    In Bangkok and around Thailand, it can be a bit hit and miss. Sometimes you get a great pint at a fair price. Other times… not so much.
+  </p>
+
+  <p class="intro-small">
+    After spending more baht than I’d like to admit chasing a decent pint around the land of smiles, I started keeping track of where it’s actually worth ordering. 
+    This is a simple attempt to map it all out. No big agenda here, just a guide to help you find a proper Guinness in Thailand without overpaying for it. 
+    I’m not here to name and shame, just mapping what I find. Corcaigh abú!
+  </p>
 
   <a href="https://www.timeout.com/bangkok/news/find-the-cheapest-guinness-in-bangkok-042826"
      target="_blank"
      rel="noopener noreferrer"
      class="timeout-link">
 
-    <img src="timeout.png" alt="Time Out Bangkok article" class="timeout-img">
+    <img src="timeout.png"
+         alt="Time Out Bangkok article"
+         class="timeout-img">
 
   </a>
 
   <div class="timeout-caption">
     As featured in Time Out Bangkok →
   </div>
-
 </div>
 
     <div id="happy-hour" class="section-block">
@@ -221,7 +222,8 @@
  <div class="nearby-col">
     <h2 class="intro-heading">Explore pubs near you</h2>
    <p class="intro-small">
-  In Bangkok? Allow location access and we’ll point you to nearby Guinness pubs, happy hour deals, and some of the city’s best-value pints.
+  In Bangkok? Allow location access and we’ll point you to nearby Guinness pubs and some of the city’s best-value pints. 
+  Whether you’re chasing a proper creamer or just looking for the nearest pint, we’ll help you find it.
 </p>
     
 <div class="nearby-actions">
@@ -255,7 +257,7 @@
   </div>
        </div>
 
-<div class="impact-row">
+<div class="impact-row no-promo">
   <div class="impact-strip impact-main">
     <div class="section-label">Real Market Impact</div>
     <div class="insight-text">
@@ -293,7 +295,7 @@
     <div class="insight-box faq-box">
   <div class="section-label">Frequently Asked Questions</div>
   <p class="intro-small">
-    How prices are tracked, how rankings work, and how to suggest updates.
+    How Guinness prices are tracked across Bangkok, how the rankings work, and how to suggest updates, happy hour deals, or newly discovered pints.
   </p>
   <a href="faq.html" class="contact-link">Read FAQ</a>
 </div>
@@ -308,9 +310,10 @@
 
     
      <div class="contact-col">
-  <div class="section-label">Spotted Something Wrong?</div>
+  <div class="section-label">Spotted a Creamer?</div>
   <p class="intro-small">
-    Found a better pint, a new price, or something outdated? Let me know and I’ll update it.
+    Found a better pint, spotted a new price, or had an absolute creamer in Bangkok? Let me know and send over your Guinness photos to be featured.
+</p>
   </p>
   <a href="mailto:pintsofbangkok@gmail.com" class="contact-link" id="contact-link" rel="noopener noreferrer">
     Get in touch
