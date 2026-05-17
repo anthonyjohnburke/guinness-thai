@@ -1733,8 +1733,6 @@ margin-bottom: 28px;
 
   border-radius: 16px;
   background: rgba(139,195,74,0.10);
-  border: 1.5px solid rgba(139,195,74,0.32);
-
   text-align: left;
 }
 
@@ -1746,7 +1744,7 @@ margin-bottom: 28px;
   color: #8bc34a;
 
   padding-right: 12px;
-  border-right: 2px solid rgba(212,175,55,0.65);
+  border-right: 2px solid rgba(139,195,74,0.65);
 
   margin-bottom: 0;
   text-align: left;
