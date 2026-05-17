@@ -748,10 +748,6 @@ input, button {
     font-size: 0.9rem;
   }
 
-    .popup-row.price-row .popup-label {
-    font-size: 2.7rem;
-  }
-
   .popup-row.price-row .popup-value {
     font-size: 3rem;
   }
@@ -1807,15 +1803,15 @@ margin-bottom: 28px;
 }
 
 .popup-row.price-row .popup-label {
-  font-size: 3.1rem;
-  font-weight: 700;
+  font-size: 2.1rem;
+  font-weight: 600;
   letter-spacing: 0.02em;
-  color: #111;
+  color: #000;
 }
 
 .popup-row.price-row .popup-value {
-  font-size: 3.7rem;
-  font-weight: 800;
+  font-size: 2.1rem;
+  font-weight: 700;
   letter-spacing: 0.01em;
   color: #000;
 }
