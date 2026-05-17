@@ -1750,7 +1750,7 @@ margin-bottom: 28px;
 
 .popup-special {
   display: grid;
-  grid-template-columns: 82px 1fr;
+  grid-template-columns: 70px 1fr;
   align-items: center;
   column-gap: 16px;
 
