@@ -1897,24 +1897,33 @@ margin-bottom: 28px;
     width: 92%;
 }
 
-   .popup-row.price-row {
-    gap: 10px;
-    margin: 6px 0 8px;
-  }
+ .popup-row.price-row {
+  gap: 12px;
+  margin: 4px 0 8px;
+}
 
-  .popup-row.price-row .popup-label {
-    font-size: 1.15rem;
-    letter-spacing: 0.01em;
-  }
+.popup-row.price-row .popup-label {
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+}
 
-  .popup-row.price-row .popup-value {
-    font-size: 1.2rem;
-  }
+.popup-row.price-row .popup-value {
+  font-size: 1.6rem;
+}
 
-  .popup-row.price-row .price-divider {
-    height: 22px;
-    width: 2px;
-  }
+.popup-row.price-row .price-divider {
+  width: 2px;
+  height: 28px;
+}
+
+.popup-actions {
+  padding: 8px 12px 12px;
+}
+
+.popup-actions a {
+  padding: 7px 10px;
+  font-size: 0.82em;
+}
         
 .faq-hero {
   padding: 46px 20px 40px;
@@ -2119,8 +2128,9 @@ box-sizing: border-box;
 }
 
 /* Pull popup down so it connects to the triangle */
+
 .mapboxgl-popup {
-  transform: translateY(2px);
+  transform: translateY(-12px);
 }
 
 .mapboxgl-popup-tip {
@@ -2145,32 +2155,33 @@ box-sizing: border-box;
     display: none;
   }
 
-  .mapboxgl-popup-content {
-    padding: 0px 6px 8px;
-    border-radius: 12px;
-  }
+ .mapboxgl-popup-content {
+  padding: 0 !important;
+  border-radius: 18px !important;
+  overflow: visible;
+}
 
-  .popup-card.modern {
-    width: 280px;
-    border-radius: 16px;
-  }
+.popup-card.modern {
+  width: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+}
 
-  .popup-header {
-    padding: 8px 12px 10px;
-  }
+ .popup-header {
+  margin-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  padding: 12px 14px 14px;
+}
 
+.popup-body {
+  padding: 16px 14px 10px;
+}
   .popup-actions {
     padding: 8px 10px 12px;
     gap: 8px;
   }
 
-  .popup-special {
-    margin: 10px 14px 6px;
-    padding: 10px 12px;
-  }
-
-
-        .popup-special {
+    .popup-special {
     margin: 12px 22px 8px;
     padding: 13px 15px;
     gap: 14px;
