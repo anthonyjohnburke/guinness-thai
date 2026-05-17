@@ -730,6 +730,36 @@ input, button {
   margin-top: 8px;
 }
 
+     .popup-happy-hour {
+    gap: 12px;
+    padding: 14px 15px;
+  }
+
+  .popup-happy-label {
+    font-size: 1.5rem;
+    padding-right: 14px;
+  }
+
+  .popup-happy-time {
+    font-size: 1.1rem;
+  }
+
+  .popup-happy-price {
+    font-size: 0.9rem;
+  }
+
+    .popup-row.price-row .popup-label {
+    font-size: 2.7rem;
+  }
+
+  .popup-row.price-row .popup-value {
+    font-size: 3rem;
+  }
+
+  .popup-row.price-row .price-divider {
+    height: 40px;
+  }
+    
 .insight-box,
 .contact-col {
   justify-content: space-between;
@@ -1777,7 +1807,7 @@ margin-bottom: 28px;
 }
 
 .popup-row.price-row .popup-label {
-  font-size: 3.5rem;
+  font-size: 3.1rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: #111;
@@ -1792,7 +1822,7 @@ margin-bottom: 28px;
 
 .popup-row.price-row .price-divider {
   width: 2px;
-  height: 52px;
+  height: 42px;
   background: rgba(212,175,55,0.7);
 }
 
