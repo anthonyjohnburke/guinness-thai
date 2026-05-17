@@ -1794,24 +1794,22 @@ margin-bottom: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 22px;
-
-  margin: 24px 0 28px;
+  gap: 16px;
+  margin: 12px 0 14px;
   line-height: 1;
-
   font-family: 'Bebas Neue', sans-serif;
 }
 
 .popup-row.price-row .popup-label {
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 200;
   letter-spacing: 0.02em;
   color: #000;
 }
 
 .popup-row.price-row .popup-value {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: 600;
   letter-spacing: 0.01em;
   color: #000;
 }
