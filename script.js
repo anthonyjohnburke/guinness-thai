@@ -140,24 +140,40 @@ function buildPopupHTML(pub, safeLink) {
 
     <div class="popup-body">
 
-      ${pub.price ? `
-        <div class="popup-row">
-          <span class="popup-label">Guinness</span>
-          <span class="popup-value">฿${escapeHTML(pub.price)}</span>
-        </div>
-      ` : `
+     ${pub.price ? `
+  <div class="popup-row price-row">
+    <span class="popup-label">GUINNESS</span>
+    <span class="price-divider"></span>
+    <span class="popup-value">฿${escapeHTML(pub.price)}</span>
+  </div>
+` : `
         <div class="popup-row">
           <span class="popup-label">Guinness</span>
           <span class="popup-value">Under investigation</span>
         </div>
       `}
 
-      ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
-        <div class="popup-row">
-          <span class="popup-label">Happy Hour</span>
-          <span class="popup-value popup-value-happy">฿${escapeHTML(pub.happy_hour_price)}</span>
-        </div>
-      ` : ""}
+     ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
+  <div class="popup-happy-hour">
+
+    <div class="popup-happy-label">
+      HAPPY HOUR
+    </div>
+
+    <div class="popup-happy-details">
+      ${
+        pub.happy_hour
+          ? `<div class="popup-happy-time">${escapeHTML(pub.happy_hour)}</div>`
+          : ""
+      }
+
+      <div class="popup-happy-price">
+        All pints ฿${escapeHTML(pub.happy_hour_price)}
+      </div>
+    </div>
+
+  </div>
+` : ""}
 
          ${pub.special ? `
   <div class="popup-row popup-special">
