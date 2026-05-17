@@ -109,7 +109,7 @@ function isFresh(dateStr) {
 
   const diffDays = (now - updated) / (1000 * 60 * 60 * 24);
 
-  return diffDays <= 30;
+  return diffDays <= 20;
 }
 
   function highlightChartPub(pubName) {
