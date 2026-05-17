@@ -19,6 +19,38 @@ body {
   padding-top: 18px;
 }
 
+.faq-hero {
+  background: #f3f3f3;
+  color: #111;
+  padding: 40px 24px 30px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.faq-hero .faq-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.2rem;
+  line-height: 1;
+  margin: 0 0 10px;
+  color: #111;
+}
+
+.faq-hero .faq-intro {
+  max-width: 950px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(0,0,0,0.72);
+}
+
+.faq-divider {
+  width: 120px;
+  height: 2px;
+  background: #d4af37;
+  margin: 28px auto 0;
+  opacity: 0.85;
+}
+
 .page-wrap {
     display: block;
 }
@@ -90,9 +122,11 @@ body {
     transition: all 0.25s ease;
 }
 
-/* Did you know scroll behavior */
 #top-bar.is-scrolled #did-you-know-top {
-    opacity: 0.9;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    pointer-events: none;
 }
 
 #top-bar.is-scrolled .did-you-know-title {
@@ -122,16 +156,6 @@ body {
   transform: translateY(0);
 }
 
-/* Note */
-#note {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 1.15em;
-    color: rgba(255,255,255,0.78);
-    text-align: center;
-    margin: 18px 0 22px;
-    padding: 0 20px;
-}
-
 /* Did you know */
 #did-you-know-top {
     max-width: 350px;
@@ -139,6 +163,11 @@ body {
     font-size: 0.9em;
     line-height: 1.5;
     padding-top: 2px;
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s ease;
 }
 
 .did-you-know-title {
@@ -251,7 +280,7 @@ body {
 #intro {
     display: grid;
     grid-template-columns: 2.15fr 1fr;
-    gap: 64px;
+    gap: 50px;
     max-width: 1500px;
     width: 100%;
     padding: 0 28px;
@@ -287,7 +316,7 @@ body {
 
 #wisdom-text {
   font-family: 'Shadows Into Light', cursive;
-  font-size: 1.5em;
+  font-size: 1.7em;
     line-height: 1.5;
   color: rgba(255,255,255,0.82);
 opacity: 1;
@@ -561,8 +590,7 @@ input, button {
 
 .impact-row {
   max-width: 1450px;
-  margin: 42px auto;
-  padding: 0 24px;
+  margin: 48px auto;
   display: grid;
   grid-template-columns: 1fr 150px;
   gap: 20px;
@@ -696,7 +724,23 @@ input, button {
 }
 
 @media (max-width: 768px) {
-  .impact-row {
+
+.freshness-key {
+  display: block;
+  margin-top: 8px;
+}
+
+.insight-box,
+.contact-col {
+  justify-content: space-between;
+}
+
+.insight-box .contact-link,
+.contact-col .contact-link {
+  margin-top: 18px;
+}
+  
+.impact-row {
     grid-template-columns: 1fr;
     width: calc(100% - 32px);
     padding: 0;
@@ -931,7 +975,7 @@ font-size: 2.3em;
 }
 
 .popup-value-happy {
-    color: #d4af37;
+    color: #8bc34a; /* green */
     font-weight: 800;
 }
 
@@ -979,10 +1023,6 @@ font-size: 2.3em;
 
 .popup-row:last-child {
   border-bottom: none;
-}
-
-.popup-value-happy {
-  color: #8bc34a; /* green */
 }
 
 /* Secondary */
@@ -1044,7 +1084,7 @@ appearance: none !important;
     margin: 10px auto 0;
     background: rgba(255,255,255,0.02);
     border-radius: 12px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2.15fr 1fr;
     align-items: start;
     display: grid;
     gap: 50px;
@@ -1069,8 +1109,8 @@ appearance: none !important;
   align-items: center;
   justify-content: center;
 
-  background: #d4af37;
-  color: #000;
+  background: #8bc34a;
+  color: #061006;
   text-decoration: none;
 
   padding: 14px 26px;
@@ -1114,19 +1154,13 @@ appearance: none !important;
   border-radius: 12px;
 }
 
-.faq-contact-link {
-  background: #8bc34a;
-  color: #061006;
-}
-
 .faq-contact-actions .faq-contact-link {
   background: #8bc34a;
   color: #061006;
 }
 
 .nearby-col {
-    border-left: 1px solid rgba(255,255,255,0.08);
-    padding-left: 40px;
+    border-left: 1px solid rgba(255,255,255,0.05);
     display: flex;
   flex-direction: column;
 }
@@ -1551,6 +1585,27 @@ appearance: none !important;
   color: #f2d47a;
 }
 
+.freshness-key {
+  display: inline-block;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.fresh-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: 3px;
+  border-radius: 50%;
+  background: #8bc34a;
+  box-shadow: 0 0 6px rgba(139,195,74,0.45);
+  vertical-align: middle;
+
+  position: relative;
+  top: -2px;
+}
+
 .timeout-link {
   display: block;
 }
@@ -1581,25 +1636,15 @@ appearance: none !important;
 }
 
 .faq-page {
-  max-width: 1400px;
+ max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 32px 80px;
+  padding: 42px 32px 80px;
 }
 
 .faq-title {
 font-size: 3rem;
 text-align: center;
 margin-bottom: 28px;
-}
-
-.faq-intro {
-  max-width: 1300px;
-  margin: 0 auto 56px;
-  text-align: center;
-  font-size: 1.1rem;
-    font-weight: 700;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.78);
 }
 
 .faq-grid {
@@ -1650,6 +1695,26 @@ margin-bottom: 28px;
   line-height: 1.6;
 }
 
+.impact-row.no-promo {
+  grid-template-columns: 1fr;
+}
+
+.impact-row.no-promo .impact-side {
+  display: none;
+}
+
+.insight-box,
+.contact-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.insight-box .contact-link,
+.contact-col .contact-link {
+  margin-top: auto;
+}
+
 .faq-page .contact-link {
   display: flex;
   width: fit-content;
@@ -1661,39 +1726,38 @@ margin-bottom: 28px;
   text-decoration: none;
 }
 
-.faq-page .contact-link {
-  display: flex;
-  width: fit-content;
-}
-
 /* Mobile */
 @media (max-width: 900px) {
     
-    #intro {
-        grid-template-columns: 1fr;
+.fresh-dot {
+  top: -1px;
+}
+    
+#intro {
+    grid-template-columns: 1fr;
     }
 
-    .intro-small {
-    font-size: 0.9em;
+.intro-col {
+    text-align: center;
+    }
+
+.intro-small {
+    font-size: 0.95em;
 }
 
-    #wisdom-text {
+ #wisdom-text {
     font-size: 1.1em;
     padding: 0 10px;
 }
 
-    .intro-col-wide {
-        border-right: none;
-        padding-right: 0;
-        min-height: auto;
+.intro-col-wide {
+    border-right: none;
+    padding-right: 0;
+    min-height: auto;
     }
 
-    #top-stats {
-        grid-template-columns: 1fr;
-    }
-
-    #top-bar.is-scrolled #did-you-know-top {
-        opacity: 0.95;
+#top-stats {
+    grid-template-columns: 1fr;
     }
 
     #question {
@@ -1717,7 +1781,7 @@ margin-bottom: 28px;
 }
 
     .faq-page {
-  padding: 8px 18px 24px;
+  padding: 32px 18px 32px;
 } 
     
    .faq-title {
@@ -1726,12 +1790,6 @@ margin-bottom: 28px;
   margin-bottom: 18px;
 }
     
-    .faq-intro { 
-        font-size: 0.9rem; 
-        line-height: 1.6; 
-        margin: 0 auto 32px; 
-        color: rgba(255,255,255,0.72); 
-    } 
     .faq-grid { 
         grid-template-columns: 1fr; gap: 18px; 
     } 
@@ -1761,12 +1819,26 @@ margin-bottom: 28px;
     #wisdom-text {
     width: 92%;
 }
+        
+.faq-hero {
+  padding: 46px 20px 40px;
+}
+
+.faq-hero .faq-title {
+  font-size: 2.3rem;
+}
+
+.faq-hero .faq-intro {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+        
     #wisdom-box {
     display: none;
   }
         
 .insight-strip {
-width: calc(100% - 62px);
+width: calc(100% - 32px);
 margin: 28px auto 10px;
 box-sizing: border-box;
 }
@@ -1845,14 +1917,17 @@ box-sizing: border-box;
       line-height: 1.25;
 }
 
-    #suggest-section {
+     #suggest-section {
     width: calc(100% - 32px);
     margin: 8px auto 0;
     padding: 24px 18px;
     gap: 0;
     border-radius: 14px;
     grid-template-columns: 1fr;
-  }
+
+    justify-items: center;
+    text-align: center;
+}
 
 .suggest-col,
 .nearby-col {
@@ -1892,14 +1967,10 @@ box-sizing: border-box;
   #radius-select,
   #find-nearby-btn,
   .contact-link {
-    width: 90%;
+    width: 100%;
     max-width: none;
     height: 48px;
     min-height: 48px;
-  }
-
-  .contact-link {
-    margin-top: 4px;
   }
         
     body {
@@ -2056,11 +2127,9 @@ box-sizing: border-box;
         height: 52px;
     }
 
-    #did-you-know-top {
-        max-width: 100%;
-        text-align: center;
-        padding-top: 0;
-    }
+   #did-you-know-top {
+    display: none;
+}
 
     .did-you-know-title {
         text-align: center;
@@ -2084,6 +2153,8 @@ box-sizing: border-box;
     .happy-name {
         font-size: 0.9em;
         line-height: 1.3;
+        flex: 1;
+        text-align: left;
     }
 
     .happy-rank {
@@ -2097,7 +2168,6 @@ box-sizing: border-box;
 
     .happy-prices.stacked {
         gap: 2px;
-        min-width: 0;
     }
 
     .price-line {
@@ -2151,24 +2221,27 @@ box-sizing: border-box;
         margin-top: 6px;
     }
         
-    .chart-key {
-        font-size: 0.68em;
-        margin-bottom: 12px;
-        line-height: 1.45;
-    }
+.chart-key {
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
 
-  .bar-row {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
+ .bar-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin-bottom: 16px;
+  text-align: left;
+}
 
-    .bar-label {
-        font-size: 0.95em;
-        line-height: 1.25;
-        white-space: normal;
-    }
+   .bar-label {
+  font-size: 0.95em;
+  line-height: 1.25;
+  white-space: normal;
+  text-align: left;
+}
 
     .bar-area {
     white-space: normal;
@@ -2176,7 +2249,7 @@ box-sizing: border-box;
 
     .bar-row .bar-bottom {
         display: grid;
-        grid-template-columns: 1fr 72px;
+        grid-template-columns: 1fr 76px;
         gap: 10px;
         align-items: center;
     }
@@ -2186,13 +2259,14 @@ box-sizing: border-box;
     height: 7px;
     }
 
-   .bar-price {
+  .bar-price {
   font-size: 1.1rem;
   font-weight: 700;
-  min-width: 72px;
+  min-width: 78px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  text-align: right;
   line-height: 1;
 }
 
@@ -2206,13 +2280,7 @@ box-sizing: border-box;
 .footer-inner {
     font-size: 0.6em;
     line-height: 1.4;
-}
-
-    #did-you-know-top,
-  #note {
-    display: none;
-  }
-    
+}   
 }
 
 @media (max-width: 600px) {
@@ -2260,14 +2328,17 @@ box-sizing: border-box;
     .happy-item {
         flex-direction: row;
         align-items: flex-start;
+        display: flex;
+  justify-content: space-between;
     }
 
-    .happy-prices,
-    .happy-prices.stacked {
-        align-items: flex-end;
-        min-width: 0;
-        white-space: nowrap;
-    }   
+.happy-prices,
+.happy-prices.stacked {
+  min-width: 120px;
+  text-align: right;
+  align-items: flex-end;
+    white-space: nowrap;
+}   
 }
 
 /* Desktop spacing improvements */
