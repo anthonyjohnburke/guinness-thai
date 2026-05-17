@@ -1775,8 +1775,8 @@ margin-bottom: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  margin: 12px 0 12px;
+  gap: 14px;
+  margin: 8px 0 8px;
   line-height: 1;
   font-family: 'Bebas Neue', sans-serif;
 }
