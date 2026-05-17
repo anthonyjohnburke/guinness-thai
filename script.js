@@ -949,7 +949,7 @@ map.on('mouseleave', 'pubs-layer', () => {
   hoveredId = null;
 });
 
-   map.on('click', 'pubs-layer', (e) => {
+map.on('click', 'pubs-layer', (e) => {
   const feature = e.features && e.features[0];
   if (!feature) return;
 
@@ -957,45 +957,69 @@ map.on('mouseleave', 'pubs-layer', () => {
   const safeLink = sanitizeURL(p.link);
   const html = buildPopupHTML(p, safeLink);
 
-  const coordinates = feature.geometry.coordinates.slice(); // ✅ now works
+  const coordinates = feature.geometry.coordinates.slice();
 
-if (activePopup) {
-  activePopup.remove();
-  activePopup = null;
-}
+  // CLOSE if same pub clicked again
+  if (
+    activePopup &&
+    activePopup.pubName === p.name
+  ) {
+    activePopup.remove();
+    activePopup = null;
+    return;
+  }
 
-activePopup = new mapboxgl.Popup({  offset: window.innerWidth <= 768 ? 28 : 18,
-  closeButton: true,
-  closeOnClick: true,
-  maxWidth: "240px"
-});
+  // Close existing popup
+  if (activePopup) {
+    activePopup.remove();
+    activePopup = null;
+  }
 
-if (window.innerWidth <= 768) {
-  map.easeTo({
-    center: coordinates,
-    zoom: Math.max(map.getZoom(), 14),
-    duration: 350,
-    padding: {
-      top: 100,
-      bottom: 220,
-      left: 40,
-      right: 40
-    }
+  const popup = new mapboxgl.Popup({
+    offset: window.innerWidth <= 768 ? 28 : 18,
+    closeButton: true,
+    closeOnClick: true,
+    maxWidth: "none"
   });
 
-  setTimeout(() => {
-    activePopup
+  popup.pubName = p.name;
+
+  if (window.innerWidth <= 768) {
+
+    map.easeTo({
+      center: coordinates,
+      zoom: Math.max(map.getZoom(), 14),
+      duration: 350,
+      padding: {
+        top: 100,
+        bottom: 220,
+        left: 40,
+        right: 40
+      }
+    });
+
+    setTimeout(() => {
+      popup
+        .setLngLat(coordinates)
+        .setHTML(html)
+        .addTo(map);
+
+      activePopup = popup;
+    }, 360);
+
+  } else {
+
+    popup
       .setLngLat(coordinates)
       .setHTML(html)
       .addTo(map);
-  }, 360);
 
-} else {
-  activePopup
-    .setLngLat(coordinates)
-    .setHTML(html)
-    .addTo(map);
-}
+    activePopup = popup;
+  }
+
+  popup.on("close", () => {
+    activePopup = null;
+  });
 
   trackEvent("popup_open", {
     pub_name: p.name || "unknown"
