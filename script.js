@@ -126,10 +126,6 @@ function isFresh(dateStr) {
     }
 
 function buildPopupHTML(pub, safeLink) {
-  const mapsLink = (pub.lat && pub.lon)
-    ? `https://www.google.com/maps?q=${pub.lat},${pub.lon}`
-    : "";
-
   return `
   <div class="popup-card modern">
 
@@ -140,45 +136,33 @@ function buildPopupHTML(pub, safeLink) {
 
     <div class="popup-body">
 
-     ${pub.price ? `
-  <div class="popup-row price-row">
-    <span class="popup-label">GUINNESS</span>
-    <span class="price-divider"></span>
-    <span class="popup-value">฿${escapeHTML(pub.price)}</span>
-  </div>
-` : `
+      ${pub.price ? `
+        <div class="popup-row price-row">
+          <span class="popup-label">GUINNESS</span>
+          <span class="price-divider"></span>
+          <span class="popup-value">฿${escapeHTML(pub.price)}</span>
+        </div>
+      ` : `
         <div class="popup-row">
           <span class="popup-label">Guinness</span>
           <span class="popup-value">Under investigation</span>
         </div>
       `}
 
-    ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
-  <div class="popup-row price-row">
-    <span class="popup-label">Happy Hour</span>
-    <div class="price-divider"></div>
-    <span class="popup-value popup-value-happy">
-      ฿${escapeHTML(pub.happy_hour_price)}
-    </span>
-  </div>
-` : ""}
+      ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
+        <div class="popup-row price-row">
+          <span class="popup-label">Happy Hour</span>
+          <span class="price-divider"></span>
+          <span class="popup-value popup-value-happy">฿${escapeHTML(pub.happy_hour_price)}</span>
+        </div>
+      ` : ""}
 
-      }
-
-      <div class="popup-happy-price">
-        All pints ฿${escapeHTML(pub.happy_hour_price)}
-      </div>
-    </div>
-
-  </div>
-` : ""}
-
-         ${pub.special ? `
-  <div class="popup-row popup-special">
-    <div class="popup-special-label">Special</div>
-    <div class="popup-special-text">${escapeHTML(pub.special)}</div>
-  </div>
-` : ""}
+      ${pub.special ? `
+        <div class="popup-row popup-special">
+          <div class="popup-special-label">Special</div>
+          <div class="popup-special-text">${escapeHTML(pub.special)}</div>
+        </div>
+      ` : ""}
 
     </div>
 
