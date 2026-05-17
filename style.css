@@ -1796,6 +1796,53 @@ margin-bottom: 28px;
   background: rgba(212,175,55,0.7);
 }
 
+.popup-happy-hour {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin: 14px 28px 10px;
+  padding: 16px 18px;
+
+  border-radius: 16px;
+
+  background: #111;
+  border: 1px solid rgba(212,175,55,0.35);
+
+  color: white;
+}
+
+.popup-happy-label {
+  flex-shrink: 0;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  color: #d4af37;
+
+  padding-right: 18px;
+  border-right: 2px solid rgba(212,175,55,0.6);
+}
+
+.popup-happy-details {
+  text-align: left;
+  line-height: 1.1;
+}
+
+.popup-happy-time {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.popup-happy-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #d4af37;
+}
+
+
+
 /* Mobile */
 @media (max-width: 900px) {
     
