@@ -2217,15 +2217,29 @@ box-sizing: border-box;
   }
 
   .mapboxgl-popup-content {
-    padding: 0px 12px 14px;
-    border-radius: 14px;
-    max-width: 260px;
+    padding: 0px 6px 8px;
+    border-radius: 12px;
   }
 
-.popup-card.modern {
-    width: 285px;
-    border-radius: 18px;
+  .popup-card.modern {
+    width: 280px;
+    border-radius: 16px;
   }
+
+  .popup-header {
+    padding: 8px 12px 10px;
+  }
+
+  .popup-actions {
+    padding: 8px 10px 12px;
+    gap: 8px;
+  }
+
+  .popup-special {
+    margin: 10px 14px 6px;
+    padding: 10px 12px;
+  }
+
 
         .popup-special {
     margin: 12px 22px 8px;
