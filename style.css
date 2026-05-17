@@ -751,10 +751,6 @@ input, button {
   .popup-row.price-row .popup-value {
     font-size: 2.5rem;
   }
-
-  .popup-row.price-row .price-divider {
-    height: 40px;
-  }
     
 .insight-box,
 .contact-col {
@@ -1808,22 +1804,22 @@ margin-bottom: 28px;
 }
 
 .popup-row.price-row .popup-label {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 200;
   letter-spacing: 0.02em;
   color: #000;
 }
 
 .popup-row.price-row .popup-value {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   color: #000;
 }
 
 .popup-row.price-row .price-divider {
-  width: 3px;
-  height: 42px;
+  width: 2.5px;
+  height: 32px;
   background: rgba(212,175,55,0.7);
 }
 
@@ -1983,7 +1979,7 @@ margin-bottom: 28px;
   }
 
   .popup-row.price-row .price-divider {
-    height: 24px;
+    height: 22px;
     width: 2px;
   }
         
