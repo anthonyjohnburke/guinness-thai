@@ -2212,9 +2212,9 @@ box-sizing: border-box;
  .popup-actions a {
   flex: 1;
   text-align: center;
-  padding: 9px 10px;
-  font-size: 0.9em;
-  font-weight: 600;
+  padding: 7px 10px;
+  font-size: 0.85em;
+  font-weight: 500;
   border-radius: 10px;
   text-decoration: none;
   white-space: nowrap;
