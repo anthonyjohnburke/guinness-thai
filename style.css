@@ -1715,6 +1715,26 @@ margin-bottom: 28px;
   margin-top: auto;
 }
 
+.popup-special {
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px 4px;
+}
+
+.popup-special-label {
+  font-size: 0.75em;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #d4af37;
+}
+
+.popup-special-text {
+  font-size: 0.95em;
+  line-height: 1.35;
+  color: #333;
+}
+
 .faq-page .contact-link {
   display: flex;
   width: fit-content;
