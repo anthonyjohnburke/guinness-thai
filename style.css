@@ -1743,9 +1743,9 @@ margin-bottom: 28px;
 
 .popup-special {
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: 82px 1fr;
   align-items: center;
-  column-gap: 18px;
+  column-gap: 16px;
 
   margin: 14px 28px 8px;
   padding: 16px 18px;
@@ -1764,7 +1764,7 @@ margin-bottom: 28px;
   letter-spacing: 0.12em;
   color: #d4af37;
 
-  padding-right: 18px;
+  padding-right: 12px;
   border-right: 2px solid rgba(212,175,55,0.65);
 
   margin-bottom: 0;
@@ -2205,6 +2205,8 @@ box-sizing: border-box;
     margin: 12px 22px 8px;
     padding: 13px 15px;
     gap: 14px;
+            grid-template-columns: 68px 1fr;
+    column-gap: 12px;
   }
 
   .popup-special-label {
