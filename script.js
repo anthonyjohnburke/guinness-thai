@@ -153,18 +153,16 @@ function buildPopupHTML(pub, safeLink) {
         </div>
       `}
 
-     ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
-  <div class="popup-happy-hour">
+    ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
+  <div class="popup-row price-row">
+    <span class="popup-label">Happy Hour</span>
+    <div class="price-divider"></div>
+    <span class="popup-value popup-value-happy">
+      ฿${escapeHTML(pub.happy_hour_price)}
+    </span>
+  </div>
+` : ""}
 
-    <div class="popup-happy-label">
-      HAPPY HOUR
-    </div>
-
-    <div class="popup-happy-details">
-      ${
-        pub.happy_hour
-          ? `<div class="popup-happy-time">${escapeHTML(pub.happy_hour)}</div>`
-          : ""
       }
 
       <div class="popup-happy-price">
