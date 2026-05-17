@@ -159,6 +159,13 @@ function buildPopupHTML(pub, safeLink) {
         </div>
       ` : ""}
 
+         ${pub.special ? `
+  <div class="popup-row popup-special">
+    <div class="popup-special-label">Guinness Special</div>
+    <div class="popup-special-text">${escapeHTML(pub.special)}</div>
+  </div>
+` : ""}
+
     </div>
 
     <div class="popup-actions">
