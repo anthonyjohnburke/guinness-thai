@@ -1018,11 +1018,11 @@ map.on('click', 'pubs-layer', (e) => {
       zoom: Math.max(map.getZoom(), 14),
       duration: 350,
       padding: {
-        top: 100,
-        bottom: 220,
-        left: 40,
-        right: 40
-      }
+  top: 90,
+  bottom: 160,
+  left: 28,
+  right: 28
+}
     });
 
     setTimeout(() => {
@@ -1034,7 +1034,7 @@ map.on('click', 'pubs-layer', (e) => {
 activePopup = popup;
 
 keepPopupInView(activePopup);
-    }, 360);
+    }, 220);
 
   } else {
 
