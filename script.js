@@ -994,7 +994,11 @@ map.on('click', 'pubs-layer', (e) => {
   }
 
   const popup = new mapboxgl.Popup({
-    offset: window.innerWidth <= 768 ? 28 : 18,
+  offset: window.innerWidth <= 768
+    ? {
+        bottom: [0, -12]
+      }
+    : 18,
     closeButton: true,
     closeOnClick: true,
     maxWidth: "320px"
