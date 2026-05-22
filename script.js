@@ -125,6 +125,42 @@ function isFresh(dateStr) {
       }
     }
 
+function keepPopupInView(popup) {
+  requestAnimationFrame(() => {
+    const popupEl = popup.getElement();
+    const mapEl = map.getContainer();
+
+    if (!popupEl || !mapEl) return;
+
+    const popupRect = popupEl.getBoundingClientRect();
+    const mapRect = mapEl.getBoundingClientRect();
+
+    const padding = 18;
+    let dx = 0;
+    let dy = 0;
+
+    if (popupRect.left < mapRect.left + padding) {
+      dx = popupRect.left - mapRect.left - padding;
+    }
+
+    if (popupRect.right > mapRect.right - padding) {
+      dx = popupRect.right - mapRect.right + padding;
+    }
+
+    if (popupRect.top < mapRect.top + padding) {
+      dy = popupRect.top - mapRect.top - padding;
+    }
+
+    if (popupRect.bottom > mapRect.bottom - padding) {
+      dy = popupRect.bottom - mapRect.bottom + padding;
+    }
+
+    if (dx || dy) {
+      map.panBy([dx, dy], { duration: 250 });
+    }
+  });
+}
+
 function buildPopupHTML(pub, safeLink) {
   return `
   <div class="popup-card modern">
@@ -367,7 +403,7 @@ console.log("Filtered pubs:", filtered.length);
   activePopup
     .setLngLat([lon, lat])
     .setHTML(html)
-    .addTo(map);
+    
 }, 700);
       }, 150);
     }
@@ -961,7 +997,7 @@ map.on('click', 'pubs-layer', (e) => {
     offset: window.innerWidth <= 768 ? 28 : 18,
     closeButton: true,
     closeOnClick: true,
-    maxWidth: "none"
+    maxWidth: "320px"
   });
 
   popup.pubName = p.name;
@@ -982,21 +1018,25 @@ map.on('click', 'pubs-layer', (e) => {
 
     setTimeout(() => {
       popup
-        .setLngLat(coordinates)
-        .setHTML(html)
-        .addTo(map);
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
 
-      activePopup = popup;
+activePopup = popup;
+
+keepPopupInView(activePopup);
     }, 360);
 
   } else {
 
     popup
-      .setLngLat(coordinates)
-      .setHTML(html)
-      .addTo(map);
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
 
-    activePopup = popup;
+activePopup = popup;
+
+keepPopupInView(activePopup);
   }
 
   popup.on("close", () => {
@@ -1182,6 +1222,7 @@ function typeWriter(el, text, speed = 35) {
 userMarker = new mapboxgl.Marker({ color: "#ffffff" })
   .setLngLat([userLon, userLat])
   .addTo(map);
+    keepPopupInView(activePopup);
 
 processNearest(userLat, userLon, pubs, zoomToPub, radiusValue);
   }, () => {
