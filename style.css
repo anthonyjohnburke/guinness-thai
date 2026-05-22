@@ -2135,7 +2135,7 @@ margin-bottom: 28px;
 }
 
 .popup-body {
-  padding: 10px 12px 6px;
+  padding: 6px 12px 2px;
 }
 
 .popup-row.price-row {
@@ -2157,8 +2157,8 @@ margin-bottom: 28px;
 }
 
 .popup-special {
-  margin: 8px 12px 6px;
-  padding: 9px 10px;
+  margin: 6px 12px 4px;
+  padding: 7px 9px;
   grid-template-columns: 58px 1fr;
   column-gap: 10px;
 }
@@ -2179,8 +2179,8 @@ margin-bottom: 28px;
 
 .popup-actions a {
   flex: 1;
-  padding: 6px 8px;
-  font-size: 0.78em;
+  padding: 4px 8px;
+  font-size: 0.76em;
   font-weight: 500;
   border-radius: 10px;
 }
