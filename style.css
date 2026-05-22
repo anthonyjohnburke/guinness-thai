@@ -756,7 +756,8 @@ input, button {
   .impact-side {
     grid-column: auto;
   }
-    }
+    
+}
 
 .impact-strip .section-label {
   color: #8bc34a;
