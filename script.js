@@ -126,6 +126,8 @@ function isFresh(dateStr) {
     }
 
 function keepPopupInView(popup) {
+  if (!popup) return;
+
   requestAnimationFrame(() => {
     const popupEl = popup.getElement();
     const mapEl = map.getContainer();
@@ -401,8 +403,11 @@ console.log("Filtered pubs:", filtered.length);
   activePopup = new mapboxgl.Popup({ offset: 10 });
 
   activePopup
-    .setLngLat([lon, lat])
-    .setHTML(html)
+  .setLngLat([lon, lat])
+  .setHTML(html)
+  .addTo(map);
+
+keepPopupInView(activePopup);
     
 }, 700);
       }, 150);
@@ -1226,7 +1231,6 @@ function typeWriter(el, text, speed = 35) {
 userMarker = new mapboxgl.Marker({ color: "#ffffff" })
   .setLngLat([userLon, userLat])
   .addTo(map);
-    keepPopupInView(activePopup);
 
 processNearest(userLat, userLon, pubs, zoomToPub, radiusValue);
   }, () => {
