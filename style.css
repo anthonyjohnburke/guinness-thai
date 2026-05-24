@@ -783,10 +783,6 @@ input, button {
     font-weight: 600;
 }
 
-.insight-strip {
-  margin-top: 18px;
-}
-
 #submit-btn {
     background: #d4af37;
     color: #000;
@@ -1898,6 +1894,23 @@ margin-bottom: 28px;
     #wisdom-text {
     width: 92%;
 }
+        
+#featured-text.collapsed p:not(:first-of-type) {
+display: none;
+  }
+
+  #toggle-featured-btn {
+    display: block;
+    width: 100%;
+    margin: 12px 0 18px;
+    padding: 12px 18px;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
 
 #toggle-chart-btn {
   display: block;
