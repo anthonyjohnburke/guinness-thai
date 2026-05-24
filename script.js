@@ -128,7 +128,7 @@ function isFresh(dateStr) {
 function keepPopupInView(popup) {
   if (!popup) return;
 
-  requestAnimationFrame(() => {
+  setTimeout(() => {
     const popupEl = popup.getElement();
     const mapEl = map.getContainer();
 
@@ -137,30 +137,34 @@ function keepPopupInView(popup) {
     const popupRect = popupEl.getBoundingClientRect();
     const mapRect = mapEl.getBoundingClientRect();
 
-    const padding = 18;
-    let dx = 0;
-    let dy = 0;
+    const padding = window.innerWidth <= 768 ? 24 : 40;
+
+    let offsetX = 0;
+    let offsetY = 0;
 
     if (popupRect.left < mapRect.left + padding) {
-      dx = popupRect.left - mapRect.left - padding;
+      offsetX = popupRect.left - mapRect.left - padding;
     }
 
     if (popupRect.right > mapRect.right - padding) {
-      dx = popupRect.right - mapRect.right + padding;
+      offsetX = popupRect.right - mapRect.right + padding;
     }
 
     if (popupRect.top < mapRect.top + padding) {
-      dy = popupRect.top - mapRect.top - padding;
+      offsetY = popupRect.top - mapRect.top - padding;
     }
 
     if (popupRect.bottom > mapRect.bottom - padding) {
-      dy = popupRect.bottom - mapRect.bottom + padding;
+      offsetY = popupRect.bottom - mapRect.bottom + padding;
     }
 
-    if (dx || dy) {
-      map.panBy([dx, dy], { duration: 250 });
+    if (offsetX || offsetY) {
+      map.panBy([offsetX, offsetY], {
+        duration: 450,
+        easing: t => t
+      });
     }
-  });
+  }, 80);
 }
 
 function buildPopupHTML(pub, safeLink) {
