@@ -125,11 +125,49 @@ function isFresh(dateStr) {
       }
     }
 
-function buildPopupHTML(pub, safeLink) {
-  const mapsLink = (pub.lat && pub.lon)
-    ? `https://www.google.com/maps?q=${pub.lat},${pub.lon}`
-    : "";
+function keepPopupInView(popup) {
+  if (!popup) return;
 
+  setTimeout(() => {
+    const popupEl = popup.getElement();
+    const mapEl = map.getContainer();
+
+    if (!popupEl || !mapEl) return;
+
+    const popupRect = popupEl.getBoundingClientRect();
+    const mapRect = mapEl.getBoundingClientRect();
+
+    const padding = window.innerWidth <= 768 ? 24 : 40;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (popupRect.left < mapRect.left + padding) {
+      offsetX = popupRect.left - mapRect.left - padding;
+    }
+
+    if (popupRect.right > mapRect.right - padding) {
+      offsetX = popupRect.right - mapRect.right + padding;
+    }
+
+    if (popupRect.top < mapRect.top + padding) {
+      offsetY = popupRect.top - mapRect.top - padding;
+    }
+
+    if (popupRect.bottom > mapRect.bottom - padding) {
+      offsetY = popupRect.bottom - mapRect.bottom + padding;
+    }
+
+    if (offsetX || offsetY) {
+      map.panBy([offsetX, offsetY], {
+        duration: 450,
+        easing: t => t
+      });
+    }
+  }, 80);
+}
+
+function buildPopupHTML(pub, safeLink) {
   return `
   <div class="popup-card modern">
 
@@ -141,8 +179,9 @@ function buildPopupHTML(pub, safeLink) {
     <div class="popup-body">
 
       ${pub.price ? `
-        <div class="popup-row">
-          <span class="popup-label">Guinness</span>
+        <div class="popup-row price-row">
+          <span class="popup-label">GUINNESS</span>
+          <span class="price-divider"></span>
           <span class="popup-value">฿${escapeHTML(pub.price)}</span>
         </div>
       ` : `
@@ -153,9 +192,17 @@ function buildPopupHTML(pub, safeLink) {
       `}
 
       ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
-        <div class="popup-row">
+        <div class="popup-row price-row">
           <span class="popup-label">Happy Hour</span>
+          <span class="price-divider"></span>
           <span class="popup-value popup-value-happy">฿${escapeHTML(pub.happy_hour_price)}</span>
+        </div>
+      ` : ""}
+
+      ${pub.special ? `
+        <div class="popup-row popup-special">
+          <div class="popup-special-label">Special</div>
+          <div class="popup-special-text">${escapeHTML(pub.special)}</div>
         </div>
       ` : ""}
 
@@ -360,9 +407,12 @@ console.log("Filtered pubs:", filtered.length);
   activePopup = new mapboxgl.Popup({ offset: 10 });
 
   activePopup
-    .setLngLat([lon, lat])
-    .setHTML(html)
-    .addTo(map);
+  .setLngLat([lon, lat])
+  .setHTML(html)
+  .addTo(map);
+
+keepPopupInView(activePopup);
+    
 }, 700);
       }, 150);
     }
@@ -632,6 +682,24 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
   });
 }
 
+      const featuredBtn = document.getElementById("toggle-featured-btn");
+const featuredText = document.getElementById("featured-text");
+
+if (window.innerWidth <= 768 && featuredBtn && featuredText) {
+
+  featuredBtn.addEventListener("click", () => {
+
+    featuredText.classList.toggle("collapsed");
+
+    featuredBtn.textContent =
+      featuredText.classList.contains("collapsed")
+        ? "Read more"
+        : "Show less";
+
+  });
+
+}
+      
     const cheapList = document.getElementById("cheap-list");
 
     if (cheapList && pricedPubs.length > 0) {
@@ -926,7 +994,7 @@ map.on('mouseleave', 'pubs-layer', () => {
   hoveredId = null;
 });
 
-   map.on('click', 'pubs-layer', (e) => {
+map.on('click', 'pubs-layer', (e) => {
   const feature = e.features && e.features[0];
   if (!feature) return;
 
@@ -934,45 +1002,77 @@ map.on('mouseleave', 'pubs-layer', () => {
   const safeLink = sanitizeURL(p.link);
   const html = buildPopupHTML(p, safeLink);
 
-  const coordinates = feature.geometry.coordinates.slice(); // ✅ now works
+  const coordinates = feature.geometry.coordinates.slice();
 
-if (activePopup) {
-  activePopup.remove();
-  activePopup = null;
-}
+  // CLOSE if same pub clicked again
+  if (
+    activePopup &&
+    activePopup.pubName === p.name
+  ) {
+    activePopup.remove();
+    activePopup = null;
+    return;
+  }
 
-activePopup = new mapboxgl.Popup({  offset: window.innerWidth <= 768 ? 28 : 18,
-  closeButton: true,
-  closeOnClick: true,
-  maxWidth: "240px"
-});
+  // Close existing popup
+  if (activePopup) {
+    activePopup.remove();
+    activePopup = null;
+  }
 
-if (window.innerWidth <= 768) {
-  map.easeTo({
-    center: coordinates,
-    zoom: Math.max(map.getZoom(), 14),
-    duration: 350,
-    padding: {
-      top: 100,
-      bottom: 220,
-      left: 40,
-      right: 40
-    }
+  const popup = new mapboxgl.Popup({
+  offset: window.innerWidth <= 768
+    ? {
+        bottom: [0, -12]
+      }
+    : 18,
+    closeButton: true,
+    closeOnClick: true,
+    maxWidth: "320px"
   });
 
-  setTimeout(() => {
-    activePopup
-      .setLngLat(coordinates)
-      .setHTML(html)
-      .addTo(map);
-  }, 360);
+  popup.pubName = p.name;
 
-} else {
-  activePopup
-    .setLngLat(coordinates)
-    .setHTML(html)
-    .addTo(map);
+  if (window.innerWidth <= 768) {
+
+    map.easeTo({
+      center: coordinates,
+      zoom: Math.max(map.getZoom(), 14),
+      duration: 350,
+      padding: {
+  top: 90,
+  bottom: 160,
+  left: 28,
+  right: 28
 }
+    });
+
+    setTimeout(() => {
+      popup
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
+
+activePopup = popup;
+
+keepPopupInView(activePopup);
+    }, 220);
+
+  } else {
+
+    popup
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
+
+activePopup = popup;
+
+keepPopupInView(activePopup);
+  }
+
+  popup.on("close", () => {
+    activePopup = null;
+  });
 
   trackEvent("popup_open", {
     pub_name: p.name || "unknown"
