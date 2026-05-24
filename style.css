@@ -743,6 +743,30 @@ input, button {
 .contact-col .contact-link {
   margin-top: 18px;
 }
+
+    #find-nearby-btn,
+#submit-btn,
+#toggle-chart-btn,
+#toggle-featured-btn,
+.faq-contact-actions .contact-link,
+.faq-contact-actions .faq-contact-link {
+  width: 90%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+    
+    .nearby-actions,
+.inline-form,
+.faq-contact-actions {
+  align-items: center;
+}
+
+    .inline-form input[type="text"] {
+  width: 90%;
+  max-width: 320px;
+  margin: 0 auto;
+}
   
 .impact-row {
     grid-template-columns: 1fr;
@@ -1905,7 +1929,8 @@ display: none;
 
   #toggle-featured-btn {
     display: block;
-    width: 100%;
+    width: 90%;
+    max-width: 320px;
     margin: 12px 0 18px;
     padding: 12px 18px;
     border: 1px solid rgba(255,255,255,0.14);
@@ -1918,7 +1943,8 @@ display: none;
 
 #toggle-chart-btn {
   display: block;
-  width: 100%;
+  width: 90%;
+  max-width: 320px;
   margin: 18px 0 8px;
   padding: 14px 20px;
   border: 1px solid rgba(255,255,255,0.18);
@@ -2072,16 +2098,22 @@ display: none;
     padding-top: 0;
   }
 
-  .inline-form input,
-  #submit-btn,
-  #radius-select,
-  #find-nearby-btn,
-  .contact-link {
-    width: 100%;
-    max-width: none;
+ .inline-form input,
+#radius-select {
+    width: 90%;
+    max-width: 320px;
     height: 44px;
     min-height: 44px;
-  }
+}
+
+#submit-btn,
+#find-nearby-btn,
+.contact-link {
+    width: 90%;
+    max-width: 320px;
+    height: 44px;
+    min-height: 44px;
+}
         
     body {
     padding-top: 110px;
@@ -2415,7 +2447,8 @@ display: none;
 
   .faq-contact-actions .contact-link,
   .faq-contact-actions .faq-contact-link {
-   width: 100%;
+   width: 90%;
+   max-width: 320px;
     box-sizing: border-box;
     margin: 0;
   }
