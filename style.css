@@ -1899,7 +1899,7 @@ margin-bottom: 28px;
     width: 92%;
 }
 
-        #toggle-chart-btn {
+#toggle-chart-btn {
   display: block;
   width: 100%;
   margin: 18px 0 8px;
@@ -1911,7 +1911,7 @@ margin-bottom: 28px;
   font-weight: 700;
 }
 
-#price-chart.is-collapsed .bar-row:nth-of-type(n+12) {
+#price-chart.is-collapsed .bar-row:nth-child(n+12) {
   display: none;
 }
         
