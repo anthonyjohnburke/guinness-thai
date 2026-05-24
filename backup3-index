@@ -155,9 +155,9 @@
       <div id="last-updated" class="last-updated">Prices last updated: —</div>
     </div>
 
- <div class="intro-col">
-
-  <div class="section-block featured-block">
+<div class="intro-col">
+<div class="section-block featured-block">
+  <div id="featured-text" class="featured-text collapsed">
 
   <h2 class="intro-heading">Someone had to do it</h2>
 
@@ -170,7 +170,13 @@
     After spending more baht than I’d like to admit chasing a decent pint around the land of smiles, I started keeping track of where it’s actually worth ordering. 
     This is a simple attempt to map it all out. No big agenda here, just a guide to help you find a proper Guinness in Thailand without overpaying for it. 
     I’m not here to name and shame, just mapping what I find. Corcaigh abú!
-  </p>
+</p>
+
+  </div>
+
+  <button id="toggle-featured-btn" type="button">
+    Read more
+  </button>
 
   <a href="https://www.timeout.com/bangkok/news/find-the-cheapest-guinness-in-bangkok-042826"
      target="_blank"
@@ -185,8 +191,9 @@
 
   <div class="timeout-caption">
     As featured in Time Out Bangkok →
-  </div>
+  </div> 
 </div>
+  
 
     <div id="happy-hour" class="section-block">
       <h2 class="intro-heading">Happy Hour Guinness Deals</h2>
@@ -314,7 +321,6 @@
   <p class="intro-small">
     Found a better pint, spotted a new price, or had an absolute creamer in Bangkok? Let me know and send over your Guinness photos to be featured.
 </p>
-  </p>
   <a href="mailto:pintsofbangkok@gmail.com" class="contact-link" id="contact-link" rel="noopener noreferrer">
     Get in touch
   </a>
