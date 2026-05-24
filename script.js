@@ -678,6 +678,24 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
   });
 }
 
+      const featuredBtn = document.getElementById("toggle-featured-btn");
+const featuredText = document.getElementById("featured-text");
+
+if (window.innerWidth <= 768 && featuredBtn && featuredText) {
+
+  featuredBtn.addEventListener("click", () => {
+
+    featuredText.classList.toggle("collapsed");
+
+    featuredBtn.textContent =
+      featuredText.classList.contains("collapsed")
+        ? "Read more"
+        : "Show less";
+
+  });
+
+}
+      
     const cheapList = document.getElementById("cheap-list");
 
     if (cheapList && pricedPubs.length > 0) {
