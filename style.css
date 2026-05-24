@@ -476,6 +476,10 @@ margin-top: 2px;
   display: none;
 }
 
+#toggle-featured-btn {
+  display: none;
+}
+
 /* Form */
 .inline-form {
     display: flex;
