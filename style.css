@@ -756,8 +756,8 @@ input, button {
 #toggle-featured-btn,
 .faq-contact-actions .contact-link,
 .faq-contact-actions .faq-contact-link {
-  width: 90%;
-  max-width: 320px;
+  width: 85%;
+  max-width: 300px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -769,9 +769,20 @@ input, button {
 }
 
     .inline-form input[type="text"] {
-  width: 90%;
-  max-width: 320px;
+  width: 85%;
+  max-width: 300px;
   margin: 0 auto;
+}
+
+    #radius-select {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#toggle-featured-btn {
+  margin-left: auto;
+  margin-right: auto;
 }
   
 .impact-row {
@@ -1935,8 +1946,8 @@ display: none;
 
   #toggle-featured-btn {
     display: block;
-    width: 90%;
-    max-width: 320px;
+    width: 85%;
+    max-width: 300px;
     margin: 12px 0 18px;
     padding: 12px 18px;
     border: 1px solid rgba(255,255,255,0.14);
@@ -1949,8 +1960,8 @@ display: none;
 
 #toggle-chart-btn {
   display: block;
-  width: 90%;
-  max-width: 320px;
+  width: 85%;
+  max-width: 300px;
   margin: 18px 0 8px;
   padding: 14px 20px;
   border: 1px solid rgba(255,255,255,0.18);
@@ -1958,6 +1969,10 @@ display: none;
   color: #fff;
   border-radius: 8px;
   font-weight: 700;
+}
+
+#radius-select {
+text-align-last: center;
 }
 
 #price-chart.is-collapsed .bar-row:nth-child(n+12) {
@@ -2104,21 +2119,19 @@ display: none;
     padding-top: 0;
   }
 
- .inline-form input,
-#radius-select {
-    width: 90%;
-    max-width: 320px;
-    height: 44px;
-    min-height: 44px;
-}
-
+.inline-form input,
+#radius-select,
 #submit-btn,
 #find-nearby-btn,
-.contact-link {
-    width: 90%;
-    max-width: 320px;
+.contact-link,
+#toggle-chart-btn,
+#toggle-featured-btn {
+    width: 85%;
+    max-width: 300px;
     height: 44px;
     min-height: 44px;
+    margin-left: auto;
+    margin-right: auto;
 }
         
     body {
