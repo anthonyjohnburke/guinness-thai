@@ -364,6 +364,15 @@ opacity: 1;
     padding: 12px 0;
 }
 
+.featured-pub-image-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: block;
+}
+
 .featured-pub-img {
   width: 65%;
   max-width: 300px;
@@ -372,15 +381,6 @@ opacity: 1;
   object-position: center;
   border-radius: 14px;
   margin: 1rem 0;
-  display: block;
-  cursor: pointer;
-}
-
-.featured-pub-image-btn {
-  border: none;
-  background: transparent;
-  padding: 0;
-  margin: 0;
   display: block;
   cursor: pointer;
 }
