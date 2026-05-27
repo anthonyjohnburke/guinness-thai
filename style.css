@@ -314,6 +314,18 @@ body {
     line-height: 1.5;
 }
 
+.featured-inline-link {
+  color: #d4af37;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.featured-inline-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
 #wisdom-text {
   font-family: 'Shadows Into Light', cursive;
   font-size: 1.7em;
