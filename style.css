@@ -374,22 +374,6 @@ opacity: 1;
   cursor: pointer;
 }
 
-.featured-pub-btn {
-  display: inline-block;
-    margin-top: 0.5rem;
-  background: #d4af37;
-  color: #000;
-  font-weight: 700;
-  padding: 0.75rem 1.1rem;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.featured-pub-btn:hover {
-  opacity: 0.88;
-}
-
 .gold-btn {
   background: #d4af37;
   color: #000;
@@ -1553,6 +1537,7 @@ font-size: 2.4em;
 #submit-btn,
 #find-nearby-btn,
 .contact-link,
+.featured-pub-btn,
 #radius-select {
   height: 36px;
   padding: 0 25px;
