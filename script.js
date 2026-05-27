@@ -1365,20 +1365,26 @@ if (posterBtn && posterLightbox && posterClose) {
 
   if (featuredPubImageBtn) {
 
-    featuredPubImageBtn.addEventListener("click", () => {
+  featuredPubImageBtn.addEventListener("click", () => {
 
-      const modalImg = posterLightbox.querySelector("img");
+    const modalImg = posterLightbox.querySelector("img");
 
-      if (modalImg) {
-        modalImg.src = "SplitG.jpg";
-        modalImg.alt = "Creamer of the Month";
-      }
+    if (modalImg) {
+      modalImg.src = "SplitG.jpg";
+      modalImg.alt = "Creamer of the Month";
+    }
 
-      posterLightbox.classList.add("is-open");
+    const modalLink = posterLightbox.querySelector("a");
 
-    });
+    if (modalLink) {
+      modalLink.href = "https://www.instagram.com/theoldenglishbangkok/";
+    }
 
-  }
+    posterLightbox.classList.add("is-open");
+
+  });
+
+}
 
   posterClose.addEventListener("click", () => {
     posterLightbox.classList.remove("is-open");
