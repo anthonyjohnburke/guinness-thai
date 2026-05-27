@@ -405,17 +405,6 @@ opacity: 1;
   display: block;
 }
 
-.gold-btn {
-  background: #d4af37;
-  color: #000;
-  font-weight: 700;
-  border-radius: 10px;
-  padding: 0.8rem 1.1rem;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-}
-
 /* Bar chart */
 #price-chart {
     width: 100%;
@@ -1588,29 +1577,6 @@ font-size: 2.4em;
   line-height: 1;
   box-sizing: border-box;
   transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
-}
-
-.featured-pub-btn {
-  height: 36px;
-  padding: 0 25px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  font-size: 0.8em;
-  font-weight: 700;
-  line-height: 1;
-  box-sizing: border-box;
-  background: #d4af37;
-  color: #000;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-}
-
-.featured-pub-btn:hover {
-  background: #c49c2f;
-  transform: translateY(-1px);
 }
 
 #radius-select {
