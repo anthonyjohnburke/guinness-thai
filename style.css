@@ -365,11 +365,11 @@ opacity: 1;
 }
 
 .featured-pub-img {
-  width: 100%;
-  max-height: 520px;
+  width: 70%;
+  max-width: 320px;
   object-fit: cover;
   border-radius: 14px;
-  margin: 1rem 0;
+  margin: 1rem auto;
   display: block;
   cursor: pointer;
 }
