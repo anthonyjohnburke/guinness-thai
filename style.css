@@ -364,6 +364,29 @@ opacity: 1;
     padding: 12px 0;
 }
 
+.featured-pub-img {
+  width: 100%;
+  border-radius: 14px;
+  margin: 1rem 0 1rem;
+  display: block;
+  object-fit: cover;
+}
+
+.featured-pub-btn {
+  display: inline-block;
+  background: #d4af37;
+  color: #000;
+  font-weight: 700;
+  padding: 0.75rem 1.1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.featured-pub-btn:hover {
+  opacity: 0.88;
+}
+
 /* Bar chart */
 #price-chart {
     width: 100%;
