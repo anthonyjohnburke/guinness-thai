@@ -774,77 +774,6 @@ input, button {
     0 10px 30px rgba(0,0,0,0.22);
 }
 
-@media (max-width: 768px) {
-
-.freshness-key {
-  display: block;
-  margin-top: 8px;
-}
-    
-.insight-box,
-.contact-col {
-  justify-content: space-between;
-}
-
-.insight-box .contact-link,
-.contact-col .contact-link {
-  margin-top: 18px;
-}
-
-    #find-nearby-btn,
-#submit-btn,
-#toggle-chart-btn,
-#toggle-featured-btn,
-.faq-contact-actions .contact-link,
-.faq-contact-actions .faq-contact-link {
-  width: 85%;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-}
-    
-    .nearby-actions,
-.inline-form,
-.faq-contact-actions {
-  align-items: center;
-}
-
-    .inline-form input[type="text"] {
-  width: 85%;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-    #radius-select {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#toggle-featured-btn {
-  margin-left: auto;
-  margin-right: auto;
-}
-  
-.impact-row {
-    grid-template-columns: 1fr;
-    width: calc(100% - 32px);
-    padding: 0;
-    margin: 28px auto;
-  }
-
-    .impact-side {
-  max-width: 240px;
-  margin-top: 20px;
-}
-
-  .impact-main,
-  .impact-side {
-    grid-column: auto;
-  }
-    
-}
-
 .impact-strip .section-label {
   color: #8bc34a;
 }
@@ -1993,6 +1922,73 @@ margin-bottom: 28px;
     #wisdom-text {
     width: 92%;
 }
+
+        .freshness-key {
+  display: block;
+  margin-top: 8px;
+}
+    
+.insight-box,
+.contact-col {
+  justify-content: space-between;
+}
+
+.insight-box .contact-link,
+.contact-col .contact-link {
+  margin-top: 18px;
+}
+
+    #find-nearby-btn,
+#submit-btn,
+#toggle-chart-btn,
+#toggle-featured-btn,
+.faq-contact-actions .contact-link,
+.faq-contact-actions .faq-contact-link {
+  width: 85%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+    
+    .nearby-actions,
+.inline-form,
+.faq-contact-actions {
+  align-items: center;
+}
+
+    .inline-form input[type="text"] {
+  width: 85%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+    #radius-select {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#toggle-featured-btn {
+  margin-left: auto;
+  margin-right: auto;
+}
+  
+.impact-row {
+    grid-template-columns: 1fr;
+    width: calc(100% - 32px);
+    padding: 0;
+    margin: 28px auto;
+  }
+
+    .impact-side {
+  max-width: 240px;
+  margin-top: 20px;
+}
+
+  .impact-main,
+  .impact-side {
+    grid-column: auto;
+  }
 
          #cheap-list,
   #expensive-list {
