@@ -1657,7 +1657,8 @@ font-size: 2.4em;
 }
 
 .timeout-link {
-  display: block;
+display: block;
+margin-top: 18px;
 }
 
 .timeout-img {
