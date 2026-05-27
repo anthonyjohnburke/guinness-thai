@@ -1982,6 +1982,10 @@ margin-bottom: 28px;
   margin-top: 18px;
   margin-bottom: 0;
 }
+    .mobile-list-toggle {
+  display: none;
+}
+    
 }
 
     @media (max-width: 768px) {
@@ -1989,6 +1993,31 @@ margin-bottom: 28px;
     #wisdom-text {
     width: 92%;
 }
+
+         #cheap-list,
+  #expensive-list {
+    display: none;
+  }
+
+  #cheap-list.is-open,
+  #expensive-list.is-open {
+    display: block;
+  }
+
+  .mobile-list-toggle {
+    display: block;
+    width: 85%;
+    max-width: 300px;
+    height: 44px;
+    margin: 14px auto 0;
+    padding: 0 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
         
 #featured-text.collapsed p:not(:first-of-type) {
 display: none;
