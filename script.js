@@ -1355,12 +1355,30 @@ document.addEventListener("DOMContentLoaded", () => {
 const posterBtn = document.getElementById("globe-poster-btn");
 const posterLightbox = document.getElementById("poster-lightbox");
 const posterClose = document.getElementById("poster-close");
+const featuredPubImageBtn = document.getElementById("featured-pub-image-btn");
 
 if (posterBtn && posterLightbox && posterClose) {
 
   posterBtn.addEventListener("click", () => {
     posterLightbox.classList.add("is-open");
   });
+
+  if (featuredPubImageBtn) {
+
+    featuredPubImageBtn.addEventListener("click", () => {
+
+      const modalImg = posterLightbox.querySelector("img");
+
+      if (modalImg) {
+        modalImg.src = "SplitG.jpg";
+        modalImg.alt = "Creamer of the Month";
+      }
+
+      posterLightbox.classList.add("is-open");
+
+    });
+
+  }
 
   posterClose.addEventListener("click", () => {
     posterLightbox.classList.remove("is-open");
