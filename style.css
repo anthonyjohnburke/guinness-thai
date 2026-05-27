@@ -376,6 +376,15 @@ opacity: 1;
   cursor: pointer;
 }
 
+.featured-pub-image-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  display: block;
+  cursor: pointer;
+}
+
 .gold-btn {
   background: #d4af37;
   color: #000;
