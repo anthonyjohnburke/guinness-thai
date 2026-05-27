@@ -1634,6 +1634,10 @@ font-size: 2.4em;
   top: -2px;
 }
 
+ .mobile-list-toggle {
+  display: none;
+}
+
 .timeout-link {
 display: block;
 margin-top: 18px;
@@ -1910,20 +1914,20 @@ margin-bottom: 28px;
    .contact-link {
   margin-top: 18px;
   margin-bottom: 0;
-}
-    .mobile-list-toggle {
-  display: none;
-}
-    
+}  
 }
 
     @media (max-width: 768px) {
 
-    #wisdom-text {
-    width: 92%;
+#wisdom-text {
+width: 92%;
 }
 
-        .freshness-key {
+.mobile-list-toggle {
+display: block;
+}
+
+.freshness-key {
   display: block;
   margin-top: 8px;
 }
