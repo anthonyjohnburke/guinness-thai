@@ -682,6 +682,29 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
   });
 }
 
+      document.querySelectorAll(".mobile-list-toggle").forEach(button => {
+  button.addEventListener("click", () => {
+    const targetId = button.dataset.target;
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    target.classList.toggle("is-open");
+
+    if (targetId === "cheap-list") {
+      button.textContent = target.classList.contains("is-open")
+        ? "Hide cheap ranking"
+        : "Show cheap ranking";
+    }
+
+    if (targetId === "expensive-list") {
+      button.textContent = target.classList.contains("is-open")
+        ? "Hide expensive ranking"
+        : "Show expensive ranking";
+    }
+  });
+});
+
       const featuredBtn = document.getElementById("toggle-featured-btn");
 const featuredText = document.getElementById("featured-text");
 
