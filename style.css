@@ -366,14 +366,17 @@ opacity: 1;
 
 .featured-pub-img {
   width: 100%;
-  border-radius: 14px;
-  margin: 1rem 0 1rem;
-  display: block;
+  max-height: 520px;
   object-fit: cover;
+  border-radius: 14px;
+  margin: 1rem 0;
+  display: block;
+  cursor: pointer;
 }
 
 .featured-pub-btn {
   display: inline-block;
+    margin-top: 0.5rem;
   background: #d4af37;
   color: #000;
   font-weight: 700;
@@ -385,6 +388,17 @@ opacity: 1;
 
 .featured-pub-btn:hover {
   opacity: 0.88;
+}
+
+.gold-btn {
+  background: #d4af37;
+  color: #000;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.8rem 1.1rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* Bar chart */
