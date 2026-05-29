@@ -377,10 +377,11 @@ console.log("Filtered pubs:", filtered.length);
     area: p.area,
     lat: p.lat,
     lon: p.lon,
+    google_maps_link: p.google_maps_link,
     price: parseFloat(p.price),
     last_updated: p.last_updated
   }));
-
+  
     function zoomToPub(pubName, allPubs) {
       const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
       if (!targetPub) return;
@@ -494,12 +495,13 @@ if (nearbyBtn) {
     }
 
   const pricedPubs = pubs
-  .filter(p => p.price && !isNaN(parseFloat(p.price)))
+  .filter(...)
   .map(p => ({
     name: p.name,
     area: p.area,
     lat: p.lat,
     lon: p.lon,
+    google_maps_link: p.google_maps_link,
     price: parseFloat(p.price),
     last_updated: p.last_updated
   }))
@@ -741,16 +743,17 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
     lastPrice = pub.price;
   }
 
-  return {
-    name: pub.name,
-    area: pub.area,
-    lat: pub.lat,
-    lon: pub.lon,
-    price: pub.price,
-    saving: mostExpensivePrice - pub.price,
-    savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
-    medal: medals[medalIndex] || `${medalIndex + 1}.`
-  };
+ return {
+  name: pub.name,
+  area: pub.area,
+  lat: pub.lat,
+  lon: pub.lon,
+  google_maps_link: pub.google_maps_link,
+  price: pub.price,
+  saving: mostExpensivePrice - pub.price,
+  savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
+  medal: medals[medalIndex] || `${medalIndex + 1}.`
+};
 });
 
       cheapList.innerHTML = "";
@@ -816,12 +819,13 @@ ${pub.google_maps_link ? `
   .sort((a, b) => b.price - a.price)
   .slice(0, 5)
   .map(pub => ({
-    name: pub.name,
-    area: pub.area,
-    lat: pub.lat,
-    lon: pub.lon,
-    price: pub.price
-  }));
+  name: pub.name,
+  area: pub.area,
+  lat: pub.lat,
+  lon: pub.lon,
+  google_maps_link: pub.google_maps_link,
+  price: pub.price
+}));
 
       expensiveList.innerHTML = "";
 
@@ -886,15 +890,16 @@ ${pub.google_maps_link ? `
     const full = parseFloat(p.price);
     const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
 
-    return {
-      name: p.name,
-      area: p.area,   // 👈 ADD
-      lat: p.lat,     // 👈 ADD
-      lon: p.lon,     // 👈 ADD
-      happyPrice: hh,
-      fullPrice: full,
-      savingPct: savingPct
-    };
+   return {
+  name: p.name,
+  area: p.area,
+  lat: p.lat,
+  lon: p.lon,
+  google_maps_link: p.google_maps_link,
+  happyPrice: hh,
+  fullPrice: full,
+  savingPct: savingPct
+};
   })
       .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
       .sort((a, b) => a.happyPrice - b.happyPrice)
