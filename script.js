@@ -213,9 +213,11 @@ function buildPopupHTML(pub, safeLink) {
         ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub</a>`
         : ""}
 
-      ${(pub.lat && pub.lon)
-        ? `<a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">Google Maps</a>`
-        : ""}
+     ${pub.google_maps_link
+  ? `<a href="${sanitizeURL(pub.google_maps_link)}" target="_blank" rel="noopener noreferrer">Google Maps</a>`
+  : (pub.lat && pub.lon)
+    ? `<a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">Google Maps</a>`
+    : ""}
     </div>
 
   </div>
