@@ -495,7 +495,7 @@ if (nearbyBtn) {
     }
 
   const pricedPubs = pubs
-  .filter(...)
+  .filter(p => p.price && !isNaN(parseFloat(p.price)))
   .map(p => ({
     name: p.name,
     area: p.area,
