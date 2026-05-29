@@ -769,11 +769,21 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
   <div class="pub-info">
     <div class="pub-name">${escapeHTML(pub.name)}</div>
     <div class="pub-meta">
-      ${pub.area ? escapeHTML(pub.area) : ""}
-      ${pub.area && pub.lat && pub.lon ? " • " : ""}
-      ${pub.lat && pub.lon ? `
-        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
-      ` : ""}
+     ${pub.area ? escapeHTML(pub.area) : ""}
+${pub.area && (pub.google_maps_link || (pub.lat && pub.lon)) ? " • " : ""}
+${pub.google_maps_link ? `
+  <a href="${sanitizeURL(pub.google_maps_link)}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : ""}
     </div>
   </div>
 </div>
@@ -827,11 +837,21 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
   <div class="pub-info">
     <div class="pub-name">${escapeHTML(pub.name)}</div>
     <div class="pub-meta">
-      ${pub.area ? escapeHTML(pub.area) : ""}
-      ${pub.area && pub.lat && pub.lon ? " • " : ""}
-      ${pub.lat && pub.lon ? `
-        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
-      ` : ""}
+     ${pub.area ? escapeHTML(pub.area) : ""}
+${pub.area && (pub.google_maps_link || (pub.lat && pub.lon)) ? " • " : ""}
+${pub.google_maps_link ? `
+  <a href="${sanitizeURL(pub.google_maps_link)}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : ""}
     </div>
   </div>
 </div>
@@ -906,9 +926,19 @@ happyPubs.forEach((pub, i) => {
       <div class="pub-name">${escapeHTML(pub.name)}</div>
       <div class="pub-meta">
         ${pub.area ? escapeHTML(pub.area) : ""}
-${pub.area && pub.lat && pub.lon ? " • " : ""}
-${pub.lat && pub.lon ? `
-  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+${pub.area && (pub.google_maps_link || (pub.lat && pub.lon)) ? " • " : ""}
+${pub.google_maps_link ? `
+  <a href="${sanitizeURL(pub.google_maps_link)}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
 ` : ""}
       </div>
     </div>
