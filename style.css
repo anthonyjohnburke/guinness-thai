@@ -2394,21 +2394,21 @@ text-align-last: center;
   #top-bar {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 18px;
+    gap: 0px;
     padding: 14px 16px;
     text-align: center;
 }
 
  .top-logo {
+     flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
+    justify-content: flex-start;
 }
     .instagram-link {
     margin: 0;
+        flex-shrink: 0;
   }
 
   .instagram-link img {
