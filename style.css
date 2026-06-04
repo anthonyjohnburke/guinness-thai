@@ -137,6 +137,28 @@ body {
     font-size: 0.85em;
 }
 
+.instagram-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.instagram-link img {
+  width: 34px;
+  height: 34px;
+  display: block;
+  opacity: 0.85;
+  filter: brightness(0);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.instagram-link:hover img {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
 .tooltip {
   position: fixed;
   background: rgba(20, 20, 20, 0.95);
