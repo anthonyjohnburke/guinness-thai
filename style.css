@@ -2416,6 +2416,11 @@ text-align-last: center;
     height: 36px;
   }
 
+#top-bar.is-scrolled .instagram-link img {
+  width: 30px;
+  height: 30px;
+}
+
     #top-bar.is-scrolled {
         padding: 10px 16px 8px;
     }
