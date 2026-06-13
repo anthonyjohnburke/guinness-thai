@@ -1352,7 +1352,7 @@ font-size: 2.4em;
     justify-content: space-between;
     align-items: center;
     font-size: 1em;
-    padding: 14px 0;   /* ↑ more breathing room */
+    padding: 12px 0;   /* ↑ more breathing room */
     margin-bottom: 4px; 
     border-bottom: 1px solid rgba(255,255,255,0.08); /* slightly clearer */
     opacity: 0;
