@@ -94,6 +94,16 @@
     <div class="did-you-know-title">Did you know?</div>
     <div id="did-you-know-text">Tracking Bangkok’s Guinness prices, one pint at a time.</div>
   </div>
+
+  <a href="https://www.instagram.com/pintsofbangkok/"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="instagram-link"
+   aria-label="Follow Pints of Bangkok on Instagram"
+   title="Follow Pints of Bangkok on Instagram">
+  <img src="Instagram_Glyph_White.svg" alt="Pints of Bangkok Instagram">
+</a>
+    
 </div>
 
   <section id="map-section">
@@ -156,20 +166,75 @@
     </div>
 
 <div class="intro-col">
+  
+    <div id="happy-hour" class="section-block">
+      <h2 class="intro-heading">Happy Hour Guinness Deals</h2>
+      <p class="intro-small">
+        The best happy hour Guinness deals we’ve found in Bangkok so far. We salute you, fine establishments.
+      </p>
+      <div id="happy-list"></div>
+    </div>
+
+    <div id="cheap-list-block" class="section-block">
+      <h2 class="intro-heading">Cheap Guinness in Bangkok</h2>
+      <p class="intro-small">
+        Not all pints break the bank. These are the cheapest Guinness pours we’ve found in Bangkok so far.
+      </p>
+      <div id="cheap-list"></div>
+      <button class="mobile-list-toggle" data-target="cheap-list">
+  Show cheap Guinness ranking
+</button>
+    </div>
+
+    <div id="expensive-list-block" class="section-block">
+      <h2 class="intro-heading">Expensive Guinness in Bangkok</h2>
+      <p class="intro-small">
+        Not all pints are priced equally. These are the most expensive Guinness pours we’ve found in Bangkok so far.
+      </p>
+      <div id="expensive-list"></div>
+      <button class="mobile-list-toggle" data-target="expensive-list">
+  Show expensive Guinness ranking
+</button>
+    </div>
+
+<div id="featured-pub-block" class="section-block featured-pub-block">
+
+<h2 class="intro-heading">Creamer of the Month</h2>
+
+<div class="featured-pub-layout">
+
+  <button id="featured-pub-image-btn" class="featured-pub-image-btn" type="button">
+    <img
+      src="SplitG.jpg"
+      alt="Creamer of the Month"
+      class="featured-pub-img"
+    >
+  </button>
+
+  <div class="featured-pub-copy">
+    <p class="intro-small">Come down every Friday at <a href="https://www.instagram.com/theoldenglishbangkok/"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="featured-inline-link">The Old English</a> and take on the legendary Split The G Challenge.
+</p>
+  </div>
+</div>
+  </div>
+  
+
 <div class="section-block featured-block">
   <div id="featured-text" class="featured-text collapsed">
 
   <h2 class="intro-heading">Someone had to do it</h2>
 
   <p class="intro-small">
-    I’m Irish, so I do love a proper pint of Guinness. You know the one with a lovely creamy head served in a clean glass, and a pour that isn’t rushed. 
-    In Bangkok and around Thailand, it can be a bit hit and miss. Sometimes you get a great pint at a fair price. Other times… not so much.
+    I’m Irish, so I do love a proper pint of Guinness. You know the one. Creamy head, branded glass, and a pour that isn’t rushed. 
+    In Bangkok and around Thailand, it can be hit and miss. Sometimes you find a pint at a fair price. Other times… not so much.
   </p>
 
   <p class="intro-small">
     After spending more baht than I’d like to admit chasing a decent pint around the land of smiles, I started keeping track of where it’s actually worth ordering. 
-    This is a simple attempt to map it all out. No big agenda here, just a guide to help you find a proper Guinness in Thailand without overpaying for it. 
-    I’m not here to name and shame, just mapping what I find. Corcaigh abú!
+    This site is a simple attempt to map it all out. No big agenda here, just a guide to help you find a pint of Guinness in Thailand without overpaying. Corcaigh abú!
 </p>
 
   </div>
@@ -193,33 +258,9 @@
     As featured in Time Out Bangkok →
   </div> 
 </div>
-  
-
-    <div id="happy-hour" class="section-block">
-      <h2 class="intro-heading">Happy Hour Guinness Deals</h2>
-      <p class="intro-small">
-        The best happy hour Guinness deals we’ve found in Bangkok so far. We salute you, fine establishments.
-      </p>
-      <div id="happy-list"></div>
-    </div>
-
-    <div id="cheap-list-block" class="section-block">
-      <h2 class="intro-heading">Cheap Guinness in Bangkok</h2>
-      <p class="intro-small">
-        Not all pints break the bank. These are the cheapest Guinness pours we’ve found in Bangkok so far.
-      </p>
-      <div id="cheap-list"></div>
-    </div>
-
-    <div id="expensive-list-block" class="section-block">
-      <h2 class="intro-heading">Expensive Guinness in Bangkok</h2>
-      <p class="intro-small">
-        Not all pints are priced equally. These are the most expensive Guinness pours we’ve found in Bangkok so far.
-      </p>
-      <div id="expensive-list"></div>
-    </div>
 
   </div>
+ 
 </div>
 
   <div id="tooltip" class="tooltip"></div>
@@ -268,9 +309,9 @@
   <div class="impact-strip impact-main">
     <div class="section-label">Real Market Impact</div>
     <div class="insight-text">
-      <a href="https://www.facebook.com/p/On-The-Square-61579011092046/" target="_blank" rel="noopener noreferrer">
-        On The Square
-      </a> in Silom has reintroduced its ฿270 Guinness Happy Hour (down from ฿290) after checking the tracker. That’s 16% cheaper and pushes them right up the Happy Hour rankings. Big shout out to On The Square. Well done, sir Grant.
+      Updated:<a href="https://www.facebook.com/p/On-The-Square-61579011092046/" target="_blank" rel="noopener noreferrer">
+      On The Square</a> in Silom reintroduced its ฿270 Guinness Happy Hour (down from ฿290) after checking the tracker, pushing them right up the Happy Hour rankings. 
+      Since then, they’ve gone one better and added Kilkenny on draught. Well played.
     </div>
   </div>
 
