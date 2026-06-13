@@ -2564,8 +2564,8 @@ text-align-last: center;
 
     .bar-row .bar-bottom {
         display: grid;
-        grid-template-columns: 1fr 76px;
-        gap: 10px;
+        grid-template-columns: 1fr 68px;
+        gap: 8px;
         align-items: center;
     }
 
