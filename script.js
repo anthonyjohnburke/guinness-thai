@@ -1431,13 +1431,38 @@ if (posterBtn && posterLightbox && posterClose) {
 
     if (modalImg) {
       modalImg.src = "SplitG.jpg";
-      modalImg.alt = "Creamer of the Month";
+      modalImg.alt = "Split The G Challenge at The Old English";
     }
 
     const modalLink = posterLightbox.querySelector("a");
 
     if (modalLink) {
       modalLink.href = "https://www.instagram.com/theoldenglishbangkok/";
+    }
+
+    posterLightbox.classList.add("is-open");
+
+  });
+
+}
+
+  const huntersPromoBtn = document.getElementById("hunters-promo-btn");
+
+if (huntersPromoBtn) {
+
+  huntersPromoBtn.addEventListener("click", () => {
+
+    const modalImg = posterLightbox.querySelector("img");
+
+    if (modalImg) {
+      modalImg.src = "hunters_promote.jpg";
+      modalImg.alt = "Hunters Garden Guinness Promotion";
+    }
+
+    const modalLink = posterLightbox.querySelector("a");
+
+    if (modalLink) {
+      modalLink.href = "https://www.instagram.com/huntersgardenbkk/";
     }
 
     posterLightbox.classList.add("is-open");
