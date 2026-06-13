@@ -213,9 +213,11 @@ function buildPopupHTML(pub, safeLink) {
         ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub</a>`
         : ""}
 
-      ${(pub.lat && pub.lon)
-        ? `<a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">Google Maps</a>`
-        : ""}
+     ${pub.google_maps_link
+  ? `<a href="${sanitizeURL(pub.google_maps_link)}" target="_blank" rel="noopener noreferrer">Google Maps</a>`
+  : (pub.lat && pub.lon)
+    ? `<a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">Google Maps</a>`
+    : ""}
     </div>
 
   </div>
@@ -375,10 +377,11 @@ console.log("Filtered pubs:", filtered.length);
     area: p.area,
     lat: p.lat,
     lon: p.lon,
+    google_maps_link: p.google_maps_link,
     price: parseFloat(p.price),
     last_updated: p.last_updated
   }));
-
+  
     function zoomToPub(pubName, allPubs) {
       const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
       if (!targetPub) return;
@@ -498,6 +501,7 @@ if (nearbyBtn) {
     area: p.area,
     lat: p.lat,
     lon: p.lon,
+    google_maps_link: p.google_maps_link,
     price: parseFloat(p.price),
     last_updated: p.last_updated
   }))
@@ -682,6 +686,29 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
   });
 }
 
+      document.querySelectorAll(".mobile-list-toggle").forEach(button => {
+  button.addEventListener("click", () => {
+    const targetId = button.dataset.target;
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    target.classList.toggle("is-open");
+
+    if (targetId === "cheap-list") {
+      button.textContent = target.classList.contains("is-open")
+        ? "Hide cheap ranking"
+        : "Show cheap ranking";
+    }
+
+    if (targetId === "expensive-list") {
+      button.textContent = target.classList.contains("is-open")
+        ? "Hide expensive ranking"
+        : "Show expensive ranking";
+    }
+  });
+});
+
       const featuredBtn = document.getElementById("toggle-featured-btn");
 const featuredText = document.getElementById("featured-text");
 
@@ -716,16 +743,17 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
     lastPrice = pub.price;
   }
 
-  return {
-    name: pub.name,
-    area: pub.area,
-    lat: pub.lat,
-    lon: pub.lon,
-    price: pub.price,
-    saving: mostExpensivePrice - pub.price,
-    savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
-    medal: medals[medalIndex] || `${medalIndex + 1}.`
-  };
+ return {
+  name: pub.name,
+  area: pub.area,
+  lat: pub.lat,
+  lon: pub.lon,
+  google_maps_link: pub.google_maps_link,
+  price: pub.price,
+  saving: mostExpensivePrice - pub.price,
+  savingPct: Math.round(((mostExpensivePrice - pub.price) / mostExpensivePrice) * 100),
+  medal: medals[medalIndex] || `${medalIndex + 1}.`
+};
 });
 
       cheapList.innerHTML = "";
@@ -744,11 +772,21 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
   <div class="pub-info">
     <div class="pub-name">${escapeHTML(pub.name)}</div>
     <div class="pub-meta">
-      ${pub.area ? escapeHTML(pub.area) : ""}
-      ${pub.area && pub.lat && pub.lon ? " • " : ""}
-      ${pub.lat && pub.lon ? `
-        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
-      ` : ""}
+     ${pub.area ? escapeHTML(pub.area) : ""}
+${pub.area && (pub.google_maps_link || (pub.lat && pub.lon)) ? " • " : ""}
+${pub.google_maps_link ? `
+  <a href="${sanitizeURL(pub.google_maps_link)}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : ""}
     </div>
   </div>
 </div>
@@ -781,12 +819,13 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
   .sort((a, b) => b.price - a.price)
   .slice(0, 5)
   .map(pub => ({
-    name: pub.name,
-    area: pub.area,
-    lat: pub.lat,
-    lon: pub.lon,
-    price: pub.price
-  }));
+  name: pub.name,
+  area: pub.area,
+  lat: pub.lat,
+  lon: pub.lon,
+  google_maps_link: pub.google_maps_link,
+  price: pub.price
+}));
 
       expensiveList.innerHTML = "";
 
@@ -802,11 +841,21 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
   <div class="pub-info">
     <div class="pub-name">${escapeHTML(pub.name)}</div>
     <div class="pub-meta">
-      ${pub.area ? escapeHTML(pub.area) : ""}
-      ${pub.area && pub.lat && pub.lon ? " • " : ""}
-      ${pub.lat && pub.lon ? `
-        <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
-      ` : ""}
+     ${pub.area ? escapeHTML(pub.area) : ""}
+${pub.area && (pub.google_maps_link || (pub.lat && pub.lon)) ? " • " : ""}
+${pub.google_maps_link ? `
+  <a href="${sanitizeURL(pub.google_maps_link)}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : ""}
     </div>
   </div>
 </div>
@@ -841,15 +890,16 @@ const cheapestFive = pricedPubs.slice(0, 5).map(pub => {
     const full = parseFloat(p.price);
     const savingPct = full > 0 ? Math.round(((full - hh) / full) * 100) : 0;
 
-    return {
-      name: p.name,
-      area: p.area,   // 👈 ADD
-      lat: p.lat,     // 👈 ADD
-      lon: p.lon,     // 👈 ADD
-      happyPrice: hh,
-      fullPrice: full,
-      savingPct: savingPct
-    };
+   return {
+  name: p.name,
+  area: p.area,
+  lat: p.lat,
+  lon: p.lon,
+  google_maps_link: p.google_maps_link,
+  happyPrice: hh,
+  fullPrice: full,
+  savingPct: savingPct
+};
   })
       .filter(p => !isNaN(p.happyPrice) && !isNaN(p.fullPrice))
       .sort((a, b) => a.happyPrice - b.happyPrice)
@@ -881,9 +931,19 @@ happyPubs.forEach((pub, i) => {
       <div class="pub-name">${escapeHTML(pub.name)}</div>
       <div class="pub-meta">
         ${pub.area ? escapeHTML(pub.area) : ""}
-${pub.area && pub.lat && pub.lon ? " • " : ""}
-${pub.lat && pub.lon ? `
-  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}" target="_blank" rel="noopener noreferrer">View map</a>
+${pub.area && (pub.google_maps_link || (pub.lat && pub.lon)) ? " • " : ""}
+${pub.google_maps_link ? `
+  <a href="${sanitizeURL(pub.google_maps_link)}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
+` : pub.lat && pub.lon ? `
+  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}"
+     target="_blank"
+     rel="noopener noreferrer">
+    View map
+  </a>
 ` : ""}
       </div>
     </div>
@@ -1355,12 +1415,36 @@ document.addEventListener("DOMContentLoaded", () => {
 const posterBtn = document.getElementById("globe-poster-btn");
 const posterLightbox = document.getElementById("poster-lightbox");
 const posterClose = document.getElementById("poster-close");
+const featuredPubImageBtn = document.getElementById("featured-pub-image-btn");
 
 if (posterBtn && posterLightbox && posterClose) {
 
   posterBtn.addEventListener("click", () => {
     posterLightbox.classList.add("is-open");
   });
+
+  if (featuredPubImageBtn) {
+
+  featuredPubImageBtn.addEventListener("click", () => {
+
+    const modalImg = posterLightbox.querySelector("img");
+
+    if (modalImg) {
+      modalImg.src = "SplitG.jpg";
+      modalImg.alt = "Creamer of the Month";
+    }
+
+    const modalLink = posterLightbox.querySelector("a");
+
+    if (modalLink) {
+      modalLink.href = "https://www.instagram.com/theoldenglishbangkok/";
+    }
+
+    posterLightbox.classList.add("is-open");
+
+  });
+
+}
 
   posterClose.addEventListener("click", () => {
     posterLightbox.classList.remove("is-open");
