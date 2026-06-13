@@ -451,6 +451,10 @@ opacity: 1;
   display: block;
 }
 
+.featured-pub-layout + .featured-pub-layout {
+  margin-top: 24px;
+}
+
 /* Bar chart */
 #price-chart {
     width: 100%;
