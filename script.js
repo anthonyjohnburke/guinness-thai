@@ -1462,7 +1462,7 @@ if (huntersPromoBtn) {
     const modalLink = posterLightbox.querySelector("a");
 
     if (modalLink) {
-      modalLink.href = "https://www.instagram.com/huntersgardenbkk/";
+      modalLink.href = "https://www.instagram.com/huntersgardenrestaurant/";
     }
 
     posterLightbox.classList.add("is-open");
