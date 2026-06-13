@@ -448,7 +448,8 @@ opacity: 1;
 }
 
 .featured-pub-copy {
-  display: block;
+    display: block;
+    margin-bottom: 16px;
 }
 
 .featured-pub-layout + .featured-pub-layout {
