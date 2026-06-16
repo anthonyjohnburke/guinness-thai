@@ -608,12 +608,22 @@ if (nearbyBtn) {
   });
 }
 
-      row.innerHTML = `
-  <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
-  <span class="bar-rank">${i + 1}.</span>
-  ${escapeHTML(pub.name)}
-  ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
-</div>
+     row.innerHTML = `
+  <div class="bar-top">
+
+    <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
+      <span class="bar-rank">${i + 1}.</span>
+      ${escapeHTML(pub.name)}
+      ${pub.area ? `<span class="bar-area"> - ${escapeHTML(pub.area)}</span>` : ""}
+    </div>
+
+    <div class="bar-price"
+         title="Verified ${formatDate(pub.last_updated)}">
+      ฿${pub.price}
+      ${isFresh(pub.last_updated) ? '<span class="fresh-dot"></span>' : ''}
+    </div>
+
+  </div>
 
   <div class="bar-bottom">
     <div class="bar-wrap">
@@ -623,11 +633,6 @@ if (nearbyBtn) {
            title="Verified ${formatDate(pub.last_updated)}">
       </div>
     </div>
-   <div class="bar-price"
-     title="Verified ${formatDate(pub.last_updated)}">
-  ฿${pub.price}
-  ${isFresh(pub.last_updated) ? '<span class="fresh-dot"></span>' : ''}
-</div>
   </div>
 `;
         chart.appendChild(row);
