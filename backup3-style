@@ -451,6 +451,10 @@ opacity: 1;
   display: block;
 }
 
+.featured-pub-layout + .featured-pub-layout {
+  margin-top: 36px;
+}
+
 /* Bar chart */
 #price-chart {
     width: 100%;
@@ -492,7 +496,6 @@ opacity: 1;
   color: #ffffff;
 }
 
-
 .bar-area {
   color: rgba(255,255,255,0.45);
   font-size: 0.9em;
@@ -514,6 +517,10 @@ line-height: 1.25;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.bar-rank {
+  margin-right: 2px;
 }
 
 .bar-wrap {
