@@ -510,12 +510,6 @@ opacity: 1;
   min-width: 0;
 }
 
-.bar-price {
-  flex-shrink: 0;
-  font-weight: 700;
-  color: #d4af37;
-}
-
 .bar-area {
   color: rgba(255,255,255,0.45);
   font-size: 0.9em;
@@ -542,7 +536,7 @@ line-height: 1.25;
 .bar-rank {
   color: #d4af37;
   font-weight: 700;
-  margin-right: 6px;
+  margin-right: 4px;
 }
 
 .bar-wrap {
@@ -555,19 +549,14 @@ line-height: 1.25;
 }
 
 .bar-price {
-    font-size: 1em;
-    font-weight: bold;
-    color: rgba(255,255,255,0.8);
-    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 70px;
     text-align: right;
-    justify-self: end;
-    align-self: center;
-    line-height: 1;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: -1px;
-    cursor: pointer;
+    white-space: nowrap;
+
+    font-size: 1rem;
+    font-weight: 700;
+    color: #d4af37;
 }
 
 .bar {
@@ -2628,14 +2617,8 @@ text-align-last: center;
     }
 
   .bar-price {
-  font-size: 1.1rem;
-  font-weight: 700;
   min-width: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  text-align: right;
-  line-height: 1;
+  font-size: 1rem;
 }
 
     #submit-btn,
