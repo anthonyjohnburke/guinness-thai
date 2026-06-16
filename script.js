@@ -610,9 +610,10 @@ if (nearbyBtn) {
 
       row.innerHTML = `
   <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
-    ${escapeHTML(pub.name)}
-    ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
-  </div>
+  <span class="bar-rank">${i + 1}.</span>
+  ${escapeHTML(pub.name)}
+  ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
+</div>
 
   <div class="bar-bottom">
     <div class="bar-wrap">
