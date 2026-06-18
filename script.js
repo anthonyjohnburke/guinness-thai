@@ -210,7 +210,11 @@ function buildPopupHTML(pub, safeLink) {
  <div class="popup-row popup-nearest">
   <div class="popup-nearest-text">
     ${escapeHTML(pub.nearest_station)}
-    ${pub.station_distance ? ` (${pub.station_distance})` : ""}
+    ${pub.station_distance ? ` (${
+  Number(pub.station_distance) >= 1000
+    ? (Number(pub.station_distance) / 1000).toFixed(1) + "km"
+    : Number(pub.station_distance) + "m"
+})` : ""}
   </div>
 </div>
 ` : ""}
