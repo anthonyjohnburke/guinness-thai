@@ -1147,24 +1147,6 @@ font-size: 2.4em;
   line-height: 1.4;
 }
 
-.popup-nearest-label {
-  font-size: 1em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-
-  color: #333;
-
-  padding-right: 12px;
-  border-right: 2px solid rgba(0,0,0,0.2);
-}
-
-.popup-nearest-text {
-  font-size: 1.05em;
-  color: #111;
-  font-weight: 500;
-}
-
 #suggest-section {
     width: 100%;
     max-width: 1500px;
