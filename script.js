@@ -206,6 +206,16 @@ function buildPopupHTML(pub, safeLink) {
         </div>
       ` : ""}
 
+      ${pub.nearest_station ? `
+  <div class="popup-row popup-nearest">
+    <div class="popup-nearest-label">Nearest</div>
+    <div class="popup-nearest-text">
+      ${escapeHTML(pub.nearest_station)}
+      ${pub.station_distance ? `(${pub.station_distance}m)` : ""}
+    </div>
+  </div>
+` : ""}
+
     </div>
 
     <div class="popup-actions">
