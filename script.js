@@ -211,7 +211,7 @@ function buildPopupHTML(pub, safeLink) {
     <div class="popup-nearest-label">Nearest</div>
     <div class="popup-nearest-text">
       ${escapeHTML(pub.nearest_station)}
-${pub.station_distance ? ` (${pub.station_distance}m)` : ""}
+${pub.station_distance ? ` (${pub.station_distance})` : ""}
     </div>
   </div>
 ` : ""}
