@@ -1460,9 +1460,31 @@ if (posterBtn && posterLightbox && posterClose) {
 
 }
 
-  posterClose.addEventListener("click", () => {
-    posterLightbox.classList.remove("is-open");
+  // HUNTERS PROMOTION
+const huntersPromoBtn = document.getElementById("hunters-promo-btn");
+
+if (huntersPromoBtn) {
+  huntersPromoBtn.addEventListener("click", () => {
+    const modalImg = posterLightbox.querySelector("img");
+
+    if (modalImg) {
+      modalImg.src = "hunters_promote.jpg";
+      modalImg.alt = "Hunters Garden Guinness Promotion";
+    }
+
+    const modalLink = posterLightbox.querySelector("a");
+
+    if (modalLink) {
+      modalLink.href = "https://www.instagram.com/huntersgardenrestaurant/";
+    }
+
+    posterLightbox.classList.add("is-open");
   });
+}
+
+posterClose.addEventListener("click", () => {
+  posterLightbox.classList.remove("is-open");
+});
 
   posterLightbox.addEventListener("click", (e) => {
     if (e.target === posterLightbox) {
