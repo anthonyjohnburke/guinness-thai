@@ -1029,12 +1029,19 @@ font-size: 2.4em;
     font-weight: 800;
 }
 
+.popup-actions {
+    display: flex;
+    gap: 12px;
+    padding: 10px 14px 18px;   /* 👈 increase bottom padding */
+    font-size: 1em;
+    font-weight: 500;
+}
+
 .popup-actions a {
   flex: 1;
   text-align: center;
   padding: 8px 12px;
   font-size: 1em;   /* 👈 same everywhere */
-  font-weight: 400;
   border-radius: 10px;
   text-decoration: none;
   white-space: nowrap;
@@ -1052,13 +1059,6 @@ font-size: 2.4em;
     border-radius: 18px 18px 0 0;
     text-align: center;
     margin-bottom: 8px;
-}
-
-.popup-actions {
-    display: flex;
-    gap: 12px;
-    padding: 10px 14px 18px;   /* 👈 increase bottom padding */
-    font-size: 1.1em;
 }
 
 .popup-row {
