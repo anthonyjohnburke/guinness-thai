@@ -1848,16 +1848,16 @@ margin-bottom: 28px;
 }
 
 .popup-row.price-row .popup-label {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 200;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   color: #000;
 }
 
 .popup-row.price-row .popup-value {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   color: #000;
 }
 
