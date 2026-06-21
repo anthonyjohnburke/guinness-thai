@@ -1795,21 +1795,18 @@ margin-bottom: 28px;
 
 .popup-special {
   display: grid;
-  grid-template-columns: 70px 1fr;
+  grid-template-columns: 75px 1fr;
   align-items: center;
   column-gap: 16px;
-
   margin: 14px 16px 8px;
   padding: 12px 16px;
-
-  border-radius: 16px;
   background: rgba(139,195,74,0.10);
   text-align: left;
 }
 
 .popup-special-label {
-  font-size: 1em;
-  font-weight: 700;
+  font-size: 1.1em;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #8bc34a;
