@@ -1842,7 +1842,7 @@ margin-bottom: 28px;
   justify-content: center;
   align-items: center;
   gap: 14px;
-  margin: 8px 0 8px;
+  margin: 8px 0 6px;
   line-height: 1;
   font-family: 'Bebas Neue', sans-serif;
 }
@@ -2340,7 +2340,7 @@ text-align-last: center;
 
 .popup-row.price-row {
   gap: 10px;
-  margin: 2px 0 6px;
+  margin: 2px 0 4px;
 }
 
 .popup-row.price-row .popup-label {
