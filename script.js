@@ -1514,9 +1514,6 @@ function initHappyHourRadarShell() {
 
   if (!banner || !panel) return;
 
-  // temporary: always show it
-  banner.classList.remove("is-hidden");
-
   function openRadar() {
   panel.classList.add("is-open");
   document.body.style.overflow = "hidden";
@@ -1654,10 +1651,47 @@ console.log("Happy hours:", happyHours);
 
   const liveCount = happyHours.filter(pub => pub.status === "Live").length;
 
+  const startingSoonCount =
+  happyHours.filter(pub => pub.status === "Starting Soon").length;
+
+  const banner = document.getElementById("hh-radar-banner");
+
+  const titleEl = document.querySelector("#hh-radar-open strong");
+const subtitleEl = document.querySelector("#hh-radar-open small");
+
+if (banner) {
+  if (liveCount === 0 && startingSoonCount === 0) {
+    banner.classList.add("is-hidden");
+  } else {
+    banner.classList.remove("is-hidden");
+  }
+}
+
   console.log("Live count:", liveCount);
   
+if (liveCount > 0) {
   countEl.textContent = liveCount;
+} else {
+  countEl.textContent = startingSoonCount;
+}
 
+  if (titleEl && subtitleEl) {
+  if (liveCount > 0) {
+    titleEl.textContent =
+      `${liveCount} Guinness Happy Hours Live Right Now`;
+
+    subtitleEl.textContent =
+      "Tap to see deals near you";
+
+  } else if (startingSoonCount > 0) {
+    titleEl.textContent =
+      `${startingSoonCount} Guinness Happy Hours Starting Soon`;
+
+    subtitleEl.textContent =
+      "Tap to see upcoming deals";
+  }
+}
+  
   if (!happyHours.length) {
     resultsEl.innerHTML = `<div class="hh-radar-empty">No happy hours found right now.</div>`;
     return;
