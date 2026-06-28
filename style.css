@@ -2657,3 +2657,225 @@ text-align-last: center;
   }
 
 }
+
+/* ===== Happy Hour Radar ===== */
+
+.hh-radar-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  z-index: 9997;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.hh-radar-banner.is-hidden {
+  display: none;
+}
+
+.hh-radar-open {
+  width: 100%;
+  border: 1px solid rgba(212,175,55,0.45);
+  background: rgba(8,8,8,0.96);
+  color: #fff;
+  border-radius: 999px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.45);
+  cursor: pointer;
+}
+
+.hh-radar-open strong {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.hh-radar-open small {
+  display: block;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.75rem;
+  margin-top: 3px;
+}
+
+.hh-radar-emoji {
+  font-size: 1.45rem;
+}
+
+.hh-radar-arrow {
+  margin-left: auto;
+  color: #d4af37;
+  font-size: 1.4rem;
+}
+
+.hh-radar-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: none;
+}
+
+.hh-radar-panel.is-open {
+  display: block;
+}
+
+.hh-radar-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(4px);
+}
+
+.hh-radar-sheet {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(960px, calc(100% - 18px));
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #080808;
+  color: #fff;
+  border: 1px solid rgba(212,175,55,0.35);
+  border-radius: 24px 24px 0 0;
+  padding: 18px;
+  box-sizing: border-box;
+  box-shadow: 0 -18px 50px rgba(0,0,0,0.55);
+}
+
+.hh-radar-handle {
+  width: 54px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.28);
+  margin: 0 auto 18px;
+}
+
+.hh-radar-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.hh-radar-header {
+  text-align: left;
+  padding-right: 46px;
+  margin-bottom: 18px;
+}
+
+.hh-radar-header h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  margin: 0 0 6px;
+}
+
+.hh-radar-header p {
+  margin: 0;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.hh-radar-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+.hh-radar-tabs button {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.72);
+  border-radius: 999px;
+  padding: 9px 13px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hh-radar-tabs button.active {
+  background: #d4af37;
+  color: #000;
+  border-color: #d4af37;
+}
+
+.hh-radar-table {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hh-radar-row {
+  display: grid;
+  grid-template-columns: 38px minmax(130px, 1fr) 72px 115px 80px;
+  gap: 10px;
+  align-items: center;
+  padding: 13px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  text-align: left;
+}
+
+.hh-radar-row:last-child {
+  border-bottom: none;
+}
+
+.hh-radar-table-head {
+  color: rgba(255,255,255,0.48);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(255,255,255,0.035);
+}
+
+.hh-radar-empty {
+  padding: 24px;
+  color: rgba(255,255,255,0.62);
+  text-align: center;
+}
+
+.hh-radar-note {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.62);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+@media (max-width: 700px) {
+  .hh-radar-row {
+    grid-template-columns: 32px minmax(120px, 1fr) 62px 98px;
+  }
+
+  .hh-radar-row span:nth-child(5) {
+    display: none;
+  }
+
+  .hh-radar-table-head span:nth-child(5) {
+    display: none;
+  }
+
+  .hh-radar-open {
+    padding: 13px 15px;
+  }
+
+  .hh-radar-open strong {
+    font-size: 0.88rem;
+  }
+}
