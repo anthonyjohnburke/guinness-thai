@@ -1559,6 +1559,12 @@ const subtitleEl = document.querySelector("#hh-radar-open small");
 
 if (!resultsEl) return;
 
+  const statusOrder = {
+  "Ending Soon": 0,
+  "Live": 1,
+  "Starting Soon": 2
+};
+
   const now = new Date(
   new Date().toLocaleString("en-US", {
     timeZone: "Asia/Bangkok"
@@ -1657,12 +1663,6 @@ if (!resultsEl) return;
   pub.status === "Ending Soon" ||
   pub.status === "Starting Soon"
 )
-const statusOrder = {
-  "Ending Soon": 0,
-  "Live": 1,
-  "Starting Soon": 2
-};
-
 .sort((a, b) => {
   if (statusOrder[a.status] !== statusOrder[b.status]) {
     return statusOrder[a.status] - statusOrder[b.status];
@@ -1677,7 +1677,6 @@ const statusOrder = {
 
   return a.distance - b.distance;
 });
-
   console.log("Bangkok time:", now);
 console.log("Happy hours:", happyHours);
 
