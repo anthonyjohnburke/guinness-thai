@@ -891,7 +891,7 @@ ${pub.google_maps_link ? `
         expensiveList.appendChild(row);
       });
     }
-
+initHappyHourRadarData(pubs);
    const happyPubs = pubs
   .filter(p =>
     p.happy_hour_price &&
@@ -1528,3 +1528,88 @@ function initHappyHourRadarShell() {
 }
 
 document.addEventListener("DOMContentLoaded", initHappyHourRadarShell);
+
+function initHappyHourRadarData(pubs) {
+  const countEl = document.getElementById("hh-live-count");
+  const resultsEl = document.getElementById("hh-radar-results");
+  if (!countEl || !resultsEl) return;
+
+  const now = new Date();
+
+  function parseHappyHourTimes(text) {
+    if (!text) return null;
+
+    const match = String(text).match(/(\d{1,2}):(\d{2})\s*[-–]\s*(\d{1,2}):(\d{2})/);
+    if (!match) return null;
+
+    const start = new Date(now);
+    start.setHours(Number(match[1]), Number(match[2]), 0, 0);
+
+    const end = new Date(now);
+    end.setHours(Number(match[3]), Number(match[4]), 0, 0);
+
+    return { start, end };
+  }
+
+  function formatRemaining(ms) {
+    const mins = Math.max(0, Math.round(ms / 60000));
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    if (h && m) return `${h}h ${m}m`;
+    if (h) return `${h}h`;
+    return `${m}m`;
+  }
+
+  const happyHours = pubs
+    .filter(pub => pub.happy_hour_price && pub.special)
+    .map(pub => {
+      const times = parseHappyHourTimes(pub.special);
+      if (!times) return null;
+
+      let status = "Later";
+      let statusText = "";
+
+      if (now >= times.start && now <= times.end) {
+        status = "Live";
+        statusText = `Ends in ${formatRemaining(times.end - now)}`;
+      } else if (now < times.start) {
+        status = "Starting Soon";
+        statusText = `Starts in ${formatRemaining(times.start - now)}`;
+      } else {
+        status = "Ended";
+        statusText = "Ended today";
+      }
+
+      return {
+        name: pub.name,
+        area: pub.area,
+        price: pub.happy_hour_price,
+        status,
+        statusText
+      };
+    })
+    .filter(Boolean)
+    .filter(pub => pub.status !== "Ended")
+    .sort((a, b) => Number(a.price) - Number(b.price));
+
+  const liveCount = happyHours.filter(pub => pub.status === "Live").length;
+  countEl.textContent = liveCount;
+
+  if (!happyHours.length) {
+    resultsEl.innerHTML = `<div class="hh-radar-empty">No happy hours found right now.</div>`;
+    return;
+  }
+
+  resultsEl.innerHTML = happyHours.map((pub, index) => `
+    <div class="hh-radar-row">
+      <span>${index + 1}</span>
+      <span>
+        <strong>${escapeHTML(pub.name)}</strong><br>
+        <small>${escapeHTML(pub.area || "")}</small>
+      </span>
+      <span>฿${escapeHTML(pub.price)}</span>
+      <span>${escapeHTML(pub.statusText)}</span>
+      <span>—</span>
+    </div>
+  `).join("");
+}
