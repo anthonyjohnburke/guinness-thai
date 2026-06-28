@@ -1499,3 +1499,32 @@ posterClose.addEventListener("click", () => {
   });
 
 }
+
+function initHappyHourRadarShell() {
+  const banner = document.getElementById("hh-radar-banner");
+  const panel = document.getElementById("hh-radar-panel");
+  const openBtn = document.getElementById("hh-radar-open");
+  const closeBtn = document.getElementById("hh-radar-close");
+  const backdrop = document.getElementById("hh-radar-backdrop");
+
+  if (!banner || !panel) return;
+
+  // temporary: always show it
+  banner.classList.remove("is-hidden");
+
+  function openRadar() {
+    panel.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeRadar() {
+    panel.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openRadar);
+  closeBtn?.addEventListener("click", closeRadar);
+  backdrop?.addEventListener("click", closeRadar);
+}
+
+document.addEventListener("DOMContentLoaded", initHappyHourRadarShell);
