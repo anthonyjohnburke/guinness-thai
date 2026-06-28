@@ -2859,26 +2859,7 @@ backdrop-filter: blur(18px);
 }
 
 @media (max-width: 700px) {
-  .hh-radar-row {
-    grid-template-columns: 32px minmax(120px, 1fr) 62px 98px;
-  }
-
-  .hh-radar-row span:nth-child(5) {
-    display: none;
-  }
-
-  .hh-radar-table-head span:nth-child(5) {
-    display: none;
-  }
-
-  .hh-radar-open {
-    padding: 13px 15px;
-  }
-
-  .hh-radar-open strong {
-    font-size: 0.88rem;
-  }
-     .hh-radar-sheet {
+  .hh-radar-sheet {
     top: auto;
     bottom: 0;
     left: 0;
@@ -2886,7 +2867,11 @@ backdrop-filter: blur(18px);
     width: 100%;
     max-height: 82vh;
     border-radius: 18px 18px 0 0;
-    padding: 16px 14px 18px;
+    padding: 16px 14px 20px;
+  }
+
+  .hh-radar-table-head {
+    display: none;
   }
 
   .hh-radar-header h2 {
@@ -2898,21 +2883,31 @@ backdrop-filter: blur(18px);
   }
 
   .hh-radar-row {
-    grid-template-columns: 28px 1fr 58px;
-    gap: 8px;
-    padding: 13px 10px;
+    grid-template-columns: 30px 1fr;
+    gap: 6px 12px;
+    padding: 14px 12px;
+    align-items: start;
   }
 
+  .hh-radar-row span:nth-child(1) {
+    grid-row: 1 / span 2;
+    font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    padding-top: 2px;
+  }
+
+  .hh-radar-row span:nth-child(2) {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .hh-radar-row span:nth-child(3),
   .hh-radar-row span:nth-child(4),
   .hh-radar-row span:nth-child(5) {
-    grid-column: 2 / -1;
-    font-size: 0.78rem;
+    grid-column: 2;
+    font-size: 0.82rem;
     color: rgba(255,255,255,0.65);
-    margin-top: -4px;
-  }
-
-  .hh-radar-table-head {
-    display: none;
+    margin-top: -2px;
   }
 
   .hh-radar-tabs {
