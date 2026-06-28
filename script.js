@@ -334,9 +334,10 @@ fetch(SHEET_URL)
   })
 
 .then(pubs => {
+  window.allPubs = pubs;
 
   const areaStrip = document.getElementById("area-filter-strip");
-
+  
   if (areaStrip) {
     const areaCounts = {};
 
@@ -1668,7 +1669,9 @@ if (navigator.geolocation) {
         lat: position.coords.latitude,
         lon: position.coords.longitude
       };
-    },
+if (window.allPubs) {
+  initHappyHourRadarData(window.allPubs);
+}    },
     () => {}
   );
 }
