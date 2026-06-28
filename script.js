@@ -1518,9 +1518,30 @@ function initHappyHourRadarShell() {
   banner.classList.remove("is-hidden");
 
   function openRadar() {
-    panel.classList.add("is-open");
-    document.body.style.overflow = "hidden";
+  panel.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+
+  if (
+    !window.userLocation &&
+    navigator.geolocation
+  ) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        window.userLocation = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        };
+
+        if (window.allPubs) {
+          initHappyHourRadarData(window.allPubs);
+        }
+      },
+      () => {
+        // user declined location
+      }
+    );
   }
+}
 
   function closeRadar() {
     panel.classList.remove("is-open");
@@ -1654,24 +1675,10 @@ console.log("Happy hours:", happyHours);
       <span>
   ${
     pub.distance != null
-      ? `${pub.distance.toFixed(1)} km`
-      : "Allow location"
+  ? `${pub.distance.toFixed(1)} km`
+  : "Distance unavailable"
   }
 </span>
     </div>
   `).join("");
-}
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      window.userLocation = {
-        lat: position.coords.latitude,
-        lon: position.coords.longitude
-      };
-if (window.allPubs) {
-  initHappyHourRadarData(window.allPubs);
-}    },
-    () => {}
-  );
 }
