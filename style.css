@@ -2731,7 +2731,7 @@ text-align-last: center;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(960px, calc(100% - 18px));
+  width: min(1100px, calc(100% - 40px));
   max-height: 88vh;
   overflow-y: auto;
   background: rgba(8, 8, 8, 0.88);
