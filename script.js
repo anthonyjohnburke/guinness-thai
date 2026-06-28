@@ -1601,7 +1601,13 @@ function initHappyHourRadarData(pubs) {
     .filter(pub => pub.status !== "Ended")
     .sort((a, b) => Number(a.price) - Number(b.price));
 
+  console.log("Bangkok time:", now);
+console.log("Happy hours:", happyHours);
+
   const liveCount = happyHours.filter(pub => pub.status === "Live").length;
+
+  console.log("Live count:", liveCount);
+  
   countEl.textContent = liveCount;
 
   if (!happyHours.length) {
