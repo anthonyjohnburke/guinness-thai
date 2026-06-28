@@ -1567,10 +1567,9 @@ function initHappyHourRadarData(pubs) {
   }
 
   const happyHours = pubs
-    .filter(pub =>
+   .filter(pub =>
   pub.happy_hour_price &&
-  pub.special &&
-  /(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/.test(pub.special)
+  parseHappyHourTimes(pub.special)
 )
     .map(pub => {
       const times = parseHappyHourTimes(pub.special);
