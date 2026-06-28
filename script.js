@@ -1534,7 +1534,11 @@ function initHappyHourRadarData(pubs) {
   const resultsEl = document.getElementById("hh-radar-results");
   if (!countEl || !resultsEl) return;
 
-  const now = new Date();
+  const now = new Date(
+  new Date().toLocaleString("en-US", {
+    timeZone: "Asia/Bangkok"
+  })
+);
 
   function parseHappyHourTimes(text) {
     if (!text) return null;
