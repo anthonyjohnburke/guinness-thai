@@ -1660,3 +1660,15 @@ console.log("Happy hours:", happyHours);
     </div>
   `).join("");
 }
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      window.userLocation = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+      };
+    },
+    () => {}
+  );
+}
