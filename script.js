@@ -1320,6 +1320,10 @@ function typeWriter(el, text, speed = 35) {
   navigator.geolocation.getCurrentPosition(position => {
     const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
+    window.userLocation = {
+  lat: userLat,
+  lon: userLon
+};
     if (userMarker) {
   userMarker.remove();
 }
@@ -1590,16 +1594,38 @@ function initHappyHourRadarData(pubs) {
       }
 
       return {
-        name: pub.name,
-        area: pub.area,
-        price: pub.happy_hour_price,
-        status,
-        statusText
-      };
+  name: pub.name,
+  area: pub.area,
+  price: pub.happy_hour_price,
+  status,
+  statusText,
+  lat: pub.lat,
+  lon: pub.lon,
+  distance:
+    pub.lat &&
+    pub.lon &&
+    window.userLocation
+      ? getDistance(
+          window.userLocation.lat,
+          window.userLocation.lon,
+          parseFloat(pub.lat),
+          parseFloat(pub.lon)
+        )
+      : null
+};
     })
     .filter(Boolean)
     .filter(pub => pub.status !== "Ended")
-    .sort((a, b) => Number(a.price) - Number(b.price));
+    .sort((a, b) => {
+  if (a.distance == null && b.distance == null) {
+    return Number(a.price) - Number(b.price);
+  }
+
+  if (a.distance == null) return 1;
+  if (b.distance == null) return -1;
+
+  return a.distance - b.distance;
+});
 
   console.log("Bangkok time:", now);
 console.log("Happy hours:", happyHours);
@@ -1624,7 +1650,13 @@ console.log("Happy hours:", happyHours);
       </span>
       <span>฿${escapeHTML(pub.price)}</span>
       <span>${escapeHTML(pub.statusText)}</span>
-      <span>—</span>
+      <span>
+  ${
+    pub.distance != null
+      ? `${pub.distance.toFixed(1)} km`
+      : "Allow location"
+  }
+</span>
     </div>
   `).join("");
 }
