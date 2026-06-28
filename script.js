@@ -1553,9 +1553,11 @@ function initHappyHourRadarShell() {
 document.addEventListener("DOMContentLoaded", initHappyHourRadarShell);
 
 function initHappyHourRadarData(pubs) {
-  const countEl = document.getElementById("hh-live-count");
-  const resultsEl = document.getElementById("hh-radar-results");
-  if (!countEl || !resultsEl) return;
+const resultsEl = document.getElementById("hh-radar-results");
+const titleEl = document.getElementById("hh-radar-title");
+const subtitleEl = document.querySelector("#hh-radar-open small");
+
+if (!resultsEl) return;
 
   const now = new Date(
   new Date().toLocaleString("en-US", {
@@ -1601,16 +1603,32 @@ function initHappyHourRadarData(pubs) {
       let status = "Later";
       let statusText = "";
 
-      if (now >= times.start && now <= times.end) {
-        status = "Live";
-        statusText = `Ends in ${formatRemaining(times.end - now)}`;
-      } else if (now < times.start) {
-        status = "Starting Soon";
-        statusText = `Starts in ${formatRemaining(times.start - now)}`;
-      } else {
-        status = "Ended";
-        statusText = "Ended today";
-      }
+     if (now >= times.start && now <= times.end) {
+  const remaining = times.end - now;
+
+  if (remaining <= 60 * 60 * 1000) {
+    status = "Ending Soon";
+    statusText = `Ending in ${formatRemaining(remaining)}`;
+  } else {
+    status = "Live";
+    statusText = `Ends in ${formatRemaining(remaining)}`;
+  }
+
+} else if (
+  now < times.start &&
+  (times.start - now) <= 90 * 60 * 1000
+) {
+  status = "Starting Soon";
+  statusText = `Starts in ${formatRemaining(times.start - now)}`;
+
+} else if (now < times.start) {
+  status = "Later";
+  statusText = `Starts later today`;
+
+} else {
+  status = "Ended";
+  statusText = "Ended today";
+}
 
       return {
   name: pub.name,
@@ -1634,8 +1652,12 @@ function initHappyHourRadarData(pubs) {
 };
     })
     .filter(Boolean)
-    .filter(pub => pub.status !== "Ended")
-    .sort((a, b) => {
+.filter(pub =>
+  pub.status === "Live" ||
+  pub.status === "Ending Soon" ||
+  pub.status === "Starting Soon"
+)
+.sort((a, b) => {
   if (a.distance == null && b.distance == null) {
     return Number(a.price) - Number(b.price);
   }
@@ -1649,15 +1671,16 @@ function initHappyHourRadarData(pubs) {
   console.log("Bangkok time:", now);
 console.log("Happy hours:", happyHours);
 
-  const liveCount = happyHours.filter(pub => pub.status === "Live").length;
+  const liveCount =
+  happyHours.filter(pub =>
+    pub.status === "Live" ||
+    pub.status === "Ending Soon"
+  ).length;
 
   const startingSoonCount =
   happyHours.filter(pub => pub.status === "Starting Soon").length;
 
   const banner = document.getElementById("hh-radar-banner");
-
-  const titleEl = document.querySelector("#hh-radar-open strong");
-const subtitleEl = document.querySelector("#hh-radar-open small");
 
 if (banner) {
   if (liveCount === 0 && startingSoonCount === 0) {
@@ -1668,12 +1691,6 @@ if (banner) {
 }
 
   console.log("Live count:", liveCount);
-  
-if (liveCount > 0) {
-  countEl.textContent = liveCount;
-} else {
-  countEl.textContent = startingSoonCount;
-}
 
   if (titleEl && subtitleEl) {
   if (liveCount > 0) {
@@ -1691,14 +1708,12 @@ if (liveCount > 0) {
       "Tap to see upcoming deals";
   }
 }
-  
-  if (!happyHours.length) {
-    resultsEl.innerHTML = `<div class="hh-radar-empty">No happy hours found right now.</div>`;
-    return;
-  }
 
   resultsEl.innerHTML = happyHours.map((pub, index) => `
-    <div class="hh-radar-row">
+    <div
+  class="hh-radar-row"
+  data-pub="${escapeHTML(pub.name)}"
+>
       <span>${index + 1}</span>
       <span>
         <strong>${escapeHTML(pub.name)}</strong><br>
