@@ -1539,7 +1539,9 @@ function initHappyHourRadarData(pubs) {
   function parseHappyHourTimes(text) {
     if (!text) return null;
 
-    const match = String(text).match(/(\d{1,2}):(\d{2})\s*[-–]\s*(\d{1,2}):(\d{2})/);
+    const match = String(text).match(
+  /(\d{1,2}):(\d{2}).*?(\d{1,2}):(\d{2})/
+);
     if (!match) return null;
 
     const start = new Date(now);
@@ -1561,7 +1563,11 @@ function initHappyHourRadarData(pubs) {
   }
 
   const happyHours = pubs
-    .filter(pub => pub.happy_hour_price && pub.special)
+    .filter(pub =>
+  pub.happy_hour_price &&
+  pub.special &&
+  /(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/.test(pub.special)
+)
     .map(pub => {
       const times = parseHappyHourTimes(pub.special);
       if (!times) return null;
