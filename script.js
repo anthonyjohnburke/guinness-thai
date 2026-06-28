@@ -1657,7 +1657,17 @@ if (!resultsEl) return;
   pub.status === "Ending Soon" ||
   pub.status === "Starting Soon"
 )
+const statusOrder = {
+  "Ending Soon": 0,
+  "Live": 1,
+  "Starting Soon": 2
+};
+
 .sort((a, b) => {
+  if (statusOrder[a.status] !== statusOrder[b.status]) {
+    return statusOrder[a.status] - statusOrder[b.status];
+  }
+
   if (a.distance == null && b.distance == null) {
     return Number(a.price) - Number(b.price);
   }
