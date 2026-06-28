@@ -292,6 +292,62 @@
 
   <div id="tooltip" class="tooltip"></div>
 
+  <!-- Happy Hour Radar -->
+<div id="hh-radar-banner" class="hh-radar-banner is-hidden">
+  <button id="hh-radar-open" class="hh-radar-open" type="button">
+    <span class="hh-radar-emoji">🍺</span>
+    <span>
+      <strong><span id="hh-live-count">0</span> Guinness Happy Hours Live Right Now</strong>
+      <small>Tap to see all happy hours near you</small>
+    </span>
+    <span class="hh-radar-arrow">→</span>
+  </button>
+</div>
+
+<div id="hh-radar-panel" class="hh-radar-panel" aria-hidden="true">
+  <div class="hh-radar-backdrop" id="hh-radar-backdrop"></div>
+
+  <div class="hh-radar-sheet">
+    <button id="hh-radar-close" class="hh-radar-close" type="button">×</button>
+
+    <div class="hh-radar-handle"></div>
+
+    <div class="hh-radar-header">
+      <div>
+        <h2>🍺 Guinness Happy Hour Radar</h2>
+        <p>Live, starting soon and ending soon. Sorted by distance when location is allowed.</p>
+      </div>
+    </div>
+
+    <div class="hh-radar-tabs">
+      <button class="active" type="button">All</button>
+      <button type="button">Live Now</button>
+      <button type="button">Starting Soon</button>
+      <button type="button">Ending Soon</button>
+    </div>
+
+    <div class="hh-radar-table">
+      <div class="hh-radar-row hh-radar-table-head">
+        <span>#</span>
+        <span>Pub</span>
+        <span>Price</span>
+        <span>Status</span>
+        <span>Distance</span>
+      </div>
+
+      <div id="hh-radar-results">
+        <div class="hh-radar-empty">
+          Loading happy hours…
+        </div>
+      </div>
+    </div>
+
+    <div class="hh-radar-note">
+      Times are local Bangkok time. Happy hour details may change, so please check with the pub.
+    </div>
+  </div>
+</div>
+
    <div id="suggest-section">
 
  <div class="nearby-col">
