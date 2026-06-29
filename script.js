@@ -1597,6 +1597,17 @@ if (!resultsEl) return;
     return `${m}m`;
   }
 
+  function formatClock(date) {
+  return date.toLocaleTimeString("en-US", {
+    timeZone: "Asia/Bangkok",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  })
+  .toLowerCase()
+  .replace(":00", "");
+}
+
   const happyHours = pubs
    .filter(pub =>
   pub.happy_hour_price &&
@@ -1619,19 +1630,25 @@ const savingPct =
   const remaining = times.end - now;
 
   if (remaining <= 60 * 60 * 1000) {
-    status = "Ending Soon";
-    statusText = `Ending in ${formatRemaining(remaining)}`;
-  } else {
-    status = "Live";
-    statusText = `Ends in ${formatRemaining(remaining)}`;
-  }
+  status = "Ending Soon";
+  statusText =
+    `Ends at ${formatClock(times.end)} ` +
+    `(${formatRemaining(remaining)})`;
+} else {
+  status = "Live";
+  statusText =
+    `Ends at ${formatClock(times.end)} ` +
+    `(${formatRemaining(remaining)})`;
+}
 
 } else if (
   now < times.start &&
   (times.start - now) <= 90 * 60 * 1000
 ) {
   status = "Starting Soon";
-  statusText = `Starts in ${formatRemaining(times.start - now)}`;
+  statusText =
+  `Starts at ${formatClock(times.start)} ` +
+  `(${formatRemaining(times.start - now)})`;
 
 } else if (now < times.start) {
   status = "Later";
