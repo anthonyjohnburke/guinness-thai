@@ -1597,6 +1597,19 @@ if (!resultsEl) return;
     return `${m}m`;
   }
 
+  function formatRemainingShort(ms) {
+  const mins = Math.max(0, Math.round(ms / 60000));
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+
+  if (h) return `${h}h`;
+  return `${m}m`;
+}
+
+function formatClockShort(date) {
+  return formatClock(date).replace(" ", "");
+}
+
   function formatClock(date) {
   return date.toLocaleTimeString("en-US", {
     timeZone: "Asia/Bangkok",
@@ -1624,7 +1637,8 @@ const savingPct =
   Math.round((saving / Number(pub.price)) * 100);
 
       let status = "Later";
-      let statusText = "";
+let statusText = "";
+let statusShortText = "";
 
      if (now >= times.start && now <= times.end) {
   const remaining = times.end - now;
@@ -1634,11 +1648,19 @@ const savingPct =
   statusText =
     `Ends at ${formatClock(times.end)} ` +
     `(${formatRemaining(remaining)})`;
+
+  statusShortText =
+    `Ends ${formatClockShort(times.end)} ` +
+    `(${formatRemainingShort(remaining)})`;
 } else {
   status = "Live";
   statusText =
     `Ends at ${formatClock(times.end)} ` +
     `(${formatRemaining(remaining)})`;
+
+  statusShortText =
+    `Ends ${formatClockShort(times.end)} ` +
+    `(${formatRemainingShort(remaining)})`;
 }
 
 } else if (
@@ -1649,6 +1671,10 @@ const savingPct =
   statusText =
   `Starts at ${formatClock(times.start)} ` +
   `(${formatRemaining(times.start - now)})`;
+
+statusShortText =
+  `Starts ${formatClockShort(times.start)} ` +
+  `(${formatRemainingShort(times.start - now)})`;
 
 } else if (now < times.start) {
   status = "Later";
@@ -1667,8 +1693,9 @@ const savingPct =
   savingPct,
   google_maps_link: pub.google_maps_link,
   status,
-  statusText,
-  lat: pub.lat,
+statusText,
+statusShortText,
+lat: pub.lat,
   lon: pub.lon,
   distance:
     pub.lat &&
@@ -1777,7 +1804,7 @@ if (banner) {
     Save ฿${pub.saving} (${pub.savingPct}%)
   </div>
 </span>
-      <span>
+     <span class="radar-status-cell">
   ${
     pub.status === "Ending Soon"
       ? `<div class="radar-status-ending">Ending Soon</div>`
@@ -1789,7 +1816,23 @@ if (banner) {
   <div class="radar-status-text">
     ${escapeHTML(pub.statusText)}
   </div>
+
+  <div class="radar-mobile-status-line">
+    <strong>${escapeHTML(pub.status)}</strong>
+    <span>•</span>
+    <span>${escapeHTML(pub.statusShortText)}</span>
+    <span>•</span>
+    <span>
+      ${
+        pub.distance != null
+          ? `${pub.distance.toFixed(1)} km`
+          : "Distance unavailable"
+      }
+    </span>
+  </div>
 </span>
+
+
       <span>
   ${
     pub.distance != null
