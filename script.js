@@ -1818,18 +1818,19 @@ if (banner) {
   </div>
 
   <div class="radar-mobile-status-line">
-    <strong>${escapeHTML(pub.status)}</strong>
-    <span>•</span>
-    <span>${escapeHTML(pub.statusShortText)}</span>
-    <span>•</span>
-    <span>
-      ${
-        pub.distance != null
-          ? `${pub.distance.toFixed(1)} km`
-          : "Distance unavailable"
-      }
-    </span>
-  </div>
+  <strong>${escapeHTML(pub.status)}</strong>
+  <span>•</span>
+  <span>${escapeHTML(pub.statusShortText)}</span>
+
+  ${
+    pub.distance != null
+      ? `
+        <span>•</span>
+        <span>${pub.distance.toFixed(1)} km</span>
+      `
+      : ""
+  }
+</div>
 </span>
 
 
