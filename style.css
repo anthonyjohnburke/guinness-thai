@@ -2940,6 +2940,41 @@ backdrop-filter: blur(18px);
 }
 
 @media (max-width: 700px) {
+
+    .hh-radar-banner {
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  max-width: none;
+}
+
+.hh-radar-open {
+  padding: 10px 14px;
+  border-radius: 12px;
+  min-height: 42px;
+}
+
+.hh-radar-open span:first-child {
+  min-width: 0;
+}
+
+.hh-radar-open strong {
+  font-size: 0.78rem;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hh-radar-open small {
+  display: none;
+}
+
+.hh-radar-arrow {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+    
   .hh-radar-sheet {
     top: auto;
     bottom: 0;
