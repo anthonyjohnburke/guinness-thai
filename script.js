@@ -1693,6 +1693,7 @@ statusShortText =
   name: pub.name,
   area: pub.area,
   price: pub.happy_hour_price,
+  originalPrice: pub.price,
   saving,
   savingPct,
   google_maps_link: pub.google_maps_link,
@@ -1799,16 +1800,18 @@ if (banner) {
     }
   </div>
 </span>
-      <span>
+
+ <span>
   <div class="radar-price">
     ฿${escapeHTML(pub.price)}
   </div>
 
   <div class="radar-saving">
-    Save ฿${pub.saving} (${pub.savingPct}%)
+    Original: ฿${pub.price + pub.saving} • Save ฿${pub.saving}
   </div>
 </span>
-     <span class="radar-status-cell">
+
+  <span class="radar-status-cell">
   ${
     pub.status === "Ending Soon"
       ? `<div class="radar-status-ending">Ending Soon</div>`
