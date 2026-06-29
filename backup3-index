@@ -199,14 +199,14 @@
 
 <div id="featured-pub-block" class="section-block featured-pub-block">
 
-<h2 class="intro-heading">Creamer of the Month</h2>
+<h2 class="intro-heading">Featured Promotions</h2>
 
 <div class="featured-pub-layout">
 
   <button id="featured-pub-image-btn" class="featured-pub-image-btn" type="button">
     <img
       src="SplitG.jpg"
-      alt="Creamer of the Month"
+      alt="Split The G Challenge at The Old English"
       class="featured-pub-img"
     >
   </button>
@@ -217,11 +217,38 @@
      rel="noopener noreferrer"
      class="featured-inline-link">The Old English</a> and take on the legendary Split The G Challenge.
 </p>
-  </div>
 </div>
-  </div>
+</div>
   
+  <!-- Promotion 2 -->
+<div class="featured-pub-layout">
+  
+  <button id="hunters-promo-btn"
+        class="featured-pub-image-btn"
+        type="button">
+    <img
+      src="hunters_promote.jpg"
+      alt="Hunters Garden Guinness Promotion"
+      class="featured-pub-img"
+    >
+  </button>
 
+  <div class="featured-pub-copy">
+ <p class="intro-small">
+  Guinness is now pouring at
+  <a href="https://www.instagram.com/huntersgardenrestaurant/"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="featured-inline-link">
+     Hunters Garden
+  </a>.
+  Drop by and take advantage of their latest Guinness promotion.
+</p>
+</div>
+</div>
+
+</div>
+  
 <div class="section-block featured-block">
   <div id="featured-text" class="featured-text collapsed">
 
@@ -265,6 +292,66 @@
 
   <div id="tooltip" class="tooltip"></div>
 
+  <!-- Happy Hour Radar -->
+<div id="hh-radar-banner" class="hh-radar-banner is-hidden">
+ <button id="hh-radar-open" class="hh-radar-open" type="button">
+  <span>
+    <strong id="hh-radar-title">Guinness Happy Hours</strong>
+    <small>Tap to see deals near you</small>
+  </span>
+  <span class="hh-radar-arrow">→</span>
+</button>
+</div>
+
+  <div class="hh-radar-seo-text">
+  We track Guinness happy hour deals across Bangkok, including Sukhumvit, Silom, Sathorn and Thonglor. Discover live Guinness happy hours, see which deals are ending soon and find the cheapest pint of Guinness in Bangkok today.
+</div>
+
+
+<div id="hh-radar-panel" class="hh-radar-panel" aria-hidden="true">
+  <div class="hh-radar-backdrop" id="hh-radar-backdrop"></div>
+
+  <div class="hh-radar-sheet">
+    <button id="hh-radar-close" class="hh-radar-close" type="button">×</button>
+
+    <div class="hh-radar-handle"></div>
+
+    <div class="hh-radar-header">
+      <div>
+        <h2>Guinness Happy Hour Radar</h2>
+        <p>Live, starting soon and ending soon. Sorted by distance when location is allowed.</p>
+      </div>
+    </div>
+
+    <div class="hh-radar-tabs">
+      <button class="active" type="button">All</button>
+      <button type="button">Live Now</button>
+      <button type="button">Starting Soon</button>
+      <button type="button">Ending Soon</button>
+    </div>
+
+    <div class="hh-radar-table">
+      <div class="hh-radar-row hh-radar-table-head">
+        <span>#</span>
+        <span>Pub</span>
+        <span>Price</span>
+        <span>Status</span>
+        <span>Distance</span>
+      </div>
+
+      <div id="hh-radar-results">
+        <div class="hh-radar-empty">
+          Loading happy hours…
+        </div>
+      </div>
+    </div>
+
+    <div class="hh-radar-note">
+      Times are local Bangkok time. Happy hour details may change, so please check with the pub.
+    </div>
+  </div>
+</div>
+
    <div id="suggest-section">
 
  <div class="nearby-col">
@@ -307,11 +394,10 @@
 
 <div class="impact-row no-promo">
   <div class="impact-strip impact-main">
-    <div class="section-label">Real Market Impact</div>
+    <div class="section-label">75 Pubs and Counting</div>
     <div class="insight-text">
-      Updated:<a href="https://www.facebook.com/p/On-The-Square-61579011092046/" target="_blank" rel="noopener noreferrer">
-      On The Square</a> in Silom reintroduced its ฿270 Guinness Happy Hour (down from ฿290) after checking the tracker, pushing them right up the Happy Hour rankings. 
-      Since then, they’ve gone one better and added Kilkenny on draught. Well played.
+      Pints of Bangkok now tracks 75 pubs. What started as a small side project has quietly become Thailand's largest Guinness price tracker. 
+      Thanks to everyone sending updates, photos and tips. Sláinte!
     </div>
   </div>
 
