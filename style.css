@@ -2789,7 +2789,7 @@ backdrop-filter: blur(18px);
 }
 
 .hh-radar-tabs {
-  display: flex;
+  display: none;
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 12px;
@@ -2999,80 +2999,91 @@ backdrop-filter: blur(18px);
   }
 
  .hh-radar-row {
-  grid-template-columns: 34px 1fr 110px;
-  gap: 8px 12px;
-  padding: 16px 14px;
+  grid-template-columns: 26px 1fr 105px;
+  gap: 12px;
+  padding: 30px 16px;
   align-items: start;
 }
 
 .hh-radar-row span:nth-child(1) {
   grid-column: 1;
-  grid-row: 1 / span 2;
+  grid-row: 1 / span 3;
   font-size: 1.05rem;
   font-weight: 800;
   color: rgba(255,255,255,0.45);
-  padding-top: 2px;
+  padding-top: 3px;
 }
 
 .hh-radar-row span:nth-child(2) {
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 1 / span 2;
 }
 
 .hh-radar-row span:nth-child(3) {
   grid-column: 3;
-  grid-row: 1;
+  grid-row: 1 / span 2;
   text-align: right;
   white-space: nowrap;
 }
 
 .hh-radar-row span:nth-child(4) {
-  grid-column: 3;
-  grid-row: 2;
-  text-align: right;
-  white-space: nowrap;
+  grid-column: 2 / 4;
+  grid-row: 3;
 }
 
 .hh-radar-row span:nth-child(5) {
-  grid-column: 3;
-  grid-row: 3;
-  text-align: right;
-  white-space: nowrap;
-  color: rgba(255,255,255,0.62);
-  font-size: 0.82rem;
+  display: none;
 }
 
-  .hh-radar-tabs {
-    gap: 6px;
-  }
-
-  .hh-radar-tabs button {
-    font-size: 0.72rem;
-    padding: 8px 10px;
-  }
-
-  .hh-radar-close {
-    top: 12px;
-    right: 12px;
-  }
-
-    .radar-pub-name {
-  font-size: 1rem;
-}
-
-.radar-pub-meta {
-  font-size: 0.82rem;
-}
-
+.radar-pub-name,
 .radar-price {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.radar-pub-meta,
+.radar-saving {
+  margin-top: 8px;
+  font-size: 0.86rem;
+  line-height: 1.2;
 }
 
 .radar-saving {
-  font-size: 0.76rem;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .radar-status-text {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
+}
+
+.hh-radar-row span:nth-child(4) {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px 12px;
+  border-radius: 9px;
+  background: rgba(139,195,74,0.18);
+  color: rgba(255,255,255,0.88);
+}
+
+.hh-radar-row span:nth-child(4):has(.radar-status-starting) {
+  background: rgba(255,255,255,0.10);
+}
+
+.hh-radar-row span:nth-child(4):has(.radar-status-ending) {
+  background: rgba(245,201,106,0.16);
+}
+
+.hh-radar-row span:nth-child(4) .radar-status-text {
+  margin-top: 0;
+  text-align: center;
+}
+
+.hh-radar-row span:nth-child(4)::after {
+  content: attr(data-distance);
 }
 }
