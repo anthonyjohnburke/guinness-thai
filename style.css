@@ -2827,9 +2827,9 @@ backdrop-filter: blur(18px);
     120px
     150px
     90px;
-  gap: 18px;
+  gap: 22px;
+  padding: 16px 16px;
   align-items: center;
-  padding: 15px 14px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   text-align: left;
   cursor: pointer;
@@ -2867,16 +2867,40 @@ backdrop-filter: blur(18px);
 
 .radar-price {
   color: #d4af37;
-  font-size: 1.1rem;
+  font-size: 1.22rem;
   font-weight: 800;
   line-height: 1;
 }
 
 .radar-saving {
   margin-top: 4px;
-  color: #7ac943;
-  font-size: 0.78rem;
+  color: #8bc34a;
+  font-size: 0.82rem;
   font-weight: 600;
+}
+
+.radar-status-live {
+  color: #8bc34a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.radar-status-ending {
+  color: #f5c96a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.radar-status-starting {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .hh-radar-row:last-child {
