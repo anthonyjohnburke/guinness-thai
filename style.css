@@ -2842,7 +2842,7 @@ backdrop-filter: blur(18px);
 
 .radar-pub-name {
   font-size: 1.02rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
 }
 
@@ -2868,7 +2868,7 @@ backdrop-filter: blur(18px);
 .radar-price {
   color: #d4af37;
   font-size: 1.02rem; /* same as pub name */
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1;
 }
 
@@ -2882,28 +2882,28 @@ font-weight: 500;
 .radar-status-live {
   color: #8bc34a;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
 .radar-status-ending {
   color: #f5c96a;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
 .radar-status-starting {
   color: rgba(255,255,255,0.7);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
 .hh-radar-row span:last-child {
   color: white;
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .radar-status-text {
