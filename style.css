@@ -3180,12 +3180,3 @@ font-weight: 500;
   display: none;
 }  
 }
-
-@media (max-width: 700px) {
-  .radar-saving {
-    color: #8bc34a;
-    max-width: 105px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
