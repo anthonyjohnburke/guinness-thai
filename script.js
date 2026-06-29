@@ -1760,7 +1760,19 @@ if (banner) {
     Save ฿${pub.saving} (${pub.savingPct}%)
   </div>
 </span>
-      <span>${escapeHTML(pub.statusText)}</span>
+      <span>
+  ${
+    pub.status === "Ending Soon"
+      ? `<div class="radar-status-ending">Ending Soon</div>`
+      : pub.status === "Live"
+      ? `<div class="radar-status-live">Live</div>`
+      : `<div class="radar-status-starting">Starting Soon</div>`
+  }
+
+  <div class="radar-status-text">
+    ${escapeHTML(pub.statusText)}
+  </div>
+</span>
       <span>
   ${
     pub.distance != null
