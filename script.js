@@ -1606,6 +1606,12 @@ if (!resultsEl) return;
       const times = parseHappyHourTimes(pub.special);
       if (!times) return null;
 
+      const saving =
+  Number(pub.price) - Number(pub.happy_hour_price);
+
+const savingPct =
+  Math.round((saving / Number(pub.price)) * 100);
+
       let status = "Later";
       let statusText = "";
 
@@ -1640,6 +1646,9 @@ if (!resultsEl) return;
   name: pub.name,
   area: pub.area,
   price: pub.happy_hour_price,
+  saving,
+  savingPct,
+  google_maps_link: pub.google_maps_link,
   status,
   statusText,
   lat: pub.lat,
@@ -1724,11 +1733,33 @@ if (banner) {
   data-pub="${escapeHTML(pub.name)}"
 >
       <span>${index + 1}</span>
+     <span>
+  <div class="radar-pub-name">
+    ${escapeHTML(pub.name)}
+  </div>
+
+  <div class="radar-pub-meta">
+    ${escapeHTML(pub.area || "")}
+    ${
+      pub.google_maps_link
+        ? ` • <a
+              href="${sanitizeURL(pub.google_maps_link)}"
+              target="_blank"
+              class="radar-map-link"
+            >View map</a>`
+        : ""
+    }
+  </div>
+</span>
       <span>
-        <strong>${escapeHTML(pub.name)}</strong><br>
-        <small>${escapeHTML(pub.area || "")}</small>
-      </span>
-      <span>฿${escapeHTML(pub.price)}</span>
+  <div class="radar-price">
+    ฿${escapeHTML(pub.price)}
+  </div>
+
+  <div class="radar-saving">
+    Save ฿${pub.saving} (${pub.savingPct}%)
+  </div>
+</span>
       <span>${escapeHTML(pub.statusText)}</span>
       <span>
   ${
