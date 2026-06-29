@@ -975,11 +975,7 @@ ${pub.google_maps_link ? `
     Save ฿${savingAmount} (${pub.savingPct}%)
   </span>
 </div>
-
-<div class="happy-saving">
-  Original: ฿${pub.fullPrice} • Save ฿${savingAmount}
 </div>
-  </div>
 `;
   
   happyList.appendChild(row);
