@@ -2905,7 +2905,7 @@ backdrop-filter: blur(18px);
 
 .hh-radar-row span:last-child {
   color: rgba(255,255,255,0.72);
-  ont-size: 0.72rem;
+  font-size: 0.72rem;
   font-weight: 400;
 }
 
@@ -3038,7 +3038,10 @@ backdrop-filter: blur(18px);
 }
 
 .hh-radar-row span:nth-child(5) {
-  display: none;
+  display: block;
+  grid-column: 2 / 4;
+  grid-row: 4;
+  text-align: right;
 }
 
 .radar-pub-name,
@@ -3066,11 +3069,11 @@ backdrop-filter: blur(18px);
 
 .hh-radar-row span:nth-child(4) {
   display: grid;
-  grid-template-columns: 1fr 1fr 0.8fr;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 8px;
   margin-top: 14px;
-  padding: 12px 12px;
+  padding: 10px 14px;
   border-radius: 9px;
   background: rgba(139,195,74,0.18);
   color: rgba(255,255,255,0.88);
@@ -3092,4 +3095,37 @@ backdrop-filter: blur(18px);
 .hh-radar-row span:nth-child(4)::after {
   content: attr(data-distance);
 }
+
+    .hh-radar-row span:nth-child(4) .radar-status-live,
+.hh-radar-row span:nth-child(4) .radar-status-ending,
+.hh-radar-row span:nth-child(4) .radar-status-starting {
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.hh-radar-row span:nth-child(4) .radar-status-text {
+  margin-top: 0;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+.hh-radar-row span:nth-child(5) {
+  margin-top: -6px;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.76rem;
+}
+
+    .radar-status-live,
+.radar-status-ending,
+.radar-status-starting {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+    .radar-status-text {
+  white-space: nowrap;
+  font-size: 0.82rem;
+}
+    
 }
