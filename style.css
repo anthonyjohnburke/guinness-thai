@@ -2942,10 +2942,6 @@ font-weight: 500;
   }
 }
 
-.hh-radar-row:last-child {
-  border-bottom: none;
-}
-
 .hh-radar-table-head {
   color: rgba(255,255,255,0.52);
   font-size: 0.88rem;
