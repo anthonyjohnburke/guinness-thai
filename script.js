@@ -1651,7 +1651,7 @@ let statusShortText = "";
 
   statusShortText =
     `Ends ${formatClockShort(times.end)} ` +
-    `(${formatRemainingShort(remaining)})`;
+    `(${formatRemaining(remaining)})`;
 } else {
   status = "Live";
   statusText =
@@ -1660,7 +1660,7 @@ let statusShortText = "";
 
   statusShortText =
     `Ends ${formatClockShort(times.end)} ` +
-    `(${formatRemainingShort(remaining)})`;
+    `(${formatRemaining(remaining)})`;
 }
 
 } else if (
@@ -1674,7 +1674,7 @@ let statusShortText = "";
 
 statusShortText =
   `Starts ${formatClockShort(times.start)} ` +
-  `(${formatRemainingShort(times.start - now)})`;
+  `(${formatRemaining(times.start - now)})`;
 
 } else if (now < times.start) {
   status = "Later";
