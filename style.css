@@ -2920,10 +2920,6 @@ font-weight: 500;
   border-bottom: none;
 }
 
-.radar-mobile-status-line {
-  display: none;
-}
-
 /* Desktop only */
 @media (min-width: 769px) {
   .hh-radar-row {
