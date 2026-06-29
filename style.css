@@ -2922,6 +2922,36 @@ font-weight: 500;
   border-bottom: none;
 }
 
+.radar-mobile-status-line {
+  display: none;
+}
+
+/* Desktop only */
+@media (min-width: 769px) {
+  .hh-radar-row {
+    grid-template-columns:
+      32px
+      minmax(300px, 1.25fr)
+      minmax(220px, 0.85fr)
+      minmax(210px, 0.8fr)
+      88px;
+    gap: 18px;
+  }
+
+  .radar-price,
+  .radar-saving {
+    color: #d4af37;
+  }
+
+  .radar-saving {
+    font-weight: 500;
+  }
+}
+
+.hh-radar-row:last-child {
+  border-bottom: none;
+}
+
 .hh-radar-table-head {
   color: rgba(255,255,255,0.52);
   font-size: 0.88rem;
@@ -3148,6 +3178,14 @@ font-weight: 500;
 
 .hh-radar-row span:nth-child(5) {
   display: none;
+}  
 }
-    
+
+@media (max-width: 700px) {
+  .radar-saving {
+    color: #8bc34a;
+    max-width: 105px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
