@@ -970,10 +970,14 @@ ${pub.google_maps_link ? `
       <span class="value gold">฿${pub.happyPrice}</span>
     </div>
 
-    <div class="price-line saving">
-<span class="value green">
-  Save ฿${savingAmount} (${pub.savingPct}%)
-</span>
+   <div class="price-line saving">
+  <span class="value green">
+    Save ฿${savingAmount} (${pub.savingPct}%)
+  </span>
+</div>
+
+<div class="happy-saving">
+  Original: ฿${pub.fullPrice} • Save ฿${savingAmount}
 </div>
   </div>
 `;
