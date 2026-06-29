@@ -2822,12 +2822,12 @@ backdrop-filter: blur(18px);
 .hh-radar-row {
   display: grid;
   grid-template-columns:
-    38px
-    minmax(240px, 1fr)
-    120px
+    32px
+    minmax(320px, 1fr)
     150px
-    90px;
-  gap: 22px;
+    180px
+    100px;
+  gap: 12px;
   padding: 24px 16px;
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -3000,7 +3000,7 @@ backdrop-filter: blur(18px);
 
  .hh-radar-row {
   grid-template-columns: 26px 1fr 105px;
-  gap: 12px;
+  gap: 10px;
   padding: 30px 16px;
   align-items: start;
 }
