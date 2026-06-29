@@ -1801,13 +1801,13 @@ if (banner) {
   </div>
 </span>
 
- <span>
+<span>
   <div class="radar-price">
     ฿${escapeHTML(pub.price)}
   </div>
 
   <div class="radar-saving">
-    Original: ฿${pub.price + pub.saving} • Save ฿${pub.saving}
+    Original: ฿${escapeHTML(pub.originalPrice)} • Save ฿${pub.saving}
   </div>
 </span>
 
