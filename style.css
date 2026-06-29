@@ -3043,8 +3043,8 @@ backdrop-filter: blur(18px);
 
 .radar-pub-name,
 .radar-price {
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.1;
 }
 
