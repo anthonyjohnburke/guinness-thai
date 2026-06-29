@@ -967,9 +967,9 @@ input, button {
 
 .popup-header .popup-title-text {
   color: #fff;
-  font-size: 2.25rem;
+  font-size: 2.2rem;
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
 .popup-card.modern {
@@ -995,7 +995,7 @@ input, button {
 
 .popup-title-text {
     font-family: 'Bebas Neue', sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 2.2em;
     line-height: 0.95;
     letter-spacing: 0.5px;
