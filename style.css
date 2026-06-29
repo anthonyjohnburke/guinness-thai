@@ -2905,8 +2905,8 @@ line-height: 1.25;
 }
 
 .hh-radar-row span:last-child {
-  color: rgba(255,255,255,0.48);
-  font-size: 0.82rem;
+  color: white;
+  font-size: 0.88rem;
   font-weight: 500;
 }
 
