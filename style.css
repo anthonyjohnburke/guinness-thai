@@ -2822,11 +2822,11 @@ backdrop-filter: blur(18px);
 .hh-radar-row {
   display: grid;
   grid-template-columns:
-    32px
-    minmax(320px, 1fr)
-    150px
-    180px
-    100px;
+  32px
+  minmax(300px, 1fr)
+  170px
+  210px
+  120px;
   gap: 8px;
   padding: 24px 16px;
   align-items: center;
@@ -2904,8 +2904,8 @@ backdrop-filter: blur(18px);
 }
 
 .hh-radar-row span:last-child {
-  color: rgba(255,255,255,0.72);
-  font-size: 0.72rem;
+  color: rgba(255,255,255,0.48);
+  font-size: 0.88rem;
   font-weight: 400;
 }
 
@@ -2921,10 +2921,11 @@ backdrop-filter: blur(18px);
 }
 
 .hh-radar-table-head {
-  color: rgba(255,255,255,0.48);
-  font-size: 0.72rem;
+  color: rgba(255,255,255,0.52);
+  font-size: 0.82rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   background: rgba(255,255,255,0.035);
 }
 
@@ -3046,7 +3047,7 @@ backdrop-filter: blur(18px);
 
 .radar-pub-name,
 .radar-price {
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 600;
   line-height: 1.1;
 }
