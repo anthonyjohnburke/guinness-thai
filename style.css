@@ -960,8 +960,8 @@ input, button {
   color: #d4af37;
   margin-bottom: 6px;
   font-size: 0.86rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
