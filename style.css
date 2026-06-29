@@ -2821,12 +2821,6 @@ backdrop-filter: blur(18px);
 
 .hh-radar-row {
   display: grid;
-  grid-template-columns:
-    32px
-    minmax(300px, 1.25fr)
-    minmax(220px, 0.85fr)
-    minmax(210px, 0.8fr)
-    88px;
   gap: 18px;
   padding: 24px 16px;
   align-items: center;
@@ -2877,6 +2871,10 @@ backdrop-filter: blur(18px);
   color: rgba(212,175,55,0.88);
   font-size: 0.88rem;
   font-weight: 500;
+}
+
+.radar-saving-mobile {
+  display: none;
 }
 
 .radar-status-live {
@@ -2979,7 +2977,18 @@ font-weight: 500;
 
 @media (max-width: 700px) {
 
-    .hh-radar-banner {
+.radar-saving-desktop {
+  display: none;
+}
+
+.radar-saving-mobile {
+  display: block;
+  color: #8bc34a;
+  text-align: right;
+  white-space: nowrap;
+}
+    
+.hh-radar-banner {
   left: 12px;
   right: 12px;
   bottom: 12px;
