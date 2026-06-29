@@ -2670,6 +2670,20 @@ text-align-last: center;
   margin: 0 auto;
 }
 
+.hh-radar-seo-text {
+  max-width: 1100px;
+  margin: 10px auto 0;
+  padding: 0 20px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.38);
+  text-align: center;
+}
+
+.hh-radar-banner.is-hidden + .hh-radar-seo-text {
+  display: none;
+}
+
 .hh-radar-banner.is-hidden {
   display: none;
 }
