@@ -206,6 +206,19 @@ function buildPopupHTML(pub, safeLink) {
         </div>
       ` : ""}
 
+      ${pub.nearest_station ? `
+ <div class="popup-row popup-nearest">
+  <div class="popup-nearest-text">
+    ${escapeHTML(pub.nearest_station)}
+    ${pub.station_distance ? ` (${
+  Number(pub.station_distance) >= 1000
+    ? (Number(pub.station_distance) / 1000).toFixed(1) + "km"
+    : Number(pub.station_distance) + "m"
+})` : ""}
+  </div>
+</div>
+` : ""}
+
     </div>
 
     <div class="popup-actions">
@@ -321,9 +334,10 @@ fetch(SHEET_URL)
   })
 
 .then(pubs => {
+  window.allPubs = pubs;
 
   const areaStrip = document.getElementById("area-filter-strip");
-
+  
   if (areaStrip) {
     const areaCounts = {};
 
@@ -610,9 +624,10 @@ if (nearbyBtn) {
 
       row.innerHTML = `
   <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
-    ${escapeHTML(pub.name)}
-    ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
-  </div>
+  <span class="bar-rank">${i + 1}.</span>
+  ${escapeHTML(pub.name)}
+  ${pub.area ? `<span class="bar-area"> ${escapeHTML(pub.area)}</span>` : ""}
+</div>
 
   <div class="bar-bottom">
     <div class="bar-wrap">
@@ -877,7 +892,7 @@ ${pub.google_maps_link ? `
         expensiveList.appendChild(row);
       });
     }
-
+initHappyHourRadarData(pubs);
    const happyPubs = pubs
   .filter(p =>
     p.happy_hour_price &&
@@ -955,12 +970,12 @@ ${pub.google_maps_link ? `
       <span class="value gold">฿${pub.happyPrice}</span>
     </div>
 
-    <div class="price-line saving">
-<span class="value green">
-  Save ฿${savingAmount} (${pub.savingPct}%)
-</span>
+   <div class="price-line saving">
+  <span class="value green">
+    Save ฿${savingAmount} (${pub.savingPct}%)
+  </span>
 </div>
-  </div>
+</div>
 `;
   
   happyList.appendChild(row);
@@ -1306,6 +1321,10 @@ function typeWriter(el, text, speed = 35) {
   navigator.geolocation.getCurrentPosition(position => {
     const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
+    window.userLocation = {
+  lat: userLat,
+  lon: userLon
+};
     if (userMarker) {
   userMarker.remove();
 }
@@ -1446,9 +1465,31 @@ if (posterBtn && posterLightbox && posterClose) {
 
 }
 
-  posterClose.addEventListener("click", () => {
-    posterLightbox.classList.remove("is-open");
+  // HUNTERS PROMOTION
+const huntersPromoBtn = document.getElementById("hunters-promo-btn");
+
+if (huntersPromoBtn) {
+  huntersPromoBtn.addEventListener("click", () => {
+    const modalImg = posterLightbox.querySelector("img");
+
+    if (modalImg) {
+      modalImg.src = "hunters_promote.jpg";
+      modalImg.alt = "Hunters Garden Guinness Promotion";
+    }
+
+    const modalLink = posterLightbox.querySelector("a");
+
+    if (modalLink) {
+      modalLink.href = "https://www.instagram.com/huntersgardenrestaurant/";
+    }
+
+    posterLightbox.classList.add("is-open");
   });
+}
+
+posterClose.addEventListener("click", () => {
+  posterLightbox.classList.remove("is-open");
+});
 
   posterLightbox.addEventListener("click", (e) => {
     if (e.target === posterLightbox) {
@@ -1462,4 +1503,352 @@ if (posterBtn && posterLightbox && posterClose) {
     }
   });
 
+}
+
+function initHappyHourRadarShell() {
+  const banner = document.getElementById("hh-radar-banner");
+  const panel = document.getElementById("hh-radar-panel");
+  const openBtn = document.getElementById("hh-radar-open");
+  const closeBtn = document.getElementById("hh-radar-close");
+  const backdrop = document.getElementById("hh-radar-backdrop");
+
+  if (!banner || !panel) return;
+
+  function openRadar() {
+  panel.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+
+  if (
+    !window.userLocation &&
+    navigator.geolocation
+  ) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        window.userLocation = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        };
+
+        if (window.allPubs) {
+          initHappyHourRadarData(window.allPubs);
+        }
+      },
+      () => {
+        // user declined location
+      }
+    );
+  }
+}
+
+  function closeRadar() {
+    panel.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openRadar);
+  closeBtn?.addEventListener("click", closeRadar);
+  backdrop?.addEventListener("click", closeRadar);
+}
+
+document.addEventListener("DOMContentLoaded", initHappyHourRadarShell);
+
+function initHappyHourRadarData(pubs) {
+const resultsEl = document.getElementById("hh-radar-results");
+const titleEl = document.getElementById("hh-radar-title");
+const subtitleEl = document.querySelector("#hh-radar-open small");
+
+if (!resultsEl) return;
+
+  const statusOrder = {
+  "Ending Soon": 0,
+  "Live": 1,
+  "Starting Soon": 2
+};
+
+  const now = new Date(
+  new Date().toLocaleString("en-US", {
+    timeZone: "Asia/Bangkok"
+  })
+);
+
+  function parseHappyHourTimes(text) {
+    if (!text) return null;
+
+    const match = String(text).match(
+  /(\d{1,2}):(\d{2}).*?(\d{1,2}):(\d{2})/
+);
+    if (!match) return null;
+
+    const start = new Date(now);
+    start.setHours(Number(match[1]), Number(match[2]), 0, 0);
+
+    const end = new Date(now);
+    end.setHours(Number(match[3]), Number(match[4]), 0, 0);
+
+    return { start, end };
+  }
+
+  function formatRemaining(ms) {
+    const mins = Math.max(0, Math.round(ms / 60000));
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    if (h && m) return `${h}h ${m}m`;
+    if (h) return `${h}h`;
+    return `${m}m`;
+  }
+
+  function formatRemainingShort(ms) {
+  const mins = Math.max(0, Math.round(ms / 60000));
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+
+  if (h) return `${h}h`;
+  return `${m}m`;
+}
+
+function formatClockShort(date) {
+  return formatClock(date).replace(" ", "");
+}
+
+  function formatClock(date) {
+  return date.toLocaleTimeString("en-US", {
+    timeZone: "Asia/Bangkok",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  })
+  .toLowerCase()
+  .replace(":00", "");
+}
+
+  const happyHours = pubs
+   .filter(pub =>
+  pub.happy_hour_price &&
+  parseHappyHourTimes(pub.special)
+)
+    .map(pub => {
+      const times = parseHappyHourTimes(pub.special);
+      if (!times) return null;
+
+      const saving =
+  Number(pub.price) - Number(pub.happy_hour_price);
+
+const savingPct =
+  Math.round((saving / Number(pub.price)) * 100);
+
+      let status = "Later";
+let statusText = "";
+let statusShortText = "";
+
+     if (now >= times.start && now <= times.end) {
+  const remaining = times.end - now;
+
+  if (remaining <= 60 * 60 * 1000) {
+  status = "Ending Soon";
+  statusText =
+    `Ends at ${formatClock(times.end)} ` +
+    `(${formatRemaining(remaining)})`;
+
+  statusShortText =
+    `Ends ${formatClockShort(times.end)} ` +
+    `(${formatRemaining(remaining)})`;
+} else {
+  status = "Live";
+  statusText =
+    `Ends at ${formatClock(times.end)} ` +
+    `(${formatRemaining(remaining)})`;
+
+  statusShortText =
+    `Ends ${formatClockShort(times.end)} ` +
+    `(${formatRemaining(remaining)})`;
+}
+
+} else if (
+  now < times.start &&
+  (times.start - now) <= 90 * 60 * 1000
+) {
+  status = "Starting Soon";
+  statusText =
+  `Starts at ${formatClock(times.start)} ` +
+  `(${formatRemaining(times.start - now)})`;
+
+statusShortText =
+  `Starts ${formatClockShort(times.start)} ` +
+  `(${formatRemaining(times.start - now)})`;
+
+} else if (now < times.start) {
+  status = "Later";
+  statusText = `Starts later today`;
+
+} else {
+  status = "Ended";
+  statusText = "Ended today";
+}
+
+      return {
+  name: pub.name,
+  area: pub.area,
+  price: pub.happy_hour_price,
+  originalPrice: pub.price,
+  saving,
+  savingPct,
+  google_maps_link: pub.google_maps_link,
+  status,
+statusText,
+statusShortText,
+lat: pub.lat,
+  lon: pub.lon,
+  distance:
+    pub.lat &&
+    pub.lon &&
+    window.userLocation
+      ? getDistance(
+          window.userLocation.lat,
+          window.userLocation.lon,
+          parseFloat(pub.lat),
+          parseFloat(pub.lon)
+        )
+      : null
+};
+    })
+    .filter(Boolean)
+.filter(pub =>
+  pub.status === "Live" ||
+  pub.status === "Ending Soon" ||
+  pub.status === "Starting Soon"
+)
+.sort((a, b) => {
+  if (statusOrder[a.status] !== statusOrder[b.status]) {
+    return statusOrder[a.status] - statusOrder[b.status];
+  }
+
+  if (a.distance == null && b.distance == null) {
+    return Number(a.price) - Number(b.price);
+  }
+
+  if (a.distance == null) return 1;
+  if (b.distance == null) return -1;
+
+  return a.distance - b.distance;
+});
+  console.log("Bangkok time:", now);
+console.log("Happy hours:", happyHours);
+
+  const liveCount =
+  happyHours.filter(pub =>
+    pub.status === "Live" ||
+    pub.status === "Ending Soon"
+  ).length;
+
+  const startingSoonCount =
+  happyHours.filter(pub => pub.status === "Starting Soon").length;
+
+  const banner = document.getElementById("hh-radar-banner");
+
+if (banner) {
+  if (liveCount === 0 && startingSoonCount === 0) {
+    banner.classList.add("is-hidden");
+  } else {
+    banner.classList.remove("is-hidden");
+  }
+}
+
+  console.log("Live count:", liveCount);
+
+  if (titleEl && subtitleEl) {
+  if (liveCount > 0) {
+    titleEl.textContent =
+      `${liveCount} Guinness Happy Hours Live Right Now`;
+
+    subtitleEl.textContent =
+      "Tap to see deals near you";
+
+  } else if (startingSoonCount > 0) {
+    titleEl.textContent =
+      `${startingSoonCount} Guinness Happy Hours Starting Soon`;
+
+    subtitleEl.textContent =
+      "Tap to see upcoming deals";
+  }
+}
+
+  resultsEl.innerHTML = happyHours.map((pub, index) => `
+    <div
+  class="hh-radar-row"
+  data-pub="${escapeHTML(pub.name)}"
+>
+      <span>${index + 1}</span>
+     <span>
+  <div class="radar-pub-name">
+    ${escapeHTML(pub.name)}
+  </div>
+
+  <div class="radar-pub-meta">
+    ${escapeHTML(pub.area || "")}
+    ${
+      pub.google_maps_link
+        ? ` • <a
+              href="${sanitizeURL(pub.google_maps_link)}"
+              target="_blank"
+              class="radar-map-link"
+            >View map</a>`
+        : ""
+    }
+  </div>
+</span>
+
+<span>
+  <div class="radar-price">
+    ฿${escapeHTML(pub.price)}
+  </div>
+
+<div class="radar-saving radar-saving-desktop">
+  Original: ฿${escapeHTML(pub.originalPrice)} • Save ฿${pub.saving}
+</div>
+
+<div class="radar-saving radar-saving-mobile">
+  Save ฿${pub.saving} (${pub.savingPct}%)
+</div>
+
+</span>
+
+  <span class="radar-status-cell">
+  ${
+    pub.status === "Ending Soon"
+      ? `<div class="radar-status-ending">Ending Soon</div>`
+      : pub.status === "Live"
+      ? `<div class="radar-status-live">Live</div>`
+      : `<div class="radar-status-starting">Starting Soon</div>`
+  }
+
+  <div class="radar-status-text">
+    ${escapeHTML(pub.statusText)}
+  </div>
+
+  <div class="radar-mobile-status-line">
+  <strong>${escapeHTML(pub.status)}</strong>
+  <span>•</span>
+  <span>${escapeHTML(pub.statusShortText)}</span>
+
+  ${
+    pub.distance != null
+      ? `
+        <span>•</span>
+        <span>${pub.distance.toFixed(1)} km</span>
+      `
+      : ""
+  }
+</div>
+</span>
+
+
+      <span>
+  ${
+    pub.distance != null
+  ? `${pub.distance.toFixed(1)} km`
+  : "Distance unavailable"
+  }
+</span>
+    </div>
+  `).join("");
 }
