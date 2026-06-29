@@ -1773,6 +1773,12 @@ margin-bottom: 28px;
   line-height: 1.6;
 }
 
+.happy-saving {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 3px;
+}
+
 .impact-row.no-promo {
   grid-template-columns: 1fr;
 }
@@ -1956,7 +1962,8 @@ margin-bottom: 28px;
    .contact-link {
   margin-top: 18px;
   margin-bottom: 0;
-}  
+}   
+}   
 }
 
     @media (max-width: 768px) {
@@ -1964,6 +1971,10 @@ margin-bottom: 28px;
 #wisdom-text {
 width: 92%;
 }
+
+.happy-saving {
+display: none;
+  }
 
 .mobile-list-toggle {
 display: block;
