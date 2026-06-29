@@ -3132,5 +3132,41 @@ backdrop-filter: blur(18px);
   white-space: nowrap;
   font-size: 0.82rem;
 }
+
+    .radar-status-cell > .radar-status-live,
+.radar-status-cell > .radar-status-ending,
+.radar-status-cell > .radar-status-starting,
+.radar-status-cell > .radar-status-text {
+  display: none;
+}
+
+.radar-mobile-status-line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border-radius: 10px;
+  background: rgba(139,195,74,0.16);
+  color: rgba(255,255,255,0.82);
+  font-size: 0.72rem;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.radar-mobile-status-line strong {
+  color: #8bc34a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.hh-radar-row span:nth-child(5) {
+  display: none;
+}
     
 }
