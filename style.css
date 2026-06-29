@@ -3070,18 +3070,6 @@ font-weight: 600;
   font-size: 0.82rem;
 }
 
-.hh-radar-row span:nth-child(4) {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 8px;
-  margin-top: 14px;
-  padding: 10px 14px;
-  border-radius: 9px;
-  background: rgba(139,195,74,0.18);
-  color: rgba(255,255,255,0.88);
-}
-
 .hh-radar-row span:nth-child(4):has(.radar-status-starting) {
   background: rgba(255,255,255,0.10);
 }
