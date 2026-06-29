@@ -2916,6 +2916,10 @@ backdrop-filter: blur(18px);
   line-height: 1.3;
 }
 
+.radar-mobile-status-line {
+  display: none;
+}
+
 .hh-radar-row:last-child {
   border-bottom: none;
 }
