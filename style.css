@@ -1845,12 +1845,16 @@ margin-bottom: 28px;
 }
 
 .popup-special-label {
-  color: #fff;
-  font-size: 1.6rem;
-  line-height: 1.4;
-  text-align: center;
-  padding-right: 10px;
-  border-right: 1.2px solid rgba(139,195,74,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    text-align: center;
+    padding-right: 10px;
+    border-right: 1.2px solid rgba(139,195,74,0.6);
 }
 
 .popup-special-text {
