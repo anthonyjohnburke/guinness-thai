@@ -2421,8 +2421,8 @@ text-align-last: center;
 .popup-nearest {
   margin: 6px 12px 4px;
   padding: 7px 9px;
-  grid-template-columns: 84px 1fr;
-  column-gap: 10px;
+  grid-template-columns: 78px 1fr;
+  column-gap: 8px;
   border-top: none;
   background: transparent;
 }
@@ -2443,15 +2443,16 @@ text-align-last: center;
   color: #111;
   font-size: 0.9rem;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.2;
 }
 
 .popup-nearest-distance {
   display: block;
   color: #111;
   font-size: 0.9rem;
-  font-weight: 700;
-  margin-top: 2px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
 }
 
 .popup-special-label {
