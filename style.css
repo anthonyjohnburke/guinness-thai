@@ -1176,8 +1176,8 @@ column-gap: 20px;
 .popup-nearest-distance {
   display: block;
   color: #111;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
   line-height: 1.2;
   margin-top: 0;
 }
