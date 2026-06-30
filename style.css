@@ -1150,7 +1150,7 @@ input, button {
       display: grid;
     grid-template-columns: 110px 1fr;
     column-gap: 16px;
-  align-items: center;
+      align-items: center;
   text-align: left;
 }
 
