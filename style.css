@@ -1161,6 +1161,19 @@ input, button {
   line-height: 1.4;
 }
 
+.popup-nearest-label {
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.popup-nearest-distance {
+  color: rgba(0,0,0,0.55);
+  font-size: 0.92rem;
+}
+
 #suggest-section {
     width: 100%;
     max-width: 1500px;
