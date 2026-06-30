@@ -1846,19 +1846,16 @@ margin-bottom: 28px;
 
 .popup-special-label {
   color: #fff;
-  font-size: 1.35rem;
-  font-weight: 700;
-  line-height: 1;
+  font-size: 1.6rem;
+  line-height: 1.4;
   text-align: center;
-
-  padding-right: 16px;
-  border-right: 2px solid rgba(139,195,74,0.5);
+  padding-right: 10px;
+  border-right: 1.2px solid rgba(139,195,74,0.6);
 }
 
 .popup-special-text {
   color: #111;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.9rem;
   line-height: 1.2;
   text-align: left;
 }
