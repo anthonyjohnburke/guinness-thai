@@ -1164,7 +1164,7 @@ column-gap: 20px;
     text-align: right;
 
     padding-right: 14px;
-    border-right: 2px solid rgba(0,0,0,0.14);
+    border-right: 1.2px solid rgba(0,0,0,0.3);
 }
 
 .popup-nearest-text {
