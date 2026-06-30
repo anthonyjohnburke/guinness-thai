@@ -1163,8 +1163,8 @@ input, button {
 
 .popup-nearest-label {
   color: #666;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
@@ -2119,6 +2119,10 @@ line-height: 1.5;
 #featured-text.collapsed p:not(:first-of-type) {
 display: none;
   }
+
+.popup-nearest-label {
+  font-size: 0.8rem;
+}
 
   #toggle-featured-btn {
     display: block;
