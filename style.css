@@ -1834,21 +1834,19 @@ margin-bottom: 28px;
   display: grid;
   grid-template-columns: 46px 1fr;
   align-items: center;
-  column-gap: 18px;
-
-  margin: 14px 18px 0;
-  padding: 18px 22px;
-
+  column-gap: 10px;
+  margin: 14px 18px;
+  padding: 14px 18px;
   background: rgba(139,195,74,0.10);
   text-align: left;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 .popup-special-label {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    transform: translateY(-1px);
     color: #fff;
     font-size: 1.6rem;
     line-height: 1.4;
