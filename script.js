@@ -225,7 +225,7 @@ function buildPopupHTML(pub, safeLink) {
 
     <div class="popup-actions">
       ${safeLink
-        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub</a>`
+        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub →</a>`
         : ""}
 
      ${pub.google_maps_link
