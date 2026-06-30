@@ -2938,8 +2938,8 @@ backdrop-filter: blur(18px);
 
 .hh-radar-copy {
   margin: 0 0 14px;
-  font-size: 0.92rem;
-  line-height: 1.65;
+  font-size: 0.9rem;
+  line-height: 1.5;
   color: rgba(255,255,255,0.68);
   text-align: center;
 }
@@ -2974,7 +2974,7 @@ backdrop-filter: blur(18px);
 }
 
 .radar-price {
-  color: #d4af37;
+  color: #fff;
   font-size: 1.02rem; /* same as pub name */
   font-weight: 600;
   line-height: 1;
