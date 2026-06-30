@@ -2414,10 +2414,11 @@ text-align-last: center;
 }
 
 .popup-special {
-  margin: 6px 12px 4px;
-  padding: 7px 9px;
-  grid-template-columns: 58px 1fr;
-  column-gap: 10px;
+    margin: 6px 0px;
+    padding: 7px 9px;
+    grid-template-columns: 58px 1fr;
+    column-gap: 10px;
+    border-radius: 8px;
 }
 
 .popup-nearest {
