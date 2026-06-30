@@ -1156,27 +1156,26 @@ input, button {
 .popup-nearest-label {
   color: #111;
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 
-  padding-right: 16px;
+  padding-right: 14px;
   border-right: 2px solid rgba(0,0,0,0.14);
 }
 
 .popup-nearest-text {
   color: #111;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.9rem;
   line-height: 1.2;
 }
 
 .popup-nearest-distance {
   display: block;
   color: #111;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 500;
   line-height: 1.2;
   margin-top: 0;
 }
