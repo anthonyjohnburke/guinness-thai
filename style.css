@@ -2421,7 +2421,7 @@ text-align-last: center;
 .popup-nearest {
   margin: 6px 12px 4px;
   padding: 7px 9px;
-  grid-template-columns: 58px 1fr;
+  grid-template-columns: 84px 1fr;
   column-gap: 10px;
   border-top: none;
   background: transparent;
@@ -2429,9 +2429,9 @@ text-align-last: center;
 
 .popup-nearest-label {
   color: #111;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.2;
   padding-right: 8px;
   border-right: 2px solid rgba(0,0,0,0.12);
 }
