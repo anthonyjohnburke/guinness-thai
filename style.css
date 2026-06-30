@@ -1993,6 +1993,11 @@ width: 92%;
 display: block;
 }
 
+.hh-radar-copy {
+font-size: 0.7rem;
+line-height: 1.5;
+}
+
 .freshness-key {
   display: block;
   margin-top: 8px;
@@ -2060,7 +2065,7 @@ display: block;
     grid-column: auto;
   }
 
-         #cheap-list,
+#cheap-list,
   #expensive-list {
     display: none;
   }
