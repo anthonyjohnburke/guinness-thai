@@ -212,7 +212,7 @@ function buildPopupHTML(pub, safeLink) {
 <div class="popup-row popup-nearest">
 
   <div class="popup-nearest-label">
-    NEAREST STATION
+    NEAREST<br>STATION
   </div>
 
   <div class="popup-nearest-text">
