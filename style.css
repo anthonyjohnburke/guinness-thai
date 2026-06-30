@@ -2872,6 +2872,18 @@ backdrop-filter: blur(18px);
   background: rgba(255,255,255,0.03);
 }
 
+.hh-radar-copy {
+  margin: 0 0 14px;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.68);
+  text-align: center;
+}
+
+.hh-radar-note p:last-child {
+  margin: 0;
+}
+
 .radar-pub-name {
   font-size: 1.02rem;
   font-weight: 600;
