@@ -1144,12 +1144,12 @@ input, button {
 }
 
 .popup-nearest {
-  margin: 8px 32px 14px;
-  padding: 16px 0;
-  border-top: none;
-  display: grid;
-    grid-template-columns: 115px 1fr;
-column-gap: 20px;
+      margin: 8px 32px 14px;
+      padding: 16px 0;
+      border-top: none;
+      display: grid;
+    grid-template-columns: 110px 1fr;
+    column-gap: 16px;
   align-items: center;
   text-align: left;
 }
