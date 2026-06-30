@@ -208,16 +208,22 @@ function buildPopupHTML(pub, safeLink) {
         </div>
       ` : ""}
 
-      ${pub.nearest_station ? `
- <div class="popup-row popup-nearest">
+     ${pub.nearest_station ? `
+<div class="popup-row popup-nearest">
+
+  <div class="popup-nearest-label">
+    NEAREST BTS
+  </div>
+
   <div class="popup-nearest-text">
     ${escapeHTML(pub.nearest_station)}
-    ${pub.station_distance ? ` (${
-  Number(pub.station_distance) >= 1000
-    ? (Number(pub.station_distance) / 1000).toFixed(1) + "km"
-    : Number(pub.station_distance) + "m"
-})` : ""}
+    ${pub.station_distance ? `<br><span class="popup-nearest-distance">${
+      Number(pub.station_distance) >= 1000
+        ? (Number(pub.station_distance) / 1000).toFixed(1) + " km"
+        : Number(pub.station_distance) + " m"
+    }</span>` : ""}
   </div>
+
 </div>
 ` : ""}
 
