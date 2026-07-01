@@ -3253,12 +3253,7 @@ font-weight: 500;
 }
 
 .hh-radar-row span:nth-child(4):has(.radar-status-ending) {
-  background: rgba(245,201,106,0.16);
-}
-
-.hh-radar-row span:nth-child(4) .radar-status-text {
-  margin-top: 0;
-  text-align: center;
+  background: rgba(212,175,55,0.12);
 }
 
 .hh-radar-row span:nth-child(4) .radar-status-live,
