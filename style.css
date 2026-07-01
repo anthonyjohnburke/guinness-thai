@@ -3034,7 +3034,7 @@ backdrop-filter: blur(18px);
 }
 
 .radar-status-ending {
-  color: #f5c96a;
+  ccolor: #d4af37;
   font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -3306,24 +3306,39 @@ font-weight: 500;
   gap: 6px;
   width: 100%;
   box-sizing: border-box;
-  padding: 11px 14px;
-  border-radius: 10px;
-  background: rgba(139,195,74,0.18);
-  color: rgba(255,255,255,0.72);
-  font-size: 0.72rem;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(139,195,74,0.16);
+  color: rgba(255,255,255,0.68);
+  font-size: 0.7rem;
   line-height: 1.25;
-  white-space: normal;
-  overflow: visible;
-  flex-wrap: wrap;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-wrap: nowrap;
 }
-  
+
 .radar-mobile-status-line strong {
   color: #8bc34a;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
-  flex-shrink: 0;
+}
+
+.radar-mobile-status-line span {
+  color: rgba(255,255,255,0.68);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+    .radar-status-cell {
+  background: transparent;
+}
+
+.radar-status-ending,
+.radar-status-live,
+.radar-status-starting,
+.radar-status-text {
+  background: transparent;
 }
 
 .hh-radar-row span:nth-child(5) {
