@@ -2774,10 +2774,10 @@ text-align-last: center;
   .hh-radar-banner {
     left: 40px;
     right: auto;
-    top: 118px;
+    top: 96px;
     bottom: auto;
     transform: none;
-    width: 500px;
+    width: 450px;
     max-width: calc(100% - 80px);
     transition: top 0.25s ease;
   }
@@ -2787,8 +2787,9 @@ text-align-last: center;
   }
 
   .hh-radar-open {
-    border-radius: 14px;
-    padding: 16px 22px;
+    border-radius: 10px;
+    padding: 22px 22px;
+    min-height: 74px;   /* adds a little more height */
   }
 }
 
