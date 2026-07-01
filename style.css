@@ -2772,12 +2772,12 @@ text-align-last: center;
 
 @media (min-width: 901px) {
   .hh-radar-banner {
-    left: 40px;
+    left: 30px;
     right: auto;
-    top: 96px;
+    top: 130px;
     bottom: auto;
     transform: none;
-    width: 450px;
+    width: 420px;
     max-width: calc(100% - 80px);
     transition: top 0.25s ease;
   }
