@@ -2772,13 +2772,18 @@ text-align-last: center;
 
 @media (min-width: 901px) {
   .hh-radar-banner {
-    left: 50%;
+    left: 40px;
     right: auto;
-    top: 125px;
+    top: 118px;
     bottom: auto;
-    transform: translateX(-50%);
+    transform: none;
     width: 500px;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 80px);
+    transition: top 0.25s ease;
+  }
+
+  body.header-scrolled .hh-radar-banner {
+    top: 82px;
   }
 
   .hh-radar-open {
