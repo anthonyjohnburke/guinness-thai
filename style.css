@@ -3252,10 +3252,6 @@ font-weight: 500;
   background: rgba(255,255,255,0.10);
 }
 
-.hh-radar-row span:nth-child(4):has(.radar-status-ending) {
-  background: rgba(212,175,55,0.12);
-}
-
 .hh-radar-row span:nth-child(4) .radar-status-live,
 .hh-radar-row span:nth-child(4) .radar-status-ending,
 .hh-radar-row span:nth-child(4) .radar-status-starting {
