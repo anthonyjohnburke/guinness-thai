@@ -2997,8 +2997,8 @@ backdrop-filter: blur(18px);
 
 .radar-status-live {
   color: #8bc34a;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.02rem;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -3010,10 +3010,9 @@ backdrop-filter: blur(18px);
 }
 
 .radar-status-starting {
-  color: rgba(255,255,255,0.7);
-  font-size: 1rem;
+  color: #fff;
+  font-size: 1.02rem;
   font-weight: 500;
-  text-transform: uppercase;
 }
 
 .hh-radar-row span:last-child {
