@@ -1857,7 +1857,7 @@ margin-bottom: 28px;
 .popup-special-text {
   color: #111;
   font-size: 0.9rem;
-  line-height: 1.2;
+  line-height: 1.4;
   text-align: left;
 }
 
@@ -2020,6 +2020,15 @@ width: 92%;
         
 .mobile-list-toggle {
 display: block;
+}
+
+.popup-special-text {
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+.popup-special-label {
+  transform: translateY(0px);
 }
 
 .hh-radar-copy {
