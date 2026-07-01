@@ -1176,7 +1176,7 @@ input, button {
 .popup-nearest-distance {
   display: block;
   color: #111;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   line-height: 1.2;
   margin-top: 0;
@@ -2453,8 +2453,8 @@ text-align-last: center;
 .popup-nearest-distance {
   display: block;
   color: #111;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 500;
   line-height: 1.2;
   margin-top: 0;
 }
@@ -2462,10 +2462,6 @@ text-align-last: center;
 .popup-special-label {
   font-size: 0.8em;
   padding-right: 8px;
-}
-
-.popup-special-text {
-  font-size: 0.95em;
 }
 
 .popup-nearest-text {
