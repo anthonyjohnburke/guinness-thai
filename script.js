@@ -1833,7 +1833,7 @@ if (banner) {
     ${escapeHTML(pub.statusText)}
   </div>
 
-  <div class="radar-mobile-status-line">
+ <div class="radar-mobile-status-line">
   <strong>${escapeHTML(pub.status)}</strong>
   <span>•</span>
   <span>${escapeHTML(pub.statusShortText)}</span>
@@ -1842,7 +1842,7 @@ if (banner) {
     pub.distance != null
       ? `
         <span>•</span>
-        <span>${pub.distance.toFixed(1)} km</span>
+        <span>${pub.distance.toFixed(1)} km away</span>
       `
       : ""
   }
