@@ -3330,6 +3330,14 @@ font-weight: 500;
   font-weight: 500;
 }
 
+    .radar-status-cell:has(.radar-status-ending) .radar-mobile-status-line {
+  background: rgba(212,175,55,0.13);
+}
+
+.radar-status-cell:has(.radar-status-ending) .radar-mobile-status-line strong {
+  color: #d4af37;
+}
+
     .radar-status-cell {
   background: transparent;
 }
