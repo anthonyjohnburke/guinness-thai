@@ -1279,11 +1279,10 @@ window.addEventListener("scroll", () => {
   const topBar = document.getElementById("top-bar");
   if (!topBar) return;
 
-  if (window.scrollY > 30) {
-    topBar.classList.add("is-scrolled");
-  } else {
-    topBar.classList.remove("is-scrolled");
-  }
+  const scrolled = window.scrollY > 30;
+
+  topBar.classList.toggle("is-scrolled", scrolled);
+  document.body.classList.toggle("header-scrolled", scrolled);
 });
 
 function typeWriter(el, text, speed = 35) {
