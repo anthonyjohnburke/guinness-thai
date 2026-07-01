@@ -1832,17 +1832,14 @@ if (banner) {
     ${escapeHTML(pub.statusText)}
   </div>
 
- <div class="radar-mobile-status-line">
+<div class="radar-mobile-status-line">
   <strong>${escapeHTML(pub.status)}</strong>
   <span>•</span>
   <span>${escapeHTML(pub.statusShortText)}</span>
 
   ${
-    pub.distance != null
-      ? `
-        <span>•</span>
-        <span>${pub.distance.toFixed(1)} km away</span>
-      `
+    Number.isFinite(pub.distance)
+      ? `<span>• ${pub.distance.toFixed(1)} km away</span>`
       : ""
   }
 </div>
