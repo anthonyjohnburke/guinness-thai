@@ -2791,8 +2791,8 @@ text-align-last: center;
   max-width: 1100px;
   margin: 10px auto 0;
   padding: 0 20px;
-  font-size: 0.8rem;
-  line-height: 1.5;
+  font-size: 0.75rem;
+  line-height: 1.4;
   color: rgba(255,255,255,0.38);
   text-align: center;
 }
