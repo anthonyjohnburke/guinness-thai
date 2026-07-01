@@ -2756,7 +2756,6 @@ text-align-last: center;
   .insight-strip {
     margin-top: 42px;
   }
-
 }
 
 /* ===== Happy Hour Radar ===== */
@@ -2769,6 +2768,23 @@ text-align-last: center;
   z-index: 9997;
   max-width: 760px;
   margin: 0 auto;
+}
+
+@media (min-width: 901px) {
+  .hh-radar-banner {
+    left: 50%;
+    right: auto;
+    top: 125px;
+    bottom: auto;
+    transform: translateX(-50%);
+    width: 500px;
+    max-width: calc(100% - 40px);
+  }
+
+  .hh-radar-open {
+    border-radius: 14px;
+    padding: 16px 22px;
+  }
 }
 
 .hh-radar-seo-text {
