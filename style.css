@@ -3121,10 +3121,10 @@ font-weight: 500;
   display: none;
 }
 
-#hh-radar-results .hh-radar-row > span:last-child {
+#hh-radar-results .hh-radar-row span:last-child {
 display: none;
   }
-
+    
 .radar-saving-mobile {
   display: block;
   color: #8bc34a;
