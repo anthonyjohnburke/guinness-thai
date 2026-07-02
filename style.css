@@ -3049,7 +3049,7 @@ backdrop-filter: blur(18px);
 #hh-radar-results .hh-radar-row span:last-child {
   color: rgba(255,255,255,0.82);
   font-size: 0.88rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .radar-status-text {
@@ -3309,6 +3309,17 @@ font-weight: 500;
   flex-wrap: nowrap;
 }
 
+    .radar-mobile-status-line,
+.radar-mobile-status-line span,
+.radar-mobile-status-line strong {
+  font-size: 0.7rem;
+}
+
+.radar-mobile-status-line span {
+  color: rgba(255,255,255,0.68);
+  font-weight: 500;
+}
+
 .radar-mobile-status-line strong {
   color: #8bc34a;
   font-size: 0.7rem;
@@ -3341,7 +3352,7 @@ font-weight: 500;
   background: transparent;
 }
 
-.hh-radar-row span:nth-child(5) {
+/* .hh-radar-row span:nth-child(5) {
   display: none;
-}  
+} */
 }
