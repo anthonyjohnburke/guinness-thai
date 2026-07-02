@@ -3292,6 +3292,12 @@ font-weight: 500;
   display: none;
 }
 
+    .radar-mobile-distance {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.68);
+    font-weight: 500;
+  }
+
 .radar-mobile-status-line {
   display: flex;
   align-items: center;
