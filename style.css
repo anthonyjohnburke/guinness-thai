@@ -3124,6 +3124,12 @@ font-weight: 500;
 #hh-radar-results .hh-radar-row > span:last-child {
   display: none;
 }
+
+#hh-radar-results .hh-radar-row span:last-child {
+  color: rgba(255,255,255,0.82);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
     
 .radar-saving-mobile {
   display: block;
