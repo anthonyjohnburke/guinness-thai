@@ -1839,8 +1839,7 @@ if (banner) {
 
   ${
     Number.isFinite(pub.distance)
-      ? `<span class="radar-mobile-distance">• ${pub.distance.toFixed(1)} km away</span>``
-      : ""
+? `<span class="radar-mobile-distance">• ${pub.distance.toFixed(1)} km away</span>`      : ""
   }
 </div>
 </span>
