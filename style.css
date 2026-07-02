@@ -3121,9 +3121,9 @@ font-weight: 500;
   display: none;
 }
 
-#hh-radar-results .hh-radar-row span:last-child {
-display: none;
-  }
+#hh-radar-results .hh-radar-row > span:last-child {
+  display: none;
+}
     
 .radar-saving-mobile {
   display: block;
@@ -3221,14 +3221,7 @@ display: none;
   grid-column: 2 / 4;
   grid-row: 3;
 }
-
-.hh-radar-row span:nth-child(5) {
-  display: block;
-  grid-column: 2 / 4;
-  grid-row: 4;
-  text-align: right;
-}
-
+    
 .radar-pub-name,
 .radar-price {
   font-size: 1.08rem;
@@ -3271,13 +3264,7 @@ display: none;
   font-size: 0.78rem;
 }
 
-.hh-radar-row span:nth-child(5) {
-  margin-top: -6px;
-  color: rgba(255,255,255,0.62);
-  font-size: 0.76rem;
-}
-
-    .radar-status-live,
+.radar-status-live,
 .radar-status-ending,
 .radar-status-starting {
   font-size: 0.75rem;
@@ -3319,27 +3306,11 @@ display: none;
   flex-wrap: nowrap;
 }
 
-    .radar-mobile-status-line,
-.radar-mobile-status-line span,
-.radar-mobile-status-line strong {
-  font-size: 0.7rem;
-}
-
-.radar-mobile-status-line span {
-  color: rgba(255,255,255,0.68);
-  font-weight: 500;
-}
-
 .radar-mobile-status-line strong {
   color: #8bc34a;
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.04em;
-}
-
-#hh-radar-results .hh-radar-row span:last-child {
-  font-size: 0.7rem;
-  font-weight: 500;
 }
 
 .radar-mobile-status-line span {
@@ -3366,8 +3337,4 @@ display: none;
 .radar-status-text {
   background: transparent;
 }
-
-/* .hh-radar-row span:nth-child(5) {
-  display: none;
-} */
 }
