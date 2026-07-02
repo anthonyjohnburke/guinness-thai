@@ -879,7 +879,7 @@ input, button {
     width: 95%;
     max-width: 1500px;
     margin: 15px auto 0;
-    padding: 28px 28px 36px;
+    padding: 28px 28px;
     border-top: 1px solid rgba(255,255,255,0.08);
     box-sizing: border-box;
 }
@@ -889,7 +889,7 @@ input, button {
     color: rgba(255,255,255,0.45);
     max-width: 1400px;
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.5;
     text-align: center;
 }
 
