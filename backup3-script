@@ -191,31 +191,39 @@ function buildPopupHTML(pub, safeLink) {
         </div>
       `}
 
-      ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
-        <div class="popup-row price-row">
-          <span class="popup-label">Happy Hour</span>
-          <span class="price-divider"></span>
-          <span class="popup-value popup-value-happy">฿${escapeHTML(pub.happy_hour_price)}</span>
-        </div>
-      ` : ""}
+     ${pub.happy_hour_price && String(pub.happy_hour_price).toLowerCase() !== "n/a" ? `
+  <div class="popup-row price-row happy-row">
+    <span class="popup-label popup-label-happy">HAPPY HOUR</span>
+    <span class="price-divider price-divider-happy"></span>
+    <span class="popup-value popup-value-happy">
+      ฿${escapeHTML(pub.happy_hour_price)}
+    </span>
+  </div>
+` : ""}
 
       ${pub.special ? `
         <div class="popup-row popup-special">
-          <div class="popup-special-label">Special</div>
+          <div class="popup-special-label">★</div>
           <div class="popup-special-text">${escapeHTML(pub.special)}</div>
         </div>
       ` : ""}
 
-      ${pub.nearest_station ? `
- <div class="popup-row popup-nearest">
+     ${pub.nearest_station ? `
+<div class="popup-row popup-nearest">
+
+  <div class="popup-nearest-label">
+    NEAREST<br>STATION
+  </div>
+
   <div class="popup-nearest-text">
     ${escapeHTML(pub.nearest_station)}
-    ${pub.station_distance ? ` (${
-  Number(pub.station_distance) >= 1000
-    ? (Number(pub.station_distance) / 1000).toFixed(1) + "km"
-    : Number(pub.station_distance) + "m"
-})` : ""}
+    ${pub.station_distance ? `<br><span class="popup-nearest-distance">${
+      Number(pub.station_distance) >= 1000
+        ? (Number(pub.station_distance) / 1000).toFixed(1) + " km"
+        : Number(pub.station_distance) + " m"
+    }</span>` : ""}
   </div>
+
 </div>
 ` : ""}
 
@@ -223,7 +231,7 @@ function buildPopupHTML(pub, safeLink) {
 
     <div class="popup-actions">
       ${safeLink
-        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub</a>`
+        ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer" data-pub-link="${escapeHTML(pub.name || 'unknown')}">View Pub →</a>`
         : ""}
 
      ${pub.google_maps_link
@@ -1271,11 +1279,10 @@ window.addEventListener("scroll", () => {
   const topBar = document.getElementById("top-bar");
   if (!topBar) return;
 
-  if (window.scrollY > 30) {
-    topBar.classList.add("is-scrolled");
-  } else {
-    topBar.classList.remove("is-scrolled");
-  }
+  const scrolled = window.scrollY > 30;
+
+  topBar.classList.toggle("is-scrolled", scrolled);
+  document.body.classList.toggle("header-scrolled", scrolled);
 });
 
 function typeWriter(el, text, speed = 35) {
@@ -1825,18 +1832,14 @@ if (banner) {
     ${escapeHTML(pub.statusText)}
   </div>
 
-  <div class="radar-mobile-status-line">
+<div class="radar-mobile-status-line">
   <strong>${escapeHTML(pub.status)}</strong>
   <span>•</span>
   <span>${escapeHTML(pub.statusShortText)}</span>
 
   ${
-    pub.distance != null
-      ? `
-        <span>•</span>
-        <span>${pub.distance.toFixed(1)} km</span>
-      `
-      : ""
+    Number.isFinite(pub.distance)
+? `<span class="radar-mobile-distance">• ${pub.distance.toFixed(1)} km away</span>`      : ""
   }
 </div>
 </span>
