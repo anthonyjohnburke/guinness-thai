@@ -1764,12 +1764,17 @@ const closestPub = [...happyHours]
 
 if (summaryEl) {
   summaryEl.innerHTML = `
-    <strong>${liveCount} Live</strong> •
-    ${startingSoonCount} Starting &lt;1h •
-    ${endingSoonCount} Ending &lt;1h
+    <span><strong>${liveCount}</strong> Live</span>
+    <span>•</span>
+    <span><strong>${startingSoonCount}</strong> Starting &lt;1h</span>
+    <span>•</span>
+    <span><strong>${endingSoonCount}</strong> Ending &lt;1h</span>
     ${
       closestPub
-        ? ` • Closest: <strong>${escapeHTML(closestPub.name)}</strong> (${closestPub.distance.toFixed(1)} km)`
+        ? `
+          <span>•</span>
+          <span>Closest: <strong>${escapeHTML(closestPub.name)}</strong> (${closestPub.distance.toFixed(1)} km)</span>
+        `
         : ""
     }
   `;
