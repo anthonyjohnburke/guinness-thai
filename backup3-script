@@ -10,7 +10,7 @@ const INITIAL_VIEW = {
   center: [100.5018, 13.7563],
   zoom: 11.2
 };
-
+ 
   const wisdoms = [
   "If you’ve crossed Sukhumvit for it, it better be a creamy one.",
   "That was an absolute creamer… if you know, you know.",
