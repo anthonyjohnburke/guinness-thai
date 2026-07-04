@@ -3043,7 +3043,7 @@ backdrop-filter: blur(18px);
 .radar-status-starting {
   color: #fff;
   font-size: 1.02rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 #hh-radar-results .hh-radar-row span:last-child {
