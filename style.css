@@ -2950,8 +2950,7 @@ backdrop-filter: blur(18px);
   align-items: center;
   flex-wrap: wrap;
   gap: 10px 14px;
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
   padding: 14px 18px;
   border-radius: 16px;
   background: rgba(255,255,255,0.045);
@@ -2960,6 +2959,7 @@ backdrop-filter: blur(18px);
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.4;
+    box-sizing: border-box;
 }
 
 .hh-radar-summary strong {
