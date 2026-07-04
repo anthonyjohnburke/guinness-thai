@@ -3170,24 +3170,26 @@ font-weight: 500;
   min-width: 0;
 }
 
-    .hh-radar-tabs {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 12px;
-    margin-bottom: 14px;
-    -webkit-overflow-scrolling: touch;
-  }
+   .hh-radar-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  overflow: visible;
+  padding-bottom: 0;
+  margin-bottom: 14px;
+}
 
+.hh-radar-tabs button {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 10px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  text-align: center;
+}
+    
   .hh-radar-tabs::-webkit-scrollbar {
     display: none;
-  }
-
-  .hh-radar-tabs button {
-    flex: 0 0 auto;
-    padding: 12px 18px;
-    font-size: 0.82rem;
-    white-space: nowrap;
   }
     
 .hh-radar-open strong {
