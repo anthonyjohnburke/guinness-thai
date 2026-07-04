@@ -2927,7 +2927,7 @@ backdrop-filter: blur(18px);
 
 .hh-radar-tabs {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   overflow-x: auto;
   padding-bottom: 12px;
   margin-bottom: 8px;
