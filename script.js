@@ -1563,6 +1563,8 @@ function initHappyHourRadarData(pubs) {
 const resultsEl = document.getElementById("hh-radar-results");
 const titleEl = document.getElementById("hh-radar-title");
 const subtitleEl = document.querySelector("#hh-radar-open small");
+const sortTabs = document.getElementById("hh-radar-sort-tabs");
+let radarSort = window.hhRadarSort || "nearest";
 
 if (!resultsEl) return;
 
@@ -1715,7 +1717,9 @@ lat: pub.lat,
           parseFloat(pub.lat),
           parseFloat(pub.lon)
         )
-      : null
+      : null,
+        remainingMs: times.end - now,
+happyDurationMs: times.end - times.start
 };
     })
     .filter(Boolean)
@@ -1723,21 +1727,8 @@ lat: pub.lat,
   pub.status === "Live" ||
   pub.status === "Ending Soon" ||
   pub.status === "Starting Soon"
-)
-.sort((a, b) => {
-  if (statusOrder[a.status] !== statusOrder[b.status]) {
-    return statusOrder[a.status] - statusOrder[b.status];
-  }
+);
 
-  if (a.distance == null && b.distance == null) {
-    return Number(a.price) - Number(b.price);
-  }
-
-  if (a.distance == null) return 1;
-  if (b.distance == null) return -1;
-
-  return a.distance - b.distance;
-});
   console.log("Bangkok time:", now);
 console.log("Happy hours:", happyHours);
 
@@ -1778,8 +1769,38 @@ if (banner) {
       "Tap to see upcoming deals";
   }
 }
+function sortHappyHours(list) {
+  return [...list].sort((a, b) => {
 
-  resultsEl.innerHTML = happyHours.map((pub, index) => `
+    if (radarSort === "cheapest") {
+      return Number(a.price) - Number(b.price);
+    }
+
+    if (radarSort === "ending") {
+      return a.remainingMs - b.remainingMs;
+    }
+
+    if (radarSort === "longest") {
+      return b.remainingMs - a.remainingMs;
+    }
+
+    // default = nearest
+    if (a.distance == null && b.distance == null) {
+      return Number(a.price) - Number(b.price);
+    }
+
+    if (a.distance == null) return 1;
+    if (b.distance == null) return -1;
+
+    return a.distance - b.distance;
+  });
+}
+
+function renderHappyHours() {
+  const sortedHappyHours = sortHappyHours(happyHours);
+
+  resultsEl.innerHTML = sortedHappyHours.map((pub, index) => `
+  
     <div
   class="hh-radar-row"
   data-pub="${escapeHTML(pub.name)}"
@@ -1854,4 +1875,29 @@ if (banner) {
 </span>
     </div>
   `).join("");
+}
+
+renderHappyHours();
+
+if (sortTabs) {
+  sortTabs.querySelectorAll("button").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.sort === radarSort
+    );
+
+    button.addEventListener("click", () => {
+      radarSort = button.dataset.sort;
+      window.hhRadarSort = radarSort;
+
+      sortTabs.querySelectorAll("button")
+        .forEach(btn => btn.classList.remove("active"));
+
+      button.classList.add("active");
+
+      renderHappyHours();
+    });
+  });
+}
 }
