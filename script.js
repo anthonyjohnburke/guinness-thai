@@ -1772,8 +1772,11 @@ if (summaryEl) {
     ${
       closestPub
         ? `
-          <span>•</span>
-          <span>Closest: <strong>${escapeHTML(closestPub.name)}</strong> (${closestPub.distance.toFixed(1)} km)</span>
+          <span class="summary-separator">•</span>
+<span class="summary-closest">
+  Closest: <strong>${escapeHTML(closestPub.name)}</strong>
+  (${closestPub.distance.toFixed(1)} km)
+</span>
         `
         : ""
     }
