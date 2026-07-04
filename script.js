@@ -1559,6 +1559,19 @@ function initHappyHourRadarShell() {
 
 document.addEventListener("DOMContentLoaded", initHappyHourRadarShell);
 
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("hh-radar-banner");
+  if (!banner) return;
+
+  setTimeout(() => {
+    banner.classList.add("attention");
+
+    setTimeout(() => {
+      banner.classList.remove("attention");
+    }, 1400);
+  }, 6000);
+});
+
 function initHappyHourRadarData(pubs) {
 const resultsEl = document.getElementById("hh-radar-results");
 const titleEl = document.getElementById("hh-radar-title");
