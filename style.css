@@ -300,6 +300,7 @@ body {
 
 #map-unlock-btn {
   display: none;
+  animation: pulse 1.6s ease-in-out infinite;
 }
 
 /* Layout */
@@ -863,10 +864,6 @@ input, button {
 #submit-btn:hover {
     background: #c49c2f;
     transform: translateY(-1px);
-}
-
-#map-unlock-btn {
-  animation: pulse 1.6s ease-in-out infinite;
 }
 
 @keyframes pulse {
