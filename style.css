@@ -3173,6 +3173,28 @@ font-weight: 500;
   display: none;
 }
 
+    .hh-radar-header {
+  text-align: center;
+}
+
+.hh-radar-header p {
+  text-align: center;
+}
+
+.hh-radar-summary {
+  justify-content: center;
+}
+
+.hh-radar-summary .summary-closest {
+  width: 100%;
+  display: block;
+  margin-top: 4px;
+}
+
+.hh-radar-summary .summary-separator:last-of-type {
+  display: none;
+}
+    
 #hh-radar-results .hh-radar-row > span:last-child {
   display: none;
 }
