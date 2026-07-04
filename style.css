@@ -3087,7 +3087,9 @@ font-weight: 500;
 
   .radar-saving {
     font-weight: 500;
+    color: rgba(255,255,255,0.75)
   }
+    
 }
 
 .hh-radar-table-head {
