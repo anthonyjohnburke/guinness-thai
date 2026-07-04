@@ -2770,6 +2770,19 @@ text-align-last: center;
   margin: 0 auto;
 }
 
+.hh-radar-summary {
+  margin: 14px 0 0;
+  color: rgba(255,255,255,0.68);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.hh-radar-summary strong {
+  color: #d4af37;
+  font-weight: 800;
+}
+
 @media (min-width: 901px) {
   .hh-radar-banner {
     left: 30px;
