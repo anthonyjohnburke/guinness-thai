@@ -2955,12 +2955,15 @@ backdrop-filter: blur(18px);
   font-size: 0.78rem;
   font-weight: 700;
   white-space: nowrap;
+    transition: all 0.18s ease;
 }
 
 .hh-radar-tabs button.active {
   background: #d4af37;
   color: #000;
   border-color: #d4af37;
+transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212,175,55,0.25);
 }
 
 .hh-radar-table {
