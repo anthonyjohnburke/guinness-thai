@@ -14,7 +14,7 @@ body {
     min-height: 100vh;
     padding-top: 120px;
 }
-
+ 
 .faq-body {
   padding-top: 18px;
 }
