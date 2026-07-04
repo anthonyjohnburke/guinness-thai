@@ -1577,6 +1577,7 @@ const resultsEl = document.getElementById("hh-radar-results");
 const titleEl = document.getElementById("hh-radar-title");
 const subtitleEl = document.querySelector("#hh-radar-open small");
 const sortTabs = document.getElementById("hh-radar-sort-tabs");
+const summaryEl = document.getElementById("hh-radar-summary");
 let radarSort = window.hhRadarSort || "nearest";
 
 if (!resultsEl) return;
@@ -1687,7 +1688,7 @@ let statusShortText = "";
 
 } else if (
   now < times.start &&
-  (times.start - now) <= 90 * 60 * 1000
+  (times.start - now) <= 60 * 60 * 1000
 ) {
   status = "Starting Soon";
   statusText =
@@ -1753,6 +1754,26 @@ console.log("Happy hours:", happyHours);
 
   const startingSoonCount =
   happyHours.filter(pub => pub.status === "Starting Soon").length;
+
+  const endingSoonCount =
+  happyHours.filter(pub => pub.status === "Ending Soon").length;
+
+const closestPub = [...happyHours]
+  .filter(pub => Number.isFinite(pub.distance))
+  .sort((a, b) => a.distance - b.distance)[0];
+
+if (summaryEl) {
+  summaryEl.innerHTML = `
+    <strong>${liveCount} Live</strong> •
+    ${startingSoonCount} Starting &lt;1h •
+    ${endingSoonCount} Ending &lt;1h
+    ${
+      closestPub
+        ? ` • Closest: <strong>${escapeHTML(closestPub.name)}</strong> (${closestPub.distance.toFixed(1)} km)`
+        : ""
+    }
+  `;
+}
 
   const banner = document.getElementById("hh-radar-banner");
 
