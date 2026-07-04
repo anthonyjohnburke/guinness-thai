@@ -2782,6 +2782,19 @@ text-align-last: center;
     transition: top 0.25s ease;
   }
 
+    @keyframes radar-nudge {
+  0%,100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+}
+
+.hh-radar-banner.attention {
+  animation: radar-nudge 1.4s ease;
+}
+
   body.header-scrolled .hh-radar-banner {
     top: 82px;
   }
