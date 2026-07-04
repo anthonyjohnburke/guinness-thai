@@ -1770,31 +1770,36 @@ if (banner) {
   }
 }
 function sortHappyHours(list) {
+
+  // Longest Remaining
+  if (radarSort === "longest") {
+    return [...list]
+      .filter(pub =>
+        pub.status === "Live" ||
+        pub.status === "Ending Soon"
+      )
+      .sort((a, b) => b.remainingMs - a.remainingMs);
+  }
+
+  // Ending Soon
+  if (radarSort === "ending") {
+    return [...list]
+      .filter(pub =>
+        pub.status === "Live" ||
+        pub.status === "Ending Soon"
+      )
+      .sort((a, b) => a.remainingMs - b.remainingMs);
+  }
+
+  // Cheapest
+  if (radarSort === "cheapest") {
+    return [...list].sort(
+      (a, b) => Number(a.price) - Number(b.price)
+    );
+  }
+
+  // Nearest (default)
   return [...list].sort((a, b) => {
-
-    if (radarSort === "cheapest") {
-      return Number(a.price) - Number(b.price);
-    }
-
-    if (radarSort === "ending") {
-  const liveOnly = list.filter(pub =>
-    pub.status === "Live" ||
-    pub.status === "Ending Soon"
-  );
-
-  return liveOnly.sort((a, b) => a.remainingMs - b.remainingMs);
-}
-
-if (radarSort === "longest") {
-  const liveOnly = list.filter(pub =>
-    pub.status === "Live" ||
-    pub.status === "Ending Soon"
-  );
-
-  return liveOnly.sort((a, b) => b.remainingMs - a.remainingMs);
-}
-
-    // default = nearest
     if (a.distance == null && b.distance == null) {
       return Number(a.price) - Number(b.price);
     }
