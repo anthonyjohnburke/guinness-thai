@@ -2948,18 +2948,23 @@ backdrop-filter: blur(18px);
 .hh-radar-summary {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 10px 14px;
+  gap: 8px 14px;
+
   width: 100%;
-  padding: 14px 18px;
-  border-radius: 16px;
+  box-sizing: border-box;
+  padding: 16px 22px;
+
+  border-radius: 18px;
   background: rgba(255,255,255,0.045);
   border: 1px solid rgba(255,255,255,0.10);
+
   color: rgba(255,255,255,0.78);
   font-size: 0.9rem;
   font-weight: 600;
-  line-height: 1.4;
-    box-sizing: border-box;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .hh-radar-summary strong {
