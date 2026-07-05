@@ -3168,7 +3168,9 @@ font-weight: 500;
 }
 
 .hh-radar-summary {
-  justify-content: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    line-height: 1.1;
 }
 
 .hh-radar-summary .summary-closest {
