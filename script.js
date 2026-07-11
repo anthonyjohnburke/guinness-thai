@@ -95,15 +95,19 @@ function renderFeaturedPromotions() {
         >
       </button>
 
-     <div class="featured-pub-copy">
+  <div class="featured-pub-copy">
 
-  <div class="promo-badge">
-    ${promo.badge}
+  <div class="promo-header">
+
+    <div class="promo-badge">
+      ${promo.badge}
+    </div>
+
+    <h3 class="promo-title">
+      ${promo.title}
+    </h3>
+
   </div>
-
-  <h3 class="promo-title">
-    ${promo.title}
-  </h3>
 
   <p class="intro-small">
     ${promo.description}
