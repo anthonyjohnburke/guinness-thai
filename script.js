@@ -13,37 +13,31 @@ const INITIAL_VIEW = {
 
 const featuredPromotions = [
   {
+    badge: "FEATURED",
     title: "Split The G Challenge",
+    venue: "The Old English",
+    venueUrl: "https://www.instagram.com/theoldenglishbangkok/",
     image: "SplitG.jpg",
     alt: "Split The G Challenge at The Old English",
+    description: "Come down every Friday and take on the legendary Split The G Challenge.",
     link: "https://www.instagram.com/theoldenglishbangkok/",
-    description: `
-      Come down every Friday at
-      <a href="https://www.instagram.com/theoldenglishbangkok/"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="featured-inline-link">
-         The Old English
-      </a>
-      and take on the legendary Split The G Challenge.
-    `
+    buttonText: "View Promotion",
+    order: 1,
+    active: true
   },
 
   {
+    badge: "NEW",
     title: "Hunters Garden",
+    venue: "Hunters Garden",
+    venueUrl: "https://www.instagram.com/huntersgardenrestaurant/",
     image: "hunters_promote.jpg",
     alt: "Hunters Garden Guinness Promotion",
+    description: "Guinness is now pouring. Drop by and take advantage of their latest Guinness promotion.",
     link: "https://www.instagram.com/huntersgardenrestaurant/",
-    description: `
-      Guinness is now pouring at
-      <a href="https://www.instagram.com/huntersgardenrestaurant/"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="featured-inline-link">
-         Hunters Garden
-      </a>.
-      Drop by and take advantage of their latest Guinness promotion.
-    `
+    buttonText: "View Promotion",
+    order: 2,
+    active: true
   }
 ];
  
