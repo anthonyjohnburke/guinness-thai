@@ -110,15 +110,12 @@ function renderFeaturedPromotions() {
   </div>
 
   <p class="intro-small">
-    ${promo.description}
-  </p>
-
- <p class="promo-venue">
+  ${promo.description}
   <a
     href="${promo.venueUrl}"
     target="_blank"
     rel="noopener noreferrer"
-    class="promo-venue-link"
+    class="promo-inline-link"
   >
     → ${promo.venue}
   </a>
