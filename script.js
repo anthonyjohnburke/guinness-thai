@@ -117,7 +117,7 @@ function renderFeaturedPromotions() {
     rel="noopener noreferrer"
     class="promo-inline-link"
   >
-    → ${promo.venue}
+    › ${promo.venue}
   </a>
 </p>
 
