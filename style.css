@@ -486,17 +486,17 @@ opacity: 1;
 
 .promo-venue {
   margin-top: 10px;
-  font-size: 15px;
 }
 
-.promo-venue a {
-  color: #bdbdbd;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.promo-venue a:hover {
+.promo-venue-link {
   color: #d4af37;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.promo-venue-link:hover {
+  opacity: 0.8;
 }
 
 /* Bar chart */
