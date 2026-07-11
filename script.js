@@ -12,6 +12,8 @@ const INITIAL_VIEW = {
   zoom: 11.2
 };
 
+// Fallback promotions
+// Used if Google Sheets cannot be loaded.
 const featuredPromotions = [
   {
     badge: "FEATURED",
