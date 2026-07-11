@@ -3,6 +3,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
 const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
+const PROMOTIONS_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Promotions";
 const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYNGNwFHCLN934thYjzdlFnoJS6zFIvF31EVluSNu2fTpUGVxBsHfCSvXloPCqrv7s/exec";
 const SUBMIT_COOLDOWN_MS = 30000;
 
