@@ -180,6 +180,51 @@ async function loadFeaturedPromotions() {
   }
 }
 
+async function loadSiteMessage() {
+
+  try {
+    const response = await fetch(SITE_MESSAGES_URL);
+
+    if (!response.ok) {
+      throw new Error("Failed to load site message");
+    }
+
+    const rows = await response.json();
+
+    const row = rows.find(r =>
+      String(r.Active || "").trim().toLowerCase() === "true"
+    );
+
+    if (!row) return;
+
+    const titleEl = document.getElementById("site-message-title");
+    const textEl = document.getElementById("site-message-text");
+    const linkEl = document.getElementById("site-message-link");
+
+    if (titleEl) {
+      titleEl.textContent = row.Title || "";
+    }
+
+    if (textEl) {
+      textEl.textContent = row.Text || "";
+    }
+
+    if (
+      linkEl &&
+      row["Link Text"] &&
+      row["Link URL"]
+    ) {
+      linkEl.textContent = row["Link Text"];
+      linkEl.href = row["Link URL"];
+      linkEl.hidden = false;
+    }
+
+  } catch (err) {
+    console.warn("Using fallback site message", err);
+  }
+
+}
+
 function setRandomWisdom() {
   const el = document.getElementById("wisdom-text");
   if (!el) return;
@@ -471,6 +516,7 @@ class ResetControl {
 map.addControl(new ResetControl(), 'top-right');
 
 loadFeaturedPromotions();
+loadSiteMessage();
 
 fetch(SHEET_URL)
   .then(res => {
