@@ -1536,9 +1536,11 @@ document.addEventListener("click", (e) => {
 
 });
 
-if (posterClose && posterLightbox) {
-  posterClose.addEventListener("click", () => {
-    posterLightbox.classList.remove("is-open");
+if (posterLightbox) {
+  posterLightbox.addEventListener("click", (e) => {
+    if (e.target === posterLightbox) {
+      posterLightbox.classList.remove("is-open");
+    }
   });
 }
 
@@ -1549,10 +1551,10 @@ if (posterClose && posterLightbox) {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      posterLightbox.classList.remove("is-open");
-    }
-  });
+  if (e.key === "Escape" && posterLightbox) {
+    posterLightbox.classList.remove("is-open");
+  }
+});
 
 function initHappyHourRadarShell() {
   const banner = document.getElementById("hh-radar-banner");
