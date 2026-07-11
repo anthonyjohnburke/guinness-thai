@@ -128,6 +128,55 @@ function renderFeaturedPromotions() {
   `).join("");
 }
 
+async function loadFeaturedPromotions() {
+  renderFeaturedPromotions();
+
+  try {
+    const response = await fetch(PROMOTIONS_URL);
+
+    if (!response.ok) {
+      throw new Error("Failed to load promotions");
+    }
+
+    const rows = await response.json();
+
+    const sheetPromotions = rows
+      .filter(row =>
+        String(row.Active || "").trim().toLowerCase() === "true"
+      )
+      .map(row => ({
+        badge: String(row.Badge || "").trim(),
+        title: String(row.Title || "").trim(),
+        venue: String(row.Venue || "").trim(),
+        venueUrl: String(row["Venue URL"] || "").trim(),
+        image: String(row.Image || "").trim(),
+        alt: `${row.Title || "Guinness promotion"} at ${row.Venue || "a Bangkok pub"}`,
+        description: String(row.Description || "").trim(),
+        link: String(row.Link || row["Venue URL"] || "").trim(),
+        buttonText: "View Promotion",
+        order: Number(row.Order) || 999,
+        active: true
+      }))
+      .filter(promo => promo.title && promo.image)
+      .sort((a, b) => a.order - b.order);
+
+    if (sheetPromotions.length === 0) {
+      throw new Error("No active promotions found");
+    }
+
+    featuredPromotions.splice(
+      0,
+      featuredPromotions.length,
+      ...sheetPromotions
+    );
+
+    renderFeaturedPromotions();
+
+  } catch (error) {
+    console.warn("Using fallback promotions:", error);
+  }
+}
+
 function setRandomWisdom() {
   const el = document.getElementById("wisdom-text");
   if (!el) return;
@@ -418,7 +467,7 @@ class ResetControl {
 
 map.addControl(new ResetControl(), 'top-right');
 
-renderFeaturedPromotions();
+loadFeaturedPromotions();
 
 fetch(SHEET_URL)
   .then(res => {
