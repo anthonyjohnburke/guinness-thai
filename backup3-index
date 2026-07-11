@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
- <title>Best Guinness in Bangkok, Thailand 2026 | Prices, Maps & Cheapest Pints</title>
+<title>Best Guinness in Bangkok, Thailand 2026 | Prices, Maps & Cheapest Pints</title>
   <meta name="description" content="Discover the best Guinness in Bangkok and across Thailand. Compare prices, find top pubs, and see where to get the cheapest pint.">
   <meta name="keywords" content="Guinness Bangkok, best Guinness Bangkok, Irish pubs Bangkok">
   <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -13,7 +13,7 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png">
 <link rel="icon" href="/favicon-16x16.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
+ 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
 
@@ -199,53 +199,9 @@
 
 <div id="featured-pub-block" class="section-block featured-pub-block">
 
-<h2 class="intro-heading">Featured Promotions</h2>
+  <h2 class="intro-heading">What's on tap</h2>
 
-<div class="featured-pub-layout">
-
-  <button id="featured-pub-image-btn" class="featured-pub-image-btn" type="button">
-    <img
-      src="SplitG.jpg"
-      alt="Split The G Challenge at The Old English"
-      class="featured-pub-img"
-    >
-  </button>
-
-  <div class="featured-pub-copy">
-    <p class="intro-small">Come down every Friday at <a href="https://www.instagram.com/theoldenglishbangkok/"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="featured-inline-link">The Old English</a> and take on the legendary Split The G Challenge.
-</p>
-</div>
-</div>
-  
-  <!-- Promotion 2 -->
-<div class="featured-pub-layout">
-  
-  <button id="hunters-promo-btn"
-        class="featured-pub-image-btn"
-        type="button">
-    <img
-      src="hunters_promote.jpg"
-      alt="Hunters Garden Guinness Promotion"
-      class="featured-pub-img"
-    >
-  </button>
-
-  <div class="featured-pub-copy">
- <p class="intro-small">
-  Guinness is now pouring at
-  <a href="https://www.instagram.com/huntersgardenrestaurant/"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="featured-inline-link">
-     Hunters Garden
-  </a>.
-  Drop by and take advantage of their latest Guinness promotion.
-</p>
-</div>
-</div>
+  <div id="featured-promotions"></div>
 
 </div>
   
@@ -312,18 +268,19 @@
     <div class="hh-radar-handle"></div>
 
     <div class="hh-radar-header">
-      <div>
-        <h2>Guinness Happy Hour Radar</h2>
-        <p>Live, starting soon and ending soon. Sorted by distance when location is allowed.</p>
-      </div>
-    </div>
+  <div>
+    <h2>Guinness Happy Hour Radar</h2>
+    <p>Live, starting soon and ending soon. Sorted by distance when location is allowed.</p>
+    <div id="hh-radar-summary" class="hh-radar-summary"></div>
+  </div>
+</div>
 
-    <div class="hh-radar-tabs">
-      <button class="active" type="button">All</button>
-      <button type="button">Live Now</button>
-      <button type="button">Starting Soon</button>
-      <button type="button">Ending Soon</button>
-    </div>
+<div class="hh-radar-tabs" id="hh-radar-sort-tabs">
+  <button class="active" type="button" data-sort="nearest">Nearest</button>
+  <button type="button" data-sort="cheapest">Cheapest</button>
+  <button type="button" data-sort="ending">Ending Soon</button>
+  <button type="button" data-sort="longest">Most Time Left</button>
+</div>
 
     <div class="hh-radar-table">
       <div class="hh-radar-row hh-radar-table-head">
