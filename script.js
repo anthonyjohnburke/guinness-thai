@@ -1509,62 +1509,38 @@ document.addEventListener("DOMContentLoaded", () => {
 const posterBtn = document.getElementById("globe-poster-btn");
 const posterLightbox = document.getElementById("poster-lightbox");
 const posterClose = document.getElementById("poster-close");
-const featuredPubImageBtn = document.getElementById("featured-pub-image-btn");
 
-if (posterBtn && posterLightbox && posterClose) {
+document.addEventListener("click", (e) => {
 
-  posterBtn.addEventListener("click", () => {
-    posterLightbox.classList.add("is-open");
-  });
+  const btn = e.target.closest(".featured-pub-image-btn");
+  if (!btn) return;
 
-  if (featuredPubImageBtn) {
+  const index = Number(btn.dataset.promo);
+  const promo = featuredPromotions[index];
 
-  featuredPubImageBtn.addEventListener("click", () => {
+  if (!promo) return;
 
-    const modalImg = posterLightbox.querySelector("img");
+  const modalImg = posterLightbox.querySelector("img");
+  const modalLink = posterLightbox.querySelector("a");
 
-    if (modalImg) {
-      modalImg.src = "SplitG.jpg";
-      modalImg.alt = "Creamer of the Month";
-    }
+  if (modalImg) {
+    modalImg.src = promo.image;
+    modalImg.alt = promo.alt;
+  }
 
-    const modalLink = posterLightbox.querySelector("a");
+  if (modalLink) {
+    modalLink.href = promo.link;
+  }
 
-    if (modalLink) {
-      modalLink.href = "https://www.instagram.com/theoldenglishbangkok/";
-    }
+  posterLightbox.classList.add("is-open");
 
-    posterLightbox.classList.add("is-open");
-
-  });
-
-}
-
-  // HUNTERS PROMOTION
-const huntersPromoBtn = document.getElementById("hunters-promo-btn");
-
-if (huntersPromoBtn) {
-  huntersPromoBtn.addEventListener("click", () => {
-    const modalImg = posterLightbox.querySelector("img");
-
-    if (modalImg) {
-      modalImg.src = "hunters_promote.jpg";
-      modalImg.alt = "Hunters Garden Guinness Promotion";
-    }
-
-    const modalLink = posterLightbox.querySelector("a");
-
-    if (modalLink) {
-      modalLink.href = "https://www.instagram.com/huntersgardenrestaurant/";
-    }
-
-    posterLightbox.classList.add("is-open");
-  });
-}
-
-posterClose.addEventListener("click", () => {
-  posterLightbox.classList.remove("is-open");
 });
+
+if (posterClose && posterLightbox) {
+  posterClose.addEventListener("click", () => {
+    posterLightbox.classList.remove("is-open");
+  });
+}
 
   posterLightbox.addEventListener("click", (e) => {
     if (e.target === posterLightbox) {
@@ -1577,8 +1553,6 @@ posterClose.addEventListener("click", () => {
       posterLightbox.classList.remove("is-open");
     }
   });
-
-}
 
 function initHappyHourRadarShell() {
   const banner = document.getElementById("hh-radar-banner");
