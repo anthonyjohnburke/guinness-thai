@@ -3,6 +3,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
 const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
+const PROMOTIONS_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Promotions";
 const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYNGNwFHCLN934thYjzdlFnoJS6zFIvF31EVluSNu2fTpUGVxBsHfCSvXloPCqrv7s/exec";
 const SUBMIT_COOLDOWN_MS = 30000;
 
@@ -10,6 +11,38 @@ const INITIAL_VIEW = {
   center: [100.5018, 13.7563],
   zoom: 11.2
 };
+
+// Fallback promotions
+// Used if Google Sheets cannot be loaded.
+const featuredPromotions = [
+  {
+    badge: "FEATURED",
+    title: "Split The G Challenge",
+    venue: "The Old English",
+    venueUrl: "https://www.instagram.com/theoldenglishbangkok/",
+    image: "SplitG.jpg",
+    alt: "Split The G Challenge at The Old English",
+    description: "Come down every Friday and take on the legendary Split The G Challenge.",
+    link: "https://www.instagram.com/theoldenglishbangkok/",
+    buttonText: "View Promotion",
+    order: 1,
+    active: true
+  },
+
+  {
+    badge: "NEW",
+    title: "Hunters Garden",
+    venue: "Hunters Garden",
+    venueUrl: "https://www.instagram.com/huntersgardenrestaurant/",
+    image: "hunters_promote.jpg",
+    alt: "Hunters Garden Guinness Promotion",
+    description: "Guinness is now pouring. Drop by and take advantage of their latest Guinness promotion.",
+    link: "https://www.instagram.com/huntersgardenrestaurant/",
+    buttonText: "View Promotion",
+    order: 2,
+    active: true
+  }
+];
  
   const wisdoms = [
   "If you’ve crossed Sukhumvit for it, it better be a creamy one.",
@@ -42,6 +75,107 @@ function sanitizeURL(url) {
     return "";
   } catch {
     return "";
+  }
+}
+
+function renderFeaturedPromotions() {
+  const container = document.getElementById("featured-promotions");
+
+  if (!container) return;
+
+  container.innerHTML = featuredPromotions.map((promo, index) => `
+    <div class="featured-pub-layout">
+
+      <button
+        class="featured-pub-image-btn"
+        type="button"
+        data-promo="${index}"
+      >
+        <img
+          src="${promo.image}"
+          alt="${promo.alt}"
+          class="featured-pub-img"
+        >
+      </button>
+
+  <div class="featured-pub-copy">
+
+  <div class="promo-header">
+
+    <div class="promo-badge">
+      ${promo.badge}
+    </div>
+
+    <h3 class="promo-title">
+      ${promo.title}
+    </h3>
+
+  </div>
+
+  <p class="intro-small">
+  ${promo.description}
+  <a
+    href="${promo.venueUrl}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="promo-inline-link"
+  >
+    › ${promo.venue}
+  </a>
+</p>
+
+</div>
+
+    </div>
+  `).join("");
+}
+
+async function loadFeaturedPromotions() {
+  renderFeaturedPromotions();
+
+  try {
+    const response = await fetch(PROMOTIONS_URL);
+
+    if (!response.ok) {
+      throw new Error("Failed to load promotions");
+    }
+
+    const rows = await response.json();
+
+    const sheetPromotions = rows
+      .filter(row =>
+        String(row.Active || "").trim().toLowerCase() === "true"
+      )
+      .map(row => ({
+        badge: String(row.Badge || "").trim(),
+        title: String(row.Title || "").trim(),
+        venue: String(row.Venue || "").trim(),
+        venueUrl: String(row["Venue URL"] || "").trim(),
+        image: String(row.Image || "").trim(),
+        alt: `${row.Title || "Guinness promotion"} at ${row.Venue || "a Bangkok pub"}`,
+        description: String(row.Description || "").trim(),
+        link: String(row.Link || row["Venue URL"] || "").trim(),
+        buttonText: "View Promotion",
+        order: Number(row.Order) || 999,
+        active: true
+      }))
+      .filter(promo => promo.title && promo.image)
+      .sort((a, b) => a.order - b.order);
+
+    if (sheetPromotions.length === 0) {
+      throw new Error("No active promotions found");
+    }
+
+    featuredPromotions.splice(
+      0,
+      featuredPromotions.length,
+      ...sheetPromotions
+    );
+
+    renderFeaturedPromotions();
+
+  } catch (error) {
+    console.warn("Using fallback promotions:", error);
   }
 }
 
@@ -334,6 +468,8 @@ class ResetControl {
 }
 
 map.addControl(new ResetControl(), 'top-right');
+
+loadFeaturedPromotions();
 
 fetch(SHEET_URL)
   .then(res => {
@@ -1441,76 +1577,51 @@ document.addEventListener("DOMContentLoaded", () => {
 const posterBtn = document.getElementById("globe-poster-btn");
 const posterLightbox = document.getElementById("poster-lightbox");
 const posterClose = document.getElementById("poster-close");
-const featuredPubImageBtn = document.getElementById("featured-pub-image-btn");
 
-if (posterBtn && posterLightbox && posterClose) {
+document.addEventListener("click", (e) => {
 
-  posterBtn.addEventListener("click", () => {
-    posterLightbox.classList.add("is-open");
-  });
+  const btn = e.target.closest(".featured-pub-image-btn");
+  if (!btn) return;
 
-  if (featuredPubImageBtn) {
+  const index = Number(btn.dataset.promo);
+  const promo = featuredPromotions[index];
 
-  featuredPubImageBtn.addEventListener("click", () => {
+  if (!promo) return;
 
-    const modalImg = posterLightbox.querySelector("img");
+  const modalImg = posterLightbox.querySelector("img");
+  const modalLink = posterLightbox.querySelector("a");
 
-    if (modalImg) {
-      modalImg.src = "SplitG.jpg";
-      modalImg.alt = "Creamer of the Month";
-    }
+  if (modalImg) {
+    modalImg.src = promo.image;
+    modalImg.alt = promo.alt;
+  }
 
-    const modalLink = posterLightbox.querySelector("a");
+  if (modalLink) {
+    modalLink.href = promo.link;
+  }
 
-    if (modalLink) {
-      modalLink.href = "https://www.instagram.com/theoldenglishbangkok/";
-    }
-
-    posterLightbox.classList.add("is-open");
-
-  });
-
-}
-
-  // HUNTERS PROMOTION
-const huntersPromoBtn = document.getElementById("hunters-promo-btn");
-
-if (huntersPromoBtn) {
-  huntersPromoBtn.addEventListener("click", () => {
-    const modalImg = posterLightbox.querySelector("img");
-
-    if (modalImg) {
-      modalImg.src = "hunters_promote.jpg";
-      modalImg.alt = "Hunters Garden Guinness Promotion";
-    }
-
-    const modalLink = posterLightbox.querySelector("a");
-
-    if (modalLink) {
-      modalLink.href = "https://www.instagram.com/huntersgardenrestaurant/";
-    }
-
-    posterLightbox.classList.add("is-open");
-  });
-}
-
-posterClose.addEventListener("click", () => {
-  posterLightbox.classList.remove("is-open");
+  posterLightbox.classList.add("is-open");
 });
 
+if (posterClose && posterLightbox) {
+  posterClose.addEventListener("click", () => {
+    posterLightbox.classList.remove("is-open");
+  });
+}
+
+if (posterLightbox) {
   posterLightbox.addEventListener("click", (e) => {
     if (e.target === posterLightbox) {
       posterLightbox.classList.remove("is-open");
     }
   });
+}
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      posterLightbox.classList.remove("is-open");
-    }
-  });
-
-}
+  if (e.key === "Escape" && posterLightbox) {
+    posterLightbox.classList.remove("is-open");
+  }
+});
 
 function initHappyHourRadarShell() {
   const banner = document.getElementById("hh-radar-banner");
@@ -1559,10 +1670,26 @@ function initHappyHourRadarShell() {
 
 document.addEventListener("DOMContentLoaded", initHappyHourRadarShell);
 
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("hh-radar-banner");
+  if (!banner) return;
+
+  setTimeout(() => {
+    banner.classList.add("attention");
+
+    setTimeout(() => {
+      banner.classList.remove("attention");
+    }, 1400);
+  }, 6000);
+});
+
 function initHappyHourRadarData(pubs) {
 const resultsEl = document.getElementById("hh-radar-results");
 const titleEl = document.getElementById("hh-radar-title");
 const subtitleEl = document.querySelector("#hh-radar-open small");
+const sortTabs = document.getElementById("hh-radar-sort-tabs");
+const summaryEl = document.getElementById("hh-radar-summary");
+let radarSort = window.hhRadarSort || "nearest";
 
 if (!resultsEl) return;
 
@@ -1672,7 +1799,7 @@ let statusShortText = "";
 
 } else if (
   now < times.start &&
-  (times.start - now) <= 90 * 60 * 1000
+  (times.start - now) <= 60 * 60 * 1000
 ) {
   status = "Starting Soon";
   statusText =
@@ -1715,7 +1842,9 @@ lat: pub.lat,
           parseFloat(pub.lat),
           parseFloat(pub.lon)
         )
-      : null
+      : null,
+        remainingMs: times.end - now,
+happyDurationMs: times.end - times.start
 };
     })
     .filter(Boolean)
@@ -1723,21 +1852,8 @@ lat: pub.lat,
   pub.status === "Live" ||
   pub.status === "Ending Soon" ||
   pub.status === "Starting Soon"
-)
-.sort((a, b) => {
-  if (statusOrder[a.status] !== statusOrder[b.status]) {
-    return statusOrder[a.status] - statusOrder[b.status];
-  }
+);
 
-  if (a.distance == null && b.distance == null) {
-    return Number(a.price) - Number(b.price);
-  }
-
-  if (a.distance == null) return 1;
-  if (b.distance == null) return -1;
-
-  return a.distance - b.distance;
-});
   console.log("Bangkok time:", now);
 console.log("Happy hours:", happyHours);
 
@@ -1749,6 +1865,34 @@ console.log("Happy hours:", happyHours);
 
   const startingSoonCount =
   happyHours.filter(pub => pub.status === "Starting Soon").length;
+
+  const endingSoonCount =
+  happyHours.filter(pub => pub.status === "Ending Soon").length;
+
+const closestPub = [...happyHours]
+  .filter(pub => Number.isFinite(pub.distance))
+  .sort((a, b) => a.distance - b.distance)[0];
+
+if (summaryEl) {
+  summaryEl.innerHTML = `
+    <span><strong>${liveCount}</strong> Live</span>
+    <span>•</span>
+    <span><strong>${startingSoonCount}</strong> Starting &lt;1h</span>
+    <span>•</span>
+    <span><strong>${endingSoonCount}</strong> Ending &lt;1h</span>
+    ${
+      closestPub
+        ? `
+          <span class="summary-separator">•</span>
+<span class="summary-closest">
+  Closest: <strong>${escapeHTML(closestPub.name)}</strong>
+  (${closestPub.distance.toFixed(1)} km)
+</span>
+        `
+        : ""
+    }
+  `;
+}
 
   const banner = document.getElementById("hh-radar-banner");
 
@@ -1778,8 +1922,53 @@ if (banner) {
       "Tap to see upcoming deals";
   }
 }
+function sortHappyHours(list) {
 
-  resultsEl.innerHTML = happyHours.map((pub, index) => `
+  // Longest Remaining
+  if (radarSort === "longest") {
+    return [...list]
+      .filter(pub =>
+        pub.status === "Live" ||
+        pub.status === "Ending Soon"
+      )
+      .sort((a, b) => b.remainingMs - a.remainingMs);
+  }
+
+  // Ending Soon
+  if (radarSort === "ending") {
+    return [...list]
+      .filter(pub =>
+        pub.status === "Live" ||
+        pub.status === "Ending Soon"
+      )
+      .sort((a, b) => a.remainingMs - b.remainingMs);
+  }
+
+  // Cheapest
+  if (radarSort === "cheapest") {
+    return [...list].sort(
+      (a, b) => Number(a.price) - Number(b.price)
+    );
+  }
+
+  // Nearest (default)
+  return [...list].sort((a, b) => {
+    if (a.distance == null && b.distance == null) {
+      return Number(a.price) - Number(b.price);
+    }
+
+    if (a.distance == null) return 1;
+    if (b.distance == null) return -1;
+
+    return a.distance - b.distance;
+  });
+}
+
+function renderHappyHours() {
+  const sortedHappyHours = sortHappyHours(happyHours);
+
+  resultsEl.innerHTML = sortedHappyHours.map((pub, index) => `
+  
     <div
   class="hh-radar-row"
   data-pub="${escapeHTML(pub.name)}"
@@ -1854,4 +2043,29 @@ if (banner) {
 </span>
     </div>
   `).join("");
+}
+
+renderHappyHours();
+
+if (sortTabs) {
+  sortTabs.querySelectorAll("button").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.sort === radarSort
+    );
+
+    button.addEventListener("click", () => {
+      radarSort = button.dataset.sort;
+      window.hhRadarSort = radarSort;
+
+      sortTabs.querySelectorAll("button")
+        .forEach(btn => btn.classList.remove("active"));
+
+      button.classList.add("active");
+
+      renderHappyHours();
+    });
+  });
+}
 }
