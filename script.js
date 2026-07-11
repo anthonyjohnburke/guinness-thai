@@ -10,6 +10,42 @@ const INITIAL_VIEW = {
   center: [100.5018, 13.7563],
   zoom: 11.2
 };
+
+const featuredPromotions = [
+  {
+    title: "Split The G Challenge",
+    image: "SplitG.jpg",
+    alt: "Split The G Challenge at The Old English",
+    description: `
+      Come down every Friday at
+      <a href="https://www.instagram.com/theoldenglishbangkok/"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="featured-inline-link">
+         The Old English
+      </a>
+      and take on the legendary Split The G Challenge.
+    `,
+    button: true
+  },
+
+  {
+    title: "Hunters Garden",
+    image: "hunters_promote.jpg",
+    alt: "Hunters Garden Guinness Promotion",
+    description: `
+      Guinness is now pouring at
+      <a href="https://www.instagram.com/huntersgardenrestaurant/"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="featured-inline-link">
+         Hunters Garden
+      </a>.
+      Drop by and take advantage of their latest Guinness promotion.
+    `,
+    button: true
+  }
+];
  
   const wisdoms = [
   "If you’ve crossed Sukhumvit for it, it better be a creamy one.",
