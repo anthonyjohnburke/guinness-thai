@@ -209,15 +209,22 @@ async function loadSiteMessage() {
       textEl.textContent = row.Text || "";
     }
 
-    if (
-      linkEl &&
-      row["Link Text"] &&
-      row["Link URL"]
-    ) {
-      linkEl.textContent = row["Link Text"];
-      linkEl.href = row["Link URL"];
-      linkEl.hidden = false;
-    }
+   const linkText = String(row["Link Text"] || "").trim();
+const linkUrl = sanitizeURL(
+  String(row["Link URL"] || "").trim()
+);
+
+if (linkEl) {
+  linkEl.textContent = "";
+  linkEl.removeAttribute("href");
+  linkEl.style.display = "none";
+
+  if (linkText && linkUrl) {
+    linkEl.textContent = linkText;
+    linkEl.href = linkUrl;
+    linkEl.style.display = "inline-flex";
+  }
+}
 
   } catch (err) {
     console.warn("Using fallback site message", err);
