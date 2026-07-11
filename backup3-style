@@ -3,7 +3,7 @@
 html, body {
     overflow-x: hidden;
 }
-
+ 
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
@@ -16,7 +16,7 @@ body {
 }
  
 .faq-body {
-  padding-top: 18px;
+    padding-top: 18px;
 }
 
 .faq-hero {
@@ -300,6 +300,7 @@ body {
 
 #map-unlock-btn {
   display: none;
+  animation: pulse 1.6s ease-in-out infinite;
 }
 
 /* Layout */
@@ -384,7 +385,7 @@ opacity: 1;
 }
 
 .chart-key {
-    font-size: 1.1em;
+    font-size: 1em;
     color: rgba(255,255,255,0.6);
     margin: 25px 0;
     letter-spacing: 0.06em;
@@ -450,6 +451,64 @@ opacity: 1;
 
 .featured-pub-layout + .featured-pub-layout {
   margin-top: 36px;
+}
+
+.promo-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.promo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #d4af37;
+  color: #111;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.promo-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.promo-venue {
+  margin-top: 10px;
+}
+
+.promo-venue-link {
+  color: #d4af37;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.promo-venue-link:hover {
+  opacity: 0.8;
+}
+
+.promo-inline-link {
+  color: #d4af37;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.promo-inline-link:hover {
+  opacity: 0.8;
 }
 
 /* Bar chart */
@@ -557,16 +616,11 @@ line-height: 1.25;
     filter: brightness(1.15);
 }
 
-.last-updated {
-font-size: 0.7em;
-color: rgba(255,255,255,0.55);
-margin-top: 2px;
-}
-
+.last-updated,
 .verification-note {
-font-size: 0.7em;
-color: rgba(255,255,255,0.55);
-margin-top: 2px;
+  font-size: 0.7em;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2px;
 }
 
 #toggle-chart-btn {
@@ -863,10 +917,6 @@ input, button {
 #submit-btn:hover {
     background: #c49c2f;
     transform: translateY(-1px);
-}
-
-#map-unlock-btn {
-  animation: pulse 1.6s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -1641,18 +1691,13 @@ input, button {
 }
 
 .contact-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin-top: auto;
   align-items: center;
   text-align: center;
   justify-content: center;
-}
-
-.suggest-col,
-.nearby-col,
-.contact-col {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .insight-strip {
@@ -2112,6 +2157,11 @@ line-height: 1.5;
   #expensive-list.is-open {
     display: block;
   }
+
+    .promo-header {
+    justify-content: center;
+    font-size: 16px;
+}
 
   .mobile-list-toggle {
     display: block;
@@ -2770,6 +2820,11 @@ text-align-last: center;
   margin: 0 auto;
 }
 
+.hh-radar-summary strong {
+  color: #d4af37;
+  font-weight: 700;
+}
+
 @media (min-width: 901px) {
   .hh-radar-banner {
     left: 30px;
@@ -2781,6 +2836,19 @@ text-align-last: center;
     max-width: calc(100% - 80px);
     transition: top 0.25s ease;
   }
+
+    @keyframes radar-nudge {
+  0%,100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+}
+
+.hh-radar-banner.attention {
+  animation: radar-nudge 1.4s ease;
+}
 
   body.header-scrolled .hh-radar-banner {
     top: 82px;
@@ -2830,15 +2898,15 @@ cursor: pointer;
 
 .hh-radar-open strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.2;
 }
 
 .hh-radar-open small {
   display: block;
   color: rgba(255,255,255,0.62);
-  font-size: 0.75rem;
-  margin-top: 3px;
+  font-size: 0.82rem;
+  margin-top: 4px;
 }
 
 .hh-radar-arrow {
@@ -2908,26 +2976,54 @@ backdrop-filter: blur(18px);
 
 .hh-radar-header {
   text-align: left;
-  padding-right: 46px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .hh-radar-header h2 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
-  margin: 0 0 6px;
+  font-size: 3rem;
+  line-height: 0.95;
+  margin: 0 0 14px;
+  letter-spacing: 0.03em;
 }
 
 .hh-radar-header p {
-  margin: 0;
-  color: rgba(255,255,255,0.65);
-  font-size: 0.9rem;
+  margin: 0 0 18px;
+  color: rgba(255,255,255,0.66);
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
+.hh-radar-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 22px;
+
+  border-radius: 18px;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.10);
+
+  color: rgba(255,255,255,0.78);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.hh-radar-summary strong {
+  color: #fff;
+  font-weight: 800;
+}
+
 .hh-radar-tabs {
-  display: none;
-  gap: 8px;
+  display: flex;
+  gap: 12px;
   overflow-x: auto;
   padding-bottom: 12px;
   margin-bottom: 8px;
@@ -2942,12 +3038,15 @@ backdrop-filter: blur(18px);
   font-size: 0.78rem;
   font-weight: 700;
   white-space: nowrap;
+    transition: all 0.18s ease;
 }
 
 .hh-radar-tabs button.active {
   background: #d4af37;
   color: #000;
   border-color: #d4af37;
+transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212,175,55,0.25);
 }
 
 .hh-radar-table {
@@ -2959,7 +3058,7 @@ backdrop-filter: blur(18px);
 .hh-radar-row {
   display: grid;
   gap: 18px;
-  padding: 24px 16px;
+  padding: 18px 16px;
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   text-align: left;
@@ -3043,7 +3142,7 @@ backdrop-filter: blur(18px);
 .radar-status-starting {
   color: #fff;
   font-size: 1.02rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 #hh-radar-results .hh-radar-row span:last-child {
@@ -3087,7 +3186,9 @@ font-weight: 500;
 
   .radar-saving {
     font-weight: 500;
+    color: rgba(255,255,255,0.75)
   }
+    
 }
 
 .hh-radar-table-head {
@@ -3121,6 +3222,30 @@ font-weight: 500;
   display: none;
 }
 
+    .hh-radar-header {
+  text-align: center;
+}
+
+.hh-radar-header p {
+  text-align: center;
+}
+
+.hh-radar-summary {
+    justify-content: center;
+    font-size: 0.82rem;
+    line-height: 1.1;
+}
+
+.hh-radar-summary .summary-closest {
+  width: 100%;
+  display: block;
+  margin-top: 4px;
+}
+
+.hh-radar-summary .summary-separator:last-of-type {
+  display: none;
+}
+    
 #hh-radar-results .hh-radar-row > span:last-child {
   display: none;
 }
@@ -3155,6 +3280,28 @@ font-weight: 500;
   min-width: 0;
 }
 
+   .hh-radar-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  overflow: visible;
+  padding-bottom: 0;
+  margin-bottom: 14px;
+}
+
+.hh-radar-tabs button {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 10px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  text-align: center;
+}
+    
+  .hh-radar-tabs::-webkit-scrollbar {
+    display: none;
+  }
+    
 .hh-radar-open strong {
   font-size: 0.82rem;
   line-height: 1.1;
