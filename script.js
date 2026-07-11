@@ -16,6 +16,7 @@ const featuredPromotions = [
     title: "Split The G Challenge",
     image: "SplitG.jpg",
     alt: "Split The G Challenge at The Old English",
+    link: "https://www.instagram.com/theoldenglishbangkok/",
     description: `
       Come down every Friday at
       <a href="https://www.instagram.com/theoldenglishbangkok/"
@@ -25,14 +26,14 @@ const featuredPromotions = [
          The Old English
       </a>
       and take on the legendary Split The G Challenge.
-    `,
-    button: true
+    `
   },
 
   {
     title: "Hunters Garden",
     image: "hunters_promote.jpg",
     alt: "Hunters Garden Guinness Promotion",
+    link: "https://www.instagram.com/huntersgardenrestaurant/",
     description: `
       Guinness is now pouring at
       <a href="https://www.instagram.com/huntersgardenrestaurant/"
@@ -42,8 +43,7 @@ const featuredPromotions = [
          Hunters Garden
       </a>.
       Drop by and take advantage of their latest Guinness promotion.
-    `,
-    button: true
+    `
   }
 ];
  
