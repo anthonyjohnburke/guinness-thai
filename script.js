@@ -81,6 +81,36 @@ function sanitizeURL(url) {
   }
 }
 
+function renderFeaturedPromotions() {
+  const container = document.getElementById("featured-promotions");
+
+  if (!container) return;
+
+  container.innerHTML = featuredPromotions.map((promo, index) => `
+    <div class="featured-pub-layout">
+
+      <button
+        class="featured-pub-image-btn"
+        type="button"
+        data-promo="${index}"
+      >
+        <img
+          src="${promo.image}"
+          alt="${promo.alt}"
+          class="featured-pub-img"
+        >
+      </button>
+
+      <div class="featured-pub-copy">
+        <p class="intro-small">
+          ${promo.description}
+        </p>
+      </div>
+
+    </div>
+  `).join("");
+}
+
 function setRandomWisdom() {
   const el = document.getElementById("wisdom-text");
   if (!el) return;
@@ -370,6 +400,8 @@ class ResetControl {
 }
 
 map.addControl(new ResetControl(), 'top-right');
+
+renderFeaturedPromotions();
 
 fetch(SHEET_URL)
   .then(res => {
