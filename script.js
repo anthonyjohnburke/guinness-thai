@@ -1533,8 +1533,13 @@ document.addEventListener("click", (e) => {
   }
 
   posterLightbox.classList.add("is-open");
-
 });
+
+if (posterClose && posterLightbox) {
+  posterClose.addEventListener("click", () => {
+    posterLightbox.classList.remove("is-open");
+  });
+}
 
 if (posterLightbox) {
   posterLightbox.addEventListener("click", (e) => {
@@ -1543,12 +1548,6 @@ if (posterLightbox) {
     }
   });
 }
-
-  posterLightbox.addEventListener("click", (e) => {
-    if (e.target === posterLightbox) {
-      posterLightbox.classList.remove("is-open");
-    }
-  });
 
   document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && posterLightbox) {
