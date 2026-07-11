@@ -95,11 +95,32 @@ function renderFeaturedPromotions() {
         >
       </button>
 
-      <div class="featured-pub-copy">
-        <p class="intro-small">
-          ${promo.description}
-        </p>
-      </div>
+     <div class="featured-pub-copy">
+
+  <div class="promo-badge">
+    ${promo.badge}
+  </div>
+
+  <h3 class="promo-title">
+    ${promo.title}
+  </h3>
+
+  <p class="intro-small">
+    ${promo.description}
+  </p>
+
+  <p class="promo-venue">
+    <a
+      href="${promo.venueUrl}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="featured-inline-link"
+    >
+      ${promo.venue}
+    </a>
+  </p>
+
+</div>
 
     </div>
   `).join("");
