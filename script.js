@@ -1728,14 +1728,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("hh-radar-banner");
   if (!banner) return;
 
-  setTimeout(() => {
-    banner.classList.add("attention");
+ setTimeout(() => {
+  banner.classList.add("attention");
 
-    setTimeout(() => {
-      banner.classList.remove("attention");
-    }, 1400);
-  }, 6000);
-});
+  setTimeout(() => {
+    banner.classList.remove("attention");
+  }, 800);
+}, 2500);
 
 function initHappyHourRadarData(pubs) {
 const resultsEl = document.getElementById("hh-radar-results");
