@@ -1735,6 +1735,7 @@ document.addEventListener("DOMContentLoaded", () => {
     banner.classList.remove("attention");
   }, 800);
 }, 2500);
+  });
 
 function initHappyHourRadarData(pubs) {
 const resultsEl = document.getElementById("hh-radar-results");
