@@ -1961,7 +1961,7 @@ if (banner) {
       `${liveCount} Guinness Happy Hours Live Right Now`;
 
     subtitleEl.textContent =
-      "Discover today's best Guinness deals →";
+      "Discover today's best Guinness deals";
 
   } else if (startingSoonCount > 0) {
     titleEl.textContent =
