@@ -800,6 +800,9 @@ input, button {
   backdrop-filter: blur(4px);
 
   display: none;
+  visibility: hidden;
+  pointer-events: none;
+
   align-items: center;
   justify-content: center;
 
@@ -809,6 +812,8 @@ input, button {
 
 .poster-lightbox.is-open {
   display: flex;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .poster-modal {
@@ -2927,11 +2932,16 @@ cursor: pointer;
   position: fixed;
   inset: 0;
   z-index: 10001;
+
   display: none;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .hh-radar-panel.is-open {
   display: block;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .hh-radar-backdrop {
