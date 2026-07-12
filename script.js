@@ -548,9 +548,11 @@ fetch(SHEET_URL)
       areaCounts[area] = (areaCounts[area] || 0) + 1;
     });
 
-    const topAreas = Object.entries(areaCounts)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5);
+   const areaLimit = window.innerWidth <= 768 ? 5 : 8;
+
+const topAreas = Object.entries(areaCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, areaLimit);
 
     topAreas.forEach(([area, count]) => {
       const btn = document.createElement("button");
