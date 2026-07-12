@@ -566,7 +566,6 @@ fetch(SHEET_URL)
 
       const area = btn.dataset.area;
 
-      console.log("Area clicked:", area);
       areaStrip.querySelectorAll(".area-pill").forEach(p => p.classList.remove("active"));
 btn.classList.add("active");
 
@@ -574,7 +573,6 @@ const filtered = area === "all"
   ? allPricedPubs
   : allPricedPubs.filter(p => p.area && p.area.trim() === area);
 
-console.log("Filtered pubs:", filtered.length);
       zoomToArea(filtered);
     });
   }
@@ -1908,9 +1906,6 @@ happyDurationMs: times.end - times.start
   pub.status === "Starting Soon"
 );
 
-  console.log("Bangkok time:", now);
-console.log("Happy hours:", happyHours);
-
   const liveCount =
   happyHours.filter(pub =>
     pub.status === "Live" ||
@@ -1957,8 +1952,6 @@ if (banner) {
     banner.classList.remove("is-hidden");
   }
 }
-
-  console.log("Live count:", liveCount);
 
   if (titleEl && subtitleEl) {
   if (liveCount > 0) {
