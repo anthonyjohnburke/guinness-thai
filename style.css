@@ -2828,7 +2828,7 @@ text-align-last: center;
   .hh-radar-banner {
     left: 30px;
     right: auto;
-    top: 130px;
+    top: 132px;
     bottom: auto;
     transform: none;
     width: 420px;
@@ -2867,11 +2867,7 @@ text-align-last: center;
     top: 82px;
   }
 
-  .hh-radar-open {
-    border-radius: 10px;
-    padding: 22px 22px;
-    min-height: 74px;   /* adds a little more height */
-  }
+ 
 
 .hh-radar-seo-text {
   max-width: 1100px;
@@ -2899,7 +2895,7 @@ backdrop-filter: blur(14px);
 -webkit-backdrop-filter: blur(14px);
 color: #fff;
 border-radius: 16px;
-padding: 18px 18px;
+padding: 22px 18px;
 display: flex;
 align-items: center;
 gap: 12px;
