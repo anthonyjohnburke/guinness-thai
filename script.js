@@ -93,10 +93,12 @@ function renderFeaturedPromotions() {
         data-promo="${index}"
       >
         <img
-          src="${promo.image}"
-          alt="${promo.alt}"
-          class="featured-pub-img"
-        >
+  src="${promo.image}"
+  alt="${promo.alt}"
+  class="featured-pub-img"
+  loading="lazy"
+  decoding="async"
+>
       </button>
 
   <div class="featured-pub-copy">
