@@ -1511,15 +1511,14 @@ function typeWriter(el, text, speed = 35) {
 
   const text = el.getAttribute("data-text");
 
-  // 👉 Disable animation on mobile
   if (window.innerWidth <= 768) {
     el.textContent = text;
     return;
   }
 
-  setTimeout(() => {
+  runWhenIdle(() => {
     typeWriter(el, text, 28);
-  }, 400);
+  });
 });
 
   function findNearestCheapest(pubs, zoomToPub, radiusValue = "3") {
@@ -1616,8 +1615,10 @@ if (row) {
 }
  }
 
+runWhenIdle(() => {
   setRandomWisdom();
-setInterval(setRandomWisdom, 6000);
+  setInterval(setRandomWisdom, 6000);
+});
 
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".bar-price")) {
