@@ -134,7 +134,6 @@ function renderFeaturedPromotions() {
 }
 
 async function loadFeaturedPromotions() {
-  renderFeaturedPromotions();
 
   try {
     const response = await fetch(PROMOTIONS_URL);
@@ -179,6 +178,14 @@ async function loadFeaturedPromotions() {
 
   } catch (error) {
     console.warn("Using fallback promotions:", error);
+  }
+}
+
+function runWhenIdle(callback, timeout = 2000) {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(callback, { timeout });
+  } else {
+    window.setTimeout(callback, 1200);
   }
 }
 
@@ -524,8 +531,12 @@ class ResetControl {
 
 map.addControl(new ResetControl(), 'top-right');
 
-loadFeaturedPromotions();
-loadSiteMessage();
+renderFeaturedPromotions();
+
+runWhenIdle(() => {
+  loadFeaturedPromotions();
+  loadSiteMessage();
+});
 
 fetch(SHEET_URL)
   .then(res => {
