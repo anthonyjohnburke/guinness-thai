@@ -14,8 +14,16 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
  
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
+  <link rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
 
+<noscript>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap">
+</noscript>
+  
   <!-- Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
   <script defer src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
