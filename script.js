@@ -2,6 +2,10 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
+/* ==========================================================
+   Configuration
+========================================================== */
+
 const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
 const PROMOTIONS_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Promotions";
 const SITE_MESSAGES_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/SiteMessages";
@@ -13,8 +17,10 @@ const INITIAL_VIEW = {
   zoom: 11.2
 };
 
-// Fallback promotions
-// Used if Google Sheets cannot be loaded.
+/* ==========================================================
+   Fallback Content
+========================================================== */
+
 const featuredPromotions = [
   {
     badge: "FEATURED",
@@ -44,7 +50,11 @@ const featuredPromotions = [
     active: true
   }
 ];
- 
+
+/* ==========================================================
+   Static Content
+========================================================== */
+
   const wisdoms = [
   "If you’ve crossed Sukhumvit for it, it better be a creamy one.",
   "That was an absolute creamer… if you know, you know.",
@@ -53,6 +63,10 @@ const featuredPromotions = [
   "Some nights start with “just one creamy pint”… and somehow end on Soi Cowboy.",
   "Good things come to those who wait… especially in Bangkok traffic."
 ];
+
+/* ==========================================================
+   Utility Functions
+========================================================== */
 
 function escapeHTML(str) {
   return String(str).replace(/[&<>"']/g, function (m) {
@@ -306,6 +320,32 @@ function isFresh(dateStr) {
   const diffDays = (now - updated) / (1000 * 60 * 60 * 24);
 
   return diffDays <= 20;
+}
+
+function updateLastUpdatedDate(pubs) {
+  const updatedEl = document.getElementById("last-updated");
+  if (!updatedEl) return;
+
+  const dates = pubs
+    .map(pub => pub.last_updated)
+    .filter(Boolean)
+    .map(date => new Date(date))
+    .filter(date => !isNaN(date));
+
+  if (dates.length === 0) {
+    updatedEl.textContent = "Prices last updated: Recently";
+    return;
+  }
+
+  const latest = new Date(Math.max(...dates));
+
+  updatedEl.textContent =
+    "Prices last updated: " +
+    latest.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
 }
 
   function highlightChartPub(pubName) {
@@ -691,33 +731,13 @@ if (nearbyBtn) {
   });
 }
 
-    const chart = document.getElementById("price-chart");
-    const updatedEl = document.getElementById("last-updated");
-    const happyList = document.getElementById("happy-list");
+  const chart = document.getElementById("price-chart");
+  const happyList = document.getElementById("happy-list");
 
-    chart.innerHTML = "";
-    happyList.innerHTML = "";
+  chart.innerHTML = "";
+  happyList.innerHTML = "";
 
-    const dates = pubs
-      .map(p => p.last_updated)
-      .filter(Boolean)
-      .map(d => new Date(d))
-      .filter(d => !isNaN(d));
-
-    if (updatedEl) {
-      if (dates.length > 0) {
-        const latest = new Date(Math.max(...dates));
-        updatedEl.textContent =
-          "Prices last updated: " +
-          latest.toLocaleDateString('en-GB', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
-          });
-      } else {
-        updatedEl.textContent = "Prices last updated: Recently";
-      }
-    }
+  updateLastUpdatedDate(pubs);
 
   const pricedPubs = pubs
   .filter(p => p.price && !isNaN(parseFloat(p.price)))
