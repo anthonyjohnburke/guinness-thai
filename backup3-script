@@ -4,6 +4,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwN
 
 const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
 const PROMOTIONS_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Promotions";
+const SITE_MESSAGES_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/SiteMessages";
 const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYNGNwFHCLN934thYjzdlFnoJS6zFIvF31EVluSNu2fTpUGVxBsHfCSvXloPCqrv7s/exec";
 const SUBMIT_COOLDOWN_MS = 30000;
 
@@ -92,10 +93,12 @@ function renderFeaturedPromotions() {
         data-promo="${index}"
       >
         <img
-          src="${promo.image}"
-          alt="${promo.alt}"
-          class="featured-pub-img"
-        >
+  src="${promo.image}"
+  alt="${promo.alt}"
+  class="featured-pub-img"
+  loading="lazy"
+  decoding="async"
+>
       </button>
 
   <div class="featured-pub-copy">
@@ -131,7 +134,6 @@ function renderFeaturedPromotions() {
 }
 
 async function loadFeaturedPromotions() {
-  renderFeaturedPromotions();
 
   try {
     const response = await fetch(PROMOTIONS_URL);
@@ -177,6 +179,66 @@ async function loadFeaturedPromotions() {
   } catch (error) {
     console.warn("Using fallback promotions:", error);
   }
+}
+
+function runWhenIdle(callback, timeout = 2000) {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(callback, { timeout });
+  } else {
+    window.setTimeout(callback, 1200);
+  }
+}
+
+async function loadSiteMessage() {
+
+  try {
+    const response = await fetch(SITE_MESSAGES_URL);
+
+    if (!response.ok) {
+      throw new Error("Failed to load site message");
+    }
+
+    const rows = await response.json();
+
+    const row = rows.find(r =>
+      String(r.Active || "").trim().toLowerCase() === "true"
+    );
+
+    if (!row) return;
+
+    const titleEl = document.getElementById("site-message-title");
+    const textEl = document.getElementById("site-message-text");
+    const linkEl = document.getElementById("site-message-link");
+
+    if (titleEl) {
+      titleEl.textContent = row.Title || "";
+    }
+
+    if (textEl) {
+      textEl.textContent = row.Text || "";
+    }
+
+   const linkText = String(row["Link Text"] || "").trim();
+const linkUrl = sanitizeURL(
+  String(row["Link URL"] || "").trim()
+);
+
+if (linkEl) {
+  linkEl.textContent = "";
+  linkEl.removeAttribute("href");
+  linkEl.style.display = "none";
+
+  if (linkText && linkUrl) {
+    linkEl.textContent = linkText;
+    linkEl.href = linkUrl;
+    linkEl.style.display = "inline-flex";
+  }
+}
+
+  } catch (err) {
+    console.warn("Using fallback site message", err);
+  }
+
 }
 
 function setRandomWisdom() {
@@ -469,7 +531,12 @@ class ResetControl {
 
 map.addControl(new ResetControl(), 'top-right');
 
-loadFeaturedPromotions();
+renderFeaturedPromotions();
+
+runWhenIdle(() => {
+  loadFeaturedPromotions();
+  loadSiteMessage();
+});
 
 fetch(SHEET_URL)
   .then(res => {
@@ -494,9 +561,11 @@ fetch(SHEET_URL)
       areaCounts[area] = (areaCounts[area] || 0) + 1;
     });
 
-    const topAreas = Object.entries(areaCounts)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5);
+   const areaLimit = window.innerWidth <= 768 ? 5 : 8;
+
+const topAreas = Object.entries(areaCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, areaLimit);
 
     topAreas.forEach(([area, count]) => {
       const btn = document.createElement("button");
@@ -512,7 +581,6 @@ fetch(SHEET_URL)
 
       const area = btn.dataset.area;
 
-      console.log("Area clicked:", area);
       areaStrip.querySelectorAll(".area-pill").forEach(p => p.classList.remove("active"));
 btn.classList.add("active");
 
@@ -520,7 +588,6 @@ const filtered = area === "all"
   ? allPricedPubs
   : allPricedPubs.filter(p => p.area && p.area.trim() === area);
 
-console.log("Filtered pubs:", filtered.length);
       zoomToArea(filtered);
     });
   }
@@ -1444,15 +1511,14 @@ function typeWriter(el, text, speed = 35) {
 
   const text = el.getAttribute("data-text");
 
-  // 👉 Disable animation on mobile
   if (window.innerWidth <= 768) {
     el.textContent = text;
     return;
   }
 
-  setTimeout(() => {
+  runWhenIdle(() => {
     typeWriter(el, text, 28);
-  }, 400);
+  });
 });
 
   function findNearestCheapest(pubs, zoomToPub, radiusValue = "3") {
@@ -1549,8 +1615,10 @@ if (row) {
 }
  }
 
+runWhenIdle(() => {
   setRandomWisdom();
-setInterval(setRandomWisdom, 6000);
+  setInterval(setRandomWisdom, 6000);
+});
 
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".bar-price")) {
@@ -1674,14 +1742,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("hh-radar-banner");
   if (!banner) return;
 
-  setTimeout(() => {
-    banner.classList.add("attention");
+ setTimeout(() => {
+  banner.classList.add("attention");
 
-    setTimeout(() => {
-      banner.classList.remove("attention");
-    }, 1400);
-  }, 6000);
-});
+  setTimeout(() => {
+    banner.classList.remove("attention");
+  }, 800);
+}, 2500);
+  });
 
 function initHappyHourRadarData(pubs) {
 const resultsEl = document.getElementById("hh-radar-results");
@@ -1854,9 +1922,6 @@ happyDurationMs: times.end - times.start
   pub.status === "Starting Soon"
 );
 
-  console.log("Bangkok time:", now);
-console.log("Happy hours:", happyHours);
-
   const liveCount =
   happyHours.filter(pub =>
     pub.status === "Live" ||
@@ -1904,15 +1969,13 @@ if (banner) {
   }
 }
 
-  console.log("Live count:", liveCount);
-
   if (titleEl && subtitleEl) {
   if (liveCount > 0) {
     titleEl.textContent =
       `${liveCount} Guinness Happy Hours Live Right Now`;
 
     subtitleEl.textContent =
-      "Tap to see deals near you";
+      "Discover today's best Guinness deals";
 
   } else if (startingSoonCount > 0) {
     titleEl.textContent =
