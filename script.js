@@ -493,6 +493,58 @@ function buildPopupHTML(pub, safeLink) {
 `;
 }
 
+function buildAreaFilters(pubs, allPricedPubs, zoomToArea) {
+  const areaStrip = document.getElementById("area-filter-strip");
+
+  if (!areaStrip) return;
+
+  const areaCounts = {};
+
+  pubs.forEach(pub => {
+    if (!pub.area) return;
+
+    const area = pub.area.trim();
+    if (!area) return;
+
+    areaCounts[area] = (areaCounts[area] || 0) + 1;
+  });
+
+  const areaLimit = window.innerWidth <= 768 ? 5 : 8;
+
+  const topAreas = Object.entries(areaCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, areaLimit);
+
+  topAreas.forEach(([area, count]) => {
+    const btn = document.createElement("button");
+    btn.className = "area-pill";
+    btn.dataset.area = area;
+    btn.textContent = `${area} ${count}`;
+    areaStrip.appendChild(btn);
+  });
+
+  areaStrip.addEventListener("click", (e) => {
+    const btn = e.target.closest(".area-pill");
+    if (!btn) return;
+
+    const area = btn.dataset.area;
+
+    areaStrip.querySelectorAll(".area-pill").forEach(p =>
+      p.classList.remove("active")
+    );
+
+    btn.classList.add("active");
+
+    const filtered = area === "all"
+      ? allPricedPubs
+      : allPricedPubs.filter(
+          p => p.area && p.area.trim() === area
+        );
+
+    zoomToArea(filtered);
+  });
+}
+
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
@@ -599,51 +651,6 @@ fetch(SHEET_URL)
 .then(pubs => {
   window.allPubs = pubs;
 
-  const areaStrip = document.getElementById("area-filter-strip");
-  
-  if (areaStrip) {
-    const areaCounts = {};
-
-    pubs.forEach(pub => {
-      if (!pub.area) return;
-
-      const area = pub.area.trim();
-      if (!area) return;
-
-      areaCounts[area] = (areaCounts[area] || 0) + 1;
-    });
-
-   const areaLimit = window.innerWidth <= 768 ? 5 : 8;
-
-const topAreas = Object.entries(areaCounts)
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, areaLimit);
-
-    topAreas.forEach(([area, count]) => {
-      const btn = document.createElement("button");
-      btn.className = "area-pill";
-      btn.dataset.area = area;
-      btn.textContent = `${area} ${count}`;
-      areaStrip.appendChild(btn);
-    });
-
-    areaStrip.addEventListener("click", (e) => {
-      const btn = e.target.closest(".area-pill");
-      if (!btn) return;
-
-      const area = btn.dataset.area;
-
-      areaStrip.querySelectorAll(".area-pill").forEach(p => p.classList.remove("active"));
-btn.classList.add("active");
-
-const filtered = area === "all"
-  ? allPricedPubs
-  : allPricedPubs.filter(p => p.area && p.area.trim() === area);
-
-      zoomToArea(filtered);
-    });
-  }
-
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
 
@@ -722,6 +729,7 @@ keepPopupInView(activePopup);
   }
 }
 
+buildAreaFilters(pubs, allPricedPubs, zoomToArea);
 
 const nearbyBtn = document.getElementById("find-nearby-btn");
 const radiusSelect = document.getElementById("radius-select");
