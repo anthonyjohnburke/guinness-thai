@@ -6,7 +6,6 @@
 
 <title>Best Guinness in Bangkok, Thailand 2026 | Prices, Maps & Cheapest Pints</title>
   <meta name="description" content="Discover the best Guinness in Bangkok and across Thailand. Compare prices, find top pubs, and see where to get the cheapest pint.">
-  <meta name="keywords" content="Guinness Bangkok, best Guinness Bangkok, Irish pubs Bangkok">
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -15,11 +14,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
  
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet"/>
-
+ <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  
   <!-- Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
+  <script defer src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
 
 <link rel="canonical" href="https://www.guinnessthailand.com/">
   <link rel="preconnect" href="https://api.mapbox.com">
@@ -46,7 +45,6 @@
 
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta name="robots" content="index, follow">
 
   <meta property="og:title" content="Best Guinness in Bangkok">
@@ -106,10 +104,10 @@
     
 </div>
 
-  <section id="map-section">
+<section id="map-section">
   <div id="map"></div>
   <div class="map-mobile-hint">Tap map to explore • scroll with one finger</div>
-    <button id="map-unlock-btn">Explore map</button>
+  <button id="map-unlock-btn">Explore map</button>
 </section>
 
 <div id="area-filter-strip" class="area-filter-strip">
@@ -175,16 +173,21 @@
       <div id="happy-list"></div>
     </div>
 
-    <div id="cheap-list-block" class="section-block">
-      <h2 class="intro-heading">Cheap Guinness in Bangkok</h2>
-      <p class="intro-small">
-        Not all pints break the bank. These are the cheapest Guinness pours we’ve found in Bangkok so far.
-      </p>
-      <div id="cheap-list"></div>
-      <button class="mobile-list-toggle" data-target="cheap-list">
-  Show cheap Guinness ranking
-</button>
-    </div>
+   <!--
+<div id="cheap-list-block" class="section-block">
+  <h2 class="intro-heading">Cheap Guinness in Bangkok</h2>
+
+  <p class="intro-small">
+    Not all pints break the bank. These are the cheapest Guinness pours we’ve found in Bangkok so far.
+  </p>
+
+  <div id="cheap-list"></div>
+
+  <button class="mobile-list-toggle" data-target="cheap-list">
+    Show cheap Guinness ranking
+  </button>
+</div>
+-->
 
     <div id="expensive-list-block" class="section-block">
       <h2 class="intro-heading">Expensive Guinness in Bangkok</h2>
@@ -231,9 +234,11 @@
      rel="noopener noreferrer"
      class="timeout-link">
 
-    <img src="timeout.png"
-         alt="Time Out Bangkok article"
-         class="timeout-img">
+   <img src="timeout.png"
+     alt="Time Out Bangkok article"
+     class="timeout-img"
+     loading="lazy"
+     decoding="async">
 
   </a>
 
@@ -263,9 +268,14 @@
   <div class="hh-radar-backdrop" id="hh-radar-backdrop"></div>
 
   <div class="hh-radar-sheet">
-    <button id="hh-radar-close" class="hh-radar-close" type="button">×</button>
-
-    <div class="hh-radar-handle"></div>
+    <button
+      id="hh-radar-close"
+      class="hh-radar-close"
+      type="button"
+      aria-label="Close Happy Hour Radar">
+      ×
+    </button>
+  <div class="hh-radar-handle"></div>
 
     <div class="hh-radar-header">
   <div>
@@ -348,17 +358,33 @@
        </div>
 
 <div class="impact-row no-promo">
-  <div class="impact-strip impact-main">
-    <div class="section-label">75 Pubs and Counting</div>
-    <div class="insight-text">
-      Pints of Bangkok now tracks 75 pubs. What started as a small side project has quietly become Thailand's largest Guinness price tracker. 
-      Thanks to everyone sending updates, photos and tips. Sláinte!
-    </div>
+  <div class="impact-strip impact-main" id="site-message-panel">
+
+  <div class="section-label" id="site-message-title">
+    75 Pubs and Counting
   </div>
+
+  <div class="insight-text" id="site-message-text">
+    Pints of Bangkok now tracks 75 pubs. What started as a small side project has quietly become Thailand's largest Guinness price tracker.
+    Thanks to everyone sending updates, photos and tips. Sláinte!
+  </div>
+
+  <a
+    href="#"
+    id="site-message-link"
+    class="contact-link"
+    target="_blank"
+    rel="noopener noreferrer"
+    hidden
+  ></a>
+
+</div>
 
 <button class="impact-side" id="globe-poster-btn" type="button" aria-label="Open The Globe grand opening poster">
   <img src="the-globe-opening.jpg"
-       alt="The Globe Pub Bangkok grand opening party">
+       alt="The Globe Pub Bangkok grand opening party"
+       loading="lazy"
+       decoding="async">
 </button>
 
 <div class="poster-lightbox" id="poster-lightbox" aria-hidden="true">
@@ -422,8 +448,6 @@
       </p>
     </div>
   </footer>
-
-</div>
 
   <script src="script.js" defer></script>
 
