@@ -348,18 +348,30 @@ function updateLastUpdatedDate(pubs) {
     });
 }
 
-  function highlightChartPub(pubName) {
-      document.querySelectorAll('.bar-row').forEach(row => {
-        row.classList.remove('is-highlighted');
+function formatDate(dateStr) {
+  if (!dateStr) return "Unknown";
+
+  const date = new Date(dateStr);
+
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+function highlightChartPub(pubName) {
+   document.querySelectorAll('.bar-row').forEach(row => {
+   row.classList.remove('is-highlighted');
       });
 
-      const target = Array.from(document.querySelectorAll('.bar-row'))
-        .find(row => row.dataset.pubName === pubName);
+   const target = Array.from(document.querySelectorAll('.bar-row'))
+   .find(row => row.dataset.pubName === pubName);
 
-      if (target) {
-        target.classList.add('is-highlighted');
-      }
-    }
+   if (target) {
+   target.classList.add('is-highlighted');
+   }
+}
 
 function keepPopupInView(popup) {
   if (!popup) return;
@@ -840,18 +852,6 @@ if (nearbyBtn) {
         const row = document.createElement("div");
         row.className = "bar-row";
         row.dataset.pubName = pub.name;
-
-
-       function formatDate(dateStr) {
-  if (!dateStr) return "Unknown";
-
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  });
-}
 
       row.innerHTML = `
   <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
