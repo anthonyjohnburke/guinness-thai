@@ -751,20 +751,22 @@ input, button {
 
 #pub-search {
   width: 100%;
-  height: 52px;
+  height: 60px;
 
-  padding: 0 18px;
+  padding: 0 22px;
 
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.22);
 
-  background: rgba(255,255,255,0.03);
+  background: #111;
   color: #fff;
 
-font-size: 0.85em;
-font-weight: 600;
-letter-spacing: 0.02em;
-box-sizing: border-box;
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
+
+  box-shadow: 0 8px 24px rgba(0,0,0,.22);
 
   transition:
     border-color .2s ease,
