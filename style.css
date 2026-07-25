@@ -616,13 +616,6 @@ line-height: 1.25;
     filter: brightness(1.15);
 }
 
-.last-updated,
-.verification-note {
-  font-size: 0.7em;
-  color: rgba(255,255,255,0.55);
-  margin-top: 2px;
-}
-
 .verification-note {
     margin-top: 14px;
     text-align: left;
@@ -1871,13 +1864,6 @@ input, button {
   color: #f2d47a;
 }
 
-.freshness-key {
-  display: inline-block;
-  color: rgba(255,255,255,0.55);
-  letter-spacing: 0.03em;
-    text-transform: uppercase;
-}
-
 .fresh-dot {
   display: inline-block;
   width: 7px;
@@ -2226,11 +2212,6 @@ line-height: 1.4;
 .hh-radar-copy {
 font-size: 0.7rem;
 line-height: 1.5;
-}
-
-.freshness-key {
-  display: block;
-  margin-top: 8px;
 }
     
 .insight-box,
@@ -2913,14 +2894,6 @@ text-align-last: center;
     #question {
     font-size: 2.2em;
     line-height: 1.1;
-    }
-
-    .last-updated {
-    display: none;
-    }
-
-    .verification-note {
-    text-align: center;
     }
 
     #logo {
