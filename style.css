@@ -628,17 +628,10 @@ line-height: 1.25;
     text-align: left;
 }
 
-.verification-title {
-    font-size: 0.95em;
+.verification-title .verification-sub {
+    font-size: 1.25em;
     font-weight: 600;
     color: rgba(255,255,255,.78);
-}
-
-.verification-sub {
-    margin-top: 4px;
-    margin-left: 18px;   /* aligns under the text after the dot */
-    font-size: 0.85em;
-    color: rgba(255,255,255,.60);
 }
 
 #toggle-chart-btn {
