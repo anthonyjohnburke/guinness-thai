@@ -113,6 +113,31 @@
 <div id="area-filter-strip" class="area-filter-strip">
   <button class="area-pill active" data-area="all">All</button>
 </div>
+
+  <div class="pub-search-wrap">
+  <label for="pub-search" class="pub-search-label">
+    Find a pub
+  </label>
+
+  <div class="pub-search-box">
+    <input
+      type="search"
+      id="pub-search"
+      placeholder="Search pubs or areas..."
+      autocomplete="off"
+      aria-label="Search pubs or areas"
+      aria-controls="pub-search-results"
+      aria-expanded="false"
+    >
+
+    <div
+      id="pub-search-results"
+      class="pub-search-results"
+      role="listbox"
+      hidden
+    ></div>
+  </div>
+</div>
   
   <h1 id="question" data-text="Who’s pouring the finest pint of Guinness in Bangkok?" aria-label="Who’s pouring the finest pint of Guinness in Bangkok?">
   Who’s pouring the finest pint of Guinness in Bangkok?
