@@ -545,6 +545,78 @@ function buildAreaFilters(pubs, allPricedPubs, zoomToArea) {
   });
 }
 
+function buildPubSearch(pubs, zoomToPub) {
+
+  const pubSearch = document.getElementById("pub-search");
+  const pubSearchResults = document.getElementById("pub-search-results");
+
+  if (!pubSearch || !pubSearchResults) return;
+
+  pubSearch.addEventListener("input", () => {
+
+    const term = pubSearch.value.trim().toLowerCase();
+
+    pubSearchResults.innerHTML = "";
+
+    if (term.length < 2) {
+      pubSearchResults.hidden = true;
+      return;
+    }
+
+    const matches = pubs
+      .filter(pub => {
+
+        const name = (pub.name || "").toLowerCase();
+        const area = (pub.area || "").toLowerCase();
+        const station = (pub.nearest_station || "").toLowerCase();
+
+        return (
+          name.includes(term) ||
+          area.includes(term) ||
+          station.includes(term)
+        );
+
+      })
+      .slice(0, 8);
+
+    if (matches.length === 0) {
+      pubSearchResults.hidden = true;
+      return;
+    }
+
+    matches.forEach(pub => {
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "pub-search-result";
+
+      button.innerHTML = `
+        <span>${escapeHTML(pub.name)}</span>
+        <span class="pub-search-result-area">
+          ${escapeHTML(pub.area || "")}
+        </span>
+      `;
+
+      button.addEventListener("click", () => {
+
+        pubSearch.value = pub.name;
+        pubSearchResults.hidden = true;
+
+        highlightChartPub(pub.name);
+        zoomToPub(pub.name, pubs);
+
+      });
+
+      pubSearchResults.appendChild(button);
+
+    });
+
+    pubSearchResults.hidden = false;
+
+  });
+
+}
+
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
