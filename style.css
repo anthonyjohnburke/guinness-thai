@@ -623,6 +623,25 @@ line-height: 1.25;
   margin-top: 2px;
 }
 
+.verification-note {
+    margin-top: 18px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.verification-title {
+    font-size: 0.78em;
+    font-weight: 700;
+    color: rgba(255,255,255,.78);
+    letter-spacing: .03em;
+}
+
+.verification-sub {
+    margin-top: 3px;
+    font-size: 0.9em;
+    color: rgba(255,255,255,.72);
+}
+
 #toggle-chart-btn {
   display: none;
 }
