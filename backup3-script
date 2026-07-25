@@ -2,6 +2,10 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
 
+/* ==========================================================
+   Configuration
+========================================================== */
+
 const SHEET_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Sheet1";
 const PROMOTIONS_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/Promotions";
 const SITE_MESSAGES_URL = "https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/SiteMessages";
@@ -13,8 +17,10 @@ const INITIAL_VIEW = {
   zoom: 11.2
 };
 
-// Fallback promotions
-// Used if Google Sheets cannot be loaded.
+/* ==========================================================
+   Fallback Content
+========================================================== */
+
 const featuredPromotions = [
   {
     badge: "FEATURED",
@@ -44,7 +50,11 @@ const featuredPromotions = [
     active: true
   }
 ];
- 
+
+/* ==========================================================
+   Static Content
+========================================================== */
+
   const wisdoms = [
   "If you’ve crossed Sukhumvit for it, it better be a creamy one.",
   "That was an absolute creamer… if you know, you know.",
@@ -53,6 +63,10 @@ const featuredPromotions = [
   "Some nights start with “just one creamy pint”… and somehow end on Soi Cowboy.",
   "Good things come to those who wait… especially in Bangkok traffic."
 ];
+
+/* ==========================================================
+   Utility Functions
+========================================================== */
 
 function escapeHTML(str) {
   return String(str).replace(/[&<>"']/g, function (m) {
@@ -308,18 +322,56 @@ function isFresh(dateStr) {
   return diffDays <= 20;
 }
 
-  function highlightChartPub(pubName) {
-      document.querySelectorAll('.bar-row').forEach(row => {
-        row.classList.remove('is-highlighted');
+function updateLastUpdatedDate(pubs) {
+  const updatedEl = document.getElementById("last-updated");
+  if (!updatedEl) return;
+
+  const dates = pubs
+    .map(pub => pub.last_updated)
+    .filter(Boolean)
+    .map(date => new Date(date))
+    .filter(date => !isNaN(date));
+
+  if (dates.length === 0) {
+    updatedEl.textContent = "Prices last updated: Recently";
+    return;
+  }
+
+  const latest = new Date(Math.max(...dates));
+
+  updatedEl.textContent =
+    "Prices last updated: " +
+    latest.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return "Unknown";
+
+  const date = new Date(dateStr);
+
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+function highlightChartPub(pubName) {
+   document.querySelectorAll('.bar-row').forEach(row => {
+   row.classList.remove('is-highlighted');
       });
 
-      const target = Array.from(document.querySelectorAll('.bar-row'))
-        .find(row => row.dataset.pubName === pubName);
+   const target = Array.from(document.querySelectorAll('.bar-row'))
+   .find(row => row.dataset.pubName === pubName);
 
-      if (target) {
-        target.classList.add('is-highlighted');
-      }
-    }
+   if (target) {
+   target.classList.add('is-highlighted');
+   }
+}
 
 function keepPopupInView(popup) {
   if (!popup) return;
@@ -441,6 +493,58 @@ function buildPopupHTML(pub, safeLink) {
 `;
 }
 
+function buildAreaFilters(pubs, allPricedPubs, zoomToArea) {
+  const areaStrip = document.getElementById("area-filter-strip");
+
+  if (!areaStrip) return;
+
+  const areaCounts = {};
+
+  pubs.forEach(pub => {
+    if (!pub.area) return;
+
+    const area = pub.area.trim();
+    if (!area) return;
+
+    areaCounts[area] = (areaCounts[area] || 0) + 1;
+  });
+
+  const areaLimit = window.innerWidth <= 768 ? 5 : 8;
+
+  const topAreas = Object.entries(areaCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, areaLimit);
+
+  topAreas.forEach(([area, count]) => {
+    const btn = document.createElement("button");
+    btn.className = "area-pill";
+    btn.dataset.area = area;
+    btn.textContent = `${area} ${count}`;
+    areaStrip.appendChild(btn);
+  });
+
+  areaStrip.addEventListener("click", (e) => {
+    const btn = e.target.closest(".area-pill");
+    if (!btn) return;
+
+    const area = btn.dataset.area;
+
+    areaStrip.querySelectorAll(".area-pill").forEach(p =>
+      p.classList.remove("active")
+    );
+
+    btn.classList.add("active");
+
+    const filtered = area === "all"
+      ? allPricedPubs
+      : allPricedPubs.filter(
+          p => p.area && p.area.trim() === area
+        );
+
+    zoomToArea(filtered);
+  });
+}
+
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
@@ -547,51 +651,6 @@ fetch(SHEET_URL)
 .then(pubs => {
   window.allPubs = pubs;
 
-  const areaStrip = document.getElementById("area-filter-strip");
-  
-  if (areaStrip) {
-    const areaCounts = {};
-
-    pubs.forEach(pub => {
-      if (!pub.area) return;
-
-      const area = pub.area.trim();
-      if (!area) return;
-
-      areaCounts[area] = (areaCounts[area] || 0) + 1;
-    });
-
-   const areaLimit = window.innerWidth <= 768 ? 5 : 8;
-
-const topAreas = Object.entries(areaCounts)
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, areaLimit);
-
-    topAreas.forEach(([area, count]) => {
-      const btn = document.createElement("button");
-      btn.className = "area-pill";
-      btn.dataset.area = area;
-      btn.textContent = `${area} ${count}`;
-      areaStrip.appendChild(btn);
-    });
-
-    areaStrip.addEventListener("click", (e) => {
-      const btn = e.target.closest(".area-pill");
-      if (!btn) return;
-
-      const area = btn.dataset.area;
-
-      areaStrip.querySelectorAll(".area-pill").forEach(p => p.classList.remove("active"));
-btn.classList.add("active");
-
-const filtered = area === "all"
-  ? allPricedPubs
-  : allPricedPubs.filter(p => p.area && p.area.trim() === area);
-
-      zoomToArea(filtered);
-    });
-  }
-
   const bounds = new mapboxgl.LngLatBounds();
   let validCount = 0;
 
@@ -670,6 +729,7 @@ keepPopupInView(activePopup);
   }
 }
 
+buildAreaFilters(pubs, allPricedPubs, zoomToArea);
 
 const nearbyBtn = document.getElementById("find-nearby-btn");
 const radiusSelect = document.getElementById("radius-select");
@@ -691,33 +751,13 @@ if (nearbyBtn) {
   });
 }
 
-    const chart = document.getElementById("price-chart");
-    const updatedEl = document.getElementById("last-updated");
-    const happyList = document.getElementById("happy-list");
+  const chart = document.getElementById("price-chart");
+  const happyList = document.getElementById("happy-list");
 
-    chart.innerHTML = "";
-    happyList.innerHTML = "";
+  chart.innerHTML = "";
+  happyList.innerHTML = "";
 
-    const dates = pubs
-      .map(p => p.last_updated)
-      .filter(Boolean)
-      .map(d => new Date(d))
-      .filter(d => !isNaN(d));
-
-    if (updatedEl) {
-      if (dates.length > 0) {
-        const latest = new Date(Math.max(...dates));
-        updatedEl.textContent =
-          "Prices last updated: " +
-          latest.toLocaleDateString('en-GB', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
-          });
-      } else {
-        updatedEl.textContent = "Prices last updated: Recently";
-      }
-    }
+  updateLastUpdatedDate(pubs);
 
   const pricedPubs = pubs
   .filter(p => p.price && !isNaN(parseFloat(p.price)))
@@ -820,18 +860,6 @@ if (nearbyBtn) {
         const row = document.createElement("div");
         row.className = "bar-row";
         row.dataset.pubName = pub.name;
-
-
-       function formatDate(dateStr) {
-  if (!dateStr) return "Unknown";
-
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  });
-}
 
       row.innerHTML = `
   <div class="bar-label clickable" data-pub="${escapeHTML(pub.name)}">
