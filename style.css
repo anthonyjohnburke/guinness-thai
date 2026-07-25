@@ -1049,7 +1049,7 @@ input, button {
     width: 95%;
     max-width: 1500px;
     margin: 15px auto 0;
-    padding: 28px 28px;
+    padding: 22px 28px;
     border-top: 1px solid rgba(255,255,255,0.08);
     box-sizing: border-box;
 }
@@ -2186,6 +2186,10 @@ width: 92%;
 display: block;
 }
 
+#pub-search {
+font-size: 16px;
+}
+
 .popup-special-text {
   font-size: 0.7rem;
   line-height: 1.3;
@@ -2491,7 +2495,7 @@ text-align-last: center;
   }
 
   #footer {
-    margin-top: 14px;
+    margin-top: 4px;
   }
 
     #map {
