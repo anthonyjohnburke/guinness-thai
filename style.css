@@ -2414,8 +2414,8 @@ text-align-last: center;
 .area-pill {
   width: 100%;
   text-align: center;
-  font-size: 0.72em;
-  padding: 9px 8px;
+  font-size: 0.71em;
+  padding: 9px 7px;
 }
 
 .area-filter-strip::-webkit-scrollbar {
