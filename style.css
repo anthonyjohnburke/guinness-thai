@@ -775,18 +775,17 @@ input, button {
 }
 
 #pub-search::placeholder {
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.82);
   opacity: 1;
 }
 
 #pub-search:focus {
   outline: none;
-
-  border-color: rgba(212,175,55,.7);
-
-  box-shadow: 0 0 0 3px rgba(212,175,55,.12);
-
-  background: rgba(255,255,255,.05);
+  border-color: #d4af37;
+  background: #141414;
+  box-shadow:
+    0 0 0 3px rgba(212,175,55,.12),
+    0 10px 30px rgba(0,0,0,.28);
 }
 
 .pub-search-results {
