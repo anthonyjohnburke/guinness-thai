@@ -761,9 +761,10 @@ input, button {
   background: rgba(255,255,255,0.03);
   color: #fff;
 
-  font-size: 1rem;
-
-  box-sizing: border-box;
+font-size: 0.85em;
+font-weight: 600;
+letter-spacing: 0.02em;
+box-sizing: border-box;
 
   transition:
     border-color .2s ease,
