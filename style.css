@@ -745,18 +745,6 @@ input, button {
   box-sizing: border-box;
 }
 
-.pub-search-label {
-  display: block;
-  margin-bottom: 10px;
-  text-align: left;
-
-  color: rgba(255,255,255,0.65);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
 .pub-search-box {
   position: relative;
 }
