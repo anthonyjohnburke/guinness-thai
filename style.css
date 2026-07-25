@@ -624,14 +624,15 @@ line-height: 1.25;
 }
 
 .verification-note {
-    margin-top: 18px;
+    margin-top: 14px;
     text-align: left;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: rgba(255,255,255,.65);
 }
 
-.verification-title .verification-sub {
-    font-size: 1.25em;
-    font-weight: 600;
-    color: rgba(255,255,255,.78);
+.verification-note p {
+    margin: 0;
 }
 
 #toggle-chart-btn {
