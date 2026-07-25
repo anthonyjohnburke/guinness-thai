@@ -913,10 +913,9 @@ if (nearbyBtn) {
         });
       }
 
-     chart.innerHTML += `
+    chart.innerHTML += `
   <div class="chart-key">
-    Longer bar = better value — <span class="highlight">less baht, more Guinness</span><br>
-    <span class="freshness-key"><span class="fresh-dot"></span> checked in the field within 20 days</span>
+    Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
   </div>
 `;
 
