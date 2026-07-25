@@ -839,8 +839,8 @@ box-sizing: border-box;
 
 .pub-search-result:hover,
 .pub-search-result:focus {
-  background: rgba(212,175,55,0.10);
-  outline: none;
+  border-color: #d4af37;
+  background: #1b1b1b;
 }
 
 .pub-search-result-area {
