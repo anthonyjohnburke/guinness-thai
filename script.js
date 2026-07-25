@@ -730,6 +730,7 @@ keepPopupInView(activePopup);
 }
 
 buildAreaFilters(pubs, allPricedPubs, zoomToArea);
+buildPubSearch(pubs, zoomToPub);
 
 const nearbyBtn = document.getElementById("find-nearby-btn");
 const radiusSelect = document.getElementById("radius-select");
