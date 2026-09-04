@@ -2611,9 +2611,9 @@ text-align-last: center;
 }
 
 .popup-nearest {
-  margin: 6px 12px 4px;
-  padding: 6px 9px;
-  grid-template-columns: 78px 1fr;
+  margin: 6px 10px 4px;
+  padding: 6px 6px;
+  grid-template-columns: 70px 1fr;
   column-gap: 8px;
   border-top: none;
   background: transparent;
@@ -2653,7 +2653,7 @@ text-align-last: center;
 }
 
 .popup-nearest-text {
-  font-size: 0.95em;
+  font-size: 0.9em;
 }
 
 .popup-actions {
