@@ -1220,8 +1220,8 @@ input, button {
 .popup-actions a {
   flex: 1;
   text-align: center;
-  padding: 10px 14px;
-  font-size: 0.9rem;
+  padding: 9px 14px;
+  font-size: 0.8rem;
   font-weight: 700;
   border-radius: 12px;
   text-decoration: none;
