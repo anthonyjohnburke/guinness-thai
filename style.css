@@ -1059,6 +1059,10 @@ input, button {
     box-sizing: border-box;
 }
 
+#footer a {
+  color: inherit;
+}
+
 .footer-inner {
     font-size: 0.75em;
     color: rgba(255,255,255,0.45);
