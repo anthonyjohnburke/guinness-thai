@@ -236,9 +236,7 @@ def build_html(pubs):
     <h1>Bangkok Guinness Pub List</h1>
 
     <p>
-      A crawlable directory of Bangkok venues tracked by Pints of Bangkok,
-      including Guinness Draught prices, happy hour deals, nearby transport
-      and price verification dates.
+      A directory of Bangkok venues tracked by Pints of Bangkok, including Guinness Draught prices, happy hour deals, nearby transport and price verification dates.
     </p>
 
     <p>
