@@ -11,6 +11,7 @@ permissions:
 jobs:
   update-pubs:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -43,23 +44,34 @@ jobs:
 
           today = datetime.now(ZoneInfo("Asia/Bangkok")).date().isoformat()
 
-          pattern = (
-              r"(<loc>https://www\.guinnessthailand\.com/</loc>\s*"
-              r"<lastmod>)[^<]+(</lastmod>)"
-          )
+          patterns = [
+              (
+                  r"(<loc>https://www\.guinnessthailand\.com/</loc>\s*"
+                  r"<lastmod>)[^<]+(</lastmod>)",
+                  "homepage",
+              ),
+              (
+                  r"(<loc>https://www\.guinnessthailand\.com/pubs\.html</loc>\s*"
+                  r"<lastmod>)[^<]+(</lastmod>)",
+                  "pub directory",
+              ),
+          ]
 
-          updated, count = re.subn(
-              pattern,
-              rf"\g<1>{today}\2",
-              text,
-              count=1
-          )
+          for pattern, label in patterns:
+              text, count = re.subn(
+                  pattern,
+                  rf"\g<1>{today}\2",
+                  text,
+                  count=1
+              )
 
-          if count != 1:
-              raise SystemExit("Could not find homepage lastmod in sitemap.xml")
+              if count != 1:
+                  raise SystemExit(
+                      f"Could not find {label} lastmod in sitemap.xml"
+                  )
 
-          sitemap.write_text(updated, encoding="utf-8")
-          print(f"Updated homepage sitemap lastmod to {today}")
+          sitemap.write_text(text, encoding="utf-8")
+          print(f"Updated homepage and pub directory sitemap lastmod to {today}")
           '
           fi
 
