@@ -25,43 +25,52 @@ jobs:
 
       - name: Update sitemap and commit changed data
         run: |
-          if git diff --quiet -- pubs.json; then
-            echo "No pub data changes."
+          PUB_DATA_CHANGED=false
+
+          if ! git diff --quiet -- pubs.json; then
+            PUB_DATA_CHANGED=true
+          fi
+
+          if [ "$PUB_DATA_CHANGED" = true ]; then
+            python - <<'PY'
+            from datetime import datetime
+            from pathlib import Path
+            from zoneinfo import ZoneInfo
+            import re
+
+            sitemap = Path("sitemap.xml")
+            text = sitemap.read_text(encoding="utf-8")
+
+            today = datetime.now(ZoneInfo("Asia/Bangkok")).date().isoformat()
+
+            pattern = (
+                r'(<loc>https://www\.guinnessthailand\.com/</loc>\s*'
+                r'<lastmod>)[^<]+(</lastmod>)'
+            )
+
+            updated, count = re.subn(
+                pattern,
+                rf'\g<1>{today}\2',
+                text,
+                count=1
+            )
+
+            if count != 1:
+                raise SystemExit("Could not find homepage lastmod in sitemap.xml")
+
+            sitemap.write_text(updated, encoding="utf-8")
+            print(f"Updated homepage sitemap lastmod to {today}")
+            PY
+          fi
+
+          if [ -z "$(git status --porcelain -- pubs.json pubs.html sitemap.xml)" ]; then
+            echo "No pub data or directory changes."
             exit 0
           fi
 
-          python - <<'PY'
-          from datetime import datetime
-          from pathlib import Path
-          from zoneinfo import ZoneInfo
-          import re
-
-          sitemap = Path("sitemap.xml")
-          text = sitemap.read_text(encoding="utf-8")
-
-          today = datetime.now(ZoneInfo("Asia/Bangkok")).date().isoformat()
-
-          pattern = (
-              r'(<loc>https://www\.guinnessthailand\.com/</loc>\s*'
-              r'<lastmod>)[^<]+(</lastmod>)'
-          )
-
-          updated, count = re.subn(
-              pattern,
-              rf'\g<1>{today}\2',
-              text,
-              count=1
-          )
-
-          if count != 1:
-              raise SystemExit("Could not find homepage lastmod in sitemap.xml")
-
-          sitemap.write_text(updated, encoding="utf-8")
-          print(f"Updated homepage sitemap lastmod to {today}")
-          PY
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pubs.json sitemap.xml
+
+          git add pubs.json pubs.html sitemap.xml
           git commit -m "Update public pub data"
           git push
