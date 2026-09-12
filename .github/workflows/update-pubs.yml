@@ -32,35 +32,35 @@ jobs:
           fi
 
           if [ "$PUB_DATA_CHANGED" = true ]; then
-            python - <<'PY'
-            from datetime import datetime
-            from pathlib import Path
-            from zoneinfo import ZoneInfo
-            import re
+            python -c '
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          import re
 
-            sitemap = Path("sitemap.xml")
-            text = sitemap.read_text(encoding="utf-8")
+          sitemap = Path("sitemap.xml")
+          text = sitemap.read_text(encoding="utf-8")
 
-            today = datetime.now(ZoneInfo("Asia/Bangkok")).date().isoformat()
+          today = datetime.now(ZoneInfo("Asia/Bangkok")).date().isoformat()
 
-            pattern = (
-                r'(<loc>https://www\.guinnessthailand\.com/</loc>\s*'
-                r'<lastmod>)[^<]+(</lastmod>)'
-            )
+          pattern = (
+              r"(<loc>https://www\.guinnessthailand\.com/</loc>\s*"
+              r"<lastmod>)[^<]+(</lastmod>)"
+          )
 
-            updated, count = re.subn(
-                pattern,
-                rf'\g<1>{today}\2',
-                text,
-                count=1
-            )
+          updated, count = re.subn(
+              pattern,
+              rf"\g<1>{today}\2",
+              text,
+              count=1
+          )
 
-            if count != 1:
-                raise SystemExit("Could not find homepage lastmod in sitemap.xml")
+          if count != 1:
+              raise SystemExit("Could not find homepage lastmod in sitemap.xml")
 
-            sitemap.write_text(updated, encoding="utf-8")
-            print(f"Updated homepage sitemap lastmod to {today}")
-            PY
+          sitemap.write_text(updated, encoding="utf-8")
+          print(f"Updated homepage sitemap lastmod to {today}")
+          '
           fi
 
           if [ -z "$(git status --porcelain -- pubs.json pubs.html sitemap.xml)" ]; then
