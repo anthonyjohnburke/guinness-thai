@@ -3621,6 +3621,17 @@ font-weight: 500;
   background: transparent;
 }
 
+    .footer-directory-link {
+  margin: 8px 0;
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+.footer-directory-link a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .radar-status-ending,
 .radar-status-live,
 .radar-status-starting,
