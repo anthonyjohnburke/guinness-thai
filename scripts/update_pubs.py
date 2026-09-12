@@ -130,12 +130,69 @@ def build_pub_html(pub):
         {links_html}
       </article>
     """
+def build_test_structured_data(pubs):
+    test_pub = next(
+        (
+            pub for pub in pubs
+            if (pub["name"] or "").strip().lower() == "the black swan"
+        ),
+        None,
+    )
 
+    if not test_pub:
+        return ""
+
+    data = {
+        "@context": "https://schema.org",
+        "@type": "BarOrPub",
+        "name": test_pub["name"],
+    }
+
+    if (
+        test_pub["latitude"] is not None
+        and test_pub["longitude"] is not None
+    ):
+        data["geo"] = {
+            "@type": "GeoCoordinates",
+            "latitude": test_pub["latitude"],
+            "longitude": test_pub["longitude"],
+        }
+
+    if test_pub["venue_url"]:
+        data["url"] = test_pub["venue_url"]
+
+    if test_pub["price_thb"] is not None:
+        data["hasMenu"] = {
+            "@type": "Menu",
+            "hasMenuItem": {
+                "@type": "MenuItem",
+                "name": "Guinness Draught",
+                "offers": {
+                    "@type": "Offer",
+                    "price": test_pub["price_thb"],
+                    "priceCurrency": "THB",
+                },
+            },
+        }
+
+    json_ld = json.dumps(
+        data,
+        ensure_ascii=False,
+        indent=2,
+    )
+
+    return f"""
+  <script type="application/ld+json">
+{json_ld}
+  </script>
+"""
 
 def build_html(pubs):
     updated = datetime.now(
         ZoneInfo("Asia/Bangkok")
     ).date().isoformat()
+
+    structured_data = build_test_structured_data(pubs)
 
     pub_blocks = "\n".join(
         build_pub_html(pub)
@@ -162,6 +219,8 @@ def build_html(pubs):
 
   <link rel="canonical" href="https://www.guinnessthailand.com/pubs.html">
   <link rel="alternate" type="application/json" href="/pubs.json" title="Pints of Bangkok pub data">
+
+{structured_data}
 
   <style>
     body {{
