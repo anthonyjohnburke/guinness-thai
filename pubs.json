@@ -1470,5 +1470,37 @@
     "google_maps_url": "https://maps.app.goo.gl/ykZtgjEgyncpgSBZ8",
     "venue_url": "https://spicysombrerobkk.com/",
     "price_verified": "2026-09-08"
+  },
+  {
+    "name": "The Sudo Social",
+    "area": "Sathorn",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 397,
+    "happy_hour_price_thb": 339,
+    "special": "Happy hour 16:00-19:00",
+    "nearest_station": "Khlong Toei MRT",
+    "station_distance_metres": 663,
+    "latitude": 13.72028293,
+    "longitude": 100.5482724,
+    "google_maps_url": "https://maps.app.goo.gl/NXoPm3Z8jyRNw5xb8",
+    "venue_url": "https://www.instagram.com/thesudosocial.bkk/",
+    "price_verified": "2026-09-12"
+  },
+  {
+    "name": "Park Sathorn",
+    "area": "Sathorn",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 444,
+    "happy_hour_price_thb": null,
+    "special": null,
+    "nearest_station": "Khlong Toei MRT",
+    "station_distance_metres": 370,
+    "latitude": 13.72043445,
+    "longitude": 100.5513583,
+    "google_maps_url": "https://maps.app.goo.gl/NncDKkzygjsaoG5J6",
+    "venue_url": "https://www.instagram.com/parksathorn",
+    "price_verified": "2026-09-12"
   }
 ]
