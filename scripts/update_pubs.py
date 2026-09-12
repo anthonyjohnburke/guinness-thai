@@ -130,50 +130,62 @@ def build_pub_html(pub):
         {links_html}
       </article>
     """
-def build_test_structured_data(pubs):
-    test_pub = next(
-        (
-            pub for pub in pubs
-            if (pub["name"] or "").strip().lower() == "the black swan"
-        ),
-        None,
-    )
+def build_structured_data(pubs):
+    
+    items = []
 
-    if not test_pub:
-        return ""
+    for position, pub in enumerate(
+        sorted(
+            pubs,
+            key=lambda item: (item["name"] or "").lower()
+        ),
+        start=1,
+    ):
+        business = {
+            "@type": "BarOrPub",
+            "name": pub["name"],
+        }
+
+        if (
+            pub["latitude"] is not None
+            and pub["longitude"] is not None
+        ):
+            business["geo"] = {
+                "@type": "GeoCoordinates",
+                "latitude": pub["latitude"],
+                "longitude": pub["longitude"],
+            }
+
+        if pub["venue_url"]:
+            business["url"] = pub["venue_url"]
+
+        if pub["price_thb"] is not None:
+            business["hasMenu"] = {
+                "@type": "Menu",
+                "hasMenuItem": {
+                    "@type": "MenuItem",
+                    "name": "Guinness Draught",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": pub["price_thb"],
+                        "priceCurrency": "THB",
+                    },
+                },
+            }
+
+        items.append({
+            "@type": "ListItem",
+            "position": position,
+            "item": business,
+        })
 
     data = {
         "@context": "https://schema.org",
-        "@type": "BarOrPub",
-        "name": test_pub["name"],
+        "@type": "ItemList",
+        "name": "Bangkok Guinness Pub List",
+        "numberOfItems": len(items),
+        "itemListElement": items,
     }
-
-    if (
-        test_pub["latitude"] is not None
-        and test_pub["longitude"] is not None
-    ):
-        data["geo"] = {
-            "@type": "GeoCoordinates",
-            "latitude": test_pub["latitude"],
-            "longitude": test_pub["longitude"],
-        }
-
-    if test_pub["venue_url"]:
-        data["url"] = test_pub["venue_url"]
-
-    if test_pub["price_thb"] is not None:
-        data["hasMenu"] = {
-            "@type": "Menu",
-            "hasMenuItem": {
-                "@type": "MenuItem",
-                "name": "Guinness Draught",
-                "offers": {
-                    "@type": "Offer",
-                    "price": test_pub["price_thb"],
-                    "priceCurrency": "THB",
-                },
-            },
-        }
 
     json_ld = json.dumps(
         data,
@@ -186,13 +198,12 @@ def build_test_structured_data(pubs):
 {json_ld}
   </script>
 """
-
 def build_html(pubs):
     updated = datetime.now(
         ZoneInfo("Asia/Bangkok")
     ).date().isoformat()
 
-    structured_data = build_test_structured_data(pubs)
+    structured_data = build_structured_data(pubs)
 
     pub_blocks = "\n".join(
         build_pub_html(pub)
