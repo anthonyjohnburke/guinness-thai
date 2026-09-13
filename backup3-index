@@ -21,6 +21,7 @@
   <script defer src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
 
 <link rel="canonical" href="https://www.guinnessthailand.com/">
+  <link rel="alternate" type="application/json" href="/pubs.json" title="Pints of Bangkok pub data">
   <link rel="preconnect" href="https://api.mapbox.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,6 +76,45 @@
   "url": "https://guinnessthailand.com",
   "description": "Track Guinness prices across Bangkok and find the best-value pint.",
   "inLanguage": "en"
+}
+</script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Pints of Bangkok Guinness Price Dataset",
+  "description": "A regularly updated dataset of Bangkok venues serving Guinness Draught, including pint prices, happy hour prices, locations, nearby public transport and price verification dates.",
+  "url": "https://www.guinnessthailand.com/",
+  "creator": {
+    "@type": "Organization",
+    "name": "Pints of Bangkok",
+    "url": "https://www.guinnessthailand.com/"
+  },
+  "spatialCoverage": {
+    "@type": "Place",
+    "name": "Bangkok, Thailand"
+  },
+  "keywords": [
+    "Guinness",
+    "Guinness Draught",
+    "Bangkok pubs",
+    "Guinness prices",
+    "happy hour",
+    "Thailand"
+  ],
+  "isAccessibleForFree": true,
+  "variableMeasured": [
+    "Guinness Draught pint price in Thai baht",
+    "Happy hour Guinness price in Thai baht",
+    "Venue location",
+    "Price verification date"
+  ],
+  "distribution": {
+    "@type": "DataDownload",
+    "encodingFormat": "application/json",
+    "contentUrl": "https://www.guinnessthailand.com/pubs.json"
+  }
 }
 </script>
   
@@ -466,7 +506,11 @@
       <p>
         Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy or completeness of any listings.
         Rankings and comparisons reflect only the pubs currently tracked on this site and do not represent all venues in Bangkok. This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only.
+        <a href="/pubs.html">Bangkok Guinness pub directory</a>
       </p>
+
+        
+
       <p class="footer-signoff">
       © 2026 Pints of Bangkok. All rights reserved. Guinness® is a registered trademark of Diageo. This site is independent and not affiliated with Guinness or Diageo.
       </p>
