@@ -219,8 +219,16 @@ function loadMapboxLibrary() {
     return mapboxLoadingPromise;
   }
 
-  mapboxLoadingPromise = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
+mapboxLoadingPromise = new Promise((resolve, reject) => {
+
+  if (!document.querySelector('link[href*="mapbox-gl.css"]')) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css";
+    document.head.appendChild(link);
+  }
+
+  const script = document.createElement("script");
 
     script.src = "https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js";
     script.async = true;
