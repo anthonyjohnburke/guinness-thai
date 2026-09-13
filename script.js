@@ -1,6 +1,13 @@
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+const MAPBOX_TOKEN = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+
+let map = null;
+let mapboxLoadingPromise = null;
+let mapInitPromise = null;
+let hoveredId = null;
+let userMarker = null;
+let activePopup = null;
 
 /* ==========================================================
    Configuration
@@ -201,6 +208,37 @@ function runWhenIdle(callback, timeout = 2000) {
   } else {
     window.setTimeout(callback, 1200);
   }
+}
+
+function loadMapboxLibrary() {
+  if (window.mapboxgl) {
+    return Promise.resolve(window.mapboxgl);
+  }
+
+  if (mapboxLoadingPromise) {
+    return mapboxLoadingPromise;
+  }
+
+  mapboxLoadingPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+
+    script.src = "https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js";
+    script.async = true;
+
+    script.onload = () => {
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+      resolve(mapboxgl);
+    };
+
+    script.onerror = () => {
+      mapboxLoadingPromise = null;
+      reject(new Error("Mapbox failed to load"));
+    };
+
+    document.head.appendChild(script);
+  });
+
+  return mapboxLoadingPromise;
 }
 
 async function loadSiteMessage() {
@@ -617,95 +655,37 @@ function buildPubSearch(pubs, zoomToPub) {
 
 }
 
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
-  center: INITIAL_VIEW.center,
-  zoom: INITIAL_VIEW.zoom,
-  projection: 'mercator'
-});
+function ensureMapInitialized(pubs) {
+  if (map) {
+    return Promise.resolve(map);
+  }
 
-if (window.innerWidth > 768) {
-  map.scrollZoom.disable();
+  if (mapInitPromise) {
+    return mapInitPromise;
+  }
 
-  const mapEl = document.getElementById("map");
+  mapInitPromise = loadMapboxLibrary().then(() => {
+    const loading = document.getElementById("map-loading");
+    if (loading) loading.remove();
 
-  mapEl.addEventListener("click", () => {
-    map.scrollZoom.enable();
-  }, { once: true });
-}
-
-if (window.innerWidth <= 768) {
-  map.dragPan.disable();
-  map.touchZoomRotate.disableRotation(); // keep this
-
-  const unlockBtn = document.getElementById("map-unlock-btn");
-  const hint = document.querySelector(".map-mobile-hint");
-
-  if (unlockBtn) {
-    unlockBtn.addEventListener("click", () => {
-      map.dragPan.enable();
-      map.touchZoomRotate.enable(); // 👈 ADD THIS BACK
-
-      unlockBtn.style.display = "none";
-
-      if (hint) {
-        hint.style.opacity = 0;
-        setTimeout(() => {
-          hint.style.display = "none";
-        }, 400);
-      }
+    map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh",
+      center: INITIAL_VIEW.center,
+      zoom: INITIAL_VIEW.zoom,
+      projection: "mercator"
     });
-  }
-}
-  
-  let hoveredId = null;
-  let userMarker = null;
-  let activePopup = null;
 
-map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+    map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
-class ResetControl {
-  onAdd(map) {
-    this.map = map;
-    this.container = document.createElement('div');
-    this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
-
-    const button = document.createElement('button');
-    button.className = 'mapboxgl-ctrl-icon';
-    button.type = 'button';
-    button.title = 'Reset view';
-    button.innerHTML = `
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 10.5L12 3l9 7.5"></path>
-        <path d="M5 10v10h14V10"></path>
-      </svg>
-    `;
-
-    button.onclick = () => {
-  if (activePopup) {
-    activePopup.remove();
-    activePopup = null;
-  }
-
-  map.easeTo({
-    center: INITIAL_VIEW.center,
-    zoom: INITIAL_VIEW.zoom,
-    duration: 800
+    return map;
+  }).catch(err => {
+    mapInitPromise = null;
+    throw err;
   });
-};
 
-    this.container.appendChild(button);
-    return this.container;
-  }
-
-  onRemove() {
-    this.container.parentNode.removeChild(this.container);
-    this.map = undefined;
-  }
+  return mapInitPromise;
 }
-
-map.addControl(new ResetControl(), 'top-right');
 
 renderFeaturedPromotions();
 
@@ -723,9 +703,6 @@ fetch(SHEET_URL)
 .then(pubs => {
   window.allPubs = pubs;
 
-  const bounds = new mapboxgl.LngLatBounds();
-  let validCount = 0;
-
   const allPricedPubs = pubs
   .filter(p => p.price && !isNaN(parseFloat(p.price)))
   .map(p => ({
@@ -738,8 +715,8 @@ fetch(SHEET_URL)
     last_updated: p.last_updated
   }));
   
-    function zoomToPub(pubName, allPubs) {
-      const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
+async function zoomToPub(pubName, allPubs) {
+   const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
       if (!targetPub) return;
 
       const lat = parseFloat(targetPub.lat);
@@ -749,9 +726,16 @@ fetch(SHEET_URL)
       const safeLink = sanitizeURL(targetPub.link);
       const html = buildPopupHTML(targetPub, safeLink);
 
-      scrollToMap();
+     scrollToMap();
 
-      setTimeout(() => {
+try {
+  await ensureMapInitialized(allPubs);
+} catch (err) {
+  console.error("Map failed to load:", err);
+  return;
+}
+
+setTimeout(() => {
         map.easeTo({
           center: [lon, lat],
           zoom: 15,
@@ -775,8 +759,14 @@ keepPopupInView(activePopup);
 }, 700);
       }, 150);
     }
+async function zoomToArea(filteredPubs) {
+  try {
+    await ensureMapInitialized(pubs);
+  } catch (err) {
+    console.error("Map failed to load:", err);
+    return;
+  }
 
-  function zoomToArea(filteredPubs) {
   const areaBounds = new mapboxgl.LngLatBounds();
   let count = 0;
 
