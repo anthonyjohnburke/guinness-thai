@@ -2562,6 +2562,33 @@ text-align-last: center;
   overflow: visible;
 }
 
+#map-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  padding: 24px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#map-loading strong {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #222;
+}
+
+#map-loading span {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #777;
+}
+
 .popup-card.modern {
   width: 270px;
   border-radius: 16px;
