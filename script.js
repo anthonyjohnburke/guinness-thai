@@ -1489,36 +1489,21 @@ ${pub.google_maps_link ? `
 </div>
 `;
   
-  happyList.appendChild(row);
+happyList.appendChild(row);
     });
 
-    const geojson = {
-      type: "FeatureCollection",
-      features: pubs
-        .filter(p => p.lat && p.lon)
-        .map((p, i) => {
-          const lat = parseFloat(p.lat);
-          const lon = parseFloat(p.lon);
-
-          if (isNaN(lat) || isNaN(lon)) return null;
-
-          validCount++;
-          bounds.extend([lon, lat]);
-
-          return {
-  type: "Feature",
-  id: `${p.name}-${i}`, // unique id
-  geometry: {
-    type: "Point",
-    coordinates: [lon, lat]
-  },
-  properties: p
-};
-        })
-        .filter(Boolean)
-    };
-
     }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        runWhenIdle(() => {
+          ensureMapInitialized(pubs).catch(err => {
+            console.error("Map failed to load:", err);
+          });
+        }, 2500);
+      });
+    });
+
   })
   .catch(err => {
     console.error(err);
@@ -1650,14 +1635,22 @@ function typeWriter(el, text, speed = 35) {
     return;
   }
 
-  navigator.geolocation.getCurrentPosition(position => {
-    const userLat = position.coords.latitude;
+navigator.geolocation.getCurrentPosition(async position => {
+   const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
-    window.userLocation = {
+   window.userLocation = {
   lat: userLat,
   lon: userLon
 };
-    if (userMarker) {
+
+try {
+  await ensureMapInitialized(pubs);
+} catch (err) {
+  console.error("Map failed to load:", err);
+  return;
+}
+
+if (userMarker) {
   userMarker.remove();
 }
 
