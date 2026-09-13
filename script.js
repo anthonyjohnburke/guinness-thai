@@ -656,12 +656,12 @@ function buildPubSearch(pubs, zoomToPub) {
 }
 
 function ensureMapInitialized(pubs) {
-  if (map) {
-    return Promise.resolve(map);
-  }
-
   if (mapInitPromise) {
     return mapInitPromise;
+  }
+
+  if (map) {
+    return Promise.resolve(map);
   }
 
   mapInitPromise = loadMapboxLibrary().then(() => {
@@ -676,10 +676,99 @@ function ensureMapInitialized(pubs) {
       projection: "mercator"
     });
 
-  map.addControl(
+     // Desktop: prevent accidental map zoom while scrolling the page
+if (window.innerWidth > 768) {
+  map.scrollZoom.disable();
+
+  const mapEl = document.getElementById("map");
+
+  if (mapEl) {
+    mapEl.addEventListener("click", () => {
+      map.scrollZoom.enable();
+    }, { once: true });
+  }
+}
+
+// Mobile: keep map locked until user chooses to explore it
+if (window.innerWidth <= 768) {
+  map.dragPan.disable();
+  map.touchZoomRotate.disableRotation();
+
+  const unlockBtn = document.getElementById("map-unlock-btn");
+  const hint = document.querySelector(".map-mobile-hint");
+
+  if (unlockBtn) {
+    unlockBtn.addEventListener("click", () => {
+      map.dragPan.enable();
+      map.touchZoomRotate.enable();
+
+      unlockBtn.style.display = "none";
+
+      if (hint) {
+        hint.style.opacity = 0;
+
+        setTimeout(() => {
+          hint.style.display = "none";
+        }, 400);
+      }
+    });
+  }
+}
+
+ map.addControl(
   new mapboxgl.NavigationControl({ showCompass: false }),
   "top-right"
 );
+
+class ResetControl {
+  onAdd(mapInstance) {
+    this.map = mapInstance;
+    this.container = document.createElement("div");
+    this.container.className = "mapboxgl-ctrl mapboxgl-ctrl-group";
+
+    const button = document.createElement("button");
+    button.className = "mapboxgl-ctrl-icon";
+    button.type = "button";
+    button.title = "Reset view";
+
+    button.innerHTML = `
+      <svg viewBox="0 0 24 24"
+           width="18"
+           height="18"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="M3 10.5L12 3l9 7.5"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+    `;
+
+    button.onclick = () => {
+      if (activePopup) {
+        activePopup.remove();
+        activePopup = null;
+      }
+
+      map.easeTo({
+        center: INITIAL_VIEW.center,
+        zoom: INITIAL_VIEW.zoom,
+        duration: 800
+      });
+    };
+
+    this.container.appendChild(button);
+    return this.container;
+  }
+
+  onRemove() {
+    this.container.parentNode.removeChild(this.container);
+    this.map = undefined;
+  }
+}
+
+map.addControl(new ResetControl(), "top-right");
 
 const bounds = new mapboxgl.LngLatBounds();
 let validCount = 0;
