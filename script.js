@@ -676,9 +676,219 @@ function ensureMapInitialized(pubs) {
       projection: "mercator"
     });
 
-    map.addControl(new mapboxgl.NavigationControl(), "top-right");
+  map.addControl(
+  new mapboxgl.NavigationControl({ showCompass: false }),
+  "top-right"
+);
 
-    return map;
+const bounds = new mapboxgl.LngLatBounds();
+let validCount = 0;
+
+const geojson = {
+  type: "FeatureCollection",
+  features: pubs
+    .filter(p => p.lat && p.lon)
+    .map((p, i) => {
+      const lat = parseFloat(p.lat);
+      const lon = parseFloat(p.lon);
+
+      if (isNaN(lat) || isNaN(lon)) return null;
+
+      validCount++;
+      bounds.extend([lon, lat]);
+
+      return {
+        type: "Feature",
+        id: `${p.name}-${i}`,
+        geometry: {
+          type: "Point",
+          coordinates: [lon, lat]
+        },
+        properties: p
+      };
+    })
+    .filter(Boolean)
+};
+
+        const addPubLayer = () => {
+      if (map.getSource('pubs')) return;
+
+      map.addSource('pubs', {
+        type: 'geojson',
+        data: geojson
+      });
+
+      map.addLayer({
+  id: 'pubs-layer',
+  type: 'symbol',
+  source: 'pubs',
+  layout: {
+    'icon-image': 'pint-icon',
+    'icon-size': 0.8,
+    'icon-anchor': 'bottom',
+    'icon-offset': [0, 6],
+    'icon-allow-overlap': true
+  },
+  paint: {
+    'icon-opacity': [
+      'case',
+      ['boolean', ['feature-state', 'hover'], false],
+      1,
+      0.7
+    ]
+  }
+});
+
+      map.on('mousemove', 'pubs-layer', (e) => {
+  map.getCanvas().style.cursor = 'pointer';
+
+  if (e.features.length > 0) {
+    if (hoveredId !== null) {
+      map.setFeatureState(
+        { source: 'pubs', id: hoveredId },
+        { hover: false }
+      );
+    }
+
+    hoveredId = e.features[0].id;
+
+    map.setFeatureState(
+      { source: 'pubs', id: hoveredId },
+      { hover: true }
+    );
+  }
+});
+
+map.on('mouseleave', 'pubs-layer', () => {
+  map.getCanvas().style.cursor = '';
+
+  if (hoveredId !== null) {
+    map.setFeatureState(
+      { source: 'pubs', id: hoveredId },
+      { hover: false }
+    );
+  }
+
+  hoveredId = null;
+});
+
+map.on('click', 'pubs-layer', (e) => {
+  const feature = e.features && e.features[0];
+  if (!feature) return;
+
+  const p = feature.properties;
+  const safeLink = sanitizeURL(p.link);
+  const html = buildPopupHTML(p, safeLink);
+
+  const coordinates = feature.geometry.coordinates.slice();
+
+  // CLOSE if same pub clicked again
+  if (
+    activePopup &&
+    activePopup.pubName === p.name
+  ) {
+    activePopup.remove();
+    activePopup = null;
+    return;
+  }
+
+  // Close existing popup
+  if (activePopup) {
+    activePopup.remove();
+    activePopup = null;
+  }
+
+  const popup = new mapboxgl.Popup({
+  offset: window.innerWidth <= 768
+    ? {
+        bottom: [0, -12]
+      }
+    : 18,
+    closeButton: true,
+    closeOnClick: true,
+    maxWidth: "320px"
+  });
+
+  popup.pubName = p.name;
+
+  if (window.innerWidth <= 768) {
+
+    map.easeTo({
+      center: coordinates,
+      zoom: Math.max(map.getZoom(), 14),
+      duration: 350,
+      padding: {
+  top: 90,
+  bottom: 160,
+  left: 28,
+  right: 28
+}
+    });
+
+    setTimeout(() => {
+      popup
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
+
+activePopup = popup;
+
+keepPopupInView(activePopup);
+    }, 220);
+
+  } else {
+
+    popup
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
+
+activePopup = popup;
+
+keepPopupInView(activePopup);
+  }
+
+  popup.on("close", () => {
+    activePopup = null;
+  });
+
+  trackEvent("popup_open", {
+    pub_name: p.name || "unknown"
+  });
+});
+
+      if (validCount > 1) {
+        map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
+      }
+    };
+
+    const loadIcon = () => {
+      if (map.hasImage('pint-icon')) {
+        addPubLayer();
+        return;
+      }
+
+      map.loadImage('/pint-glass1.png', (err, img) => {
+        if (err || !img) {
+          console.error("Icon failed", err);
+          return;
+        }
+
+        if (!map.hasImage('pint-icon')) {
+          map.addImage('pint-icon', img);
+        }
+
+        addPubLayer();
+      });
+    };
+
+if (map.loaded()) {
+  loadIcon();
+} else {
+  map.once('load', loadIcon);
+}
+     
+return map;
   }).catch(err => {
     mapInitPromise = null;
     throw err;
@@ -1308,183 +1518,6 @@ ${pub.google_maps_link ? `
         .filter(Boolean)
     };
 
-    const addPubLayer = () => {
-      if (map.getSource('pubs')) return;
-
-      map.addSource('pubs', {
-        type: 'geojson',
-        data: geojson
-      });
-
-      map.addLayer({
-  id: 'pubs-layer',
-  type: 'symbol',
-  source: 'pubs',
-  layout: {
-    'icon-image': 'pint-icon',
-    'icon-size': 0.8,
-    'icon-anchor': 'bottom',
-    'icon-offset': [0, 6],
-    'icon-allow-overlap': true
-  },
-  paint: {
-    'icon-opacity': [
-      'case',
-      ['boolean', ['feature-state', 'hover'], false],
-      1,
-      0.7
-    ]
-  }
-});
-
-      map.on('mousemove', 'pubs-layer', (e) => {
-  map.getCanvas().style.cursor = 'pointer';
-
-  if (e.features.length > 0) {
-    if (hoveredId !== null) {
-      map.setFeatureState(
-        { source: 'pubs', id: hoveredId },
-        { hover: false }
-      );
-    }
-
-    hoveredId = e.features[0].id;
-
-    map.setFeatureState(
-      { source: 'pubs', id: hoveredId },
-      { hover: true }
-    );
-  }
-});
-
-map.on('mouseleave', 'pubs-layer', () => {
-  map.getCanvas().style.cursor = '';
-
-  if (hoveredId !== null) {
-    map.setFeatureState(
-      { source: 'pubs', id: hoveredId },
-      { hover: false }
-    );
-  }
-
-  hoveredId = null;
-});
-
-map.on('click', 'pubs-layer', (e) => {
-  const feature = e.features && e.features[0];
-  if (!feature) return;
-
-  const p = feature.properties;
-  const safeLink = sanitizeURL(p.link);
-  const html = buildPopupHTML(p, safeLink);
-
-  const coordinates = feature.geometry.coordinates.slice();
-
-  // CLOSE if same pub clicked again
-  if (
-    activePopup &&
-    activePopup.pubName === p.name
-  ) {
-    activePopup.remove();
-    activePopup = null;
-    return;
-  }
-
-  // Close existing popup
-  if (activePopup) {
-    activePopup.remove();
-    activePopup = null;
-  }
-
-  const popup = new mapboxgl.Popup({
-  offset: window.innerWidth <= 768
-    ? {
-        bottom: [0, -12]
-      }
-    : 18,
-    closeButton: true,
-    closeOnClick: true,
-    maxWidth: "320px"
-  });
-
-  popup.pubName = p.name;
-
-  if (window.innerWidth <= 768) {
-
-    map.easeTo({
-      center: coordinates,
-      zoom: Math.max(map.getZoom(), 14),
-      duration: 350,
-      padding: {
-  top: 90,
-  bottom: 160,
-  left: 28,
-  right: 28
-}
-    });
-
-    setTimeout(() => {
-      popup
-  .setLngLat(coordinates)
-  .setHTML(html)
-  .addTo(map);
-
-activePopup = popup;
-
-keepPopupInView(activePopup);
-    }, 220);
-
-  } else {
-
-    popup
-  .setLngLat(coordinates)
-  .setHTML(html)
-  .addTo(map);
-
-activePopup = popup;
-
-keepPopupInView(activePopup);
-  }
-
-  popup.on("close", () => {
-    activePopup = null;
-  });
-
-  trackEvent("popup_open", {
-    pub_name: p.name || "unknown"
-  });
-});
-
-      if (validCount > 1) {
-        map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
-      }
-    };
-
-    const loadIcon = () => {
-      if (map.hasImage('pint-icon')) {
-        addPubLayer();
-        return;
-      }
-
-      map.loadImage('/pint-glass1.png', (err, img) => {
-        if (err || !img) {
-          console.error("Icon failed", err);
-          return;
-        }
-
-        if (!map.hasImage('pint-icon')) {
-          map.addImage('pint-icon', img);
-        }
-
-        addPubLayer();
-      });
-    };
-
-if (map.loaded()) {
-  loadIcon();
-} else {
-  map.once('load', loadIcon);
-}
     }
   })
   .catch(err => {
