@@ -404,16 +404,16 @@
     "area": "Asoke",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 490,
-    "happy_hour_price_thb": 370,
-    "special": "Happy hour 07:30-19:00",
+    "price_thb": 269,
+    "happy_hour_price_thb": null,
+    "special": null,
     "nearest_station": "Phrom Phong BTS",
     "station_distance_metres": 635,
     "latitude": 13.73239545,
     "longitude": 100.5640455,
     "google_maps_url": "https://maps.app.goo.gl/43mSW6cPdMhr6Eh39",
     "venue_url": "https://thedeckbkk.com",
-    "price_verified": "2026-09-01"
+    "price_verified": "2026-09-19"
   },
   {
     "name": "The Game",
@@ -733,7 +733,7 @@
     "longitude": 100.6200154,
     "google_maps_url": "https://maps.app.goo.gl/oogxwCVE1DN1Mc3u5",
     "venue_url": "https://www.the-londoner.com/",
-    "price_verified": "2026-08-25"
+    "price_verified": "2026-09-19"
   },
   {
     "name": "BKK CF",
@@ -772,7 +772,7 @@
     "area": "Phloen Chit",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 447,
+    "price_thb": 444,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Phloen Chit BTS",
@@ -781,7 +781,7 @@
     "longitude": 100.5417459,
     "google_maps_url": "https://maps.app.goo.gl/qxZv7VJsfgv7Yfcw8",
     "venue_url": "https://www.beerrepublicbkk.com",
-    "price_verified": "2026-07-24"
+    "price_verified": "2026-09-19"
   },
   {
     "name": "Ekamai Beer House",
@@ -1293,7 +1293,7 @@
     "longitude": 100.6997527,
     "google_maps_url": "https://maps.app.goo.gl/u9GrAPimseonUgXk8",
     "venue_url": "https://www.facebook.com/Mawwow2022",
-    "price_verified": "2026-08-25"
+    "price_verified": "2026-09-01"
   },
   {
     "name": "Flann O'Brien's",
