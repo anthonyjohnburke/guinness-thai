@@ -157,7 +157,7 @@
     "longitude": 100.5930575,
     "google_maps_url": "https://maps.app.goo.gl/4wo9bjdk8HTkspG59",
     "venue_url": "https://www.facebook.com/OBriensIrishPubBangkok/",
-    "price_verified": "2026-09-01"
+    "price_verified": "2026-09-24"
   },
   {
     "name": "The Old English",
@@ -484,7 +484,7 @@
     "area": "Chit Lom",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 430,
+    "price_thb": 432,
     "happy_hour_price_thb": 350,
     "special": null,
     "nearest_station": "Phloen Chit BTS",
@@ -493,7 +493,7 @@
     "longitude": 100.5491046,
     "google_maps_url": "https://maps.app.goo.gl/X7rTcDuvLSEpigtk6",
     "venue_url": "https://witchstavern.com",
-    "price_verified": "2026-08-30"
+    "price_verified": "2026-09-24"
   },
   {
     "name": "The Laughing Tiger",
@@ -1293,7 +1293,7 @@
     "longitude": 100.6997527,
     "google_maps_url": "https://maps.app.goo.gl/u9GrAPimseonUgXk8",
     "venue_url": "https://www.facebook.com/Mawwow2022",
-    "price_verified": "2026-09-01"
+    "price_verified": "2026-09-24"
   },
   {
     "name": "Flann O'Brien's",
