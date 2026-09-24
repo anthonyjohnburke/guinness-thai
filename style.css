@@ -1163,6 +1163,15 @@ input, button {
     box-shadow: none;
 }
 
+.mapboxgl-popup {
+  background: transparent !important;
+}
+
+.mapboxgl-popup-content {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 .popup-header .popup-meta {
   color: #d4af37;
   margin-bottom: 4px;
