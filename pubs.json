@@ -1518,5 +1518,21 @@
     "google_maps_url": "https://maps.app.goo.gl/KJfqqYAcSymNKDBR8",
     "venue_url": "https://www.instagram.com/cucu.bkk/",
     "price_verified": "2026-09-17"
+  },
+  {
+    "name": "Bourbon Street",
+    "area": "Ekamai",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 333,
+    "happy_hour_price_thb": null,
+    "special": null,
+    "nearest_station": "Ekamai BTS",
+    "station_distance_metres": 363,
+    "latitude": 13.72287134,
+    "longitude": 100.5843508,
+    "google_maps_url": "https://maps.app.goo.gl/pa7eMevUshqGgDWp8",
+    "venue_url": "https://bourbonstbkk.com/",
+    "price_verified": "2026-09-30"
   }
 ]
