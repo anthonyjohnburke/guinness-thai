@@ -173,7 +173,7 @@
     "longitude": 100.5786671,
     "google_maps_url": "https://maps.app.goo.gl/LARhhjadWSYfbncv7",
     "venue_url": "https://oldenglishpubbangkok.com/",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "Paddy Reilly’s",
@@ -189,7 +189,7 @@
     "longitude": 100.5258958,
     "google_maps_url": "https://maps.app.goo.gl/iLeNxHqP1bJ3yjJi7",
     "venue_url": "https://www.facebook.com/paddyreillysirishpub/",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "Mulligans",
@@ -221,7 +221,7 @@
     "longitude": 100.5639354,
     "google_maps_url": "https://maps.app.goo.gl/CTGpJMcgd7fLXWha6",
     "venue_url": "https://www.theupperdecksportsbar.com/",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "O'Leary's",
@@ -285,7 +285,7 @@
     "longitude": 100.5234539,
     "google_maps_url": "https://maps.app.goo.gl/dvxiERbGTugt2GNA6",
     "venue_url": "https://www.britishclubbangkok.org/",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "Shenanigans",
@@ -317,7 +317,7 @@
     "longitude": 100.6064111,
     "google_maps_url": "https://maps.app.goo.gl/hTwRR35U5vESNgsH9",
     "venue_url": "https://www.facebook.com/theshamrockbkk",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "Hunter’s Garden",
@@ -333,7 +333,7 @@
     "longitude": 100.611655,
     "google_maps_url": "https://maps.app.goo.gl/FBDbAWSQHmN3CpMy8",
     "venue_url": "https://www.facebook.com/huntersbangkok",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "Sports on 20",
@@ -349,7 +349,7 @@
     "longitude": 100.5640428,
     "google_maps_url": "https://maps.app.goo.gl/91rcLoLdFzKF6J6H7",
     "venue_url": "https://sportson20.com/",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "The Sportsman",
@@ -429,7 +429,7 @@
     "longitude": 100.5558365,
     "google_maps_url": "https://maps.app.goo.gl/2EMoMpLHes1p8drb8",
     "venue_url": "https://www.instagram.com/thegamebkk/",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "The Royal Oak",
@@ -461,7 +461,7 @@
     "longitude": 100.5564631,
     "google_maps_url": "https://maps.app.goo.gl/vCpW47rapQjXh8o69",
     "venue_url": "https://hemingwaybangkok.com/",
-    "price_verified": "2026-08-25"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "O'glee",
@@ -525,7 +525,7 @@
     "longitude": 100.5648903,
     "google_maps_url": "https://maps.app.goo.gl/L9Ks5Xiy3vACBuQ49",
     "venue_url": "https://www.the-penalty-spot.com/",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "Mullis Sports Bar",
@@ -548,7 +548,7 @@
     "area": "Nana",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 391,
+    "price_thb": 397,
     "happy_hour_price_thb": null,
     "special": "30% off Guinness from 16:00 to 18:30 everyday",
     "nearest_station": "Nana BTS",
@@ -557,7 +557,7 @@
     "longitude": 100.5569185,
     "google_maps_url": "https://maps.app.goo.gl/gWFJGovu18y4XKaa9",
     "venue_url": "https://www.instagram.com/bangbangburgersbkk/",
-    "price_verified": "2026-08-25"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "Breakers Sports Bar",
@@ -1117,7 +1117,7 @@
     "longitude": 100.556692,
     "google_maps_url": "https://maps.app.goo.gl/JKRDLtxEWui1BykM7",
     "venue_url": "https://paradisebeachbar.com/",
-    "price_verified": "2026-09-05"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "Cheers",
@@ -1133,7 +1133,7 @@
     "longitude": 100.5941476,
     "google_maps_url": "https://maps.app.goo.gl/akB9fjtLnD4q16PD6",
     "venue_url": "https://www.instagram.com/wdistrictbkk",
-    "price_verified": "2026-09-12"
+    "price_verified": "2026-09-25"
   },
   {
     "name": "No Idea Gastropub",
@@ -1533,6 +1533,38 @@
     "longitude": 100.5843508,
     "google_maps_url": "https://maps.app.goo.gl/pa7eMevUshqGgDWp8",
     "venue_url": "https://bourbonstbkk.com/",
+    "price_verified": "2026-10-03"
+  },
+  {
+    "name": "Raze Arcade",
+    "area": "Phrom Phong",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 409,
+    "happy_hour_price_thb": 263,
+    "special": "Happy hour 17:00-20:00",
+    "nearest_station": "Phrom Phong BTS",
+    "station_distance_metres": 438,
+    "latitude": 13.73243865,
+    "longitude": 100.5660091,
+    "google_maps_url": "https://maps.app.goo.gl/2zx2c3pqrWR6DijEA",
+    "venue_url": "https://www.instagram.com/razearcade",
+    "price_verified": "2026-10-03"
+  },
+  {
+    "name": "Fu Bar",
+    "area": "Khao San",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 295,
+    "happy_hour_price_thb": null,
+    "special": null,
+    "nearest_station": "Sam Yot MRT",
+    "station_distance_metres": 1584,
+    "latitude": 13.76060225,
+    "longitude": 100.4966789,
+    "google_maps_url": "https://maps.app.goo.gl/C6vYpguTsGCewJNw8",
+    "venue_url": "https://www.instagram.com/fubarkhaosan",
     "price_verified": "2026-10-03"
   }
 ]
