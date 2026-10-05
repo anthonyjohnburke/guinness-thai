@@ -1566,5 +1566,21 @@
     "google_maps_url": "https://maps.app.goo.gl/C6vYpguTsGCewJNw8",
     "venue_url": "https://www.instagram.com/fubarkhaosan",
     "price_verified": "2026-10-03"
+  },
+  {
+    "name": "Save Our Souls",
+    "area": "Khlong San",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 299,
+    "happy_hour_price_thb": null,
+    "special": null,
+    "nearest_station": "Krung Thon Buri BTS",
+    "station_distance_metres": 784,
+    "latitude": 13.72485703,
+    "longitude": 100.509001,
+    "google_maps_url": "https://maps.app.goo.gl/dzenFkKMKXRhLBESA",
+    "venue_url": "https://sosbeerbkk.com/",
+    "price_verified": "2026-10-05"
   }
 ]
