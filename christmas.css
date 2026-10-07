@@ -32,7 +32,7 @@ body.christmas-body {
 }
 
 .christmas-kicker {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -80,7 +80,7 @@ body.christmas-body {
 }
 
 .christmas-count {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.48);
 }
 
@@ -91,7 +91,7 @@ body.christmas-body {
 }
 
 .christmas-sort-label {
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.5);
   margin-right: 3px;
 }
@@ -102,7 +102,7 @@ body.christmas-body {
   color: rgba(255, 255, 255, 0.72);
   border-radius: 999px;
   padding: 8px 15px;
-  font: 600 0.78rem 'Open Sans', sans-serif;
+  font: 600 0.9rem 'Open Sans', sans-serif;
   cursor: pointer;
 }
 
