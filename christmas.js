@@ -234,13 +234,26 @@ function openMenu(r) {
     safeUrl(r.menu_image);
 
 
+  wrap.classList.remove('is-zoomed');
+
+
   wrap.innerHTML = image
     ? `
-      <img
-        class="menu-image"
-        src="${esc(image)}"
-        alt="Christmas menu at ${esc(r.name)}"
-      >
+      <div class="menu-image-stage">
+        <img
+          class="menu-image"
+          src="${esc(image)}"
+          alt="Christmas menu at ${esc(r.name)}"
+          tabindex="0"
+          role="button"
+          aria-label="Zoom Christmas menu"
+          aria-pressed="false"
+        >
+      </div>
+
+      <div class="menu-zoom-hint">
+        Click / tap menu to zoom
+      </div>
     `
     : `
       <div class="menu-image-missing">
@@ -249,29 +262,21 @@ function openMenu(r) {
     `;
 
 
-  /* Pub name */
-
   document.getElementById(
     'menu-title'
   ).textContent =
     r.name || '';
 
 
-  /* Remove the old area / price / status information */
-
   document.getElementById(
     'menu-meta'
   ).textContent = '';
 
 
-  /* Remove the old booking / deposit / seating information */
-
   document.getElementById(
     'menu-booking'
   ).textContent = '';
 
-
-  /* Website / booking link only */
 
   const site =
     safeUrl(r.link);
@@ -291,6 +296,81 @@ function openMenu(r) {
       </a>
     `
     : '';
+
+
+  /* =======================================================
+     MENU IMAGE ZOOM
+     ======================================================= */
+
+  const menuImage =
+    wrap.querySelector('.menu-image');
+
+  const zoomHint =
+    wrap.querySelector('.menu-zoom-hint');
+
+
+  const toggleZoom = () => {
+
+    if (!menuImage) return;
+
+    const zoomed =
+      wrap.classList.toggle('is-zoomed');
+
+    menuImage.setAttribute(
+      'aria-pressed',
+      zoomed ? 'true' : 'false'
+    );
+
+    menuImage.setAttribute(
+      'aria-label',
+      zoomed
+        ? 'Return Christmas menu to normal size'
+        : 'Zoom Christmas menu'
+    );
+
+    if (zoomHint) {
+      zoomHint.textContent =
+        zoomed
+          ? 'Click / tap menu to zoom out'
+          : 'Click / tap menu to zoom';
+    }
+
+    if (!zoomed) {
+      const stage =
+        wrap.querySelector('.menu-image-stage');
+
+      if (stage) {
+        stage.scrollTop = 0;
+        stage.scrollLeft = 0;
+      }
+    }
+  };
+
+
+  if (menuImage) {
+
+    menuImage.addEventListener(
+      'click',
+      toggleZoom
+    );
+
+
+    menuImage.addEventListener(
+      'keydown',
+      (event) => {
+
+        if (
+          event.key === 'Enter' ||
+          event.key === ' '
+        ) {
+          event.preventDefault();
+          toggleZoom();
+        }
+
+      }
+    );
+
+  }
 
 
   box.classList.add('open');
@@ -318,12 +398,17 @@ function closeMenu() {
   const box =
     document.getElementById('menu-lightbox');
 
+  const wrap =
+    document.getElementById('menu-image-wrap');
+
   box.classList.remove('open');
 
   box.setAttribute(
     'aria-hidden',
     'true'
   );
+
+  wrap.classList.remove('is-zoomed');
 
   document.body.style.overflow = '';
 }
