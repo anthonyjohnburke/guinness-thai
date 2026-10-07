@@ -92,10 +92,14 @@ function render() {
 
   document.getElementById(
     'dinner-count'
-  ).textContent =
-    `${rows.length} ${
-      rows.length === 1 ? 'pub' : 'pubs'
-    } currently listed`;
+  ).innerHTML = `
+    <span class="count-circle">
+      ${rows.length}
+    </span>
+    <span>
+      ${rows.length === 1 ? 'pub' : 'pubs'} currently listed
+    </span>
+  `;
 
 
   if (!rows.length) {
@@ -110,6 +114,9 @@ function render() {
     .map((r, i) => {
 
       const image = safeUrl(r.menu_image);
+
+      const cardNumber =
+        String(i + 1).padStart(2, '0');
 
       const extras = [
         r.kids_price
@@ -150,6 +157,10 @@ function render() {
         >
 
           <div class="card-top">
+
+            <div class="card-number">
+              ${cardNumber}
+            </div>
 
             <div class="card-area">
               ${esc(r.area)}
