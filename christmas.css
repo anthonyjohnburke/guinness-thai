@@ -81,7 +81,7 @@ body.christmas-body {
 
 .christmas-count {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.68);
 }
 
 .christmas-sort {
@@ -92,7 +92,7 @@ body.christmas-body {
 
 .christmas-sort-label {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.68);
   margin-right: 3px;
 }
 
