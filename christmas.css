@@ -168,7 +168,7 @@ body.christmas-body {
 
 .card-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
+  font-size: 2.1rem;
   line-height: 1;
   margin: 0 0 8px;
   font-weight: 400;
@@ -176,10 +176,9 @@ body.christmas-body {
 }
 
 .card-station {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.5);
 }
-
 
 /* Card content */
 
