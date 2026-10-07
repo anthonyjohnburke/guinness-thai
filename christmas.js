@@ -319,10 +319,13 @@ function openMenu(r) {
   const zoomHint =
     wrap.querySelector('.menu-zoom-hint');
 
+  const stage =
+    wrap.querySelector('.menu-image-stage');
+
 
   const toggleZoom = () => {
 
-    if (!menuImage) return;
+    if (!menuImage || !stage) return;
 
     const zoomed =
       wrap.classList.toggle('is-zoomed');
@@ -346,14 +349,21 @@ function openMenu(r) {
           : 'Click / tap menu to zoom';
     }
 
-    if (!zoomed) {
-      const stage =
-        wrap.querySelector('.menu-image-stage');
 
-      if (stage) {
+    /* Start at the top of the menu when zooming */
+
+    if (zoomed) {
+
+      requestAnimationFrame(() => {
         stage.scrollTop = 0;
         stage.scrollLeft = 0;
-      }
+      });
+
+    } else {
+
+      stage.scrollTop = 0;
+      stage.scrollLeft = 0;
+
     }
   };
 
