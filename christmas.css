@@ -387,7 +387,7 @@ body.christmas-body {
 
 
 /* =========================================================
-   MENU IMAGE
+   FULL MENU IMAGE
    ========================================================= */
 
 .menu-image-wrap {
@@ -400,7 +400,7 @@ body.christmas-body {
   display: block;
 
   max-width: 100%;
-  max-height: 68vh;
+  max-height: 72vh;
 
   margin: 0 auto;
 
@@ -421,61 +421,51 @@ body.christmas-body {
    ========================================================= */
 
 .menu-info {
-  padding: 22px 26px 26px;
+  padding: 17px 22px 21px;
 }
 
 .menu-info h2 {
   font-family: 'Bebas Neue', sans-serif;
 
-  font-size: 2.3rem;
+  font-size: 1.65rem;
   font-weight: 400;
   line-height: 1;
 
-  margin: 0 0 8px;
+  margin: 0;
 }
 
 .menu-info-line {
-  color: rgba(255, 255, 255, 0.62);
-
-  font-size: 0.84rem;
-  line-height: 1.55;
+  display: none;
 }
 
 
 /* =========================================================
-   MENU BUTTONS
+   MENU BUTTON
    ========================================================= */
 
 .menu-actions {
   display: flex;
-  gap: 10px;
-
-  margin-top: 18px;
-
-  flex-wrap: wrap;
+  margin-top: 13px;
 }
 
 .menu-actions a {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   text-decoration: none;
 
   border-radius: 999px;
 
-  padding: 10px 17px;
+  padding: 9px 16px;
 
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
 }
 
 .menu-actions .primary {
   background: #d4af37;
   color: #111;
-}
-
-.menu-actions .secondary {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
 }
 
 
@@ -592,7 +582,15 @@ body.christmas-body {
   }
 
   .menu-image {
-    max-height: 62vh;
+    max-height: 72vh;
+  }
+
+  .menu-info {
+    padding: 15px 18px 18px;
+  }
+
+  .menu-info h2 {
+    font-size: 1.5rem;
   }
 
 
