@@ -80,8 +80,31 @@ body.christmas-body {
 }
 
 .christmas-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.68);
+}
+
+.count-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+
+  border-radius: 50%;
+
+  background: #16834b;
+  color: #fff;
+
+  font-size: 0.85rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .christmas-sort {
@@ -164,8 +187,27 @@ body.christmas-body {
    ========================================================= */
 
 .card-top {
-  padding: 22px 22px 17px;
+  position: relative;
+
+  padding: 22px 58px 17px 22px;
+
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-number {
+  position: absolute;
+
+  top: 19px;
+  right: 20px;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1;
+
+  color: rgba(255, 255, 255, 0.25);
+
+  letter-spacing: 0.05em;
 }
 
 .card-area {
@@ -624,17 +666,25 @@ body.christmas-body {
 
   .christmas-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 22px;
   }
 
   .dinner-card {
     min-height: 0;
   }
 
-  .card-top,
+  .card-top {
+    padding-left: 18px;
+    padding-right: 54px;
+  }
+
   .card-body {
     padding-left: 18px;
     padding-right: 18px;
+  }
+
+  .card-number {
+    right: 18px;
   }
 
   .card-preview-label {
