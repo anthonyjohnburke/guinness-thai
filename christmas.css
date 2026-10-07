@@ -422,6 +422,7 @@ body.christmas-body {
 
 .menu-info {
   padding: 17px 22px 21px;
+  text-align: center;
 }
 
 .menu-info h2 {
@@ -432,6 +433,7 @@ body.christmas-body {
   line-height: 1;
 
   margin: 0;
+  text-align: center;
 }
 
 .menu-info-line {
@@ -445,6 +447,8 @@ body.christmas-body {
 
 .menu-actions {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 13px;
 }
 
