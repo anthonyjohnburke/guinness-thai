@@ -9,10 +9,10 @@ let currentSort = 'area';
    HELPERS
    ========================================================= */
 
-const esc = s =>
+const esc = (s) =>
   String(s ?? '').replace(
     /[&<>'"]/g,
-    c =>
+    (c) =>
       ({
         '&': '&amp;',
         '<': '&lt;',
@@ -23,14 +23,14 @@ const esc = s =>
   );
 
 
-const safeUrl = value => {
+const safeUrl = (value) => {
   if (!value) return '';
 
   try {
-    const u = new URL(value, location.origin);
+    const url = new URL(value, location.origin);
 
-    return ['http:', 'https:'].includes(u.protocol)
-      ? u.href
+    return ['http:', 'https:'].includes(url.protocol)
+      ? url.href
       : '';
   } catch {
     return '';
@@ -38,13 +38,13 @@ const safeUrl = value => {
 };
 
 
-const price = n => {
-  const v = Number(
-    String(n || '').replace(/[^0-9.]/g, '')
+const price = (value) => {
+  const number = Number(
+    String(value || '').replace(/[^0-9.]/g, '')
   );
 
-  return Number.isFinite(v) && v > 0
-    ? v
+  return Number.isFinite(number) && number > 0
+    ? number
     : Infinity;
 };
 
@@ -54,129 +54,159 @@ const price = n => {
    ========================================================= */
 
 function sortedRows() {
-
   return [...dinners].sort((a, b) => {
 
     if (currentSort === 'price') {
-
       return (
-        price(a.dinner_price) - price(b.dinner_price) ||
-        String(a.area).localeCompare(String(b.area))
+        price(a.dinner_price) -
+          price(b.dinner_price) ||
+        String(a.area || '').localeCompare(
+          String(b.area || '')
+        )
       );
-
     }
 
     return (
-      String(a.area || '').localeCompare(String(b.area || '')) ||
-      price(a.dinner_price) - price(b.dinner_price) ||
-      String(a.name).localeCompare(String(b.name))
+      String(a.area || '').localeCompare(
+        String(b.area || '')
+      ) ||
+      price(a.dinner_price) -
+        price(b.dinner_price) ||
+      String(a.name || '').localeCompare(
+        String(b.name || '')
+      )
     );
-
   });
-
 }
 
 
 /* =========================================================
-   RENDER DINNER CARDS
+   RENDER CARDS
    ========================================================= */
 
 function render() {
-
   const grid =
     document.getElementById('christmas-grid');
 
-  const rows =
-    sortedRows();
+  const rows = sortedRows();
 
-
-  document.getElementById('dinner-count').textContent =
-    `${rows.length} ${rows.length === 1 ? 'pub' : 'pubs'} currently listed`;
+  document.getElementById(
+    'dinner-count'
+  ).textContent =
+    `${rows.length} ${
+      rows.length === 1 ? 'pub' : 'pubs'
+    } currently listed`;
 
 
   if (!rows.length) {
-
     grid.innerHTML =
       '<div class="christmas-empty">No Christmas dinners are listed yet.</div>';
 
     return;
-
   }
 
 
-  grid.innerHTML = rows.map((r, i) => {
+  grid.innerHTML = rows
+    .map((r, i) => {
 
-    const extras = [
-      r.kids_price
-        ? `Kids ฿${esc(r.kids_price)}`
-        : '',
+      const image = safeUrl(r.menu_image);
 
-      r.price_options
-        ? esc(r.price_options)
-        : ''
-    ]
-      .filter(Boolean)
-      .join(' · ');
+      const extras = [
+        r.kids_price
+          ? `Kids ฿${esc(r.kids_price)}`
+          : '',
+
+        r.price_options
+          ? esc(r.price_options)
+          : ''
+      ]
+        .filter(Boolean)
+        .join(' · ');
 
 
-    return `
-      <button
-        class="dinner-card"
-        type="button"
-        data-index="${i}"
-        aria-label="View Christmas menu for ${esc(r.name)}"
-      >
-
-        <div class="card-top">
-
-          <div class="card-area">
-            ${esc(r.area)}
+      const preview = image
+        ? `
+          <div class="card-menu-preview">
+            <img
+              src="${esc(image)}"
+              alt="Christmas menu preview for ${esc(r.name)}"
+              loading="lazy"
+            >
           </div>
 
-          <h2 class="card-name">
-            ${esc(r.name)}
-          </h2>
+          <div class="card-preview-label">
+            Click to view full menu
+          </div>
+        `
+        : '';
 
-          <div class="card-station">
-            ${esc(r.nearest_station || r.type || '')}
+
+      return `
+        <button
+          class="dinner-card"
+          type="button"
+          data-index="${i}"
+          aria-label="View Christmas menu for ${esc(r.name)}"
+        >
+
+          <div class="card-top">
+
+            <div class="card-area">
+              ${esc(r.area)}
+            </div>
+
+            <h2 class="card-name">
+              ${esc(r.name)}
+            </h2>
+
+            <div class="card-station">
+              ${esc(
+                r.nearest_station ||
+                r.type ||
+                ''
+              )}
+            </div>
+
           </div>
 
-        </div>
+
+          ${preview}
 
 
-        <div class="card-body">
+          <div class="card-body">
 
-          <div class="card-price">
-            ฿${esc(r.dinner_price || '—')}
-            <small>per person</small>
+            <div class="card-price">
+              ฿${esc(r.dinner_price || '—')}
+              <small>per person</small>
+            </div>
+
+            <p class="card-summary">
+              ${esc(
+                r.meal_summary ||
+                'Christmas menu details available from the venue.'
+              )}
+            </p>
+
+            ${
+              extras
+                ? `
+                  <div class="card-meta">
+                    ${extras}
+                  </div>
+                `
+                : ''
+            }
+
           </div>
 
-          <p class="card-summary">
-            ${esc(
-              r.meal_summary ||
-              'Christmas menu details available from the venue.'
-            )}
-          </p>
-
-          ${
-            extras
-              ? `<div class="card-meta">${extras}</div>`
-              : ''
-          }
-
-          <span class="card-view">
-            View menu
-          </span>
-
-        </div>
-
-      </button>
-    `;
-
-  }).join('');
+        </button>
+      `;
+    })
+    .join('');
 
 
-  [...grid.querySelectorAll('.dinner-card')]
+  grid
+    .querySelectorAll('.dinner-card')
     .forEach((card, i) => {
 
       card.addEventListener(
@@ -185,12 +215,11 @@ function render() {
       );
 
     });
-
 }
 
 
 /* =========================================================
-   OPEN MENU POPUP
+   MENU POPUP
    ========================================================= */
 
 function openMenu(r) {
@@ -220,28 +249,34 @@ function openMenu(r) {
     `;
 
 
-  document.getElementById('menu-title').textContent =
+  document.getElementById(
+    'menu-title'
+  ).textContent =
     r.name || '';
 
 
-  document.getElementById('menu-meta').textContent = [
-
+  document.getElementById(
+    'menu-meta'
+  ).textContent = [
     r.area,
 
     r.dinner_price
       ? `฿${r.dinner_price}`
       : '',
 
-    String(r.christmas_day).toLowerCase() === 'confirmed'
+    String(
+      r.christmas_day || ''
+    ).toLowerCase() === 'confirmed'
       ? 'Christmas Day confirmed'
       : 'Christmas Day to confirm'
-
   ]
     .filter(Boolean)
     .join(' · ');
 
 
-  document.getElementById('menu-booking').textContent =
+  document.getElementById(
+    'menu-booking'
+  ).textContent =
     r.booking || '';
 
 
@@ -252,7 +287,9 @@ function openMenu(r) {
     safeUrl(r.link);
 
 
-  document.getElementById('menu-actions').innerHTML = `
+  document.getElementById(
+    'menu-actions'
+  ).innerHTML = `
 
     ${
       map
@@ -288,18 +325,23 @@ function openMenu(r) {
 
 
   box.classList.add('open');
-  box.setAttribute('aria-hidden', 'false');
+
+  box.setAttribute(
+    'aria-hidden',
+    'false'
+  );
 
   document.body.style.overflow =
     'hidden';
 
-  document.getElementById('menu-close').focus();
-
+  document
+    .getElementById('menu-close')
+    .focus();
 }
 
 
 /* =========================================================
-   CLOSE MENU POPUP
+   CLOSE MENU
    ========================================================= */
 
 function closeMenu() {
@@ -315,61 +357,51 @@ function closeMenu() {
   );
 
   document.body.style.overflow = '';
-
 }
 
 
 /* =========================================================
-   LOAD GOOGLE SHEET DATA
+   LOAD DATA
    ========================================================= */
 
 async function load() {
 
   try {
 
-    const res =
+    const response =
       await fetch(CHRISTMAS_URL);
 
-
-    if (!res.ok) {
-
+    if (!response.ok) {
       throw new Error(
         'Unable to load Christmas dinners'
       );
-
     }
 
+    const data =
+      await response.json();
 
-    dinners = (await res.json())
-      .filter(
-        r =>
-          r.name &&
-          r.dinner_price
-      );
-
+    dinners = data.filter(
+      (row) =>
+        row.name &&
+        row.dinner_price
+    );
 
     render();
 
+  } catch (error) {
 
-  } catch (e) {
+    console.warn(error);
 
-    console.warn(e);
-
-
-    document.getElementById('dinner-count').textContent =
+    document.getElementById(
+      'dinner-count'
+    ).textContent =
       'Christmas dinner guide';
 
-
-    document.getElementById('christmas-grid').innerHTML =
-      `
-        <div class="christmas-empty">
-          Christmas dinners could not be loaded right now.
-          Please try again shortly.
-        </div>
-      `;
-
+    document.getElementById(
+      'christmas-grid'
+    ).innerHTML =
+      '<div class="christmas-empty">Christmas dinners could not be loaded right now. Please try again shortly.</div>';
   }
-
 }
 
 
@@ -379,29 +411,29 @@ async function load() {
 
 document
   .querySelectorAll('.sort-btn')
-  .forEach(btn => {
+  .forEach((button) => {
 
-    btn.addEventListener('click', () => {
+    button.addEventListener(
+      'click',
+      () => {
 
-      currentSort =
-        btn.dataset.sort;
+        currentSort =
+          button.dataset.sort;
 
+        document
+          .querySelectorAll('.sort-btn')
+          .forEach((item) => {
 
-      document
-        .querySelectorAll('.sort-btn')
-        .forEach(b => {
+            item.classList.toggle(
+              'active',
+              item === button
+            );
 
-          b.classList.toggle(
-            'active',
-            b === btn
-          );
+          });
 
-        });
-
-
-      render();
-
-    });
+        render();
+      }
+    );
 
   });
 
@@ -420,20 +452,26 @@ document
 
 document
   .getElementById('menu-lightbox')
-  .addEventListener('click', e => {
+  .addEventListener(
+    'click',
+    (event) => {
 
-    if (e.target.id === 'menu-lightbox') {
-      closeMenu();
+      if (
+        event.target.id ===
+        'menu-lightbox'
+      ) {
+        closeMenu();
+      }
+
     }
-
-  });
+  );
 
 
 document.addEventListener(
   'keydown',
-  e => {
+  (event) => {
 
-    if (e.key === 'Escape') {
+    if (event.key === 'Escape') {
       closeMenu();
     }
 
@@ -442,18 +480,21 @@ document.addEventListener(
 
 
 /* =========================================================
-   TOP BAR SCROLL EFFECT
+   TOP BAR
    ========================================================= */
 
 window.addEventListener(
   'scroll',
-  () =>
+  () => {
+
     document
       .getElementById('top-bar')
       ?.classList.toggle(
         'is-scrolled',
         window.scrollY > 30
-      ),
+      );
+
+  },
   {
     passive: true
   }
