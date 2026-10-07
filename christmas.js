@@ -249,39 +249,29 @@ function openMenu(r) {
     `;
 
 
+  /* Pub name */
+
   document.getElementById(
     'menu-title'
   ).textContent =
     r.name || '';
 
 
+  /* Remove the old area / price / status information */
+
   document.getElementById(
     'menu-meta'
-  ).textContent = [
-    r.area,
+  ).textContent = '';
 
-    r.dinner_price
-      ? `฿${r.dinner_price}`
-      : '',
 
-    String(
-      r.christmas_day || ''
-    ).toLowerCase() === 'confirmed'
-      ? 'Christmas Day confirmed'
-      : 'Christmas Day to confirm'
-  ]
-    .filter(Boolean)
-    .join(' · ');
-
+  /* Remove the old booking / deposit / seating information */
 
   document.getElementById(
     'menu-booking'
-  ).textContent =
-    r.booking || '';
+  ).textContent = '';
 
 
-  const map =
-    safeUrl(r.google_maps_link);
+  /* Website / booking link only */
 
   const site =
     safeUrl(r.link);
@@ -289,39 +279,18 @@ function openMenu(r) {
 
   document.getElementById(
     'menu-actions'
-  ).innerHTML = `
-
-    ${
-      map
-        ? `
-          <a
-            class="primary"
-            href="${esc(map)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Google Maps
-          </a>
-        `
-        : ''
-    }
-
-    ${
-      site
-        ? `
-          <a
-            class="secondary"
-            href="${esc(site)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Book / Website
-          </a>
-        `
-        : ''
-    }
-
-  `;
+  ).innerHTML = site
+    ? `
+      <a
+        class="primary"
+        href="${esc(site)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Book / Website
+      </a>
+    `
+    : '';
 
 
   box.classList.add('open');
