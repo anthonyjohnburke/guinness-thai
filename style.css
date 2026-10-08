@@ -3895,3 +3895,50 @@ body.radar-not-visible .christmas-banner {
     animation: none;
   }
 }
+
+/* Mobile: keep Christmas and Radar together */
+@media (max-width: 768px) {
+
+  .floating-banner-group {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(42px + env(safe-area-inset-bottom, 0px));
+    z-index: 9997;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    pointer-events: none;
+  }
+
+  .floating-banner-group .christmas-banner,
+  .floating-banner-group .hh-radar-banner {
+    position: relative;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto;
+    right: auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .floating-banner-group .christmas-banner {
+    order: 1;
+  }
+
+  .floating-banner-group .hh-radar-banner {
+    order: 2;
+  }
+
+  .floating-banner-group .christmas-banner-link,
+  .floating-banner-group .hh-radar-open {
+    pointer-events: auto;
+  }
+
+  body.map-out-of-view .floating-banner-group {
+    display: none;
+  }
+}
