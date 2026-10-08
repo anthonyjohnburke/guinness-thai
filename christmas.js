@@ -1,10 +1,16 @@
 
+/* =========================================================
+   PINTS OF BANGKOK
+   CHRISTMAS DAY DINNERS 2026
+   ========================================================= */
+
 const CHRISTMAS_URL =
   'https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/ChristmasDinners';
 
 let dinners = [];
 let currentSort = 'price';
 let visitorLocation = null;
+let lastMenuTrigger = null;
 
 
 /* =========================================================
@@ -14,14 +20,13 @@ let visitorLocation = null;
 const esc = (s) =>
   String(s ?? '').replace(
     /[&<>'"]/g,
-    (c) =>
-      ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
-      })[c]
+    (c) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    })[c]
   );
 
 
@@ -90,7 +95,6 @@ const radians = (degrees) =>
 
 
 function distanceKm(lat1, lon1, lat2, lon2) {
-
   const earthRadius = 6371;
 
   const dLat = radians(lat2 - lat1);
@@ -103,12 +107,14 @@ function distanceKm(lat1, lon1, lat2, lon2) {
     Math.sin(dLon / 2) ** 2;
 
   return earthRadius * 2 *
-    Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    );
 }
 
 
 function pubDistance(row) {
-
   if (!visitorLocation) return Infinity;
 
   const lat = Number(row.lat);
@@ -119,8 +125,10 @@ function pubDistance(row) {
     !String(row.lon ?? '').trim() ||
     !Number.isFinite(lat) ||
     !Number.isFinite(lon) ||
-    lat < -90 || lat > 90 ||
-    lon < -180 || lon > 180
+    lat < -90 ||
+    lat > 90 ||
+    lon < -180 ||
+    lon > 180
   ) {
     return Infinity;
   }
@@ -139,13 +147,18 @@ function pubDistance(row) {
    ========================================================= */
 
 function sortedRows() {
-
   return [...dinners].sort((a, b) => {
+    if (
+      currentSort === 'nearest' &&
+      visitorLocation
+    ) {
+      const distanceA = pubDistance(a);
+      const distanceB = pubDistance(b);
 
-    if (currentSort === 'nearest' && visitorLocation) {
       return (
-        pubDistance(a) - pubDistance(b) ||
-        price(a.dinner_price) - price(b.dinner_price) ||
+        (distanceA - distanceB) ||
+        price(a.dinner_price) -
+          price(b.dinner_price) ||
         String(a.name || '').localeCompare(
           String(b.name || '')
         )
@@ -159,30 +172,31 @@ function sortedRows() {
     }
 
     return (
-      price(a.dinner_price) - price(b.dinner_price) ||
+      price(a.dinner_price) -
+        price(b.dinner_price) ||
       String(a.name || '').localeCompare(
         String(b.name || '')
       )
     );
-
   });
 }
 
 
 function updateSortButtons() {
-
   document.querySelectorAll('.sort-btn')
     .forEach((button) => {
+      const active =
+        button.dataset.sort === currentSort;
 
-      const active = button.dataset.sort === currentSort;
-
-      button.classList.toggle('active', active);
+      button.classList.toggle(
+        'active',
+        active
+      );
 
       button.setAttribute(
         'aria-pressed',
         active ? 'true' : 'false'
       );
-
     });
 }
 
@@ -192,37 +206,41 @@ function updateSortButtons() {
    ========================================================= */
 
 function render() {
-
   const grid =
     document.getElementById('christmas-grid');
 
+  if (!grid) return;
+
   const rows = sortedRows();
 
-  document.getElementById(
-    'dinner-count'
-  ).innerHTML = `
-    <span class="count-circle">
-      ${rows.length}
-    </span>
-    <span>
-      ${rows.length === 1 ? 'pub' : 'pubs'} currently listed
-    </span>
-  `;
+  const count =
+    document.getElementById('dinner-count');
 
+  if (count) {
+    count.innerHTML = `
+      <span class="count-circle">
+        ${rows.length}
+      </span>
+      <span>
+        ${rows.length === 1 ? 'pub' : 'pubs'}
+        currently listed
+      </span>
+    `;
+  }
 
   if (!rows.length) {
-
-    grid.innerHTML =
-      '<div class="christmas-empty">No Christmas dinners are listed yet.</div>';
-
+    grid.innerHTML = `
+      <div class="christmas-empty">
+        No Christmas dinners are listed yet.
+      </div>
+    `;
     return;
   }
 
-
   grid.innerHTML = rows
     .map((r, i) => {
-
       const image = safeUrl(r.menu_image);
+      const site = safeUrl(r.link);
 
       const cardNumber =
         String(i + 1).padStart(2, '0');
@@ -230,21 +248,50 @@ function render() {
       const distance = pubDistance(r);
 
       const distanceLabel =
-        visitorLocation && Number.isFinite(distance)
+        visitorLocation &&
+        Number.isFinite(distance)
           ? `${distance.toFixed(1)} km away`
           : '';
 
       const extras = [
         r.kids_price
-          ? `Kids ฿${esc(formatPrice(r.kids_price))}`
+          ? `Kids ฿${esc(
+              formatPrice(r.kids_price)
+            )}`
           : '',
 
         r.price_options
-          ? esc(formatPriceText(r.price_options))
+          ? esc(
+              formatPriceText(r.price_options)
+            )
           : ''
       ]
         .filter(Boolean)
         .join(' · ');
+
+
+      /* Pub name links to website / social media */
+
+      const pubName = site
+        ? `
+          <a
+            class="card-pub-link"
+            href="${esc(site)}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit ${esc(r.name)} website or social page (opens in a new tab)"
+            style="
+              color: inherit;
+              text-decoration: underline;
+              text-decoration-color: #9bd75a;
+              text-decoration-thickness: 2px;
+              text-underline-offset: 5px;
+            "
+          >
+            ${esc(r.name)}
+          </a>
+        `
+        : esc(r.name);
 
 
       const preview = image
@@ -265,10 +312,11 @@ function render() {
 
 
       return `
-        <button
+        <div
           class="dinner-card"
-          type="button"
           data-index="${i}"
+          role="button"
+          tabindex="0"
           aria-label="View Christmas menu for ${esc(r.name)}"
         >
 
@@ -283,7 +331,7 @@ function render() {
             </div>
 
             <h2 class="card-name">
-              ${esc(r.name)}
+              ${pubName}
             </h2>
 
             <div class="card-station">
@@ -308,7 +356,9 @@ function render() {
           <div class="card-body">
 
             <div class="card-price">
-              ฿${esc(formatPrice(r.dinner_price))}
+              ฿${esc(
+                formatPrice(r.dinner_price)
+              )}
               <small>per person</small>
             </div>
 
@@ -331,22 +381,53 @@ function render() {
 
           </div>
 
-        </button>
+        </div>
       `;
-
     })
     .join('');
 
 
+  /* Card click opens the Christmas menu */
+
   grid
     .querySelectorAll('.dinner-card')
     .forEach((card, i) => {
-
       card.addEventListener(
         'click',
-        () => openMenu(rows[i])
+        (event) => {
+          if (
+            event.target.closest(
+              '.card-pub-link'
+            )
+          ) {
+            return;
+          }
+
+          openMenu(rows[i], card);
+        }
       );
 
+
+      /* Keyboard access for the menu */
+
+      card.addEventListener(
+        'keydown',
+        (event) => {
+          if (
+            event.target !== card
+          ) {
+            return;
+          }
+
+          if (
+            event.key === 'Enter' ||
+            event.key === ' '
+          ) {
+            event.preventDefault();
+            openMenu(rows[i], card);
+          }
+        }
+      );
     });
 }
 
@@ -356,40 +437,34 @@ function render() {
    ========================================================= */
 
 function sortNearest() {
-
   if (visitorLocation) {
-
     currentSort = 'nearest';
+
     updateSortButtons();
     render();
 
     return;
   }
 
-
   if (!navigator.geolocation) {
-
     alert(
       'Location is not supported by this browser. You can still sort by Cheapest or A–Z.'
     );
-
     return;
   }
 
-
   const nearestButton =
-    document.querySelector('[data-sort="nearest"]');
+    document.querySelector(
+      '[data-sort="nearest"]'
+    );
 
   if (nearestButton) {
     nearestButton.disabled = true;
     nearestButton.textContent = 'Locating…';
   }
 
-
   navigator.geolocation.getCurrentPosition(
-
     (position) => {
-
       visitorLocation = {
         lat: position.coords.latitude,
         lon: position.coords.longitude
@@ -400,11 +475,9 @@ function sortNearest() {
       resetNearestButton();
       updateSortButtons();
       render();
-
     },
 
     (error) => {
-
       resetNearestButton();
 
       const message = error.code === 1
@@ -412,7 +485,6 @@ function sortNearest() {
         : 'Your location could not be determined. Please try again or use Cheapest or A–Z.';
 
       alert(message);
-
     },
 
     {
@@ -420,15 +492,15 @@ function sortNearest() {
       timeout: 12000,
       maximumAge: 300000
     }
-
   );
 }
 
 
 function resetNearestButton() {
-
   const button =
-    document.querySelector('[data-sort="nearest"]');
+    document.querySelector(
+      '[data-sort="nearest"]'
+    );
 
   if (button) {
     button.disabled = false;
@@ -441,20 +513,26 @@ function resetNearestButton() {
    MENU POPUP
    ========================================================= */
 
-function openMenu(r) {
-
+function openMenu(r, trigger = null) {
   const box =
-    document.getElementById('menu-lightbox');
+    document.getElementById(
+      'menu-lightbox'
+    );
 
   const wrap =
-    document.getElementById('menu-image-wrap');
+    document.getElementById(
+      'menu-image-wrap'
+    );
 
-  const image =
-    safeUrl(r.menu_image);
+  if (!box || !wrap) return;
 
+  lastMenuTrigger = trigger;
 
-  wrap.classList.remove('is-zoomed');
+  const image = safeUrl(r.menu_image);
 
+  wrap.classList.remove(
+    'is-zoomed'
+  );
 
   wrap.innerHTML = image
     ? `
@@ -481,40 +559,55 @@ function openMenu(r) {
     `;
 
 
-  document.getElementById(
-    'menu-title'
-  ).textContent =
-    r.name || '';
+  const menuTitle =
+    document.getElementById(
+      'menu-title'
+    );
 
+  if (menuTitle) {
+    menuTitle.textContent =
+      r.name || '';
+  }
 
-  document.getElementById(
-    'menu-meta'
-  ).textContent = '';
+  const menuMeta =
+    document.getElementById(
+      'menu-meta'
+    );
 
+  if (menuMeta) {
+    menuMeta.textContent = '';
+  }
 
-  document.getElementById(
-    'menu-booking'
-  ).textContent = '';
+  const menuBooking =
+    document.getElementById(
+      'menu-booking'
+    );
 
+  if (menuBooking) {
+    menuBooking.textContent = '';
+  }
 
-  const site =
-    safeUrl(r.link);
+  const site = safeUrl(r.link);
 
+  const menuActions =
+    document.getElementById(
+      'menu-actions'
+    );
 
-  document.getElementById(
-    'menu-actions'
-  ).innerHTML = site
-    ? `
-      <a
-        class="primary"
-        href="${esc(site)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Book / Website
-      </a>
-    `
-    : '';
+  if (menuActions) {
+    menuActions.innerHTML = site
+      ? `
+        <a
+          class="primary"
+          href="${esc(site)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Book / Website
+        </a>
+      `
+      : '';
+  }
 
 
   /* =======================================================
@@ -522,21 +615,33 @@ function openMenu(r) {
      ======================================================= */
 
   const menuImage =
-    wrap.querySelector('.menu-image');
+    wrap.querySelector(
+      '.menu-image'
+    );
 
   const zoomHint =
-    wrap.querySelector('.menu-zoom-hint');
+    wrap.querySelector(
+      '.menu-zoom-hint'
+    );
 
   const stage =
-    wrap.querySelector('.menu-image-stage');
+    wrap.querySelector(
+      '.menu-image-stage'
+    );
 
 
   const toggleZoom = () => {
-
-    if (!menuImage || !stage) return;
+    if (
+      !menuImage ||
+      !stage
+    ) {
+      return;
+    }
 
     const zoomed =
-      wrap.classList.toggle('is-zoomed');
+      wrap.classList.toggle(
+        'is-zoomed'
+      );
 
     menuImage.setAttribute(
       'aria-pressed',
@@ -557,35 +662,27 @@ function openMenu(r) {
           : 'Click / tap menu to zoom';
     }
 
-
     if (zoomed) {
-
       requestAnimationFrame(() => {
         stage.scrollTop = 0;
         stage.scrollLeft = 0;
       });
-
     } else {
-
       stage.scrollTop = 0;
       stage.scrollLeft = 0;
-
     }
   };
 
 
   if (menuImage) {
-
     menuImage.addEventListener(
       'click',
       toggleZoom
     );
 
-
     menuImage.addEventListener(
       'keydown',
       (event) => {
-
         if (
           event.key === 'Enter' ||
           event.key === ' '
@@ -593,10 +690,8 @@ function openMenu(r) {
           event.preventDefault();
           toggleZoom();
         }
-
       }
     );
-
   }
 
 
@@ -612,7 +707,7 @@ function openMenu(r) {
 
   document
     .getElementById('menu-close')
-    .focus();
+    ?.focus();
 }
 
 
@@ -621,12 +716,20 @@ function openMenu(r) {
    ========================================================= */
 
 function closeMenu() {
-
   const box =
-    document.getElementById('menu-lightbox');
+    document.getElementById(
+      'menu-lightbox'
+    );
 
   const wrap =
-    document.getElementById('menu-image-wrap');
+    document.getElementById(
+      'menu-image-wrap'
+    );
+
+  if (!box || !wrap) return;
+
+  const wasOpen =
+    box.classList.contains('open');
 
   box.classList.remove('open');
 
@@ -635,9 +738,21 @@ function closeMenu() {
     'true'
   );
 
-  wrap.classList.remove('is-zoomed');
+  wrap.classList.remove(
+    'is-zoomed'
+  );
 
   document.body.style.overflow = '';
+
+  if (
+    wasOpen &&
+    lastMenuTrigger &&
+    document.contains(lastMenuTrigger)
+  ) {
+    lastMenuTrigger.focus();
+  }
+
+  lastMenuTrigger = null;
 }
 
 
@@ -646,9 +761,7 @@ function closeMenu() {
    ========================================================= */
 
 async function load() {
-
   try {
-
     const response =
       await fetch(CHRISTMAS_URL);
 
@@ -668,20 +781,32 @@ async function load() {
     );
 
     render();
-
   } catch (error) {
-
     console.warn(error);
 
-    document.getElementById(
-      'dinner-count'
-    ).textContent =
-      'Christmas dinner guide';
+    const count =
+      document.getElementById(
+        'dinner-count'
+      );
 
-    document.getElementById(
-      'christmas-grid'
-    ).innerHTML =
-      '<div class="christmas-empty">Christmas dinners could not be loaded right now. Please try again shortly.</div>';
+    if (count) {
+      count.textContent =
+        'Christmas dinner guide';
+    }
+
+    const grid =
+      document.getElementById(
+        'christmas-grid'
+      );
+
+    if (grid) {
+      grid.innerHTML = `
+        <div class="christmas-empty">
+          Christmas dinners could not be loaded
+          right now. Please try again shortly.
+        </div>
+      `;
+    }
   }
 }
 
@@ -693,15 +818,15 @@ async function load() {
 document
   .querySelectorAll('.sort-btn')
   .forEach((button) => {
-
     button.addEventListener(
       'click',
       () => {
-
         const selectedSort =
           button.dataset.sort;
 
-        if (selectedSort === 'nearest') {
+        if (
+          selectedSort === 'nearest'
+        ) {
           sortNearest();
           return;
         }
@@ -710,10 +835,8 @@ document
 
         updateSortButtons();
         render();
-
       }
     );
-
   });
 
 updateSortButtons();
@@ -725,7 +848,7 @@ updateSortButtons();
 
 document
   .getElementById('menu-close')
-  .addEventListener(
+  ?.addEventListener(
     'click',
     closeMenu
   );
@@ -733,17 +856,15 @@ document
 
 document
   .getElementById('menu-lightbox')
-  .addEventListener(
+  ?.addEventListener(
     'click',
     (event) => {
-
       if (
         event.target.id ===
         'menu-lightbox'
       ) {
         closeMenu();
       }
-
     }
   );
 
@@ -751,11 +872,9 @@ document
 document.addEventListener(
   'keydown',
   (event) => {
-
     if (event.key === 'Escape') {
       closeMenu();
     }
-
   }
 );
 
@@ -767,14 +886,12 @@ document.addEventListener(
 window.addEventListener(
   'scroll',
   () => {
-
     document
       .getElementById('top-bar')
       ?.classList.toggle(
         'is-scrolled',
         window.scrollY > 30
       );
-
   },
   {
     passive: true
