@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
     http-equiv="Content-Security-Policy"
     content="
       default-src 'self';
-      script-src 'self' https://www.googletagmanager.com;
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       font-src 'self' https://fonts.gstatic.com;
       img-src 'self' data: https:;
@@ -213,10 +214,23 @@
 
       <p class="christmas-note">
         Menus, prices and availability can change.
-        Christmas Day status is only marked confirmed where the venue
-        has explicitly advertised 25 December.
         Always confirm directly with the pub before booking.
       </p>
+
+
+      <!-- RETURN TO GUINNESS TRACKER -->
+
+      <div class="christmas-return">
+
+        <a
+          class="christmas-return-button"
+          href="../"
+        >
+          <span aria-hidden="true">←</span>
+          Back to Guinness Tracker
+        </a>
+
+      </div>
 
 
     </main>
@@ -296,7 +310,7 @@
         ></div>
 
 
-        <!-- MAP / BOOKING LINKS -->
+        <!-- BOOKING LINK -->
 
         <div
           class="menu-actions"
