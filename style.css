@@ -3755,11 +3755,8 @@ font-weight: 500;
 
 .christmas-banner-arrow {
   margin-left: auto;
-  color: #e3b85b;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  flex-shrink: 0;
+  color: #d4af37;
+  font-size: 1.4rem;
 }
 
 /* ==========================================================
@@ -3849,31 +3846,29 @@ body.map-out-of-view .christmas-banner {
     max-width: none;
   }
 
-  .christmas-banner-link {
-    min-height: 48px;
-    padding: 10px 14px;
-    gap: 10px;
-    border-radius: 12px;
-  }
+ .christmas-banner-link {
+  min-height: 48px;
+  padding: 10px 14px;
+  gap: 10px;
+  border-radius: 12px;
+}
 
-  .christmas-banner-copy strong {
+.christmas-banner-copy small {
+  display: none;
+}
+
+.christmas-banner-copy strong {
     font-size: 0.82rem;
     line-height: 1.2;
-  }
+}
 
-  .christmas-banner-copy small {
-    margin-top: 3px;
-    font-size: 0.73rem;
-    line-height: 1.3;
-  }
-
-  .christmas-banner-arrow {
+.christmas-banner-arrow {
     font-size: 1rem;
-  }
+}
 
   /* Christmas moves down when Radar is hidden */
 
-  body.radar-not-visible .christmas-banner {
+body.radar-not-visible .christmas-banner {
     bottom: 12px;
   }
 }
