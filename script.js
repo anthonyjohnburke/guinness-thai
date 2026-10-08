@@ -2433,35 +2433,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!christmas) return;
 
-  function positionChristmasBanner() {
+ 
+function positionChristmasBanner() {
 
-    // Mobile keeps the bottom-anchored layout from CSS.
-    if (window.innerWidth <= 768) {
-      christmas.style.top = "";
-      return;
-    }
-
-    const radarVisible =
-      radar &&
-      !radar.classList.contains("is-hidden") &&
-      getComputedStyle(radar).display !== "none";
-
-    if (radarVisible) {
-
-      // Position Christmas 10px below the actual Radar.
-      const rect = radar.getBoundingClientRect();
-
-      christmas.style.top = `${rect.bottom + 10}px`;
-
-    } else {
-
-      // Christmas takes the Radar position when hidden.
-      christmas.style.top =
-        document.body.classList.contains("header-scrolled")
-          ? "82px"
-          : "132px";
-    }
+  // Leave mobile and tablet positioning to CSS.
+  if (window.innerWidth <= 900) {
+    christmas.style.top = "";
+    return;
   }
+
+  const radarVisible =
+    radar &&
+    !radar.classList.contains("is-hidden") &&
+    getComputedStyle(radar).display !== "none";
+
+  if (!radarVisible) {
+    // Christmas takes Radar's position when hidden.
+    christmas.style.top =
+      document.body.classList.contains("header-scrolled")
+        ? "82px"
+        : "132px";
+    return;
+  }
+
+  // Calculate from Radar's fixed position and height,
+  // avoiding movement during scrolling animations.
+  const radarTop =
+    document.body.classList.contains("header-scrolled")
+      ? 82
+      : 132;
+
+  christmas.style.top =
+    `${radarTop + radar.offsetHeight + 10}px`;
+}
+
 
   positionChristmasBanner();
 
