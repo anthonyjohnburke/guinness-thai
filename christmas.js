@@ -1,3 +1,4 @@
+
 const CHRISTMAS_URL =
   'https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/ChristmasDinners';
 
@@ -38,6 +39,8 @@ const safeUrl = (value) => {
 };
 
 
+/* Convert spreadsheet prices to numbers for sorting */
+
 const price = (value) => {
   const number = Number(
     String(value || '').replace(/[^0-9.]/g, '')
@@ -47,6 +50,36 @@ const price = (value) => {
     ? number
     : Infinity;
 };
+
+
+/* Display prices with commas: 1250 becomes 1,250 */
+
+const formatPrice = (value) => {
+  const number = price(value);
+
+  return Number.isFinite(number)
+    ? number.toLocaleString('en-US', {
+        maximumFractionDigits: 2
+      })
+    : '—';
+};
+
+
+/* Format prices embedded in text fields too.
+   Example: "2 courses ฿1250" becomes "2 courses ฿1,250".
+   Other numbers, such as course counts, remain unchanged. */
+
+const formatPriceText = (value) =>
+  String(value ?? '').replace(
+    /฿\s*([\d,]+(?:\.\d+)?)/g,
+    (match, amount) => {
+      const number = Number(amount.replace(/,/g, ''));
+
+      return Number.isFinite(number)
+        ? `฿${number.toLocaleString('en-US')}`
+        : match;
+    }
+  );
 
 
 /* =========================================================
@@ -120,11 +153,11 @@ function render() {
 
       const extras = [
         r.kids_price
-          ? `Kids ฿${esc(r.kids_price)}`
+          ? `Kids ฿${esc(formatPrice(r.kids_price))}`
           : '',
 
         r.price_options
-          ? esc(r.price_options)
+          ? esc(formatPriceText(r.price_options))
           : ''
       ]
         .filter(Boolean)
@@ -187,7 +220,7 @@ function render() {
           <div class="card-body">
 
             <div class="card-price">
-              ฿${esc(r.dinner_price || '—')}
+              ฿${esc(formatPrice(r.dinner_price))}
               <small>per person</small>
             </div>
 
