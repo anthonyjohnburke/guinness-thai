@@ -2345,3 +2345,80 @@ if (sortTabs) {
   });
 }
 }
+
+
+/* ==========================================================
+   CHRISTMAS BANNER + HAPPY HOUR RADAR VISIBILITY
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const mapSection = document.getElementById("map-section");
+  const radarBanner = document.getElementById("hh-radar-banner");
+  const christmasBanner = document.getElementById("christmas-banner");
+
+  if (!mapSection || !christmasBanner) return;
+
+  function updateMapPromotions() {
+    const mapRect = mapSection.getBoundingClientRect();
+    const header = document.getElementById("top-bar");
+    const headerBottom = header
+      ? header.getBoundingClientRect().bottom
+      : 0;
+
+    // Show banners only while the map is visible below the header.
+    const mapVisible =
+      mapRect.bottom > headerBottom &&
+      mapRect.top < window.innerHeight;
+
+    document.body.classList.toggle(
+      "map-out-of-view",
+      !mapVisible
+    );
+
+    // Move Christmas into the Radar's position when
+    // no live or upcoming happy hours are displayed.
+    const radarVisible =
+      radarBanner &&
+      !radarBanner.classList.contains("is-hidden");
+
+    document.body.classList.toggle(
+      "radar-not-visible",
+      !radarVisible
+    );
+  }
+
+  updateMapPromotions();
+
+  window.addEventListener(
+    "scroll",
+    updateMapPromotions,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "resize",
+    updateMapPromotions,
+    { passive: true }
+  );
+
+  // Respond automatically when the Radar appears or disappears.
+  if (radarBanner && typeof MutationObserver !== "undefined") {
+    new MutationObserver(updateMapPromotions).observe(
+      radarBanner,
+      {
+        attributes: true,
+        attributeFilter: ["class"]
+      }
+    );
+  }
+
+  // Optional analytics for the Christmas guide.
+  christmasBanner.addEventListener("click", () => {
+    if (typeof trackEvent === "function") {
+      trackEvent("christmas_banner_click", {
+        location: "map"
+      });
+    }
+  });
+});
+
