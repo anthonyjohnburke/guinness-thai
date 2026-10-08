@@ -214,14 +214,14 @@
     "guinness_draught": true,
     "price_thb": 369,
     "happy_hour_price_thb": 294,
-    "special": "Happy hour 07:00-20:00",
+    "special": "Happy hour 07:00-19:00",
     "nearest_station": "Asok BTS",
     "station_distance_metres": 485,
     "latitude": 13.73453343,
     "longitude": 100.5639354,
     "google_maps_url": "https://maps.app.goo.gl/CTGpJMcgd7fLXWha6",
     "venue_url": "https://www.theupperdecksportsbar.com/",
-    "price_verified": "2026-09-25"
+    "price_verified": "2026-10-08"
   },
   {
     "name": "O'Leary's",
@@ -388,7 +388,7 @@
     "area": "Asoke",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 270,
+    "price_thb": 275,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Asok BTS",
@@ -397,7 +397,7 @@
     "longitude": 100.5637497,
     "google_maps_url": "https://maps.app.goo.gl/8BWRQ6L56C1DCLgJA",
     "venue_url": "https://buddybarbangkok.com/locations/soi20",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-08"
   },
   {
     "name": "The Deck Bangkok",
@@ -1582,5 +1582,21 @@
     "google_maps_url": "https://maps.app.goo.gl/dzenFkKMKXRhLBESA",
     "venue_url": "https://sosbeerbkk.com/",
     "price_verified": "2026-10-05"
+  },
+  {
+    "name": "Sheepshank",
+    "area": "Khao San",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 380,
+    "happy_hour_price_thb": null,
+    "special": null,
+    "nearest_station": "Sam Yot MRT",
+    "station_distance_metres": 2016,
+    "latitude": 13.76383058,
+    "longitude": 100.4942989,
+    "google_maps_url": "https://maps.app.goo.gl/pewgFjkUReyFJi5e8",
+    "venue_url": "http://www.sheepshankpublichouse.com/",
+    "price_verified": "2026-10-08"
   }
 ]
