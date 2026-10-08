@@ -2422,3 +2422,78 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+/* ==========================================================
+   CHRISTMAS BANNER — MATCH HAPPY HOUR RADAR
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const radar = document.getElementById("hh-radar-banner");
+  const christmas = document.getElementById("christmas-banner");
+
+  if (!christmas) return;
+
+  function positionChristmasBanner() {
+
+    // Mobile keeps the bottom-anchored layout from CSS.
+    if (window.innerWidth <= 768) {
+      christmas.style.top = "";
+      return;
+    }
+
+    const radarVisible =
+      radar &&
+      !radar.classList.contains("is-hidden") &&
+      getComputedStyle(radar).display !== "none";
+
+    if (radarVisible) {
+
+      // Position Christmas 10px below the actual Radar.
+      const rect = radar.getBoundingClientRect();
+
+      christmas.style.top = `${rect.bottom + 10}px`;
+
+    } else {
+
+      // Christmas takes the Radar position when hidden.
+      christmas.style.top =
+        document.body.classList.contains("header-scrolled")
+          ? "82px"
+          : "132px";
+    }
+  }
+
+  positionChristmasBanner();
+
+  window.addEventListener("scroll", positionChristmasBanner, {
+    passive: true
+  });
+
+  window.addEventListener("resize", positionChristmasBanner, {
+    passive: true
+  });
+
+  // Reposition whenever Radar appears or disappears.
+  if (radar && typeof MutationObserver !== "undefined") {
+    new MutationObserver(positionChristmasBanner).observe(radar, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  }
+
+  // Match Radar's subtle attention animation.
+  setTimeout(() => {
+    if (document.body.classList.contains("map-out-of-view")) {
+      return;
+    }
+
+    christmas.classList.add("attention");
+
+    setTimeout(() => {
+      christmas.classList.remove("attention");
+    }, 800);
+
+  }, 3500);
+});
+
+
