@@ -3679,24 +3679,33 @@ font-weight: 500;
 }
 }
     
+
 /* ==========================================================
    CHRISTMAS DINNERS BANNER
    ========================================================== */
 
 .christmas-banner {
   position: fixed;
-  top: 204px;
-  left: 20px;
-  width: 445px;
-  max-width: calc(100vw - 40px);
+  top: 132px;
+  left: 30px;
+  right: auto;
+  bottom: auto;
+
+  width: 420px;
+  max-width: calc(100vw - 60px);
+
   z-index: 9000;
-  transition: top 0.25s ease, opacity 0.25s ease;
+
+  transition:
+    top 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .christmas-banner-link {
   display: flex;
   align-items: center;
   gap: 14px;
+
   width: 100%;
   min-height: 64px;
   padding: 12px 18px;
@@ -3711,7 +3720,10 @@ font-weight: 500;
   text-decoration: none;
 
   box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
-  transition: background 0.2s ease, border-color 0.2s ease;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .christmas-banner-link:hover,
@@ -3749,48 +3761,89 @@ font-weight: 500;
   flex-shrink: 0;
 }
 
-/* Hide both banners when the map is no longer visible */
+/* ==========================================================
+   VISIBILITY
+   Hide both banners when the map leaves the viewport
+   ========================================================== */
 
 body.map-out-of-view .hh-radar-banner,
 body.map-out-of-view .christmas-banner {
   display: none !important;
 }
 
-/* Compact header */
+/* ==========================================================
+   DESKTOP POSITIONING
+   JavaScript positions Christmas beneath Radar when visible
+   ========================================================== */
 
-body.header-scrolled .christmas-banner {
-  top: 150px;
-}
+@media (min-width: 901px) {
 
-/* Move Christmas up when Happy Hour Radar is hidden */
-
-body.radar-not-visible .christmas-banner {
-  top: 132px;
-}
-
-body.header-scrolled.radar-not-visible .christmas-banner {
-  top: 82px;
-}
-
-/* Tablet */
-
-@media (max-width: 900px) and (min-width: 769px) {
   .christmas-banner {
-    left: 16px;
-    width: 400px;
-    max-width: calc(100vw - 32px);
+    top: 132px;
+    left: 30px;
+    width: 420px;
+    max-width: calc(100vw - 60px);
+  }
+
+  /* Compact header: fallback position */
+
+  body.header-scrolled .christmas-banner {
+    top: 82px;
+  }
+
+  /* When Radar is hidden, Christmas takes its place */
+
+  body.radar-not-visible .christmas-banner {
+    top: 132px;
+  }
+
+  body.header-scrolled.radar-not-visible .christmas-banner {
+    top: 82px;
   }
 }
 
-/* Mobile */
+/* ==========================================================
+   TABLET
+   ========================================================== */
+
+@media (min-width: 769px) and (max-width: 900px) {
+
+  .christmas-banner {
+    top: 132px;
+    left: 16px;
+    width: 420px;
+    max-width: calc(100vw - 32px);
+  }
+
+  body.header-scrolled .christmas-banner {
+    top: 82px;
+  }
+
+  body.radar-not-visible .christmas-banner {
+    top: 132px;
+  }
+
+  body.header-scrolled.radar-not-visible .christmas-banner {
+    top: 82px;
+  }
+}
+
+/* ==========================================================
+   MOBILE
+   Keep Christmas above the bottom-anchored Radar
+   ========================================================== */
 
 @media (max-width: 768px) {
+
   .christmas-banner {
     position: fixed;
+
     top: auto !important;
     bottom: 72px;
+
     left: 12px;
     right: 12px;
+
     width: auto;
     max-width: none;
   }
@@ -3817,54 +3870,24 @@ body.header-scrolled.radar-not-visible .christmas-banner {
     font-size: 1rem;
   }
 
+  /* Christmas moves down when Radar is hidden */
+
   body.radar-not-visible .christmas-banner {
     bottom: 12px;
   }
 }
 
-
-/* Align Christmas banner with Happy Hour Radar */
-
-@media (min-width: 901px) {
-  .christmas-banner {
-    left: 30px;
-    width: 420px;
-    max-width: calc(100% - 80px);
-  }
-}
-
-@media (min-width: 769px) and (max-width: 900px) {
-  .christmas-banner {
-    left: 16px;
-    width: 420px;
-    max-width: calc(100% - 32px);
-  }
-}
-
-
 /* ==========================================================
-   FIX: CHRISTMAS BANNER POSITIONING
+   ATTENTION ANIMATION
+   Same gentle movement as Happy Hour Radar
    ========================================================== */
 
-@media (min-width: 769px) {
-  .christmas-banner {
-    left: 30px;
-    width: 420px;
-    max-width: calc(100vw - 60px);
-    top: 226px;
-  }
-
-  body.header-scrolled .christmas-banner {
-    top: 172px;
-  }
-
-  /* Christmas takes Radar's position when Radar is hidden */
-  body.radar-not-visible .christmas-banner {
-    top: 132px;
-  }
-
-  body.header-scrolled.radar-not-visible .christmas-banner {
-    top: 82px;
-  }
+.christmas-banner.attention {
+  animation: radarAttention 0.8s ease;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .christmas-banner.attention {
+    animation: none;
+  }
+}
