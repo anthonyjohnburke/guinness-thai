@@ -3841,3 +3841,30 @@ body.header-scrolled.radar-not-visible .christmas-banner {
   }
 }
 
+
+/* ==========================================================
+   FIX: CHRISTMAS BANNER POSITIONING
+   ========================================================== */
+
+@media (min-width: 769px) {
+  .christmas-banner {
+    left: 30px;
+    width: 420px;
+    max-width: calc(100vw - 60px);
+    top: 226px;
+  }
+
+  body.header-scrolled .christmas-banner {
+    top: 172px;
+  }
+
+  /* Christmas takes Radar's position when Radar is hidden */
+  body.radar-not-visible .christmas-banner {
+    top: 132px;
+  }
+
+  body.header-scrolled.radar-not-visible .christmas-banner {
+    top: 82px;
+  }
+}
+
