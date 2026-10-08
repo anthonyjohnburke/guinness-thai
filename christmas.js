@@ -3,7 +3,8 @@ const CHRISTMAS_URL =
   'https://opensheet.elk.sh/1FENGaj61vr2_6BWbqnYL7k6lkANGIdcBpRciPQU3SOI/ChristmasDinners';
 
 let dinners = [];
-let currentSort = 'area';
+let currentSort = 'price';
+let visitorLocation = null;
 
 
 /* =========================================================
@@ -39,7 +40,7 @@ const safeUrl = (value) => {
 };
 
 
-/* Convert spreadsheet prices to numbers for sorting */
+/* Convert spreadsheet prices to numbers */
 
 const price = (value) => {
   const number = Number(
@@ -52,7 +53,7 @@ const price = (value) => {
 };
 
 
-/* Display prices with commas: 1250 becomes 1,250 */
+/* Display prices with commas */
 
 const formatPrice = (value) => {
   const number = price(value);
@@ -65,9 +66,7 @@ const formatPrice = (value) => {
 };
 
 
-/* Format prices embedded in text fields too.
-   Example: "2 courses ฿1250" becomes "2 courses ฿1,250".
-   Other numbers, such as course counts, remain unchanged. */
+/* Format prices inside text fields */
 
 const formatPriceText = (value) =>
   String(value ?? '').replace(
@@ -83,33 +82,108 @@ const formatPriceText = (value) =>
 
 
 /* =========================================================
+   LOCATION / DISTANCE
+   ========================================================= */
+
+const radians = (degrees) =>
+  degrees * Math.PI / 180;
+
+
+function distanceKm(lat1, lon1, lat2, lon2) {
+
+  const earthRadius = 6371;
+
+  const dLat = radians(lat2 - lat1);
+  const dLon = radians(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(radians(lat1)) *
+    Math.cos(radians(lat2)) *
+    Math.sin(dLon / 2) ** 2;
+
+  return earthRadius * 2 *
+    Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+
+function pubDistance(row) {
+
+  if (!visitorLocation) return Infinity;
+
+  const lat = Number(row.lat);
+  const lon = Number(row.lon);
+
+  if (
+    !String(row.lat ?? '').trim() ||
+    !String(row.lon ?? '').trim() ||
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lon) ||
+    lat < -90 || lat > 90 ||
+    lon < -180 || lon > 180
+  ) {
+    return Infinity;
+  }
+
+  return distanceKm(
+    visitorLocation.lat,
+    visitorLocation.lon,
+    lat,
+    lon
+  );
+}
+
+
+/* =========================================================
    SORTING
    ========================================================= */
 
 function sortedRows() {
+
   return [...dinners].sort((a, b) => {
 
-    if (currentSort === 'price') {
+    if (currentSort === 'nearest' && visitorLocation) {
       return (
-        price(a.dinner_price) -
-          price(b.dinner_price) ||
-        String(a.area || '').localeCompare(
-          String(b.area || '')
+        pubDistance(a) - pubDistance(b) ||
+        price(a.dinner_price) - price(b.dinner_price) ||
+        String(a.name || '').localeCompare(
+          String(b.name || '')
         )
       );
     }
 
+    if (currentSort === 'name') {
+      return String(a.name || '').localeCompare(
+        String(b.name || '')
+      );
+    }
+
     return (
-      String(a.area || '').localeCompare(
-        String(b.area || '')
-      ) ||
-      price(a.dinner_price) -
-        price(b.dinner_price) ||
+      price(a.dinner_price) - price(b.dinner_price) ||
       String(a.name || '').localeCompare(
         String(b.name || '')
       )
     );
+
   });
+}
+
+
+function updateSortButtons() {
+
+  document.querySelectorAll('.sort-btn')
+    .forEach((button) => {
+
+      const active = button.dataset.sort === currentSort;
+
+      button.classList.toggle('active', active);
+
+      button.setAttribute(
+        'aria-pressed',
+        active ? 'true' : 'false'
+      );
+
+    });
 }
 
 
@@ -118,6 +192,7 @@ function sortedRows() {
    ========================================================= */
 
 function render() {
+
   const grid =
     document.getElementById('christmas-grid');
 
@@ -136,6 +211,7 @@ function render() {
 
 
   if (!rows.length) {
+
     grid.innerHTML =
       '<div class="christmas-empty">No Christmas dinners are listed yet.</div>';
 
@@ -150,6 +226,13 @@ function render() {
 
       const cardNumber =
         String(i + 1).padStart(2, '0');
+
+      const distance = pubDistance(r);
+
+      const distanceLabel =
+        visitorLocation && Number.isFinite(distance)
+          ? `${distance.toFixed(1)} km away`
+          : '';
 
       const extras = [
         r.kids_price
@@ -209,6 +292,11 @@ function render() {
                 r.type ||
                 ''
               )}
+              ${
+                distanceLabel
+                  ? ` · ${esc(distanceLabel)}`
+                  : ''
+              }
             </div>
 
           </div>
@@ -245,6 +333,7 @@ function render() {
 
         </button>
       `;
+
     })
     .join('');
 
@@ -259,6 +348,92 @@ function render() {
       );
 
     });
+}
+
+
+/* =========================================================
+   NEAREST SORT
+   ========================================================= */
+
+function sortNearest() {
+
+  if (visitorLocation) {
+
+    currentSort = 'nearest';
+    updateSortButtons();
+    render();
+
+    return;
+  }
+
+
+  if (!navigator.geolocation) {
+
+    alert(
+      'Location is not supported by this browser. You can still sort by Cheapest or A–Z.'
+    );
+
+    return;
+  }
+
+
+  const nearestButton =
+    document.querySelector('[data-sort="nearest"]');
+
+  if (nearestButton) {
+    nearestButton.disabled = true;
+    nearestButton.textContent = 'Locating…';
+  }
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    (position) => {
+
+      visitorLocation = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+      };
+
+      currentSort = 'nearest';
+
+      resetNearestButton();
+      updateSortButtons();
+      render();
+
+    },
+
+    (error) => {
+
+      resetNearestButton();
+
+      const message = error.code === 1
+        ? 'Location permission was not granted. Please allow location access in your browser to sort by Nearest.'
+        : 'Your location could not be determined. Please try again or use Cheapest or A–Z.';
+
+      alert(message);
+
+    },
+
+    {
+      enableHighAccuracy: false,
+      timeout: 12000,
+      maximumAge: 300000
+    }
+
+  );
+}
+
+
+function resetNearestButton() {
+
+  const button =
+    document.querySelector('[data-sort="nearest"]');
+
+  if (button) {
+    button.disabled = false;
+    button.textContent = 'Nearest';
+  }
 }
 
 
@@ -382,8 +557,6 @@ function openMenu(r) {
           : 'Click / tap menu to zoom';
     }
 
-
-    /* Start at the top of the menu when zooming */
 
     if (zoomed) {
 
@@ -525,25 +698,25 @@ document
       'click',
       () => {
 
-        currentSort =
+        const selectedSort =
           button.dataset.sort;
 
-        document
-          .querySelectorAll('.sort-btn')
-          .forEach((item) => {
+        if (selectedSort === 'nearest') {
+          sortNearest();
+          return;
+        }
 
-            item.classList.toggle(
-              'active',
-              item === button
-            );
+        currentSort = selectedSort;
 
-          });
-
+        updateSortButtons();
         render();
+
       }
     );
 
   });
+
+updateSortButtons();
 
 
 /* =========================================================
