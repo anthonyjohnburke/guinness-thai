@@ -45,7 +45,7 @@
     "longitude": 100.5531211,
     "google_maps_url": "https://maps.app.goo.gl/mYm1FFVSMXHGY1MJ7",
     "venue_url": "https://www.theblarneystonebangkok.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Leks Last Stand",
@@ -61,7 +61,7 @@
     "longitude": 100.5563717,
     "google_maps_url": "https://maps.app.goo.gl/GaFrN1zdaLgX7bum7",
     "venue_url": "https://www.facebook.com/LeksLastandbar/",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Scuffy Murphys",
@@ -125,7 +125,7 @@
     "longitude": 100.5529097,
     "google_maps_url": "https://maps.app.goo.gl/qXN527NkDL5PDCRz9",
     "venue_url": "https://www.facebook.com/fitzgeraldsbangkok/",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Chequers",
@@ -141,7 +141,7 @@
     "longitude": 100.553052,
     "google_maps_url": "https://maps.app.goo.gl/RKEhQ3veE7M8Qe3t7",
     "venue_url": "http://www.chequersbangkok.com/",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "PJ O’Brien’s / the Globe",
@@ -429,7 +429,7 @@
     "longitude": 100.5558365,
     "google_maps_url": "https://maps.app.goo.gl/2EMoMpLHes1p8drb8",
     "venue_url": "https://www.instagram.com/thegamebkk/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "The Royal Oak",
@@ -765,7 +765,7 @@
     "longitude": 100.5557338,
     "google_maps_url": "https://maps.app.goo.gl/1q2R2piVCBroApnn7",
     "venue_url": "https://www.8855bangkok.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Beer Republic",
@@ -925,7 +925,7 @@
     "longitude": 100.5525009,
     "google_maps_url": "https://maps.app.goo.gl/9ZpSyssFJv4T48bb6",
     "venue_url": "https://bullys-bangkok.com/",
-    "price_verified": "2026-09-10"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Buddy's Bar (Soi 8)",
@@ -957,7 +957,7 @@
     "longitude": 100.5559236,
     "google_maps_url": "https://maps.app.goo.gl/Xx8Xg1CNiTcqE5i96",
     "venue_url": "https://www.facebook.com/VivaCafeBangkok",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "LOUIE'S on fifteen",
@@ -1021,7 +1021,7 @@
     "longitude": 100.558906,
     "google_maps_url": "https://maps.app.goo.gl/qDUG5u61fhpGgMoz7",
     "venue_url": "https://coalsthailand.com/",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Propaganda Bar",
@@ -1069,7 +1069,7 @@
     "longitude": 100.5533163,
     "google_maps_url": "https://maps.app.goo.gl/ybLqhUgKeZyf73gP7",
     "venue_url": "https://thekickingdonkey.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "The Shakespeare",
@@ -1101,7 +1101,7 @@
     "longitude": 100.5559348,
     "google_maps_url": "https://maps.app.goo.gl/irc6uQf4FEGz98HG7",
     "venue_url": "https://restaurantguru.com/Tipsy-Tap-Bangkok",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Paradise",
@@ -1405,7 +1405,7 @@
     "longitude": 100.5560419,
     "google_maps_url": "https://maps.app.goo.gl/TWVijuCD9L4qYbZ77",
     "venue_url": "https://www.instagram.com/thecornerhouseskv/",
-    "price_verified": "2026-09-21"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "T-Rex's Gastrobar",
@@ -1453,7 +1453,7 @@
     "longitude": 100.507758,
     "google_maps_url": "https://maps.app.goo.gl/2uVA9ZiRE8Tcuj1P7",
     "venue_url": "https://www.instagram.com/isara_pub.brewery/",
-    "price_verified": "2026-09-07"
+    "price_verified": "2026-09-21"
   },
   {
     "name": "Spicy Sombrero",
@@ -1508,7 +1508,7 @@
     "area": "Nana",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 432,
+    "price_thb": 409,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Nana BTS",
@@ -1517,7 +1517,7 @@
     "longitude": 100.5537777,
     "google_maps_url": "https://maps.app.goo.gl/KJfqqYAcSymNKDBR8",
     "venue_url": "https://www.instagram.com/cucu.bkk/",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-09"
   },
   {
     "name": "Bourbon Street",
