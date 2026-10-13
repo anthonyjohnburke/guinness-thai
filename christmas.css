@@ -782,3 +782,23 @@ body.christmas-body {
   }
 
 }
+
+
+/* Mobile menu swipe-close animation */
+
+@media (max-width: 620px) {
+  .menu-modal {
+    transition: transform 0.2s ease;
+  }
+
+  .menu-modal.swipe-closing {
+    transform: translateY(100vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-modal {
+    transition: none;
+  }
+}
+
