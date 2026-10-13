@@ -843,6 +843,69 @@ updateSortButtons();
 
 
 /* =========================================================
+   MOBILE — SWIPE DOWN TO CLOSE MENU
+   ========================================================= */
+
+(() => {
+  const lightbox = document.getElementById('menu-lightbox');
+  const modal = lightbox?.querySelector('.menu-modal');
+  const imageWrap = document.getElementById('menu-image-wrap');
+
+  if (!lightbox || !modal || !imageWrap) return;
+
+  let startY = 0;
+  let startX = 0;
+  let tracking = false;
+
+  modal.addEventListener('touchstart', (event) => {
+    tracking = false;
+
+    if (
+      window.innerWidth > 620 ||
+      !lightbox.classList.contains('open') ||
+      imageWrap.classList.contains('is-zoomed') ||
+      event.touches.length !== 1 ||
+      modal.scrollTop > 0
+    ) {
+      return;
+    }
+
+    startY = event.touches[0].clientY;
+    startX = event.touches[0].clientX;
+    tracking = true;
+  }, { passive: true });
+
+  modal.addEventListener('touchend', (event) => {
+    if (!tracking || !event.changedTouches.length) return;
+
+    tracking = false;
+
+    if (
+      imageWrap.classList.contains('is-zoomed') ||
+      modal.scrollTop > 0
+    ) {
+      return;
+    }
+
+    const distanceY =
+      event.changedTouches[0].clientY - startY;
+
+    const distanceX = Math.abs(
+      event.changedTouches[0].clientX - startX
+    );
+
+    if (distanceY > 90 && distanceY > distanceX * 1.5) {
+      closeMenu();
+    }
+  }, { passive: true });
+
+  modal.addEventListener('touchcancel', () => {
+    tracking = false;
+  }, { passive: true });
+})();
+
+
+/* =========================================================
    MENU EVENTS
    ========================================================= */
 
