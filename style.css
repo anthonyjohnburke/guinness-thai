@@ -3956,3 +3956,236 @@ body.radar-not-visible .christmas-banner {
   pointer-events: none;
 }
 }
+/* ==========================================================
+   MOBILE STAGE 1: chart-first, map on demand
+   Desktop styles are unchanged.
+   ========================================================== */
+@media (max-width: 768px) {
+  #intro > #map-section {
+    width: 100%;
+    padding: 0;
+    margin: 22px 0 16px;
+  }
+
+  #intro > #map-section #map {
+    height: auto;
+    min-height: 0;
+    padding: 28px 16px;
+    box-sizing: border-box;
+    background: #141414;
+    border: 1px solid rgba(212,175,55,0.22);
+  }
+
+  #intro > #map-section #map:has(.mapboxgl-canvas) {
+    height: 58vh;
+    min-height: 380px;
+    padding: 0;
+  }
+
+  #mobile-load-map {
+    display: inline-block;
+    border: 0;
+    border-radius: 8px;
+    background: #d4af37;
+    color: #111;
+    font: 700 0.95rem 'Open Sans', sans-serif;
+    padding: 15px 22px;
+    cursor: pointer;
+  }
+
+  #mobile-load-map:disabled { opacity: 0.7; cursor: wait; }
+
+  #intro > #map-section #map-loading { display: none; }
+  #intro > #map-section #map:has(.mapboxgl-canvas) #map-loading { display: flex; }
+
+  #intro > .area-filter-strip,
+  #intro > .pub-search-wrap { width: 100%; max-width: 100%; }
+}
+@media (min-width: 769px) {
+  #mobile-load-map { display: none; }
+}
+
+/* Mobile: show Explore map only after Mapbox has created its canvas.
+   Keep the initial Load Interactive Map button unobstructed. */
+@media (max-width: 768px) {
+  #intro > #map-section:not(:has(.mapboxgl-canvas)) #map-unlock-btn {
+    display: none;
+  }
+}
+
+/* STAGE 2: mobile-only compact information sections */
+.mobile-collapse-toggle { display: none; }
+@media (max-width: 768px) {
+  .mobile-collapse-toggle {
+    display: flex; width: 100%; align-items: center; justify-content: space-between;
+    padding: 14px 16px; background: #171717; border: 1px solid rgba(212,175,55,.45);
+    border-radius: 8px; color: #fff; font: 700 16px 'Open Sans', sans-serif;
+    text-align: left; cursor: pointer;
+  }
+  .mobile-collapse-toggle span { color: #d4af37; font-size: 24px; line-height: 1; }
+  .mobile-collapse-content { display: none; padding-top: 14px; }
+  .mobile-collapse.is-open > .mobile-collapse-content { display: block; }
+  .mobile-collapse.is-open > .mobile-collapse-toggle span { transform: rotate(45deg); }
+  #mobile-faq-section, #mobile-contact-section { width: 100%; box-sizing: border-box; }
+  #mobile-footer-section { margin-bottom: 16px; }
+  #mobile-footer-section .mobile-collapse-content { text-align: left; }
+}
+
+/* ==========================================================
+   MOBILE STAGE 3: compact filters, lists and information panels
+   Desktop unchanged.
+   ========================================================== */
+@media (max-width: 768px) {
+  #intro > .area-filter-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+  #intro > .area-filter-strip .area-pill {
+    font-size: 0.82rem;
+    padding: 11px 8px;
+    white-space: nowrap;
+  }
+  #happy-list { display: none; }
+  #happy-list.is-open { display: block; }
+  #featured-promotions.has-multiple-promotions:not(.show-all-promotions) .featured-pub-layout:nth-child(n+2) {
+    display: none;
+  }
+  #toggle-promotions-btn:not([hidden]) {
+    display: block;
+    width: 85%; max-width: 300px; margin: 14px auto 0;
+    border: 0; border-radius: 8px; background: #d4af37; color: #111;
+    font: 700 0.95rem 'Open Sans', sans-serif;
+    padding: 14px 18px; cursor: pointer;
+  }
+  .mobile-collapse-toggle { color: #d4af37; text-transform: uppercase; font-size: 1.15rem; }
+}
+@media (min-width: 769px) {
+  #toggle-promotions-btn { display: none !important; }
+}
+#toggle-promotions-btn[hidden] { display: none !important; }
+
+/* ==========================================================
+   MOBILE STAGE 4: compact accordions, consistent buttons and search
+   Desktop remains unchanged.
+   ========================================================== */
+@media (max-width: 768px) {
+  /* The search belongs visually with the area filter grid. */
+  #intro > .area-filter-strip {
+    margin-bottom: 16px;
+  }
+  #intro > .pub-search-wrap {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  #intro > .pub-search-wrap #pub-search {
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: none;
+    padding: 0 16px;
+    font-size: 0.85rem;
+  }
+  #intro > .pub-search-wrap #pub-search:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212,175,55,.12);
+  }
+
+  /* Match the existing understated ranking-toggle design. */
+  #toggle-promotions-btn:not([hidden]) {
+    width: 85%;
+    max-width: 300px;
+    min-height: 44px;
+    height: 44px;
+    padding: 0 12px;
+    margin: 14px auto 0;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 8px;
+    background: #111;
+    color: #fff;
+    font: 700 0.85rem 'Open Sans', sans-serif;
+    text-transform: none;
+  }
+
+  /* Three equal, compact accordion buttons, aligned to story links. */
+  #mobile-faq-section,
+  #mobile-contact-section,
+  #mobile-footer-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-sizing: border-box;
+  }
+  #mobile-faq-section > .mobile-collapse-toggle,
+  #mobile-contact-section > .mobile-collapse-toggle,
+  #mobile-footer-section > .mobile-collapse-toggle {
+    width: 85%;
+    max-width: 300px;
+    min-height: 44px;
+    height: 44px;
+    margin: 0 auto;
+    padding: 0 14px;
+    border: 1px solid rgba(212,175,55,.45);
+    border-radius: 8px;
+    background: #171717;
+    color: #d4af37;
+    font: 700 0.85rem 'Open Sans', sans-serif;
+    line-height: 1.2;
+    text-transform: uppercase;
+    text-align: left;
+    gap: 10px;
+  }
+  #mobile-faq-section > .mobile-collapse-toggle span,
+  #mobile-contact-section > .mobile-collapse-toggle span,
+  #mobile-footer-section > .mobile-collapse-toggle span {
+    flex: none;
+    font-size: 20px;
+  }
+  .insight-strip {
+    gap: 18px;
+    margin-top: 18px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  #footer {
+    border-top: 0;
+    margin-top: 18px;
+    padding-top: 0;
+  }
+  #mobile-footer-section .mobile-collapse-content {
+    padding-top: 14px;
+  }
+  #mobile-footer-section .footer-signoff {
+    margin-top: 14px;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
+   MOBILE STAGE 5: one-line chart legend and tighter filter/search gap.
+   Desktop styles remain unchanged.
+   ========================================================== */
+@media (max-width: 768px) {
+  #price-chart .chart-key {
+    font-size: clamp(8px, 2.35vw, 11px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+    margin: 16px auto 18px;
+  }
+
+  #intro > .area-filter-strip {
+    margin-bottom: 8px;
+  }
+  #intro > .pub-search-wrap {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+/* Stage 6: tighter spacing between stacked intro columns on mobile */
+@media (max-width: 768px) {
+  #intro {
+    gap: 20px;
+  }
+}

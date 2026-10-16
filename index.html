@@ -151,6 +151,7 @@
 
 <section id="map-section">
   <div id="map">
+    <button id="mobile-load-map" type="button" aria-label="Load interactive Bangkok pub map">Load Interactive Map</button>
     <div id="map-loading">
       <strong>Bangkok Guinness Map</strong>
       <span>Loading draught Guinness locations…</span>
@@ -170,7 +171,7 @@
     <input
       type="search"
       id="pub-search"
-      placeholder="Search pubs, areas or BTS/MRT stations..."
+      placeholder="Search pubs, areas or stations..."
       autocomplete="off"
       aria-label="Search pubs or areas"
       aria-controls="pub-search-results"
@@ -246,6 +247,7 @@
         The best happy hour Guinness deals we’ve found in Bangkok so far. We salute you, fine establishments.
       </p>
       <div id="happy-list"></div>
+      <button class="mobile-list-toggle" data-target="happy-list" type="button" aria-expanded="false">Show Happy Hour Deals</button>
     </div>
 
    <!--
@@ -280,6 +282,7 @@
   <h2 class="intro-heading">What's on tap</h2>
 
   <div id="featured-promotions"></div>
+  <button id="toggle-promotions-btn" type="button" aria-expanded="false">Show more promotions</button>
 
 </div>
   
@@ -493,12 +496,14 @@ Nobody asked for this. The world was carrying on perfectly well before another o
   
   <div class="insight-strip">
 
-    <div class="insight-box faq-box">
-  <div class="section-label">Frequently Asked Questions</div>
+    <div class="insight-box faq-box mobile-collapse" id="mobile-faq-section">
+  <button type="button" class="mobile-collapse-toggle" aria-expanded="false" aria-controls="mobile-faq-content">Frequently Asked Questions <span aria-hidden="true">+</span></button>
+  <div class="mobile-collapse-content" id="mobile-faq-content">
   <p class="intro-small">
     How Guinness prices are tracked across Bangkok, how the rankings work, and how to suggest updates, happy hour deals, or newly discovered pints.
   </p>
   <a href="faq.html" class="contact-link">Read FAQ</a>
+  </div>
 </div>
 
     
@@ -510,14 +515,16 @@ Nobody asked for this. The world was carrying on perfectly well before another o
   </div>
 
     
-     <div class="contact-col">
-  <div class="section-label">Spotted a Creamer?</div>
+     <div class="contact-col mobile-collapse" id="mobile-contact-section">
+  <button type="button" class="mobile-collapse-toggle" aria-expanded="false" aria-controls="mobile-contact-content">Spotted a Creamer? <span aria-hidden="true">+</span></button>
+  <div class="mobile-collapse-content" id="mobile-contact-content">
   <p class="intro-small">
     Found a better pint, spotted a new price, or had an absolute creamer in Bangkok? Let me know and send over your Guinness photos to be featured.
 </p>
   <a href="mailto:pintsofbangkok@gmail.com" class="contact-link" id="contact-link" rel="noopener noreferrer">
     Get in touch
   </a>
+  </div>
 </div>
 </div>
   
@@ -525,16 +532,19 @@ Nobody asked for this. The world was carrying on perfectly well before another o
   
   <footer id="footer">
     <div class="footer-inner">
+      <div class="mobile-collapse" id="mobile-footer-section">
+        <button type="button" class="mobile-collapse-toggle" aria-expanded="false" aria-controls="mobile-footer-content">Footer Information <span aria-hidden="true">+</span></button>
+        <div class="mobile-collapse-content" id="mobile-footer-content">
       <p>
         Prices are based on publicly available information and community submissions and may change at any time. While we aim to keep information accurate and up to date, we cannot guarantee the accuracy or completeness of any listings.
         Rankings and comparisons reflect only the pubs currently tracked on this site and do not represent all venues in Bangkok. This is an independent, community-led project and is not affiliated with or endorsed by any venues listed. All content is provided for general information purposes only.
         <a href="/pubs.html">Bangkok Guinness pub directory</a>
       </p>
-
-        
       <p class="footer-signoff">
       © 2026 Pints of Bangkok. All rights reserved. Guinness® is a registered trademark of Diageo. This site is independent and not affiliated with Guinness or Diageo.
       </p>
+        </div>
+      </div>
     </div>
   </footer>
 

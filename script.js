@@ -105,6 +105,10 @@ function renderFeaturedPromotions() {
 
   if (!container) return;
 
+  container.classList.toggle("has-multiple-promotions", featuredPromotions.length > 1);
+  const toggle = document.getElementById("toggle-promotions-btn");
+  if (toggle) toggle.hidden = featuredPromotions.length <= 1;
+
   container.innerHTML = featuredPromotions.map((promo, index) => `
     <div class="featured-pub-layout">
 
@@ -555,7 +559,7 @@ function buildAreaFilters(pubs, allPricedPubs, zoomToArea) {
     areaCounts[area] = (areaCounts[area] || 0) + 1;
   });
 
-  const areaLimit = window.innerWidth <= 768 ? 5 : 8;
+  const areaLimit = window.innerWidth <= 768 ? 11 : 8;
 
   const topAreas = Object.entries(areaCounts)
     .sort((a, b) => b[1] - a[1])
@@ -675,6 +679,9 @@ function ensureMapInitialized(pubs) {
   mapInitPromise = loadMapboxLibrary().then(() => {
     const loading = document.getElementById("map-loading");
     if (loading) loading.remove();
+
+    const mobileLoadButton = document.getElementById("mobile-load-map");
+    if (mobileLoadButton) mobileLoadButton.remove();
 
     map = new mapboxgl.Map({
       container: "map",
@@ -994,9 +1001,23 @@ return map;
   return mapInitPromise;
 }
 
-renderFeaturedPromotions();
+// Move the map and its controls below the chart on mobile only.
+// Desktop retains the original document order.
+if (window.matchMedia("(max-width: 768px)").matches) {
+  const chartColumn = document.querySelector(".intro-col-wide");
+  const mapSection = document.getElementById("map-section");
+  const filters = document.getElementById("area-filter-strip");
+  const search = document.querySelector(".pub-search-wrap");
+  if (chartColumn && mapSection) {
+    chartColumn.insertAdjacentElement("afterend", mapSection);
+    if (filters) mapSection.insertAdjacentElement("afterend", filters);
+    if (search && filters) filters.insertAdjacentElement("afterend", search);
+  }
+}
 
+// Promotions are below the chart. Load their content after initial rendering.
 runWhenIdle(() => {
+  renderFeaturedPromotions();
   loadFeaturedPromotions();
   loadSiteMessage();
 });
@@ -1324,6 +1345,12 @@ if (window.innerWidth <= 768 && toggleChartBtn) {
         : "Show cheap ranking";
     }
 
+    if (targetId === "happy-list") {
+      const open = target.classList.contains("is-open");
+      button.textContent = open ? "Hide Happy Hour Deals" : "Show Happy Hour Deals";
+      button.setAttribute("aria-expanded", String(open));
+    }
+
     if (targetId === "expensive-list") {
       button.textContent = target.classList.contains("is-open")
         ? "Hide expensive ranking"
@@ -1593,11 +1620,29 @@ happyList.appendChild(row);
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        runWhenIdle(() => {
-          ensureMapInitialized(pubs).catch(err => {
-            console.error("Map failed to load:", err);
-          });
-        }, 2500);
+        if (window.innerWidth > 768) {
+          runWhenIdle(() => {
+            ensureMapInitialized(pubs).catch(err => {
+              console.error("Map failed to load:", err);
+            });
+          }, 2500);
+        } else {
+          const loadButton = document.getElementById("mobile-load-map");
+          if (loadButton) {
+            loadButton.addEventListener("click", async () => {
+              loadButton.disabled = true;
+              loadButton.textContent = "Loading map…";
+              try {
+                await ensureMapInitialized(pubs);
+                loadButton.remove();
+              } catch (err) {
+                console.error("Map failed to load:", err);
+                loadButton.disabled = false;
+                loadButton.textContent = "Try Loading Map Again";
+              }
+            }, { once: false });
+          }
+        }
       });
     });
 
@@ -2365,10 +2410,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ? header.getBoundingClientRect().bottom
       : 0;
 
-    // Show banners only while the map is visible below the header.
-    const mapVisible =
-      mapRect.bottom > headerBottom &&
-      mapRect.top < window.innerHeight;
+    // Desktop retains original map-based visibility.
+    // Mobile: show both banners within the first 30% of scrollable page distance.
+    // Scrolling back up restores them using the existing CSS fade transition.
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const scrollableHeight = Math.max(
+      0,
+      document.documentElement.scrollHeight - window.innerHeight
+    );
+    const mobileBannersVisible = scrollableHeight === 0 ||
+      window.scrollY <= scrollableHeight * 0.30;
+    const mapVisible = isMobile
+      ? mobileBannersVisible
+      : (mapRect.bottom > headerBottom && mapRect.top < window.innerHeight);
 
     document.body.classList.toggle(
       "map-out-of-view",
@@ -2500,5 +2554,25 @@ function positionChristmasBanner() {
 
   }, 3500);
 });
+/* STAGE 2: mobile-only expandable information panels. */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".mobile-collapse-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const section = button.closest(".mobile-collapse");
+      const expanded = section.classList.toggle("is-open");
+      button.setAttribute("aria-expanded", String(expanded));
+    });
+  });
+});
 
-
+/* Stage 3: expand additional featured promotions on mobile. */
+document.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("toggle-promotions-btn");
+  const container = document.getElementById("featured-promotions");
+  if (!button || !container) return;
+  button.addEventListener("click", () => {
+    const expanded = container.classList.toggle("show-all-promotions");
+    button.textContent = expanded ? "Show fewer promotions" : "Show more promotions";
+    button.setAttribute("aria-expanded", String(expanded));
+  });
+});
