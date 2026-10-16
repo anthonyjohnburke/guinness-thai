@@ -4189,3 +4189,11 @@ body.radar-not-visible .christmas-banner {
     gap: 20px;
   }
 }
+
+/* STAGE 8: Prevent iOS Safari auto-zoom on pub search focus.
+   iOS zooms the visual viewport when an input font is below 16px. */
+@media (max-width: 768px) {
+  #intro > .pub-search-wrap #pub-search {
+    font-size: 16px;
+  }
+}
