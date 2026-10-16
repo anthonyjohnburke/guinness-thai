@@ -1,6 +1,13 @@
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+const MAPBOX_TOKEN = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
+
+let map = null;
+let mapboxLoadingPromise = null;
+let mapInitPromise = null;
+let hoveredId = null;
+let userMarker = null;
+let activePopup = null;
 
 /* ==========================================================
    Configuration
@@ -201,6 +208,45 @@ function runWhenIdle(callback, timeout = 2000) {
   } else {
     window.setTimeout(callback, 1200);
   }
+}
+
+function loadMapboxLibrary() {
+  if (window.mapboxgl) {
+    return Promise.resolve(window.mapboxgl);
+  }
+
+  if (mapboxLoadingPromise) {
+    return mapboxLoadingPromise;
+  }
+
+mapboxLoadingPromise = new Promise((resolve, reject) => {
+
+  if (!document.querySelector('link[href*="mapbox-gl.css"]')) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css";
+    document.head.appendChild(link);
+  }
+
+  const script = document.createElement("script");
+
+    script.src = "https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js";
+    script.async = true;
+
+    script.onload = () => {
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+      resolve(mapboxgl);
+    };
+
+    script.onerror = () => {
+      mapboxLoadingPromise = null;
+      reject(new Error("Mapbox failed to load"));
+    };
+
+    document.head.appendChild(script);
+  });
+
+  return mapboxLoadingPromise;
 }
 
 async function loadSiteMessage() {
@@ -617,27 +663,44 @@ function buildPubSearch(pubs, zoomToPub) {
 
 }
 
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh',
-  center: INITIAL_VIEW.center,
-  zoom: INITIAL_VIEW.zoom,
-  projection: 'mercator'
-});
+function ensureMapInitialized(pubs) {
+  if (mapInitPromise) {
+    return mapInitPromise;
+  }
 
+  if (map) {
+    return Promise.resolve(map);
+  }
+
+  mapInitPromise = loadMapboxLibrary().then(() => {
+    const loading = document.getElementById("map-loading");
+    if (loading) loading.remove();
+
+    map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/pixelboxer/cmo3us6sr000t01qz331vbdbh",
+      center: INITIAL_VIEW.center,
+      zoom: INITIAL_VIEW.zoom,
+      projection: "mercator"
+    });
+
+     // Desktop: prevent accidental map zoom while scrolling the page
 if (window.innerWidth > 768) {
   map.scrollZoom.disable();
 
   const mapEl = document.getElementById("map");
 
-  mapEl.addEventListener("click", () => {
-    map.scrollZoom.enable();
-  }, { once: true });
+  if (mapEl) {
+    mapEl.addEventListener("click", () => {
+      map.scrollZoom.enable();
+    }, { once: true });
+  }
 }
 
+// Mobile: keep map locked until user chooses to explore it
 if (window.innerWidth <= 768) {
   map.dragPan.disable();
-  map.touchZoomRotate.disableRotation(); // keep this
+  map.touchZoomRotate.disableRotation();
 
   const unlockBtn = document.getElementById("map-unlock-btn");
   const hint = document.querySelector(".map-mobile-hint");
@@ -645,12 +708,13 @@ if (window.innerWidth <= 768) {
   if (unlockBtn) {
     unlockBtn.addEventListener("click", () => {
       map.dragPan.enable();
-      map.touchZoomRotate.enable(); // 👈 ADD THIS BACK
+      map.touchZoomRotate.enable();
 
       unlockBtn.style.display = "none";
 
       if (hint) {
         hint.style.opacity = 0;
+
         setTimeout(() => {
           hint.style.display = "none";
         }, 400);
@@ -658,42 +722,49 @@ if (window.innerWidth <= 768) {
     });
   }
 }
-  
-  let hoveredId = null;
-  let userMarker = null;
-  let activePopup = null;
 
-map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+ map.addControl(
+  new mapboxgl.NavigationControl({ showCompass: false }),
+  "top-right"
+);
 
 class ResetControl {
-  onAdd(map) {
-    this.map = map;
-    this.container = document.createElement('div');
-    this.container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
+  onAdd(mapInstance) {
+    this.map = mapInstance;
+    this.container = document.createElement("div");
+    this.container.className = "mapboxgl-ctrl mapboxgl-ctrl-group";
 
-    const button = document.createElement('button');
-    button.className = 'mapboxgl-ctrl-icon';
-    button.type = 'button';
-    button.title = 'Reset view';
+    const button = document.createElement("button");
+    button.className = "mapboxgl-ctrl-icon";
+    button.type = "button";
+    button.title = "Reset view";
+
     button.innerHTML = `
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg viewBox="0 0 24 24"
+           width="18"
+           height="18"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="2"
+           stroke-linecap="round"
+           stroke-linejoin="round">
         <path d="M3 10.5L12 3l9 7.5"></path>
         <path d="M5 10v10h14V10"></path>
       </svg>
     `;
 
     button.onclick = () => {
-  if (activePopup) {
-    activePopup.remove();
-    activePopup = null;
-  }
+      if (activePopup) {
+        activePopup.remove();
+        activePopup = null;
+      }
 
-  map.easeTo({
-    center: INITIAL_VIEW.center,
-    zoom: INITIAL_VIEW.zoom,
-    duration: 800
-  });
-};
+      map.easeTo({
+        center: INITIAL_VIEW.center,
+        zoom: INITIAL_VIEW.zoom,
+        duration: 800
+      });
+    };
 
     this.container.appendChild(button);
     return this.container;
@@ -705,7 +776,223 @@ class ResetControl {
   }
 }
 
-map.addControl(new ResetControl(), 'top-right');
+map.addControl(new ResetControl(), "top-right");
+
+const bounds = new mapboxgl.LngLatBounds();
+let validCount = 0;
+
+const geojson = {
+  type: "FeatureCollection",
+  features: pubs
+    .filter(p => p.lat && p.lon)
+    .map((p, i) => {
+      const lat = parseFloat(p.lat);
+      const lon = parseFloat(p.lon);
+
+      if (isNaN(lat) || isNaN(lon)) return null;
+
+      validCount++;
+      bounds.extend([lon, lat]);
+
+      return {
+        type: "Feature",
+        id: `${p.name}-${i}`,
+        geometry: {
+          type: "Point",
+          coordinates: [lon, lat]
+        },
+        properties: p
+      };
+    })
+    .filter(Boolean)
+};
+
+        const addPubLayer = () => {
+      if (map.getSource('pubs')) return;
+
+      map.addSource('pubs', {
+        type: 'geojson',
+        data: geojson
+      });
+
+      map.addLayer({
+  id: 'pubs-layer',
+  type: 'symbol',
+  source: 'pubs',
+  layout: {
+    'icon-image': 'pint-icon',
+    'icon-size': 0.8,
+    'icon-anchor': 'bottom',
+    'icon-offset': [0, 6],
+    'icon-allow-overlap': true
+  },
+  paint: {
+    'icon-opacity': [
+      'case',
+      ['boolean', ['feature-state', 'hover'], false],
+      1,
+      0.7
+    ]
+  }
+});
+
+      map.on('mousemove', 'pubs-layer', (e) => {
+  map.getCanvas().style.cursor = 'pointer';
+
+  if (e.features.length > 0) {
+    if (hoveredId !== null) {
+      map.setFeatureState(
+        { source: 'pubs', id: hoveredId },
+        { hover: false }
+      );
+    }
+
+    hoveredId = e.features[0].id;
+
+    map.setFeatureState(
+      { source: 'pubs', id: hoveredId },
+      { hover: true }
+    );
+  }
+});
+
+map.on('mouseleave', 'pubs-layer', () => {
+  map.getCanvas().style.cursor = '';
+
+  if (hoveredId !== null) {
+    map.setFeatureState(
+      { source: 'pubs', id: hoveredId },
+      { hover: false }
+    );
+  }
+
+  hoveredId = null;
+});
+
+map.on('click', 'pubs-layer', (e) => {
+  const feature = e.features && e.features[0];
+  if (!feature) return;
+
+  const p = feature.properties;
+  const safeLink = sanitizeURL(p.link);
+  const html = buildPopupHTML(p, safeLink);
+
+  const coordinates = feature.geometry.coordinates.slice();
+
+  // CLOSE if same pub clicked again
+  if (
+    activePopup &&
+    activePopup.pubName === p.name
+  ) {
+    activePopup.remove();
+    activePopup = null;
+    return;
+  }
+
+  // Close existing popup
+  if (activePopup) {
+    activePopup.remove();
+    activePopup = null;
+  }
+
+  const popup = new mapboxgl.Popup({
+  offset: window.innerWidth <= 768
+    ? {
+        bottom: [0, -12]
+      }
+    : 18,
+    closeButton: true,
+    closeOnClick: true,
+    maxWidth: "320px"
+  });
+
+  popup.pubName = p.name;
+
+  if (window.innerWidth <= 768) {
+
+    map.easeTo({
+      center: coordinates,
+      zoom: Math.max(map.getZoom(), 14),
+      duration: 350,
+      padding: {
+  top: 90,
+  bottom: 160,
+  left: 28,
+  right: 28
+}
+    });
+
+    setTimeout(() => {
+      popup
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
+
+activePopup = popup;
+
+keepPopupInView(activePopup);
+    }, 220);
+
+  } else {
+
+    popup
+  .setLngLat(coordinates)
+  .setHTML(html)
+  .addTo(map);
+
+activePopup = popup;
+
+keepPopupInView(activePopup);
+  }
+
+  popup.on("close", () => {
+    activePopup = null;
+  });
+
+  trackEvent("popup_open", {
+    pub_name: p.name || "unknown"
+  });
+});
+
+      if (validCount > 1) {
+        map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
+      }
+    };
+
+    const loadIcon = () => {
+      if (map.hasImage('pint-icon')) {
+        addPubLayer();
+        return;
+      }
+
+      map.loadImage('/pint-glass1.png', (err, img) => {
+        if (err || !img) {
+          console.error("Icon failed", err);
+          return;
+        }
+
+        if (!map.hasImage('pint-icon')) {
+          map.addImage('pint-icon', img);
+        }
+
+        addPubLayer();
+      });
+    };
+
+if (map.loaded()) {
+  loadIcon();
+} else {
+  map.once('load', loadIcon);
+}
+     
+return map;
+  }).catch(err => {
+    mapInitPromise = null;
+    throw err;
+  });
+
+  return mapInitPromise;
+}
 
 renderFeaturedPromotions();
 
@@ -723,9 +1010,6 @@ fetch(SHEET_URL)
 .then(pubs => {
   window.allPubs = pubs;
 
-  const bounds = new mapboxgl.LngLatBounds();
-  let validCount = 0;
-
   const allPricedPubs = pubs
   .filter(p => p.price && !isNaN(parseFloat(p.price)))
   .map(p => ({
@@ -738,8 +1022,8 @@ fetch(SHEET_URL)
     last_updated: p.last_updated
   }));
   
-    function zoomToPub(pubName, allPubs) {
-      const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
+async function zoomToPub(pubName, allPubs) {
+   const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
       if (!targetPub) return;
 
       const lat = parseFloat(targetPub.lat);
@@ -749,9 +1033,16 @@ fetch(SHEET_URL)
       const safeLink = sanitizeURL(targetPub.link);
       const html = buildPopupHTML(targetPub, safeLink);
 
-      scrollToMap();
+     scrollToMap();
 
-      setTimeout(() => {
+try {
+  await ensureMapInitialized(allPubs);
+} catch (err) {
+  console.error("Map failed to load:", err);
+  return;
+}
+
+setTimeout(() => {
         map.easeTo({
           center: [lon, lat],
           zoom: 15,
@@ -775,8 +1066,14 @@ keepPopupInView(activePopup);
 }, 700);
       }, 150);
     }
+async function zoomToArea(filteredPubs) {
+  try {
+    await ensureMapInitialized(pubs);
+  } catch (err) {
+    console.error("Map failed to load:", err);
+    return;
+  }
 
-  function zoomToArea(filteredPubs) {
   const areaBounds = new mapboxgl.LngLatBounds();
   let count = 0;
 
@@ -1289,213 +1586,21 @@ ${pub.google_maps_link ? `
 </div>
 `;
   
-  happyList.appendChild(row);
+happyList.appendChild(row);
     });
 
-    const geojson = {
-      type: "FeatureCollection",
-      features: pubs
-        .filter(p => p.lat && p.lon)
-        .map((p, i) => {
-          const lat = parseFloat(p.lat);
-          const lon = parseFloat(p.lon);
-
-          if (isNaN(lat) || isNaN(lon)) return null;
-
-          validCount++;
-          bounds.extend([lon, lat]);
-
-          return {
-  type: "Feature",
-  id: `${p.name}-${i}`, // unique id
-  geometry: {
-    type: "Point",
-    coordinates: [lon, lat]
-  },
-  properties: p
-};
-        })
-        .filter(Boolean)
-    };
-
-    const addPubLayer = () => {
-      if (map.getSource('pubs')) return;
-
-      map.addSource('pubs', {
-        type: 'geojson',
-        data: geojson
-      });
-
-      map.addLayer({
-  id: 'pubs-layer',
-  type: 'symbol',
-  source: 'pubs',
-  layout: {
-    'icon-image': 'pint-icon',
-    'icon-size': 0.8,
-    'icon-anchor': 'bottom',
-    'icon-offset': [0, 6],
-    'icon-allow-overlap': true
-  },
-  paint: {
-    'icon-opacity': [
-      'case',
-      ['boolean', ['feature-state', 'hover'], false],
-      1,
-      0.7
-    ]
-  }
-});
-
-      map.on('mousemove', 'pubs-layer', (e) => {
-  map.getCanvas().style.cursor = 'pointer';
-
-  if (e.features.length > 0) {
-    if (hoveredId !== null) {
-      map.setFeatureState(
-        { source: 'pubs', id: hoveredId },
-        { hover: false }
-      );
     }
 
-    hoveredId = e.features[0].id;
-
-    map.setFeatureState(
-      { source: 'pubs', id: hoveredId },
-      { hover: true }
-    );
-  }
-});
-
-map.on('mouseleave', 'pubs-layer', () => {
-  map.getCanvas().style.cursor = '';
-
-  if (hoveredId !== null) {
-    map.setFeatureState(
-      { source: 'pubs', id: hoveredId },
-      { hover: false }
-    );
-  }
-
-  hoveredId = null;
-});
-
-map.on('click', 'pubs-layer', (e) => {
-  const feature = e.features && e.features[0];
-  if (!feature) return;
-
-  const p = feature.properties;
-  const safeLink = sanitizeURL(p.link);
-  const html = buildPopupHTML(p, safeLink);
-
-  const coordinates = feature.geometry.coordinates.slice();
-
-  // CLOSE if same pub clicked again
-  if (
-    activePopup &&
-    activePopup.pubName === p.name
-  ) {
-    activePopup.remove();
-    activePopup = null;
-    return;
-  }
-
-  // Close existing popup
-  if (activePopup) {
-    activePopup.remove();
-    activePopup = null;
-  }
-
-  const popup = new mapboxgl.Popup({
-  offset: window.innerWidth <= 768
-    ? {
-        bottom: [0, -12]
-      }
-    : 18,
-    closeButton: true,
-    closeOnClick: true,
-    maxWidth: "320px"
-  });
-
-  popup.pubName = p.name;
-
-  if (window.innerWidth <= 768) {
-
-    map.easeTo({
-      center: coordinates,
-      zoom: Math.max(map.getZoom(), 14),
-      duration: 350,
-      padding: {
-  top: 90,
-  bottom: 160,
-  left: 28,
-  right: 28
-}
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        runWhenIdle(() => {
+          ensureMapInitialized(pubs).catch(err => {
+            console.error("Map failed to load:", err);
+          });
+        }, 2500);
+      });
     });
 
-    setTimeout(() => {
-      popup
-  .setLngLat(coordinates)
-  .setHTML(html)
-  .addTo(map);
-
-activePopup = popup;
-
-keepPopupInView(activePopup);
-    }, 220);
-
-  } else {
-
-    popup
-  .setLngLat(coordinates)
-  .setHTML(html)
-  .addTo(map);
-
-activePopup = popup;
-
-keepPopupInView(activePopup);
-  }
-
-  popup.on("close", () => {
-    activePopup = null;
-  });
-
-  trackEvent("popup_open", {
-    pub_name: p.name || "unknown"
-  });
-});
-
-      if (validCount > 1) {
-        map.fitBounds(bounds, { padding: 80, maxZoom: 15 });
-      }
-    };
-
-    const loadIcon = () => {
-      if (map.hasImage('pint-icon')) {
-        addPubLayer();
-        return;
-      }
-
-      map.loadImage('/pint-glass1.png', (err, img) => {
-        if (err || !img) {
-          console.error("Icon failed", err);
-          return;
-        }
-
-        if (!map.hasImage('pint-icon')) {
-          map.addImage('pint-icon', img);
-        }
-
-        addPubLayer();
-      });
-    };
-
-if (map.loaded()) {
-  loadIcon();
-} else {
-  map.once('load', loadIcon);
-}
-    }
   })
   .catch(err => {
     console.error(err);
@@ -1627,14 +1732,22 @@ function typeWriter(el, text, speed = 35) {
     return;
   }
 
-  navigator.geolocation.getCurrentPosition(position => {
-    const userLat = position.coords.latitude;
+navigator.geolocation.getCurrentPosition(async position => {
+   const userLat = position.coords.latitude;
     const userLon = position.coords.longitude;
-    window.userLocation = {
+   window.userLocation = {
   lat: userLat,
   lon: userLon
 };
-    if (userMarker) {
+
+try {
+  await ensureMapInitialized(pubs);
+} catch (err) {
+  console.error("Map failed to load:", err);
+  return;
+}
+
+if (userMarker) {
   userMarker.remove();
 }
 
@@ -2232,3 +2345,158 @@ if (sortTabs) {
   });
 }
 }
+
+
+/* ==========================================================
+   CHRISTMAS BANNER + HAPPY HOUR RADAR VISIBILITY
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const mapSection = document.getElementById("map-section");
+  const radarBanner = document.getElementById("hh-radar-banner");
+  const christmasBanner = document.getElementById("christmas-banner");
+
+  if (!mapSection || !christmasBanner) return;
+
+  function updateMapPromotions() {
+    const mapRect = mapSection.getBoundingClientRect();
+    const header = document.getElementById("top-bar");
+    const headerBottom = header
+      ? header.getBoundingClientRect().bottom
+      : 0;
+
+    // Show banners only while the map is visible below the header.
+    const mapVisible =
+      mapRect.bottom > headerBottom &&
+      mapRect.top < window.innerHeight;
+
+    document.body.classList.toggle(
+      "map-out-of-view",
+      !mapVisible
+    );
+
+    // Move Christmas into the Radar's position when
+    // no live or upcoming happy hours are displayed.
+    const radarVisible =
+      radarBanner &&
+      !radarBanner.classList.contains("is-hidden");
+
+    document.body.classList.toggle(
+      "radar-not-visible",
+      !radarVisible
+    );
+  }
+
+  updateMapPromotions();
+
+  window.addEventListener(
+    "scroll",
+    updateMapPromotions,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "resize",
+    updateMapPromotions,
+    { passive: true }
+  );
+
+  // Respond automatically when the Radar appears or disappears.
+  if (radarBanner && typeof MutationObserver !== "undefined") {
+    new MutationObserver(updateMapPromotions).observe(
+      radarBanner,
+      {
+        attributes: true,
+        attributeFilter: ["class"]
+      }
+    );
+  }
+
+  // Optional analytics for the Christmas guide.
+  christmasBanner.addEventListener("click", () => {
+    if (typeof trackEvent === "function") {
+      trackEvent("christmas_banner_click", {
+        location: "map"
+      });
+    }
+  });
+});
+
+
+/* ==========================================================
+   CHRISTMAS BANNER — MATCH HAPPY HOUR RADAR
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const radar = document.getElementById("hh-radar-banner");
+  const christmas = document.getElementById("christmas-banner");
+
+  if (!christmas) return;
+
+ 
+function positionChristmasBanner() {
+
+  // Leave mobile and tablet positioning to CSS.
+  if (window.innerWidth <= 900) {
+    christmas.style.top = "";
+    return;
+  }
+
+  const radarVisible =
+    radar &&
+    !radar.classList.contains("is-hidden") &&
+    getComputedStyle(radar).display !== "none";
+
+  if (!radarVisible) {
+    // Christmas takes Radar's position when hidden.
+    christmas.style.top =
+      document.body.classList.contains("header-scrolled")
+        ? "82px"
+        : "132px";
+    return;
+  }
+
+  // Calculate from Radar's fixed position and height,
+  // avoiding movement during scrolling animations.
+  const radarTop =
+    document.body.classList.contains("header-scrolled")
+      ? 82
+      : 132;
+
+  christmas.style.top =
+    `${radarTop + radar.offsetHeight + 10}px`;
+}
+
+
+  positionChristmasBanner();
+
+  window.addEventListener("scroll", positionChristmasBanner, {
+    passive: true
+  });
+
+  window.addEventListener("resize", positionChristmasBanner, {
+    passive: true
+  });
+
+  // Reposition whenever Radar appears or disappears.
+  if (radar && typeof MutationObserver !== "undefined") {
+    new MutationObserver(positionChristmasBanner).observe(radar, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  }
+
+  // Match Radar's subtle attention animation.
+  setTimeout(() => {
+    if (document.body.classList.contains("map-out-of-view")) {
+      return;
+    }
+
+    christmas.classList.add("attention");
+
+    setTimeout(() => {
+      christmas.classList.remove("attention");
+    }, 800);
+
+  }, 3500);
+});
