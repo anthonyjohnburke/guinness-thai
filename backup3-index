@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +15,16 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
  
   <!-- Fonts -->
- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
-  
-  <!-- Mapbox -->
-  <link href="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.css" rel="stylesheet" />
-  <script defer src="https://api.mapbox.com/mapbox-gl-js/v3.21.0/mapbox-gl.js"></script>
+<link rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'">
 
+<noscript>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Shadows+Into+Light&display=swap">
+</noscript>  
+  <!-- Mapbox -->
 <link rel="canonical" href="https://www.guinnessthailand.com/">
   <link rel="alternate" type="application/json" href="/pubs.json" title="Pints of Bangkok pub data">
   <link rel="preconnect" href="https://api.mapbox.com">
@@ -145,7 +150,13 @@
 </div>
 
 <section id="map-section">
-  <div id="map"></div>
+  <div id="map">
+    <div id="map-loading">
+      <strong>Bangkok Guinness Map</strong>
+      <span>Loading draught Guinness locations…</span>
+    </div>
+  </div>
+  
   <div class="map-mobile-hint">Tap map to explore • scroll with one finger</div>
   <button id="map-unlock-btn">Explore map</button>
 </section>
@@ -316,7 +327,8 @@
 </div>
 
   <div id="tooltip" class="tooltip"></div>
-
+  
+  <div class="floating-banner-group">
   <!-- Happy Hour Radar -->
 <div id="hh-radar-banner" class="hh-radar-banner is-hidden">
  <button id="hh-radar-open" class="hh-radar-open" type="button">
@@ -328,6 +340,17 @@
 </button>
 </div>
 
+ <!-- Christmas dinners guide -->
+ <div id="christmas-banner" class="christmas-banner">
+   <a class="christmas-banner-link" href="/christmas/" aria-label="Explore Christmas dinners in Bangkok">
+     <span class="christmas-banner-copy">
+       <strong>Christmas dinners in Bangkok are here!</strong>
+       <small>Compare pub menus, prices &amp; booking details</small>
+     </span>
+     <span class="christmas-banner-arrow" aria-hidden="true">→</span>
+   </a>
+ </div>
+</div> <!-- End floating-banner-group -->
 <div id="hh-radar-panel" class="hh-radar-panel" aria-hidden="true">
   <div class="hh-radar-backdrop" id="hh-radar-backdrop"></div>
 
@@ -401,25 +424,24 @@
 </div>
     </div>
 
-  <div class="suggest-col">
-    <h2 class="intro-heading">Suggest a pub</h2>
-    <p class="intro-small">
-      Bangkok’s full of pubs, but where’s the pint that pours like home? Share your go-to spot for the best Guinness in town.
-    </p>
+<div class="suggest-col">
+  <h2 class="intro-heading">From the Barstool</h2>
+  <p class="intro-small">
+   <strong>The same awkward questions</strong> <span class="story-author">· Phil Reid</span><br>
+Nobody asked for this. The world was carrying on perfectly well before another opinion appeared online. The internet already groans under the weight...
+  </p>
 
-    <div class="inline-form">
-      <input
-        type="text"
-        id="response"
-        placeholder="Tell me which bar has the best pint..."
-        maxlength="150"
-        autocomplete="off"
-      />
-      <input type="text" id="website" class="hp-field" tabindex="-1" autocomplete="off" />
-      <button id="submit-btn">Submit</button>
-    </div>
-  </div>
-       </div>
+  <a
+    href="https://philiprees77.substack.com/p/the-same-awkward-questions"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="contact-link"
+  >
+    Read the story
+  </a> 
+  
+</div>
+</div>
 
 <div class="impact-row no-promo">
   <div class="impact-strip impact-main" id="site-message-panel">
@@ -510,7 +532,6 @@
       </p>
 
         
-
       <p class="footer-signoff">
       © 2026 Pints of Bangkok. All rights reserved. Guinness® is a registered trademark of Diageo. This site is independent and not affiliated with Guinness or Diageo.
       </p>
