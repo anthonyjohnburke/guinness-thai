@@ -4376,3 +4376,13 @@ body.radar-not-visible .christmas-banner {
 }
 
 
+/* Mobile: match area buttons and pub search font size */
+@media (max-width: 768px) {
+  .area-pill,
+  #pub-search {
+    font-size: 14px;
+  }
+}
+
+
+
