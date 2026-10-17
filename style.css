@@ -4274,7 +4274,7 @@ body.radar-not-visible .christmas-banner {
   #intro #toggle-chart-btn,
   #intro .mobile-list-toggle,
   #intro #toggle-promotions-btn:not([hidden]),
-  #mobile-load-map {
+  #intro #mobile-load-map {
     width: calc(100vw - 32px);
     max-width: none;
     min-height: 44px;
@@ -4296,28 +4296,28 @@ body.radar-not-visible .christmas-banner {
   }
 
   /* Match the area pills' legible 16px size without triggering iOS zoom. */
-  .area-filter-strip .area-pill {
+  #intro > .area-filter-strip .area-pill {
     font-size: 16px;
   }
-  .pub-search-wrap #pub-search {
+  #intro > .pub-search-wrap #pub-search {
     font-size: 16px;
     color: #fff;
     -webkit-text-fill-color: #fff;
   }
-  .pub-search-wrap #pub-search::placeholder {
+  #intro > .pub-search-wrap #pub-search::placeholder {
     color: #fff;
     opacity: 1;
   }
 
   /* Before loading Mapbox, show only the green button, not a map panel. */
-  #map-section #map:not(:has(.mapboxgl-canvas)) {
+  #intro > #map-section #map:not(:has(.mapboxgl-canvas)) {
     padding: 0;
     background: transparent;
     border: 0;
     border-radius: 0;
     overflow: visible;
   }
-  #mobile-load-map {
+  #intro #mobile-load-map {
     display: block;
     height: 44px;
     padding: 0 14px;
@@ -4326,10 +4326,10 @@ body.radar-not-visible .christmas-banner {
     border: 0;
     cursor: pointer;
   }
-  #map-section:has(.mapboxgl-canvas) #mobile-load-map {
+  #intro > #map-section:has(.mapboxgl-canvas) #mobile-load-map {
     display: none;
   }
-  #map-section .map-mobile-hint {
+  #intro > #map-section .map-mobile-hint {
     display: none;
   }
 
