@@ -4385,4 +4385,13 @@ body.radar-not-visible .christmas-banner {
 }
 
 
+/* Mobile only: hide map instructions */
+@media (max-width: 768px) {
+  .map-mobile-hint {
+    display: none !important;
+  }
+}
+
+
+
 
