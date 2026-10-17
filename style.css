@@ -808,7 +808,7 @@ input, button {
 }
 
 #pub-search::placeholder {
-  color: rgba(255,255,255,0.82);
+  color: #ffffff;
   opacity: 1;
 }
 
