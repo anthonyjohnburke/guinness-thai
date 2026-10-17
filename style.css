@@ -4263,3 +4263,89 @@ body.radar-not-visible .christmas-banner {
   }
   #intro > .pub-search-wrap #pub-search { width: 100%; font-size: 16px; }
 }
+
+/* ==========================================================
+   STAGE 9 REFINEMENT: equal-width mobile stack, 15px spacing
+   Based on the latest user-edited files. Desktop unchanged.
+   ========================================================== */
+@media (max-width: 768px) {
+  /* One shared 32px side inset for all six buttons and the green panel. */
+  #mobile-story-section {
+    width: calc(100vw - 64px);
+    max-width: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+
+  /* Remove the surrounding dark card and its excess internal spacing. */
+  #suggest-section {
+    width: calc(100% - 64px);
+    max-width: none;
+    padding: 0;
+    margin: 15px auto 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 15px;
+    justify-items: stretch;
+  }
+  #mobile-nearby-section,
+  #mobile-barstool-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    background: transparent;
+    border: 0;
+  }
+
+  .impact-row.no-promo {
+    width: calc(100% - 64px);
+    max-width: none;
+    margin: 15px auto 0;
+    padding: 0;
+    gap: 0;
+  }
+  #site-message-panel {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .insight-strip {
+    width: calc(100% - 64px);
+    max-width: none;
+    margin: 15px auto 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 15px;
+  }
+  #mobile-faq-section,
+  #mobile-contact-section { margin: 0; padding: 0; }
+
+  #footer {
+    width: calc(100% - 64px);
+    max-width: none;
+    margin: 15px auto 0;
+    padding: 0 0 15px;
+    border-top: 0;
+  }
+  #footer .footer-inner,
+  #mobile-footer-section { width: 100%; max-width: none; margin: 0; padding: 0; }
+
+  #mobile-story-section > .mobile-collapse-toggle,
+  #mobile-nearby-section > .mobile-collapse-toggle,
+  #mobile-barstool-section > .mobile-collapse-toggle,
+  #mobile-faq-section > .mobile-collapse-toggle,
+  #mobile-contact-section > .mobile-collapse-toggle,
+  #mobile-footer-section > .mobile-collapse-toggle {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
+}
