@@ -4197,3 +4197,69 @@ body.radar-not-visible .christmas-banner {
     font-size: 16px;
   }
 }
+
+/* ==========================================================
+   STAGE 9: mobile-only accordions and aligned widths
+   Desktop layout and existing functionality are unchanged.
+   ========================================================== */
+@media (min-width: 769px) {
+  /* New content wrappers must be transparent on desktop. */
+  #mobile-story-content,
+  #mobile-nearby-content,
+  #mobile-barstool-content { display: contents; }
+}
+@media (max-width: 768px) {
+  /* Consistent width aligned with the green site-message box. */
+  #mobile-story-section,
+  #mobile-nearby-section,
+  #mobile-barstool-section,
+  #mobile-faq-section,
+  #mobile-contact-section,
+  #mobile-footer-section { width: 100%; max-width: none; box-sizing: border-box; }
+
+  #mobile-story-section > .mobile-collapse-toggle,
+  #mobile-nearby-section > .mobile-collapse-toggle,
+  #mobile-barstool-section > .mobile-collapse-toggle,
+  #mobile-faq-section > .mobile-collapse-toggle,
+  #mobile-contact-section > .mobile-collapse-toggle,
+  #mobile-footer-section > .mobile-collapse-toggle {
+    width: 100%; max-width: none; min-height: 44px; height: auto;
+    margin: 0; padding: 12px 14px;
+    border: 1px solid rgba(212,175,55,.45);
+    border-radius: 8px; background: #171717; color: #d4af37;
+    font: 700 .85rem 'Open Sans', sans-serif;
+    line-height: 1.3; text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+    text-align: left; gap: 10px;
+  }
+  #mobile-story-section > .mobile-collapse-toggle span,
+  #mobile-nearby-section > .mobile-collapse-toggle span,
+  #mobile-barstool-section > .mobile-collapse-toggle span {
+    color: #d4af37; font-size: 20px; line-height: 1; flex: none;
+  }
+  #mobile-story-section, #mobile-nearby-section, #mobile-barstool-section {
+    padding: 0; border: 0; background: transparent;
+  }
+  #mobile-story-section > .mobile-collapse-content,
+  #mobile-nearby-section > .mobile-collapse-content,
+  #mobile-barstool-section > .mobile-collapse-content { padding: 16px 0 0; }
+  #mobile-story-section > .mobile-collapse-content .intro-heading,
+  #mobile-nearby-section > .mobile-collapse-content .intro-heading,
+  #mobile-barstool-section > .mobile-collapse-content .intro-heading { display: none; }
+  #mobile-nearby-section { border-left: 0; }
+  #mobile-nearby-section > .mobile-collapse-content { width: 100%; }
+  #mobile-nearby-section .nearby-actions { flex-wrap: wrap; justify-content: center; }
+  #mobile-story-section { margin-bottom: 20px; }
+  #suggest-section { gap: 18px; }
+  #mobile-footer-section .mobile-collapse-content,
+  #mobile-footer-section .mobile-collapse-content p,
+  #mobile-footer-section .footer-signoff { text-align: center; }
+
+  /* The filter grid and search use identical side padding. */
+  #intro > .area-filter-strip,
+  #intro > .pub-search-wrap {
+    width: 100%; max-width: 100%; padding-left: 14px; padding-right: 14px;
+    box-sizing: border-box;
+  }
+  #intro > .pub-search-wrap #pub-search { width: 100%; font-size: 16px; }
+}
