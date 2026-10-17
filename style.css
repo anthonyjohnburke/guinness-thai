@@ -4366,3 +4366,13 @@ body.radar-not-visible .christmas-banner {
   }
 }
 
+
+/* Mobile only: fix promotions button width */
+@media (max-width: 768px) {
+  #toggle-promotions-btn {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+
