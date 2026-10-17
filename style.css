@@ -4393,5 +4393,15 @@ body.radar-not-visible .christmas-banner {
 }
 
 
+/* Mobile: centre full Guinness ranking button text */
+@media (max-width: 768px) {
+  #toggle-chart-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+  }
+}
+
 
 
