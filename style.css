@@ -4404,4 +4404,25 @@ body.radar-not-visible .christmas-banner {
 }
 
 
+/* Mobile: matching filter/search text and spacing */
+@media (max-width: 768px) {
+  #intro > .area-filter-strip .area-pill,
+  #intro > .pub-search-wrap #pub-search {
+    font-size: 16px;
+  }
+
+  #intro > #map-section {
+    margin-bottom: 8px;
+  }
+
+  #intro > .area-filter-strip {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  #intro > .pub-search-wrap {
+    margin-top: 0;
+  }
+}
+
 
