@@ -4349,3 +4349,20 @@ body.radar-not-visible .christmas-banner {
     box-sizing: border-box;
   }
 }
+
+
+/* Mobile: consistent ranking, happy hour and promotions buttons */
+@media (max-width: 768px) {
+  .mobile-list-toggle,
+  #toggle-chart-btn,
+  #toggle-promotions-btn {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: none;
+  }
+}
+
