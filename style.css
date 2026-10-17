@@ -4042,11 +4042,12 @@ body.radar-not-visible .christmas-banner {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 9px;
   }
-  #intro > .area-filter-strip .area-pill {
-    font-size: 0.82rem;
-    padding: 11px 8px;
-    white-space: nowrap;
-  }
+ 
+#intro > .area-filter-strip .area-pill {
+  padding: 11px 8px;
+  white-space: nowrap;
+}
+
   #happy-list { display: none; }
   #happy-list.is-open { display: block; }
   #featured-promotions.has-multiple-promotions:not(.show-all-promotions) .featured-pub-layout:nth-child(n+2) {
