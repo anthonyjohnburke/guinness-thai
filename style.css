@@ -358,7 +358,7 @@ body {
 /* Headings */
 .intro-heading {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2em;
+    font-size: 2em;
     margin: 0 0 14px;
 }
 
@@ -1610,7 +1610,7 @@ input, button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.05em;
+    font-size: 1em;
     padding: 14px 0;   /* ↑ more breathing room */
     margin-bottom: 4px; 
     border-bottom: 1px solid rgba(255,255,255,0.08); /* slightly clearer */
@@ -4265,87 +4265,113 @@ body.radar-not-visible .christmas-banner {
 }
 
 /* ==========================================================
-   STAGE 9 REFINEMENT: equal-width mobile stack, 15px spacing
-   Based on the latest user-edited files. Desktop unchanged.
+   STAGE 9 REFINEMENT: consistent mobile widths, compact spacing,
+   search typography and simplified on-demand map control.
+   Desktop unchanged.
    ========================================================== */
 @media (max-width: 768px) {
-  /* One shared 32px side inset for all six buttons and the green panel. */
-  #mobile-story-section {
-    width: calc(100vw - 64px);
+  /* The shared mobile alignment is 16px from each viewport edge. */
+  #intro #toggle-chart-btn,
+  #intro .mobile-list-toggle,
+  #intro #toggle-promotions-btn:not([hidden]),
+  #intro #mobile-load-map {
+    width: calc(100vw - 32px);
     max-width: none;
-    position: relative;
-    left: 50%;
+    min-height: 44px;
+    box-sizing: border-box;
+    font: 700 0.85rem 'Open Sans', sans-serif;
+    line-height: 1.3;
+    text-transform: none;
+    border-radius: 8px;
+    margin-left: 50%;
     transform: translateX(-50%);
-    margin: 0;
+    text-align: center;
   }
 
-  /* Remove the surrounding dark card and its excess internal spacing. */
-  #suggest-section {
-    width: calc(100% - 64px);
-    max-width: none;
+  /* Keep the original spacing around the rankings and promotions. */
+  #intro #toggle-chart-btn,
+  #intro .mobile-list-toggle,
+  #intro #toggle-promotions-btn:not([hidden]) {
+    margin-right: 0;
+  }
+
+  /* Match the area pills' legible 16px size without triggering iOS zoom. */
+  #intro > .area-filter-strip .area-pill {
+    font-size: 16px;
+  }
+  #intro > .pub-search-wrap #pub-search {
+    font-size: 16px;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+  }
+  #intro > .pub-search-wrap #pub-search::placeholder {
+    color: #fff;
+    opacity: 1;
+  }
+
+  /* Before loading Mapbox, show only the green button, not a map panel. */
+  #intro > #map-section #map:not(:has(.mapboxgl-canvas)) {
     padding: 0;
-    margin: 15px auto 0;
+    background: transparent;
     border: 0;
     border-radius: 0;
+    overflow: visible;
+  }
+  #intro #mobile-load-map {
+    display: block;
+    height: 44px;
+    padding: 0 14px;
+    background: #8bc34a;
+    color: #061006;
+    border: 0;
+    cursor: pointer;
+  }
+  #intro > #map-section:has(.mapboxgl-canvas) #mobile-load-map {
+    display: none;
+  }
+  #intro > #map-section .map-mobile-hint {
+    display: none;
+  }
+
+  /* Remove the oversized outer panel and keep a 15px accordion stack. */
+  #suggest-section {
+    width: calc(100% - 32px);
+    padding: 0;
+    margin: 0 auto;
     background: transparent;
-    box-shadow: none;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    border: 0;
+    border-radius: 0;
     gap: 15px;
     justify-items: stretch;
   }
+  #mobile-story-section { margin-bottom: 15px; }
   #mobile-nearby-section,
-  #mobile-barstool-section {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    min-width: 0;
-    background: transparent;
-    border: 0;
-  }
+  #mobile-barstool-section { margin: 0; }
 
   .impact-row.no-promo {
-    width: calc(100% - 64px);
-    max-width: none;
+    width: calc(100% - 32px);
     margin: 15px auto 0;
     padding: 0;
-    gap: 0;
   }
   #site-message-panel {
     width: 100%;
     box-sizing: border-box;
   }
-
   .insight-strip {
-    width: calc(100% - 64px);
-    max-width: none;
+    width: calc(100% - 32px);
     margin: 15px auto 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
     gap: 15px;
   }
-  #mobile-faq-section,
-  #mobile-contact-section { margin: 0; padding: 0; }
-
+  #mobile-contact-section { margin: 0; }
   #footer {
-    width: calc(100% - 64px);
-    max-width: none;
+    width: calc(100% - 32px);
     margin: 15px auto 0;
     padding: 0 0 15px;
-    border-top: 0;
   }
-  #footer .footer-inner,
-  #mobile-footer-section { width: 100%; max-width: none; margin: 0; padding: 0; }
-
-  #mobile-story-section > .mobile-collapse-toggle,
-  #mobile-nearby-section > .mobile-collapse-toggle,
-  #mobile-barstool-section > .mobile-collapse-toggle,
-  #mobile-faq-section > .mobile-collapse-toggle,
-  #mobile-contact-section > .mobile-collapse-toggle,
-  #mobile-footer-section > .mobile-collapse-toggle {
-    width: 100%;
-    max-width: none;
-    box-sizing: border-box;
+  #mobile-footer-section { margin: 0; }
+  #mobile-footer-section .mobile-collapse-content,
+  #mobile-footer-section .mobile-collapse-content p {
+    text-align: center;
   }
 }
