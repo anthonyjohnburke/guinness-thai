@@ -324,16 +324,16 @@
     "area": "Punnawithi",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 340,
-    "happy_hour_price_thb": 270,
-    "special": "Happy hour 16:00-19:00",
+    "price_thb": 320,
+    "happy_hour_price_thb": null,
+    "special": null,
     "nearest_station": "Udom Suk BTS",
     "station_distance_metres": 539,
     "latitude": 13.68454542,
     "longitude": 100.611655,
     "google_maps_url": "https://maps.app.goo.gl/FBDbAWSQHmN3CpMy8",
     "venue_url": "https://www.facebook.com/huntersbangkok",
-    "price_verified": "2026-09-25"
+    "price_verified": "2026-10-17"
   },
   {
     "name": "Sports on 20",
@@ -365,7 +365,7 @@
     "longitude": 100.5577659,
     "google_maps_url": "https://maps.app.goo.gl/UYKTCo9GN1fNCqsZA",
     "venue_url": "https://sportsbarbangkok.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-17"
   },
   {
     "name": "The Drunken Cat",
@@ -493,7 +493,7 @@
     "longitude": 100.5491046,
     "google_maps_url": "https://maps.app.goo.gl/X7rTcDuvLSEpigtk6",
     "venue_url": "https://witchstavern.com",
-    "price_verified": "2026-09-24"
+    "price_verified": "2026-10-15"
   },
   {
     "name": "The Laughing Tiger",
@@ -541,7 +541,7 @@
     "longitude": 100.5566481,
     "google_maps_url": "https://maps.app.goo.gl/vYRnJhqhrTaXenN5A",
     "venue_url": "http://www.mullissportsbar.com/",
-    "price_verified": "2026-09-27"
+    "price_verified": "2026-10-15"
   },
   {
     "name": "Bang Bang Burgers",
@@ -573,7 +573,7 @@
     "longitude": 100.5576258,
     "google_maps_url": "https://maps.app.goo.gl/H2JT9mwCNEtZnyV18",
     "venue_url": "https://www.facebook.com/breakersbangkok/",
-    "price_verified": "2026-09-21"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "On The Square",
@@ -653,7 +653,7 @@
     "longitude": 100.5147854,
     "google_maps_url": "https://maps.app.goo.gl/MDFixLFxriDqCdLm7",
     "venue_url": "https://www.instagram.com/tax_bar_bkk/",
-    "price_verified": "2026-08-25"
+    "price_verified": "2026-10-15"
   },
   {
     "name": "BREW - Beers & Ciders",
@@ -781,7 +781,7 @@
     "longitude": 100.5417459,
     "google_maps_url": "https://maps.app.goo.gl/qxZv7VJsfgv7Yfcw8",
     "venue_url": "https://www.beerrepublicbkk.com",
-    "price_verified": "2026-09-19"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "Ekamai Beer House",
@@ -813,7 +813,7 @@
     "longitude": 100.5114006,
     "google_maps_url": "https://maps.app.goo.gl/skXgZd9LmNk8wWE78",
     "venue_url": "https://www.instagram.com/haze_bkk/",
-    "price_verified": "2026-09-21"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "Vesper",
@@ -829,7 +829,7 @@
     "longitude": 100.5334678,
     "google_maps_url": "https://maps.app.goo.gl/TXEQwGj3XEyyktZo8",
     "venue_url": "https://www.vesperbar.co/",
-    "price_verified": "2026-09-05"
+    "price_verified": "2026-10-15"
   },
   {
     "name": "Roadhouse BBQ",
@@ -845,7 +845,7 @@
     "longitude": 100.5336136,
     "google_maps_url": "https://maps.app.goo.gl/Xyzwde4hgECqmWbB9",
     "venue_url": "https://www.roadhousebarbecue.com/",
-    "price_verified": "2026-09-15"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "Black Cabin Bar",
@@ -1085,7 +1085,7 @@
     "longitude": 100.5850341,
     "google_maps_url": "https://maps.app.goo.gl/BcYHc9xZUigbmSn68",
     "venue_url": "https://englishpubbangkok.com/",
-    "price_verified": "2026-09-11"
+    "price_verified": "2026-10-03"
   },
   {
     "name": "Tipsy Tap",
@@ -1117,7 +1117,7 @@
     "longitude": 100.556692,
     "google_maps_url": "https://maps.app.goo.gl/JKRDLtxEWui1BykM7",
     "venue_url": "https://paradisebeachbar.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-15"
   },
   {
     "name": "Cheers",
@@ -1341,7 +1341,7 @@
     "longitude": 100.6135148,
     "google_maps_url": "https://maps.app.goo.gl/Xzuh4eGF6D4Eh5NZ7",
     "venue_url": "https://radiclebeer.com/",
-    "price_verified": "2026-09-12"
+    "price_verified": "2026-10-17"
   },
   {
     "name": "The Garrison",
