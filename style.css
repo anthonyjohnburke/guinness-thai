@@ -1689,10 +1689,6 @@ input, button {
     min-width: 140px;
 }
 
-.happy-prices.stacked.compact {
-    gap: 2px;
-}
-
 .price-line {
     display: flex;
     align-items: center;
