@@ -2001,6 +2001,16 @@ function initHappyHourRadarShell() {
 
 document.addEventListener("DOMContentLoaded", initHappyHourRadarShell);
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Show Christmas even if the pub data fails to load.
+  setTimeout(() => {
+    document.querySelector(".floating-banner-group")
+      ?.classList.add("banners-ready");
+  }, 4000);
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("hh-radar-banner");
   if (!banner) return;
@@ -2224,6 +2234,7 @@ if (summaryEl) {
 
   const banner = document.getElementById("hh-radar-banner");
 
+
 if (banner) {
   if (liveCount === 0 && startingSoonCount === 0) {
     banner.classList.add("is-hidden");
@@ -2231,6 +2242,12 @@ if (banner) {
     banner.classList.remove("is-hidden");
   }
 }
+
+// Reveal both mobile banners only after the Radar's
+// initial visibility has been determined.
+document.querySelector(".floating-banner-group")
+  ?.classList.add("banners-ready");
+
 
   if (titleEl && subtitleEl) {
   if (liveCount > 0) {
