@@ -4404,3 +4404,15 @@ body.radar-not-visible .christmas-banner {
     font-size: 13px;
   }
 }
+
+
+/* Prevent mobile banners shifting during initial data load */
+@media (max-width: 768px) {
+  .floating-banner-group:not(.banners-ready) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: none;
+  }
+}
+
