@@ -1214,14 +1214,10 @@ input, button {
     max-width: 100%;
 }
 
-.popup-label,
-.popup-value {
-  font-size: 1.3em;
-}
-
 .popup-label {
-  color: #666;
-  font-weight: 600; /* slightly lighter than value */
+    font-size: 1.3em;
+    color: #666;
+    font-weight: 600;
 }
 
 .popup-value {
