@@ -1153,14 +1153,14 @@ input, button {
 }
 
 /* Popup */
+
 .mapboxgl-popup-content {
     animation: popupFadeContent 0.22s ease;
     transform-origin: bottom center;
-
-    background: transparent;
+    background: transparent !important;
     padding: 0;
     border-radius: 10px;
-    box-shadow: none;
+    box-shadow: none !important;
 }
 
 .mapboxgl-popup {
@@ -1170,11 +1170,6 @@ input, button {
 /* Hide Mapbox popup arrow */
 .mapboxgl-popup-tip {
   display: none !important;
-}
-
-.mapboxgl-popup-content {
-  background: transparent !important;
-  box-shadow: none !important;
 }
 
 .popup-header .popup-meta {
