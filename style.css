@@ -103,7 +103,6 @@ body {
     max-width: 360px;
     object-fit: contain;
     display: block;
-    transition: height 0.25s ease;
 }
 
 #top-bar.is-scrolled #logo {
