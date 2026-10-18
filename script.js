@@ -591,7 +591,12 @@ function buildAreaFilters(pubs, allPricedPubs, zoomToArea) {
           p => p.area && p.area.trim() === area
         );
 
-    zoomToArea(filtered);
+zoomToArea(filtered);
+
+    // Mobile only: bring the map into view after selecting an area
+    if (window.innerWidth <= 768) {
+      scrollToMap();
+    }
   });
 }
 
