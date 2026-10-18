@@ -1477,11 +1477,6 @@ input, button {
   border-radius: 12px;
 }
 
-.faq-contact-actions .faq-contact-link {
-  background: #8bc34a;
-  color: #061006;
-}
-
 .nearby-col {
     border-left: 1px solid rgba(255,255,255,0.05);
     display: flex;
