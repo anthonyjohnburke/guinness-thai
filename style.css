@@ -4397,3 +4397,10 @@ body.radar-not-visible .christmas-banner {
     border: none;
   }
 }
+
+@media (max-width: 768px) {
+  .area-pill {
+    padding: 5px 14px;
+    font-size: 13px;
+  }
+}
