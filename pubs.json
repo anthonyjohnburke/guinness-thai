@@ -13,7 +13,7 @@
     "longitude": 100.5599,
     "google_maps_url": "https://maps.app.goo.gl/9iHoUtwGiwgukuxXA",
     "venue_url": "https://www.bkmagazine.com/restaurant/black-swan-2/",
-    "price_verified": "2026-10-16"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "The Red Lion",
@@ -45,7 +45,7 @@
     "longitude": 100.5531211,
     "google_maps_url": "https://maps.app.goo.gl/mYm1FFVSMXHGY1MJ7",
     "venue_url": "https://www.theblarneystonebangkok.com/",
-    "price_verified": "2026-10-09"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Leks Last Stand",
@@ -77,7 +77,7 @@
     "longitude": 100.5629483,
     "google_maps_url": "https://maps.app.goo.gl/Ws5zceEc5zX3vQy98",
     "venue_url": "http://scruffymurphysbangkok.com/",
-    "price_verified": "2026-10-16"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Robin Hood",
@@ -109,7 +109,7 @@
     "longitude": 100.5683532,
     "google_maps_url": "https://maps.app.goo.gl/tCuZpJdksXSWZav27",
     "venue_url": "https://www.osheasbkk.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Fitzgeralds",
@@ -509,7 +509,7 @@
     "longitude": 100.5681772,
     "google_maps_url": "https://maps.app.goo.gl/DyBbSf2Ph1GrC3xv9",
     "venue_url": "https://thelaughingtiger.squarespace.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "The Penalty Spot",
@@ -1598,5 +1598,21 @@
     "google_maps_url": "https://maps.app.goo.gl/pewgFjkUReyFJi5e8",
     "venue_url": "http://www.sheepshankpublichouse.com/",
     "price_verified": "2026-10-08"
+  },
+  {
+    "name": "Birdhouse Cafe & Bar",
+    "area": "Thonglor",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 299,
+    "happy_hour_price_thb": null,
+    "special": null,
+    "nearest_station": "Phrom Phong BTS",
+    "station_distance_metres": 956,
+    "latitude": 13.73621384,
+    "longitude": 100.5765565,
+    "google_maps_url": "https://maps.app.goo.gl/uiCqEiiwf2qHL9Sb7",
+    "venue_url": "https://www.instagram.com/birdhouse.bkk",
+    "price_verified": "2026-10-21"
   }
 ]
