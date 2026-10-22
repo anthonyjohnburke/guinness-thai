@@ -331,7 +331,23 @@
   </div>
  
 </div>
+  
+<script>
+  // Position map below the chart on mobile before deferred scripts run.
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    const chartColumn = document.querySelector(".intro-col-wide");
+    const mapSection = document.getElementById("map-section");
+    const filters = document.getElementById("area-filter-strip");
+    const search = document.querySelector(".pub-search-wrap");
 
+    if (chartColumn && mapSection) {
+      chartColumn.insertAdjacentElement("afterend", mapSection);
+      if (filters) mapSection.insertAdjacentElement("afterend", filters);
+      if (search && filters) filters.insertAdjacentElement("afterend", search);
+    }
+  }
+</script>
+  
   <div id="tooltip" class="tooltip"></div>
   
   <div class="floating-banner-group">
