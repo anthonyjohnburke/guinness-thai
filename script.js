@@ -1006,20 +1006,6 @@ return map;
   return mapInitPromise;
 }
 
-// Move the map and its controls below the chart on mobile only.
-// Desktop retains the original document order.
-if (window.matchMedia("(max-width: 768px)").matches) {
-  const chartColumn = document.querySelector(".intro-col-wide");
-  const mapSection = document.getElementById("map-section");
-  const filters = document.getElementById("area-filter-strip");
-  const search = document.querySelector(".pub-search-wrap");
-  if (chartColumn && mapSection) {
-    chartColumn.insertAdjacentElement("afterend", mapSection);
-    if (filters) mapSection.insertAdjacentElement("afterend", filters);
-    if (search && filters) filters.insertAdjacentElement("afterend", search);
-  }
-}
-
 // Promotions are below the chart. Load their content after initial rendering.
 runWhenIdle(() => {
   renderFeaturedPromotions();
