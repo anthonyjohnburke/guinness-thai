@@ -93,7 +93,7 @@
     "longitude": 100.5682684,
     "google_maps_url": "https://maps.app.goo.gl/r9bJdfhQ18DQdAHCA",
     "venue_url": "https://www.facebook.com/p/The-Robinhood-Bangkok-TH-100095106826071/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "O'Shea's",
@@ -173,7 +173,7 @@
     "longitude": 100.5786671,
     "google_maps_url": "https://maps.app.goo.gl/LARhhjadWSYfbncv7",
     "venue_url": "https://oldenglishpubbangkok.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Paddy Reilly’s",
@@ -237,7 +237,7 @@
     "longitude": 100.5584299,
     "google_maps_url": "https://maps.app.goo.gl/WaF2k52EFqnKLxiM6",
     "venue_url": "https://lp-hospitality.com/",
-    "price_verified": "2026-09-17"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "O’Malley’s",
@@ -269,7 +269,7 @@
     "longitude": 100.5629722,
     "google_maps_url": "https://maps.app.goo.gl/7DxGQFhrQwctg9Mb6",
     "venue_url": "https://www.theclubhousebangkok.com/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "The British Club (members)",
@@ -317,7 +317,7 @@
     "longitude": 100.6064111,
     "google_maps_url": "https://maps.app.goo.gl/hTwRR35U5vESNgsH9",
     "venue_url": "https://www.facebook.com/theshamrockbkk",
-    "price_verified": "2026-09-25"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Hunter’s Garden",
@@ -353,7 +353,7 @@
   },
   {
     "name": "The Sportsman",
-    "area": "Asoke",
+    "area": "Nana",
     "type": "International",
     "guinness_draught": true,
     "price_thb": 250,
