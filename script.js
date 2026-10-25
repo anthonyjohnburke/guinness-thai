@@ -1624,9 +1624,13 @@ happyList.appendChild(row);
               loadButton.disabled = true;
               loadButton.textContent = "Loading map…";
               try {
-                await ensureMapInitialized(pubs);
-                loadButton.remove();
-              } catch (err) {
+  await ensureMapInitialized(pubs);
+  loadButton.remove();
+
+  // Mobile: bring the newly loaded map into view.
+  scrollToMap();
+
+} catch (err) {
                 console.error("Map failed to load:", err);
                 loadButton.disabled = false;
                 loadButton.textContent = "Try Loading Map Again";
