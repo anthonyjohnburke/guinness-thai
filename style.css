@@ -4438,3 +4438,25 @@ body.radar-not-visible .christmas-banner {
   }
 }
 
+/* Subtle green search styling */
+#pub-search {
+  background: #101710;
+  border: 1px solid rgba(139, 195, 74, 0.38);
+  padding-left: 50px;
+}
+
+#pub-search:focus {
+  background: #131d12;
+  border-color: #8bc34a;
+  box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.12);
+}
+
+.pub-search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8bc34a;
+  pointer-events: none;
+  z-index: 1;
+}
