@@ -4427,3 +4427,14 @@ body.radar-not-visible .christmas-banner {
   }
 }
 
+/* Mobile: hide area filters until the map is loaded */
+@media (max-width: 768px) {
+  #area-filter-strip {
+    display: none;
+  }
+
+  #area-filter-strip.map-filters-visible {
+    display: flex;
+  }
+}
+
