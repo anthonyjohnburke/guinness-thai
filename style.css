@@ -4460,3 +4460,18 @@ body.radar-not-visible .christmas-banner {
   pointer-events: none;
   z-index: 1;
 }
+
+/* Mobile search icon alignment */
+@media (max-width: 768px) {
+  #pub-search {
+    padding-left: 52px !important;
+    padding-right: 18px;
+    font-size: 0.85rem;
+  }
+
+  .pub-search-icon {
+    left: 19px;
+    width: 18px;
+    height: 18px;
+  }
+}
