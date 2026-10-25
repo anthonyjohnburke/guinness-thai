@@ -1627,7 +1627,13 @@ happyList.appendChild(row);
   await ensureMapInitialized(pubs);
   loadButton.remove();
 
-  // Mobile: bring the newly loaded map into view.
+  // Reveal area filters after the map loads.
+  const areaFilters = document.getElementById("area-filter-strip");
+  if (areaFilters) {
+    areaFilters.classList.add("map-filters-visible");
+  }
+
+  // Bring the map into view.
   scrollToMap();
 
 } catch (err) {
