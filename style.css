@@ -4475,3 +4475,14 @@ body.radar-not-visible .christmas-banner {
     height: 18px;
   }
 }
+
+/* Mobile: consistent spacing between main content sections */
+@media (max-width: 768px) {
+  #happy-hour {
+    margin-bottom: 55px;
+  }
+
+  #expensive-list-block {
+    margin-bottom: 55px;
+  }
+}
