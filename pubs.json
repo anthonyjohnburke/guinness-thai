@@ -710,14 +710,14 @@
     "guinness_draught": true,
     "price_thb": 447,
     "happy_hour_price_thb": null,
-    "special": null,
+    "special": "Buy 3 pints and get 1 FREE. Saturday and Sunday",
     "nearest_station": "Khlong Toei MRT",
     "station_distance_metres": 579,
     "latitude": 13.71750038,
     "longitude": 100.553253,
     "google_maps_url": "https://maps.app.goo.gl/CVrs1CzzZpPHPhji9",
     "venue_url": "https://www.instagram.com/goodtrouble.bar/",
-    "price_verified": "2026-08-01"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "The Londoner",
@@ -749,7 +749,7 @@
     "longitude": 100.6009421,
     "google_maps_url": "https://maps.app.goo.gl/jGjqyk5ygwnwfbm3A",
     "venue_url": "https://www.facebook.com/Bangkok.CF/",
-    "price_verified": "2026-09-11"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "8855 Restaurant & Bar",
@@ -900,7 +900,7 @@
     "area": "Thonglor",
     "type": "British Pub",
     "guinness_draught": true,
-    "price_thb": 350,
+    "price_thb": null,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Thonglor BTS",
@@ -1181,7 +1181,7 @@
     "longitude": 100.5631459,
     "google_maps_url": "https://maps.app.goo.gl/a6mgHRQJagq2ebdY8",
     "venue_url": "https://craft23.com/",
-    "price_verified": "2026-10-09"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "KOSMO",
@@ -1197,7 +1197,7 @@
     "longitude": 100.5260933,
     "google_maps_url": "https://maps.app.goo.gl/s5ynCNSRAMkSV57K6",
     "venue_url": "https://kosmobkk.com",
-    "price_verified": "2026-10-09"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "KYLA",
@@ -1565,14 +1565,14 @@
     "longitude": 100.4966789,
     "google_maps_url": "https://maps.app.goo.gl/C6vYpguTsGCewJNw8",
     "venue_url": "https://www.instagram.com/fubarkhaosan",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Save Our Souls",
     "area": "Khlong San",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 299,
+    "price_thb": null,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Krung Thon Buri BTS",
@@ -1597,7 +1597,7 @@
     "longitude": 100.4942989,
     "google_maps_url": "https://maps.app.goo.gl/pewgFjkUReyFJi5e8",
     "venue_url": "http://www.sheepshankpublichouse.com/",
-    "price_verified": "2026-10-08"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Birdhouse Cafe & Bar",
@@ -1614,5 +1614,21 @@
     "google_maps_url": "https://maps.app.goo.gl/uiCqEiiwf2qHL9Sb7",
     "venue_url": "https://www.instagram.com/birdhouse.bkk",
     "price_verified": "2026-10-21"
+  },
+  {
+    "name": "Waxy O’Connor’s",
+    "area": "Thonglor",
+    "type": "Irish Pub",
+    "guinness_draught": true,
+    "price_thb": 339,
+    "happy_hour_price_thb": 289,
+    "special": "Happy hour 10:00-19:00",
+    "nearest_station": "Thonglor BTS",
+    "station_distance_metres": 1112,
+    "latitude": 13.73414077,
+    "longitude": 100.5801609,
+    "google_maps_url": "https://maps.app.goo.gl/U5AreDX3U1ZaQwk76",
+    "venue_url": "https://www.instagram.com/waxysbangkok/",
+    "price_verified": "2026-11-01"
   }
 ]
