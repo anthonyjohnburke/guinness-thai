@@ -45,7 +45,7 @@
     "longitude": 100.5531211,
     "google_maps_url": "https://maps.app.goo.gl/mYm1FFVSMXHGY1MJ7",
     "venue_url": "https://www.theblarneystonebangkok.com/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Leks Last Stand",
@@ -61,7 +61,7 @@
     "longitude": 100.5563717,
     "google_maps_url": "https://maps.app.goo.gl/GaFrN1zdaLgX7bum7",
     "venue_url": "https://www.facebook.com/LeksLastandbar/",
-    "price_verified": "2026-10-09"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Scuffy Murphys",
@@ -77,7 +77,7 @@
     "longitude": 100.5629483,
     "google_maps_url": "https://maps.app.goo.gl/Ws5zceEc5zX3vQy98",
     "venue_url": "http://scruffymurphysbangkok.com/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Robin Hood",
@@ -365,7 +365,7 @@
     "longitude": 100.5577659,
     "google_maps_url": "https://maps.app.goo.gl/UYKTCo9GN1fNCqsZA",
     "venue_url": "https://sportsbarbangkok.com/",
-    "price_verified": "2026-10-17"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "The Drunken Cat",
@@ -397,7 +397,7 @@
     "longitude": 100.5637497,
     "google_maps_url": "https://maps.app.goo.gl/8BWRQ6L56C1DCLgJA",
     "venue_url": "https://buddybarbangkok.com/locations/soi20",
-    "price_verified": "2026-10-08"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "The Deck Bangkok",
@@ -525,7 +525,7 @@
     "longitude": 100.5648903,
     "google_maps_url": "https://maps.app.goo.gl/L9Ks5Xiy3vACBuQ49",
     "venue_url": "https://www.the-penalty-spot.com/",
-    "price_verified": "2026-10-19"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Mullis Sports Bar",
@@ -541,7 +541,7 @@
     "longitude": 100.5566481,
     "google_maps_url": "https://maps.app.goo.gl/vYRnJhqhrTaXenN5A",
     "venue_url": "http://www.mullissportsbar.com/",
-    "price_verified": "2026-10-15"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Bang Bang Burgers",
@@ -557,7 +557,7 @@
     "longitude": 100.5569185,
     "google_maps_url": "https://maps.app.goo.gl/gWFJGovu18y4XKaa9",
     "venue_url": "https://www.instagram.com/bangbangburgersbkk/",
-    "price_verified": "2026-10-09"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Breakers Sports Bar",
@@ -582,14 +582,14 @@
     "guinness_draught": true,
     "price_thb": 358,
     "happy_hour_price_thb": 302,
-    "special": "Guinness and Kilkenny Happy Hour pints are all day (Promotion ends midnight 1 June)",
+    "special": "Buy 3 pints and get a 4th FREE. Open-7pm Saturday and Sunday",
     "nearest_station": "Si Lom MRT",
     "station_distance_metres": 550,
     "latitude": 13.73013975,
     "longitude": 100.531519,
     "google_maps_url": "https://maps.app.goo.gl/MTFnHrYCuciJYBdo7",
     "venue_url": "https://www.facebook.com/profile.php?id=61579011092046",
-    "price_verified": "2026-08-25"
+    "price_verified": "2026-10-21"
   },
   {
     "name": "Level Up.BKK",
@@ -605,7 +605,7 @@
     "longitude": 100.5480475,
     "google_maps_url": "https://maps.app.goo.gl/EGBGwkGTMzfY7ere9",
     "venue_url": "https://www.facebook.com/thelevelup.bkk/",
-    "price_verified": "2026-09-11"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Fishbone",
@@ -621,7 +621,7 @@
     "longitude": 100.5942503,
     "google_maps_url": "https://maps.app.goo.gl/Jwqa34ZwPZoyLAdn7",
     "venue_url": "https://fishbonelivemusicbar.godaddysites.com/",
-    "price_verified": "2026-08-15"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Velvet",
