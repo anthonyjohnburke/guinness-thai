@@ -13,7 +13,7 @@
     "longitude": 100.5599,
     "google_maps_url": "https://maps.app.goo.gl/9iHoUtwGiwgukuxXA",
     "venue_url": "https://www.bkmagazine.com/restaurant/black-swan-2/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "The Red Lion",
@@ -29,7 +29,7 @@
     "longitude": 100.5576509,
     "google_maps_url": "https://maps.app.goo.gl/kXmf2i7W8XCnQumZ8",
     "venue_url": "https://www.instagram.com/theredlionbangkok/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "The Blarney Stone",
@@ -61,7 +61,7 @@
     "longitude": 100.5563717,
     "google_maps_url": "https://maps.app.goo.gl/GaFrN1zdaLgX7bum7",
     "venue_url": "https://www.facebook.com/LeksLastandbar/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Scuffy Murphys",
@@ -109,7 +109,7 @@
     "longitude": 100.5683532,
     "google_maps_url": "https://maps.app.goo.gl/tCuZpJdksXSWZav27",
     "venue_url": "https://www.osheasbkk.com/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Fitzgeralds",
@@ -141,7 +141,7 @@
     "longitude": 100.553052,
     "google_maps_url": "https://maps.app.goo.gl/RKEhQ3veE7M8Qe3t7",
     "venue_url": "http://www.chequersbangkok.com/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "PJ O’Brien’s / the Globe",
@@ -189,7 +189,7 @@
     "longitude": 100.5258958,
     "google_maps_url": "https://maps.app.goo.gl/iLeNxHqP1bJ3yjJi7",
     "venue_url": "https://www.facebook.com/paddyreillysirishpub/",
-    "price_verified": "2026-10-16"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Mulligans",
@@ -221,7 +221,7 @@
     "longitude": 100.5639354,
     "google_maps_url": "https://maps.app.goo.gl/CTGpJMcgd7fLXWha6",
     "venue_url": "https://www.theupperdecksportsbar.com/",
-    "price_verified": "2026-10-21"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "O'Leary's",
@@ -285,7 +285,7 @@
     "longitude": 100.5234539,
     "google_maps_url": "https://maps.app.goo.gl/dvxiERbGTugt2GNA6",
     "venue_url": "https://www.britishclubbangkok.org/",
-    "price_verified": "2026-10-16"
+    "price_verified": "2026-11-01"
   },
   {
     "name": "Shenanigans",
@@ -1630,5 +1630,21 @@
     "google_maps_url": "https://maps.app.goo.gl/U5AreDX3U1ZaQwk76",
     "venue_url": "https://www.instagram.com/waxysbangkok/",
     "price_verified": "2026-11-01"
+  },
+  {
+    "name": "The Mesh",
+    "area": "Phrom Phong",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 456,
+    "happy_hour_price_thb": null,
+    "special": "Marriott Bonvoy discount: 10% on food and beverages",
+    "nearest_station": "Phrom Phong BTS",
+    "station_distance_metres": 513,
+    "latitude": 13.729857,
+    "longitude": 100.565036,
+    "google_maps_url": "https://maps.app.goo.gl/XWWvR9Dxyw6edxFJ8",
+    "venue_url": "https://www.themeshbangkoksukhumvit22.com/",
+    "price_verified": "2026-11-03"
   }
 ]
