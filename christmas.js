@@ -222,7 +222,7 @@ function render() {
         ${rows.length}
       </span>
       <span>
-        ${rows.length === 1 ? 'pub' : 'pubs'}
+        ${rows.length === 1 ? 'venue' : 'venues'}
         currently listed
       </span>
     `;
@@ -333,6 +333,16 @@ function render() {
             <h2 class="card-name">
               ${pubName}
             </h2>
+
+            ${String(r.guinness_draught || '').trim().toLowerCase() === 'yes'
+  ? `
+    <div class="card-guinness">
+      <span class="guinness-tick" aria-hidden="true">✓</span>
+      Guinness on draught
+    </div>
+  `
+  : ''
+}
 
             <div class="card-station">
               ${esc(
