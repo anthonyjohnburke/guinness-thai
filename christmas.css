@@ -229,7 +229,6 @@ body.christmas-body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-
 /* =========================================================
    MENU PREVIEW
    ========================================================= */
@@ -237,7 +236,7 @@ body.christmas-body {
 .card-menu-preview {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 16 / 7.7;
   overflow: hidden;
   background: #0c0c0c;
 }
@@ -249,10 +248,11 @@ body.christmas-body {
   object-fit: cover;
   object-position: center;
   transition: transform 0.35s ease;
+   transform: scale(1.1);
 }
 
 .dinner-card:hover .card-menu-preview img {
-  transform: scale(1.025);
+  transform: scale(1.13);
 }
 
 .card-preview-label {
@@ -819,5 +819,38 @@ body.christmas-body {
   font-size: 1.1rem;
   font-weight: 800;
   line-height: 1;
+}
+
+/* Christmas card header refinements */
+
+.card-location {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.card-location .card-area {
+  margin-bottom: 0;
+}
+
+.card-location-separator {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.8rem;
+}
+
+.card-location-station {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.card-guinness {
+  margin-top: 12px;
+}
+
+.card-station {
+  margin-top: 8px;
 }
 
