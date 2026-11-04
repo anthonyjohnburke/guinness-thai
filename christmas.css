@@ -804,19 +804,32 @@ body.christmas-body {
 
 /* Guinness draught indicator */
 
+/* Guinness on draught indicator */
+
 .card-guinness {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  margin: 8px 0 4px;
-  font-size: 0.78rem;
-  font-weight: 600;
+  align-self: flex-start;
+  gap: 10px;
+  margin: 12px 0 4px;
   color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .guinness-tick {
-  color: #8bc34a;
-  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8BC34A;
+  border-radius: 50%;
+  color: #8BC34A;
+  font-size: 13px;
   font-weight: 800;
   line-height: 1;
 }
