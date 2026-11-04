@@ -326,9 +326,22 @@ function render() {
               ${cardNumber}
             </div>
 
-            <div class="card-area">
-              ${esc(r.area)}
-            </div>
+            <div class="card-location">
+  <span class="card-area">
+    ${esc(r.area)}
+  </span>
+
+  ${
+    r.nearest_station
+      ? `
+        <span class="card-location-separator">·</span>
+        <span class="card-location-station">
+          ${esc(r.nearest_station)}
+        </span>
+      `
+      : ''
+  }
+</div>
 
             <h2 class="card-name">
               ${pubName}
@@ -344,18 +357,15 @@ function render() {
   : ''
 }
 
-            <div class="card-station">
-              ${esc(
-                r.nearest_station ||
-                r.type ||
-                ''
-              )}
-              ${
-                distanceLabel
-                  ? ` · ${esc(distanceLabel)}`
-                  : ''
-              }
-            </div>
+           ${
+  distanceLabel
+    ? `
+      <div class="card-station">
+        ${esc(distanceLabel)}
+      </div>
+    `
+    : ''
+}
 
           </div>
 
