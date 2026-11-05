@@ -1136,11 +1136,11 @@
     "price_verified": "2026-09-25"
   },
   {
-    "name": "No Idea Gastropub",
+    "name": "Pasha",
     "area": "Phrom Phong",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 283,
+    "price_thb": null,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Asok BTS",
@@ -1485,7 +1485,7 @@
     "longitude": 100.5482724,
     "google_maps_url": "https://maps.app.goo.gl/NXoPm3Z8jyRNw5xb8",
     "venue_url": "https://www.instagram.com/thesudosocial.bkk/",
-    "price_verified": "2026-10-09"
+    "price_verified": "2026-11-05"
   },
   {
     "name": "Park Sathorn",
@@ -1646,5 +1646,21 @@
     "google_maps_url": "https://maps.app.goo.gl/XWWvR9Dxyw6edxFJ8",
     "venue_url": "https://www.themeshbangkoksukhumvit22.com/",
     "price_verified": "2026-11-03"
+  },
+  {
+    "name": "Brown Sugar",
+    "area": "Chinatown",
+    "type": "International",
+    "guinness_draught": true,
+    "price_thb": 492,
+    "happy_hour_price_thb": null,
+    "special": null,
+    "nearest_station": "Hua Lamphong MRT",
+    "station_distance_metres": 404,
+    "latitude": 13.74006682,
+    "longitude": 100.514033,
+    "google_maps_url": "https://maps.app.goo.gl/UExK9KgWQaGgRsKu7",
+    "venue_url": "https://www.instagram.com/brownsugarbangkok",
+    "price_verified": "2026-11-05"
   }
 ]
