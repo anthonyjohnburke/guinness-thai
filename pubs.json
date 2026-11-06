@@ -413,7 +413,7 @@
     "longitude": 100.5640455,
     "google_maps_url": "https://maps.app.goo.gl/43mSW6cPdMhr6Eh39",
     "venue_url": "https://thedeckbkk.com",
-    "price_verified": "2026-10-16"
+    "price_verified": "2026-11-06"
   },
   {
     "name": "The Game",
@@ -806,14 +806,14 @@
     "guinness_draught": true,
     "price_thb": 280,
     "happy_hour_price_thb": null,
-    "special": "Four pints for 1,000!",
+    "special": null,
     "nearest_station": "Sam Yot MRT",
     "station_distance_metres": 993,
     "latitude": 13.74690938,
     "longitude": 100.5114006,
     "google_maps_url": "https://maps.app.goo.gl/skXgZd9LmNk8wWE78",
     "venue_url": "https://www.instagram.com/haze_bkk/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-11-06"
   },
   {
     "name": "Vesper",
