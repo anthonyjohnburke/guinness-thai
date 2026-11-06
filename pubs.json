@@ -308,7 +308,7 @@
     "area": "Bang Chak",
     "type": "Irish Pub",
     "guinness_draught": true,
-    "price_thb": 245,
+    "price_thb": null,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Bang Chak BTS",
@@ -1133,7 +1133,7 @@
     "longitude": 100.5941476,
     "google_maps_url": "https://maps.app.goo.gl/akB9fjtLnD4q16PD6",
     "venue_url": "https://www.instagram.com/wdistrictbkk",
-    "price_verified": "2026-09-25"
+    "price_verified": "2026-10-25"
   },
   {
     "name": "Pasha",
@@ -1421,7 +1421,7 @@
     "longitude": 100.4876677,
     "google_maps_url": "https://maps.app.goo.gl/fGKsnApuLGXiHFQ86",
     "venue_url": "https://www.facebook.com/TRexs64/",
-    "price_verified": "2026-10-03"
+    "price_verified": "2026-11-06"
   },
   {
     "name": "Brewave x Ari",
