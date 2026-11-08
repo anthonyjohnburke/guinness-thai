@@ -213,7 +213,7 @@
     "type": "American Bar",
     "guinness_draught": true,
     "price_thb": 369,
-    "happy_hour_price_thb": 294,
+    "happy_hour_price_thb": 315,
     "special": "Happy hour 07:00-19:00",
     "nearest_station": "Asok BTS",
     "station_distance_metres": 485,
@@ -221,7 +221,7 @@
     "longitude": 100.5639354,
     "google_maps_url": "https://maps.app.goo.gl/CTGpJMcgd7fLXWha6",
     "venue_url": "https://www.theupperdecksportsbar.com/",
-    "price_verified": "2026-11-01"
+    "price_verified": "2026-11-08"
   },
   {
     "name": "O'Leary's",
@@ -669,7 +669,7 @@
     "longitude": 100.5853911,
     "google_maps_url": "https://maps.app.goo.gl/B3Jsm51rp749rMr49",
     "venue_url": "https://www.facebook.com/brewbkk/",
-    "price_verified": "2026-08-25"
+    "price_verified": "2026-11-08"
   },
   {
     "name": "Raan Chef Bush",
