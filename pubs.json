@@ -292,7 +292,7 @@
     "area": "Silom",
     "type": "Irish Pub",
     "guinness_draught": true,
-    "price_thb": 325,
+    "price_thb": 339,
     "happy_hour_price_thb": 299,
     "special": "Happy hour 09:00-19:00",
     "nearest_station": "Si Lom MRT",
@@ -301,7 +301,7 @@
     "longitude": 100.531522,
     "google_maps_url": "https://maps.app.goo.gl/PJkCdi143XvXapLF8",
     "venue_url": "https://www.facebook.com/ShenanigansBangkok",
-    "price_verified": "2026-11-01"
+    "price_verified": "2026-11-12"
   },
   {
     "name": "The Shamrock",
