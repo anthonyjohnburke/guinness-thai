@@ -45,7 +45,7 @@
     "longitude": 100.5531211,
     "google_maps_url": "https://maps.app.goo.gl/mYm1FFVSMXHGY1MJ7",
     "venue_url": "https://www.theblarneystonebangkok.com/",
-    "price_verified": "2026-11-19"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "Leks Last Stand",
@@ -157,7 +157,7 @@
     "longitude": 100.5930575,
     "google_maps_url": "https://maps.app.goo.gl/4wo9bjdk8HTkspG59",
     "venue_url": "https://www.facebook.com/OBriensIrishPubBangkok/",
-    "price_verified": "2026-11-01"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "The Old English",
@@ -285,7 +285,7 @@
     "longitude": 100.5234539,
     "google_maps_url": "https://maps.app.goo.gl/dvxiERbGTugt2GNA6",
     "venue_url": "https://www.britishclubbangkok.org/",
-    "price_verified": "2026-11-01"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "Shenanigans",
@@ -333,7 +333,7 @@
     "longitude": 100.611655,
     "google_maps_url": "https://maps.app.goo.gl/FBDbAWSQHmN3CpMy8",
     "venue_url": "https://www.facebook.com/huntersbangkok",
-    "price_verified": "2026-10-17"
+    "price_verified": "2026-11-19"
   },
   {
     "name": "Sports on 20",
@@ -365,7 +365,7 @@
     "longitude": 100.5577659,
     "google_maps_url": "https://maps.app.goo.gl/UYKTCo9GN1fNCqsZA",
     "venue_url": "https://sportsbarbangkok.com/",
-    "price_verified": "2026-11-01"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "The Drunken Cat",
@@ -397,7 +397,7 @@
     "longitude": 100.5637497,
     "google_maps_url": "https://maps.app.goo.gl/8BWRQ6L56C1DCLgJA",
     "venue_url": "https://buddybarbangkok.com/locations/soi20",
-    "price_verified": "2026-11-19"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "The Deck Bangkok",
@@ -605,7 +605,7 @@
     "longitude": 100.5480475,
     "google_maps_url": "https://maps.app.goo.gl/EGBGwkGTMzfY7ere9",
     "venue_url": "https://www.facebook.com/thelevelup.bkk/",
-    "price_verified": "2026-11-01"
+    "price_verified": "2026-11-14"
   },
   {
     "name": "Fishbone",
@@ -932,7 +932,7 @@
     "area": "Nana",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 270,
+    "price_thb": 275,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Nana BTS",
@@ -980,7 +980,7 @@
     "area": "Nana",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": null,
+    "price_thb": 250,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Nana BTS",
@@ -989,7 +989,7 @@
     "longitude": 100.5538579,
     "google_maps_url": "https://maps.app.goo.gl/FmZU3cWE6B9WE7Qz8",
     "venue_url": null,
-    "price_verified": "2026-08-22"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "Joe’s Whisper",
@@ -1220,7 +1220,7 @@
     "area": "Silom",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 270,
+    "price_thb": 275,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Chong Nonsi BTS",
@@ -1229,14 +1229,14 @@
     "longitude": 100.5256574,
     "google_maps_url": "https://maps.app.goo.gl/wqc4UeFoqG9Zva4M9",
     "venue_url": "https://buddybarbangkok.com/locations/silom/",
-    "price_verified": "2026-11-19"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "Buddy's Bar (Soi 89)",
     "area": "Bang Chak",
     "type": "International",
     "guinness_draught": true,
-    "price_thb": 270,
+    "price_thb": 275,
     "happy_hour_price_thb": null,
     "special": null,
     "nearest_station": "Bang Chak BTS",
@@ -1245,7 +1245,7 @@
     "longitude": 100.603664,
     "google_maps_url": "https://maps.app.goo.gl/rFseN86vME9vtDwc9",
     "venue_url": "https://buddybarbangkok.com/locations/soi89/",
-    "price_verified": "2026-11-19"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "Accent.Ari",
@@ -1405,7 +1405,7 @@
     "longitude": 100.5560419,
     "google_maps_url": "https://maps.app.goo.gl/TWVijuCD9L4qYbZ77",
     "venue_url": "https://www.instagram.com/thecornerhouseskv/",
-    "price_verified": "2026-11-19"
+    "price_verified": "2026-11-22"
   },
   {
     "name": "T-Rex's Gastrobar",
@@ -1597,7 +1597,7 @@
     "longitude": 100.4942989,
     "google_maps_url": "https://maps.app.goo.gl/pewgFjkUReyFJi5e8",
     "venue_url": "http://www.sheepshankpublichouse.com/",
-    "price_verified": "2026-11-01"
+    "price_verified": "2026-11-14"
   },
   {
     "name": "Birdhouse Cafe & Bar",
