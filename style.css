@@ -2306,13 +2306,11 @@ line-height: 1.5;
     grid-column: auto;
   }
 
-#cheap-list,
-  #expensive-list {
+#cheap-list {
     display: none;
   }
 
-  #cheap-list.is-open,
-  #expensive-list.is-open {
+  #cheap-list.is-open {
     display: block;
   }
 
@@ -4481,14 +4479,10 @@ body.radar-not-visible .christmas-banner {
   #happy-hour {
     margin-bottom: 55px;
   }
-
-  #expensive-list-block {
-    margin-bottom: 55px;
-  }
 }
 /* Price chart controls — independent of map */
-.chart-controls{display:grid;gap:12px;margin:22px 0 0}.chart-controls input,.chart-controls select{box-sizing:border-box;background:#151515;color:#fff;border:1px solid #555;border-radius:6px;padding:11px 12px;font:inherit;font-size:16px;min-width:0}.chart-controls input{width:100%}.chart-areas{display:flex;gap:7px;overflow-x:auto;padding:2px 0 8px}.chart-areas button,.chart-reset, .chart-controls button#chart-reset{font:inherit;font-size:13px;color:#ddd;background:#151515;border:1px solid #444;border-radius:6px;padding:8px 12px;white-space:nowrap;cursor:pointer}.chart-areas button[aria-pressed=true]{background:#d4af37;color:#111;border-color:#d4af37}.chart-meta{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}.chart-meta select{font-size:14px}.chart-count{color:#aaa;font-size:13px}.chart-reset{background:transparent;border:0;text-decoration:underline}
-#chart-count{color:#aaa;font-size:13px}.chart-controls[hidden],.chart-controls [hidden],#toggle-chart-btn[hidden]{display:none!important}.chart-controls :focus-visible{outline:2px solid #d4af37;outline-offset:3px}.chart-empty{color:#aaa;padding:24px 0}.chart-controls select{max-width:100%}
+.chart-controls{display:grid;gap:12px;margin:22px 0 0}.chart-controls input{box-sizing:border-box;background:#151515;color:#fff;border:1px solid #555;border-radius:6px;padding:11px 12px;font:inherit;font-size:16px;min-width:0}.chart-controls input{width:100%}.chart-areas{display:flex;gap:7px;overflow-x:auto;padding:2px 0 8px}.chart-areas button{font:inherit;font-size:13px;color:#ddd;background:#151515;border:1px solid #444;border-radius:6px;padding:8px 12px;white-space:nowrap;cursor:pointer}.chart-areas button[aria-pressed=true]{background:#d4af37;color:#111;border-color:#d4af37}.chart-meta{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+#chart-count{color:#aaa;font-size:13px}.chart-controls[hidden],.chart-controls [hidden],#toggle-chart-btn[hidden]{display:none!important}.chart-controls :focus-visible{outline:2px solid #d4af37;outline-offset:3px}.chart-empty{color:#aaa;padding:24px 0}
 
 /* V3 — shared chart/map control appearance; independent behaviour */
 #chart-controls #chart-search,

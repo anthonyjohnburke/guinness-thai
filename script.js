@@ -317,7 +317,7 @@ function setRandomWisdom() {
     el.classList.remove("fade-out");
   }, 400);
 }
-  
+
 function trackEvent(name, params = {}) {
   try {
     if (typeof gtag === "function") {
@@ -996,7 +996,7 @@ if (map.loaded()) {
 } else {
   map.once('load', loadIcon);
 }
-     
+
 return map;
   }).catch(err => {
     mapInitPromise = null;
@@ -1034,7 +1034,7 @@ fetch(SHEET_URL)
     price: parseFloat(p.price),
     last_updated: p.last_updated
   }));
-  
+
 async function zoomToPub(pubName, allPubs) {
    const targetPub = allPubs.find(p => p.name === pubName && p.lat && p.lon);
       if (!targetPub) return;
@@ -1075,7 +1075,7 @@ setTimeout(() => {
   .addTo(map);
 
 keepPopupInView(activePopup);
-    
+
 }, 700);
       }, 150);
     }
@@ -1292,7 +1292,7 @@ if (nearbyBtn) {
   </div>
 `;
         chart.appendChild(row);
-        
+
 const priceEl = row.querySelector(".bar-price");
 
 priceEl.addEventListener("click", (e) => {
@@ -1380,7 +1380,7 @@ if (window.innerWidth <= 768 && featuredBtn && featuredText) {
   });
 
 }
-      
+
     const cheapList = document.getElementById("cheap-list");
 
     if (cheapList && pricedPubs.length > 0) {
@@ -1547,7 +1547,7 @@ ${pub.google_maps_link ? `
 </div>
 </div>
 `;
-  
+
 happyList.appendChild(row);
     });
 
@@ -2012,14 +2012,7 @@ if (!resultsEl) return;
     return `${m}m`;
   }
 
-  function formatRemainingShort(ms) {
-  const mins = Math.max(0, Math.round(ms / 60000));
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
 
-  if (h) return `${h}h`;
-  return `${m}m`;
-}
 
 function formatClockShort(date) {
   return formatClock(date).replace(" ", "");
@@ -2251,7 +2244,7 @@ function renderHappyHours() {
   const sortedHappyHours = sortHappyHours(happyHours);
 
   resultsEl.innerHTML = sortedHappyHours.map((pub, index) => `
-  
+
     <div
   class="hh-radar-row"
   data-pub="${escapeHTML(pub.name)}"
@@ -2449,7 +2442,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!christmas) return;
 
- 
+
 function positionChristmasBanner() {
 
   // Leave mobile and tablet positioning to CSS.
