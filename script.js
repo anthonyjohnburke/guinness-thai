@@ -2296,22 +2296,10 @@ const closestPub = [...happyHours]
 
 if (summaryEl) {
   summaryEl.innerHTML = `
-    <span><strong>${liveCount}</strong> Live</span>
-    <span>•</span>
-    <span><strong>${startingSoonCount}</strong> Starting &lt;1h</span>
-    <span>•</span>
-    <span><strong>${endingSoonCount}</strong> Ending &lt;1h</span>
-    ${
-      closestPub
-        ? `
-          <span class="summary-separator">•</span>
-<span class="summary-closest">
-  Closest: <strong>${escapeHTML(closestPub.name)}</strong>
-  (${closestPub.distance.toFixed(1)} km)
-</span>
-        `
-        : ""
-    }
+    <div class="radar-stat radar-stat-live"><strong>${liveCount}</strong><span>Live now</span></div>
+    <div class="radar-stat"><strong>${startingSoonCount}</strong><span>Starting &lt;1h</span></div>
+    <div class="radar-stat radar-stat-ending"><strong>${endingSoonCount}</strong><span>Ending &lt;1h</span></div>
+    ${closestPub ? `<div class="summary-closest">Closest: <strong>${escapeHTML(closestPub.name)}</strong> (${closestPub.distance.toFixed(1)} km)</div>` : ""}
   `;
 }
 
