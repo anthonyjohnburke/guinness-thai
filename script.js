@@ -1226,8 +1226,6 @@ if (nearbyBtn) {
     const controls = document.getElementById("chart-controls");
     const search = document.getElementById("chart-search");
     const areas = document.getElementById("chart-areas");
-    const sort = document.getElementById("chart-sort");
-    const reset = document.getElementById("chart-reset");
     const count = document.getElementById("chart-count");
     const toggleChartBtn = document.getElementById("toggle-chart-btn");
     const mobileChart = window.matchMedia("(max-width: 768px)");
@@ -1237,16 +1235,15 @@ if (nearbyBtn) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = area === null ? "All" : area;
-      btn.addEventListener("click", () => { selectedArea = area; expanded = false; renderChart(); });
+      btn.addEventListener("click", () => { selectedArea = area; if (area === null) search.value = ""; expanded = false; renderChart(); });
       areas.appendChild(btn);
     });
     function renderChart(animate = false) {
       const q = search.value.trim().toLowerCase();
-      const active = !!q || selectedArea !== null || sort.value !== "low";
+      const active = !!q || selectedArea !== null;
       const visible = pricedPubs.filter(p => (selectedArea === null || String(p.area || "").trim() === selectedArea) && [p.name,p.area,p.nearest_station].some(v => String(v || "").toLowerCase().includes(q)));
-      visible.sort((a,b)=>sort.value === "az" ? String(a.name).localeCompare(String(b.name)) : sort.value === "high" ? b.price-a.price : a.price-b.price);
+      visible.sort((a,b)=>a.price-b.price);
       count.textContent = `${visible.length} of ${pricedPubs.length} pubs`;
-      reset.hidden = !active;
       [...areas.children].forEach((btn,i)=>btn.setAttribute("aria-pressed",String([null,...areaNames][i] === selectedArea)));
       const collapsed = mobileChart.matches && !active && !expanded;
       chart.classList.toggle("is-collapsed",collapsed);
@@ -1332,8 +1329,6 @@ setTimeout(() => {
 
     }
     search.addEventListener("input",()=>{expanded=false;renderChart();});
-    sort.addEventListener("change",()=>{expanded=false;renderChart();});
-    reset.addEventListener("click",()=>{search.value="";sort.value="low";selectedArea=null;expanded=false;renderChart();});
     toggleChartBtn.addEventListener("click",()=>{expanded=!expanded;renderChart();});
     mobileChart.addEventListener("change",()=>renderChart());
     controls.hidden=false;
