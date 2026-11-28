@@ -562,7 +562,7 @@ function buildAreaFilters(pubs, allPricedPubs, zoomToArea) {
   const areaLimit = window.innerWidth <= 768 ? 11 : 8;
 
   const topAreas = Object.entries(areaCounts)
-    .sort((a, b) => b[1] - a[1])
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     .slice(0, areaLimit);
 
   topAreas.forEach(([area, count]) => {
@@ -1230,11 +1230,16 @@ if (nearbyBtn) {
     const toggleChartBtn = document.getElementById("toggle-chart-btn");
     const mobileChart = window.matchMedia("(max-width: 768px)");
     let selectedArea = null, expanded = false, tooltipTimeout;
-    const areaNames = [...new Set(pricedPubs.map(p => String(p.area || "").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+    const chartAreaCounts = new Map();
+    pricedPubs.forEach(p => {
+      const area = String(p.area || "").trim();
+      if (area) chartAreaCounts.set(area, (chartAreaCounts.get(area) || 0) + 1);
+    });
+    const areaNames = [...chartAreaCounts.keys()].sort((a,b) => chartAreaCounts.get(b) - chartAreaCounts.get(a) || a.localeCompare(b));
     [null, ...areaNames].forEach(area => {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.textContent = area === null ? "All" : area;
+      btn.textContent = area === null ? "All" : `${area} ${chartAreaCounts.get(area)}`;
       btn.addEventListener("click", () => { selectedArea = area; if (area === null) search.value = ""; expanded = false; renderChart(); });
       areas.appendChild(btn);
     });
