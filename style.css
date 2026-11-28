@@ -4521,3 +4521,25 @@ body.radar-not-visible .christmas-banner {
 @media (max-width: 768px) {
   #intro > #area-filter-strip { gap: 7px; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; padding-bottom: 8px; }
 }
+
+/* V4 — align map filter and search container widths */
+#area-filter-strip,
+#intro > #area-filter-strip,
+.pub-search-wrap,
+#intro > .pub-search-wrap {
+  width: 100%;
+  max-width: 1500px;
+  box-sizing: border-box;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+@media (max-width: 768px) {
+  #area-filter-strip,
+#intro > #area-filter-strip,
+  .pub-search-wrap,
+#intro > .pub-search-wrap {
+    max-width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
