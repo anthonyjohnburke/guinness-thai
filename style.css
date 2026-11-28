@@ -4604,3 +4604,22 @@ body.radar-not-visible .christmas-banner {
 @media (max-width: 768px) {
   #footer:has(#mobile-footer-section.is-open) { padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Adaptive promotions: only where the intro has two columns. */
+#desktop-promotions-toggle { display: none; }
+@media (min-width: 901px) {
+  #featured-promotions .desktop-promotion-hidden { display: none; }
+  #desktop-promotions-toggle:not([hidden]) {
+    display: block;
+    margin: 14px 0 0;
+    padding: 8px 0;
+    border: 0;
+    background: transparent;
+    color: #d4af37;
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+  }
+  #desktop-promotions-toggle:hover { text-decoration: underline; }
+}

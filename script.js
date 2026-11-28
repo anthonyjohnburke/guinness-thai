@@ -1,3 +1,68 @@
+// Desktop-only adaptive promotions; mobile retains its existing toggle.
+let desktopPromotionFilterActive = false;
+let desktopPromotionsExpanded = false;
+let desktopPromotionFrame = 0;
+function scheduleDesktopPromotions() {
+  if (desktopPromotionFrame) return;
+  desktopPromotionFrame = requestAnimationFrame(() => {
+    desktopPromotionFrame = 0;
+    updateDesktopPromotions();
+  });
+}
+function updateDesktopPromotions() {
+  const container = document.getElementById("featured-promotions");
+  const chart = document.getElementById("price-chart");
+  if (!container || !chart) return;
+  const cards = [...container.querySelectorAll(".featured-pub-layout")];
+  let button = document.getElementById("desktop-promotions-toggle");
+  if (!button) {
+    button = document.createElement("button");
+    button.id = "desktop-promotions-toggle";
+    button.type = "button";
+    button.hidden = true;
+    button.setAttribute("aria-controls", "featured-promotions");
+    container.after(button);
+    button.addEventListener("click", () => {
+      desktopPromotionsExpanded = !desktopPromotionsExpanded;
+      scheduleDesktopPromotions();
+    });
+  }
+  const active = matchMedia("(min-width: 901px)").matches && desktopPromotionFilterActive;
+  cards.forEach(card => card.classList.remove("desktop-promotion-hidden"));
+  button.hidden = true;
+  if (!active || cards.length < 2) return;
+  const note = chart.closest(".intro-col-wide")?.querySelector(".verification-note");
+  const bottom = (note || chart).getBoundingClientRect().bottom;
+  // Reserve room for the disclosure button when more cards remain.
+  let visible = 1;
+  for (let i = 1; i < cards.length; i++) {
+    const reserve = i < cards.length - 1 ? 48 : 0;
+    if (cards[i].getBoundingClientRect().bottom + reserve > bottom) break;
+    visible = i + 1;
+  }
+  if (visible === cards.length) return;
+  if (!desktopPromotionsExpanded) {
+    cards.slice(visible).forEach(card => card.classList.add("desktop-promotion-hidden"));
+  }
+  button.hidden = false;
+  button.textContent = desktopPromotionsExpanded ? "Show fewer promotions" : `Show more promotions (${cards.length - visible})`;
+  button.setAttribute("aria-expanded", String(desktopPromotionsExpanded));
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const desktop = matchMedia("(min-width: 901px)");
+  desktop.addEventListener("change", scheduleDesktopPromotions);
+  window.addEventListener("resize", scheduleDesktopPromotions, { passive: true });
+  if (typeof ResizeObserver !== "undefined") {
+    const observer = new ResizeObserver(scheduleDesktopPromotions);
+    ["price-chart", "happy-hour", "chart-controls"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  }
+  document.fonts?.ready.then(scheduleDesktopPromotions);
+  scheduleDesktopPromotions();
+});
+
 
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoicGl4ZWxib3hlciIsImEiOiJjang5em4wdTAweWFwM3hwNzVjM2I3NXp0In0.E-H_WpzjNZcTm7_LtXaRhA';
@@ -156,6 +221,7 @@ function renderFeaturedPromotions() {
 
     </div>
   `).join("");
+  scheduleDesktopPromotions();
 }
 
 async function loadFeaturedPromotions() {
@@ -1251,6 +1317,9 @@ if (nearbyBtn) {
     function renderChart(animate = false) {
       const q = search.value.trim().toLowerCase();
       const active = !!q || selectedArea !== null;
+      desktopPromotionFilterActive = active;
+      desktopPromotionsExpanded = false;
+      scheduleDesktopPromotions();
       const visible = pricedPubs.filter(p => (selectedArea === null || String(p.area || "").trim() === selectedArea) && [p.name,p.area,p.nearest_station].some(v => String(v || "").toLowerCase().includes(q)));
       visible.sort((a,b)=>a.price-b.price);
       count.textContent = `${visible.length} of ${pricedPubs.length} pubs`;
