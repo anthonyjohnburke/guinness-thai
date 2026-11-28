@@ -244,13 +244,29 @@
         Track Guinness prices across Bangkok and spot the bars serving the best-value pint. For adults of legal drinking age. Enjoy the pint, but mind yourself.
       </p>
 
+<div id="chart-loading-controls" class="chart-controls" aria-hidden="true">
+  <div class="chart-loading-search"></div>
+  <div class="chart-areas"><span class="chart-loading-pill"></span><span class="chart-loading-pill"></span><span class="chart-loading-pill"></span><span class="chart-loading-pill"></span></div>
+  <div class="chart-meta"><span class="chart-loading-count">Loading latest pint prices…</span></div>
+</div>
  <div class="chart-controls" id="chart-controls" hidden>
   <input id="chart-search" type="search" aria-label="Search price ranking" placeholder="Search pubs, areas or stations...">
   <div class="chart-areas" id="chart-areas" role="group" aria-label="Filter by area"></div>
   <div class="chart-meta"><span id="chart-count" aria-live="polite"></span>
   </div>
 </div>
-<div id="price-chart"></div>
+<div id="price-chart" aria-busy="true"><div class="chart-loading-rows" aria-hidden="true"><div class="chart-key">Longer bar = better value — <span class="highlight">less baht, more Guinness</span></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:95%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:91%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:87%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:83%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:79%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:75%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:71%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:67%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:63%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+<div class="bar-row"><div class="bar-label"><span class="chart-loading-label"></span></div><div class="bar-bottom"><div class="bar-wrap"><div class="chart-loading-bar" style="width:59%"></div></div><div class="bar-price"><span class="chart-loading-price"></span></div></div></div>
+</div></div>
 
 <button id="toggle-chart-btn">See full Guinness ranking</button>
 

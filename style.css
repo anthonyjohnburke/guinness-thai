@@ -4584,3 +4584,18 @@ body.radar-not-visible .christmas-banner {
 #mobile-nearby-section .intro-heading,
 #mobile-barstool-section .intro-heading,
 #mobile-story-section .timeout-caption { color: #eee; }
+
+/* Mobile performance V1: reserve the initial chart footprint before data arrives. */
+#chart-loading-controls, .chart-loading-rows { display: none; }
+@media (max-width: 768px) {
+  #chart-loading-controls { display: grid; }
+  .chart-loading-rows { display: block; }
+  .chart-loading-search { height: 44px; box-sizing: border-box; border: 1px solid rgba(139,195,74,.38); border-radius: 6px; background: #101710; }
+  .chart-loading-pill { flex: 0 0 76px; height: 36px; border-radius: 6px; background: #202020; }
+  .chart-loading-pill:first-child { flex-basis: 44px; }
+  .chart-loading-count { font-size: 13px; color: #aaa; }
+  .chart-loading-label { display: inline-block; width: 45%; height: 10px; border-radius: 3px; background: #252525; }
+  .chart-loading-bar { height: 100%; background: #302a1c; border-radius: 5px; }
+  .chart-loading-price { display: inline-block; width: 34px; height: 11px; border-radius: 3px; background: #252525; }
+  #price-chart[aria-busy="true"] ~ #toggle-chart-btn { pointer-events: none; }
+}

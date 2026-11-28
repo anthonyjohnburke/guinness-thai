@@ -1137,7 +1137,6 @@ if (nearbyBtn) {
   const chart = document.getElementById("price-chart");
   const happyList = document.getElementById("happy-list");
 
-  chart.innerHTML = "";
   happyList.innerHTML = "";
 
   updateLastUpdatedDate(pubs);
@@ -1155,6 +1154,12 @@ if (nearbyBtn) {
   }))
   .sort((a, b) => a.price - b.price);
 
+    if (!pricedPubs.length) {
+      document.getElementById("chart-loading-controls")?.remove();
+      chart.removeAttribute("aria-busy");
+      chart.innerHTML = '<div class="chart-error">No pint prices available right now.</div>';
+      document.getElementById("toggle-chart-btn").hidden = true;
+    }
     if (pricedPubs.length > 0) {
       const max = Math.max(...pricedPubs.map(p => p.price));
       const min = Math.min(...pricedPubs.map(p => p.price));
@@ -1338,6 +1343,8 @@ setTimeout(() => {
     mobileChart.addEventListener("change",()=>renderChart());
     controls.hidden=false;
     renderChart(true);
+    document.getElementById("chart-loading-controls")?.remove();
+    chart.removeAttribute("aria-busy");
 
       document.querySelectorAll(".mobile-list-toggle").forEach(button => {
   button.addEventListener("click", () => {
@@ -1595,7 +1602,11 @@ happyList.appendChild(row);
   .catch(err => {
     console.error(err);
     const chart = document.getElementById("price-chart");
+    document.getElementById("chart-loading-controls")?.remove();
+    const toggle = document.getElementById("toggle-chart-btn");
+    if (toggle) toggle.hidden = true;
     if (chart) {
+      chart.removeAttribute("aria-busy");
       chart.innerHTML = `<div class="chart-error">Could not load pub data right now.</div>`;
     }
   });
