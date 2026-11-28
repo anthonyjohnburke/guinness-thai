@@ -1027,6 +1027,7 @@ fetch(SHEET_URL)
   .map(p => ({
     name: p.name,
     area: p.area,
+    nearest_station: p.nearest_station,
     lat: p.lat,
     lon: p.lon,
     google_maps_link: p.google_maps_link,
@@ -1222,15 +1223,39 @@ if (nearbyBtn) {
         });
       }
 
-    chart.innerHTML += `
-  <div class="chart-key">
-    Longer bar = better value — <span class="highlight">less baht, more Guinness</span>
-  </div>
-`;
-
-      let tooltipTimeout;  // ✅ GLOBAL (shared across all rows)
-
-      pricedPubs.forEach((pub, i) => {
+    const controls = document.getElementById("chart-controls");
+    const search = document.getElementById("chart-search");
+    const areas = document.getElementById("chart-areas");
+    const sort = document.getElementById("chart-sort");
+    const reset = document.getElementById("chart-reset");
+    const count = document.getElementById("chart-count");
+    const toggleChartBtn = document.getElementById("toggle-chart-btn");
+    const mobileChart = window.matchMedia("(max-width: 768px)");
+    let selectedArea = null, expanded = false, tooltipTimeout;
+    const areaNames = [...new Set(pricedPubs.map(p => String(p.area || "").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+    [null, ...areaNames].forEach(area => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = area === null ? "All" : area;
+      btn.addEventListener("click", () => { selectedArea = area; expanded = false; renderChart(); });
+      areas.appendChild(btn);
+    });
+    function renderChart(animate = false) {
+      const q = search.value.trim().toLowerCase();
+      const active = !!q || selectedArea !== null || sort.value !== "low";
+      const visible = pricedPubs.filter(p => (selectedArea === null || String(p.area || "").trim() === selectedArea) && [p.name,p.area,p.nearest_station].some(v => String(v || "").toLowerCase().includes(q)));
+      visible.sort((a,b)=>sort.value === "az" ? String(a.name).localeCompare(String(b.name)) : sort.value === "high" ? b.price-a.price : a.price-b.price);
+      count.textContent = `${visible.length} of ${pricedPubs.length} pubs`;
+      reset.hidden = !active;
+      [...areas.children].forEach((btn,i)=>btn.setAttribute("aria-pressed",String([null,...areaNames][i] === selectedArea)));
+      const collapsed = mobileChart.matches && !active && !expanded;
+      chart.classList.toggle("is-collapsed",collapsed);
+      toggleChartBtn.hidden = !mobileChart.matches || active || visible.length <= 10;
+      toggleChartBtn.textContent = collapsed ? "See full Guinness ranking" : "Show fewer prices";
+      toggleChartBtn.setAttribute("aria-expanded",String(!collapsed));
+      chart.innerHTML = `<div class="chart-key">Longer bar = better value — <span class="highlight">less baht, more Guinness</span></div>`;
+      if (!visible.length) chart.insertAdjacentHTML("beforeend", '<p class="chart-empty">No matching pubs found.</p>');
+      visible.forEach((pub, i) => {
         let width;
         if (max === min) {
           width = 100;
@@ -1252,7 +1277,7 @@ if (nearbyBtn) {
   <div class="bar-bottom">
     <div class="bar-wrap">
       <div class="bar"
-           style="width:0%"
+           style="width:${animate ? 0 : width}%"
            data-width="${width}%"
            title="Verified ${formatDate(pub.last_updated)}">
       </div>
@@ -1293,10 +1318,10 @@ priceEl.addEventListener("click", (e) => {
 setTimeout(() => {
   const mainBar = row.querySelector(".bar");
   if (mainBar) mainBar.style.width = mainBar.dataset.width;
-}, 150 + i * 80);
+}, animate ? 150 + Math.min(i, 15) * 35 : 0);
       });
 
-      document.querySelectorAll('.bar-label.clickable').forEach(el => {
+      chart.querySelectorAll('.bar-label.clickable').forEach(el => {
         el.addEventListener('click', () => {
           const name = el.dataset.pub;
           highlightChartPub(name);
@@ -1305,21 +1330,14 @@ setTimeout(() => {
         });
       });
 
-    const toggleChartBtn = document.getElementById("toggle-chart-btn");
-
-if (window.innerWidth <= 768 && toggleChartBtn) {
-  chart.classList.add("is-collapsed");
-
-  toggleChartBtn.textContent = "See full Guinness ranking";
-
-  toggleChartBtn.addEventListener("click", () => {
-    chart.classList.toggle("is-collapsed");
-
-    toggleChartBtn.textContent = chart.classList.contains("is-collapsed")
-      ? "See full Guinness ranking"
-      : "Show fewer prices";
-  });
-}
+    }
+    search.addEventListener("input",()=>{expanded=false;renderChart();});
+    sort.addEventListener("change",()=>{expanded=false;renderChart();});
+    reset.addEventListener("click",()=>{search.value="";sort.value="low";selectedArea=null;expanded=false;renderChart();});
+    toggleChartBtn.addEventListener("click",()=>{expanded=!expanded;renderChart();});
+    mobileChart.addEventListener("change",()=>renderChart());
+    controls.hidden=false;
+    renderChart(true);
 
       document.querySelectorAll(".mobile-list-toggle").forEach(button => {
   button.addEventListener("click", () => {
