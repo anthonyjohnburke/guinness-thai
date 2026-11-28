@@ -2527,6 +2527,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const section = button.closest(".mobile-collapse");
       const expanded = section.classList.toggle("is-open");
       button.setAttribute("aria-expanded", String(expanded));
+      if (expanded && window.matchMedia("(max-width: 768px)").matches) {
+        requestAnimationFrame(() => {
+          if (!section.classList.contains("is-open")) return;
+          const header = document.getElementById("top-bar");
+          const top = Math.max(0, header?.getBoundingClientRect().bottom || 0) + 12;
+          const banners = document.querySelector(".floating-banner-group");
+          const bannerRect = banners?.getBoundingClientRect();
+          const bannerStyle = banners && getComputedStyle(banners);
+          const bottom = bannerRect && bannerStyle.visibility !== "hidden" && Number(bannerStyle.opacity) > 0 && bannerRect.height > 0
+            ? Math.min(window.innerHeight, bannerRect.top) - 12 : window.innerHeight - 12;
+          const rect = section.getBoundingClientRect();
+          const delta = rect.height > bottom - top || rect.top < top
+            ? rect.top - top : Math.max(0, rect.bottom - bottom);
+          if (Math.abs(delta) > 1) window.scrollBy({ top: delta, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+        });
+      }
     });
   });
 });

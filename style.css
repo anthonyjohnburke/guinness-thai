@@ -4599,3 +4599,8 @@ body.radar-not-visible .christmas-banner {
   .chart-loading-price { display: inline-block; width: 34px; height: 11px; border-radius: 3px; background: #252525; }
   #price-chart[aria-busy="true"] ~ #toggle-chart-btn { pointer-events: none; }
 }
+
+/* Leave room below an expanded mobile footer for the fixed banners. */
+@media (max-width: 768px) {
+  #footer:has(#mobile-footer-section.is-open) { padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
+}
