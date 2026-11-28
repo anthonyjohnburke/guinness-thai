@@ -4537,3 +4537,50 @@ body.radar-not-visible .christmas-banner {
     padding-right: 14px;
   }
 }
+
+
+/* Mobile refinement V1 — compact statistics and secondary navigation. */
+@media (max-width: 768px) {
+  #top-stats .stat-card:nth-child(n+4) { display: none; }
+  #top-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #top-stats .stat-card:nth-child(-n+3) { grid-column: auto; min-width: 0; }
+  #intro > .pub-search-wrap, .pub-search-wrap { display: none !important; }
+  #intro .intro-col-wide > #mobile-load-map {
+    width: 100%; max-width: none; margin: 12px 0 16px;
+  }
+  #mobile-story-section > .mobile-collapse-toggle,
+  #mobile-nearby-section > .mobile-collapse-toggle,
+  #mobile-barstool-section > .mobile-collapse-toggle,
+  #mobile-faq-section > .mobile-collapse-toggle,
+  #mobile-contact-section > .mobile-collapse-toggle,
+  #mobile-footer-section > .mobile-collapse-toggle {
+    background: #141414; border-color: #444; color: #eee;
+    text-transform: none; border-radius: 6px;
+  }
+  #mobile-story-section > .mobile-collapse-toggle span,
+  #mobile-nearby-section > .mobile-collapse-toggle span,
+  #mobile-barstool-section > .mobile-collapse-toggle span,
+  #mobile-faq-section > .mobile-collapse-toggle span,
+  #mobile-contact-section > .mobile-collapse-toggle span,
+  #mobile-footer-section > .mobile-collapse-toggle span { color: #aaa; }
+}
+/* Secondary editorial actions: neutral on both desktop and mobile. */
+#mobile-story-section #toggle-featured-btn,
+#mobile-nearby-section #find-nearby-btn,
+#mobile-barstool-section .contact-link,
+#mobile-faq-section .contact-link,
+#mobile-contact-section .contact-link {
+  background: #171717; color: #eee; border: 1px solid #444;
+  box-shadow: none;
+}
+#mobile-story-section #toggle-featured-btn:hover,
+#mobile-nearby-section #find-nearby-btn:hover,
+#mobile-barstool-section .contact-link:hover,
+#mobile-faq-section .contact-link:hover,
+#mobile-contact-section .contact-link:hover {
+  background: #242424; color: #fff; border-color: #777;
+}
+#mobile-story-section .intro-heading,
+#mobile-nearby-section .intro-heading,
+#mobile-barstool-section .intro-heading,
+#mobile-story-section .timeout-caption { color: #eee; }
