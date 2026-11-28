@@ -2290,16 +2290,11 @@ happyDurationMs: times.end - times.start
   const endingSoonCount =
   happyHours.filter(pub => pub.status === "Ending Soon").length;
 
-const closestPub = [...happyHours]
-  .filter(pub => Number.isFinite(pub.distance))
-  .sort((a, b) => a.distance - b.distance)[0];
-
 if (summaryEl) {
   summaryEl.innerHTML = `
     <div class="radar-stat radar-stat-live"><strong>${liveCount}</strong><span>Live now</span></div>
     <div class="radar-stat"><strong>${startingSoonCount}</strong><span>Starting &lt;1h</span></div>
     <div class="radar-stat radar-stat-ending"><strong>${endingSoonCount}</strong><span>Ending &lt;1h</span></div>
-    ${closestPub ? `<div class="summary-closest">Closest: <strong>${escapeHTML(closestPub.name)}</strong> (${closestPub.distance.toFixed(1)} km)</div>` : ""}
   `;
 }
 
