@@ -1300,7 +1300,77 @@ if (nearbyBtn) {
     const count = document.getElementById("chart-count");
     const toggleChartBtn = document.getElementById("toggle-chart-btn");
     const mobileChart = window.matchMedia("(max-width: 768px)");
-    let selectedArea = null, expanded = false, tooltipTimeout;
+    let selectedArea = null, selectedPub = null, expanded = false, tooltipTimeout;
+    const searchWrap = document.createElement("div");
+    searchWrap.className = "chart-search-wrap";
+    search.before(searchWrap);
+    searchWrap.appendChild(search);
+    const suggestions = document.createElement("div");
+    suggestions.id = "chart-search-suggestions";
+    suggestions.className = "chart-search-suggestions";
+    suggestions.setAttribute("role", "listbox");
+    suggestions.hidden = true;
+    searchWrap.appendChild(suggestions);
+    search.setAttribute("role", "combobox");
+    search.setAttribute("aria-autocomplete", "list");
+    search.setAttribute("aria-controls", suggestions.id);
+    search.setAttribute("aria-expanded", "false");
+    search.setAttribute("autocomplete", "off");
+    let matches = [], activeIndex = -1;
+    const inArea = p => selectedArea === null || String(p.area || "").trim() === selectedArea;
+    const matchesQuery = (p,q) => [p.name,p.area,p.nearest_station].some(v => String(v || "").toLowerCase().includes(q));
+    function closeSuggestions() {
+      suggestions.hidden = true;
+      search.setAttribute("aria-expanded", "false");
+      search.removeAttribute("aria-activedescendant");
+      activeIndex = -1;
+    }
+    function chooseSuggestion(pub) {
+      selectedPub = pub;
+      search.value = pub.name;
+      expanded = false;
+      closeSuggestions();
+      renderChart();
+    }
+    function updateSuggestions() {
+      closeSuggestions();
+      suggestions.replaceChildren();
+      const q = search.value.trim().toLowerCase();
+      if (q.length < 2 || selectedPub) return;
+      const rank = p => { const n = String(p.name || "").toLowerCase(); return n.startsWith(q) ? 0 : n.includes(q) ? 1 : 2; };
+      matches = pricedPubs.filter(p => inArea(p) && matchesQuery(p,q)).sort((a,b) => rank(a)-rank(b) || a.name.localeCompare(b.name)).slice(0,5);
+      matches.forEach((pub,i) => {
+        const option = document.createElement("div");
+        option.id = `chart-suggestion-${i}`;
+        option.setAttribute("role", "option");
+        option.setAttribute("aria-selected", "false");
+        const name = document.createElement("span"); name.textContent = pub.name;
+        const area = document.createElement("small"); area.textContent = pub.area || "";
+        option.append(name,area);
+        option.addEventListener("mousedown", e => e.preventDefault());
+        option.addEventListener("click", () => chooseSuggestion(pub));
+        suggestions.appendChild(option);
+      });
+      suggestions.hidden = !matches.length;
+      search.setAttribute("aria-expanded", String(!!matches.length));
+    }
+    search.addEventListener("keydown", e => {
+      if (e.key === "Escape" || e.key === "Tab") { closeSuggestions(); return; }
+      if (suggestions.hidden && e.key === "ArrowDown") updateSuggestions();
+      if (suggestions.hidden) return;
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        activeIndex = (activeIndex < 0 ? (e.key === "ArrowDown" ? 0 : matches.length-1) : (activeIndex + (e.key === "ArrowDown" ? 1 : -1) + matches.length) % matches.length);
+        [...suggestions.children].forEach((el,i) => el.setAttribute("aria-selected", String(i === activeIndex)));
+        search.setAttribute("aria-activedescendant", suggestions.children[activeIndex].id);
+        suggestions.children[activeIndex].scrollIntoView({block:"nearest"});
+      } else if (e.key === "Enter" && activeIndex >= 0) {
+        e.preventDefault(); chooseSuggestion(matches[activeIndex]);
+      }
+    });
+    search.addEventListener("focus", updateSuggestions);
+    search.addEventListener("blur", () => { setTimeout(() => { if (!searchWrap.contains(document.activeElement)) closeSuggestions(); }, 180); });
+    document.addEventListener("pointerdown", e => { if (!searchWrap.contains(e.target)) closeSuggestions(); });
     const chartAreaCounts = new Map();
     pricedPubs.forEach(p => {
       const area = String(p.area || "").trim();
@@ -1311,7 +1381,7 @@ if (nearbyBtn) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = area === null ? "All" : `${area} ${chartAreaCounts.get(area)}`;
-      btn.addEventListener("click", () => { selectedArea = area; if (area === null) search.value = ""; expanded = false; renderChart(); });
+      btn.addEventListener("click", () => { selectedArea = area; selectedPub = null; closeSuggestions(); if (area === null) search.value = ""; expanded = false; renderChart(); });
       areas.appendChild(btn);
     });
     function renderChart(animate = false) {
@@ -1320,7 +1390,7 @@ if (nearbyBtn) {
       desktopPromotionFilterActive = active;
       desktopPromotionsExpanded = false;
       scheduleDesktopPromotions();
-      const visible = pricedPubs.filter(p => (selectedArea === null || String(p.area || "").trim() === selectedArea) && [p.name,p.area,p.nearest_station].some(v => String(v || "").toLowerCase().includes(q)));
+      const visible = pricedPubs.filter(p => inArea(p) && (selectedPub ? p === selectedPub : matchesQuery(p,q)));
       visible.sort((a,b)=>a.price-b.price);
       count.textContent = `${visible.length} of ${pricedPubs.length} pubs`;
       [...areas.children].forEach((btn,i)=>btn.setAttribute("aria-pressed",String([null,...areaNames][i] === selectedArea)));
@@ -1407,7 +1477,7 @@ setTimeout(() => {
       });
 
     }
-    search.addEventListener("input",()=>{expanded=false;renderChart();});
+    search.addEventListener("input",()=>{selectedPub=null;expanded=false;renderChart();updateSuggestions();});
     toggleChartBtn.addEventListener("click",()=>{expanded=!expanded;renderChart();});
     mobileChart.addEventListener("change",()=>renderChart());
     controls.hidden=false;
