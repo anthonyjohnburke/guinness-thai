@@ -1360,11 +1360,6 @@ setTimeout(() => {
       button.setAttribute("aria-expanded", String(open));
     }
 
-    if (targetId === "expensive-list") {
-      button.textContent = target.classList.contains("is-open")
-        ? "Hide expensive ranking"
-        : "Show expensive ranking";
-    }
   });
 });
 
@@ -1467,75 +1462,6 @@ ${pub.google_maps_link ? `
       });
     }
 
-    const expensiveList = document.getElementById("expensive-list");
-
-    if (expensiveList && pricedPubs.length > 0) {
-      const avgPrice = Math.round(
-        pricedPubs.reduce((sum, p) => sum + p.price, 0) / pricedPubs.length
-      );
-
-     const mostExpensiveFive = [...pricedPubs]
-  .sort((a, b) => b.price - a.price)
-  .slice(0, 5)
-  .map(pub => ({
-  name: pub.name,
-  area: pub.area,
-  lat: pub.lat,
-  lon: pub.lon,
-  google_maps_link: pub.google_maps_link,
-  price: pub.price
-}));
-
-      expensiveList.innerHTML = "";
-
-      mostExpensiveFive.forEach((pub, i) => {
-        const diff = pub.price - avgPrice;
-
-        const row = document.createElement("div");
-        row.className = "happy-item";
-        row.style.animationDelay = `${150 + i * 120}ms`;
-
-        row.innerHTML = `
-        <div class="happy-name">
-  <div class="pub-info">
-    <div class="pub-name">${escapeHTML(pub.name)}</div>
-    <div class="pub-meta">
-     ${pub.area ? escapeHTML(pub.area) : ""}
-${pub.area && (pub.google_maps_link || (pub.lat && pub.lon)) ? " • " : ""}
-${pub.google_maps_link ? `
-  <a href="${sanitizeURL(pub.google_maps_link)}"
-     target="_blank"
-     rel="noopener noreferrer">
-    View map
-  </a>
-` : pub.lat && pub.lon ? `
-  <a href="https://www.google.com/maps?q=${pub.lat},${pub.lon}"
-     target="_blank"
-     rel="noopener noreferrer">
-    View map
-  </a>
-` : ""}
-    </div>
-  </div>
-</div>
-
-          <div class="happy-prices stacked compact">
-  <div class="price-line">
-  <span class="label">Price:</span>
-    <span class="value gold">฿${pub.price}</span>
-  </div>
-
-  <div class="price-line saving">
-  <span class="value expensive-line">
-    +฿${diff} above average
-  </span>
-</div>
-</div>
-        `;
-
-        expensiveList.appendChild(row);
-      });
-    }
 initHappyHourRadarData(pubs);
    const happyPubs = pubs
   .filter(p =>
